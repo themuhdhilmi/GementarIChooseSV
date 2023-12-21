@@ -2,7 +2,7 @@
 FROM node:latest AS base
 
 # Install MySQL client and server
-RUN apt-get update && apt-get install -y mysql-client mysql-server
+RUN apt-get update && apt-get install -y mariadb-client mariadb-server
 
 # Set the MySQL root password (change it as needed)
 ENV MYSQL_ROOT_PASSWORD=root_password
