@@ -47,3 +47,6 @@ jobs:
 
     - name: Build Next.js App
       run: npm run build
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
