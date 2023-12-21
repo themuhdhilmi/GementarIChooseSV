@@ -45,5 +45,8 @@ jobs:
     - name: Run Prisma Migrate
       run: npx prisma migrate deploy
 
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
     - name: Build Next.js App
       run: npm run build
