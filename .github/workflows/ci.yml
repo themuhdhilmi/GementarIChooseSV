@@ -19,7 +19,6 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: ''
           MYSQL_DATABASE: ichoosesv
         ports:
             - '3306:3306'
