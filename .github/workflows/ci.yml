@@ -36,10 +36,6 @@ jobs:
         sudo service mysql start
         sleep 5  # Allow some time for MySQL to start
 
-    - name: Set Up MySQL Root User
-      run: |
-        mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY '';"
-
     - name: Run Prisma Migrate
       run: npx prisma migrate deploy
 
