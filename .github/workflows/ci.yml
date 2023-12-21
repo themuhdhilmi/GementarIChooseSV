@@ -19,6 +19,7 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
+          MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: ichoosesv
         ports:
             - '3306:3306'
@@ -30,7 +31,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - run: mysql -h 127.0.0.1 --port 3306 -u root -p -e 'CREATE DATABASE IF NOT EXISTS ichoosesv;'
+    - run: mysql -h 127.0.0.1 --port 3306 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS ichoosesv;'
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
