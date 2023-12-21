@@ -1,17 +1,6 @@
 # Use the official Node.js image
 FROM node:latest AS base
 
-# Install MySQL client and server
-RUN apt-get update && apt-get install -y mariadb-client mariadb-server
-
-# Set the MySQL root password (change it as needed)
-ENV MYSQL_ROOT_PASSWORD=root_password
-
-# Create MySQL database and user
-ENV MYSQL_DATABASE=ichoosesv
-ENV MYSQL_USER=ichoosesv
-ENV MYSQL_PASSWORD=password
-
 # Install dependencies only when needed
 FROM base AS deps
 RUN apt-get update && apt-get install -y libc6
@@ -32,19 +21,17 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Initialize MySQL database and user
-RUN service mysql start \
-  && mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE DATABASE $MYSQL_DATABASE;" \
-  && mysql -u root -p$MYSQL_ROOT_PASSWORD -e "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" \
-  && mysql -u root -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%';" \
-  && mysql -u root -p$MYSQL_ROOT_PASSWORD -e "FLUSH PRIVILEGES;" \
-  && service mysql stop
+# Next.js collects completely anonymous telemetry data about general usage.
+# Learn more here: https://nextjs.org/telemetry
+# Uncomment the following line in case you want to disable telemetry during the build.
+# ENV NEXT_TELEMETRY_DISABLED 1
 
 RUN npx prisma migrate deploy
 RUN npx prisma generate
 RUN npx prisma db push
 
 RUN npm run build
+
 
 # If using yarn, comment out the line above and use the one below instead
 # RUN yarn build
