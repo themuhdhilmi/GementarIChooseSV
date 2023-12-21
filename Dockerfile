@@ -28,7 +28,10 @@ COPY . .
 
 RUN npx prisma migrate deploy
 RUN npx prisma generate
+RUN npx prisma db push
+
 RUN npm run build
+
 
 # If using yarn, comment out the line above and use the one below instead
 # RUN yarn build
