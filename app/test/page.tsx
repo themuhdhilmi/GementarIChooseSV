@@ -7,7 +7,6 @@ const page = () => {
 
     const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`)
 
-
     return (
         <div>You are on mobile? = {isMobile ? 'yes' : 'no'}</div>
     )
