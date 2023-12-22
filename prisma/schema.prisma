@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Account {
   id                 String    @id @default(cuid())
   userId             String
@@ -28,27 +27,38 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  userId       String
-  expires      DateTime
-  sessionToken String   @unique
-  accessToken  String   @unique
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  user         User     @relation(fields: [userId], references: [id])
+  id                 String               @id @default(cuid())
+  userId             String
+  expires            DateTime
+  sessionToken       String               @unique
+  accessToken        String               @unique
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  user               User                 @relation(fields: [userId], references: [id])
+  StudentInformation StudentInformation[]
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  hashedPassword String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  sessions      Session[]
+  id                   String               @id @default(cuid())
+  name                 String?
+  email                String?              @unique
+  emailVerified        DateTime?
+  image                String?
+  hashedPassword       String?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  accounts             Account[]
+  sessions             Session[]
+  role                 Role                 @default(STUDENT)
+  studentInformation   StudentInformation?  @relation(fields: [studentInformationId], references: [id])
+  studentInformationId String?
+  LecturerInformation  LecturerInformation?
+}
+
+enum Role {
+  ADMIN
+  LECTURER
+  STUDENT
 }
 
 model VerificationRequest {
@@ -61,3 +71,73 @@ model VerificationRequest {
 
   @@unique([identifier, token])
 }
+
+enum Track {
+  SOFTWARE
+  NETWORK
+  SECURITY
+}
+
+model SessionYear {
+  id      String @id @default(cuid())
+  number  Int
+  yearOne Int
+  yearTwo Int
+
+  StudentInformation StudentInformation[]
+  Supervisor         LecturerInformation[]
+}
+
+model GlobalIdentifier {
+  id          String @id @default(cuid())
+  memberQuota Int    @default(4)
+  titleQuota  Int    @default(3)
+}
+
+// +======================= LECTURER START ======================= 
+model LecturerInformation {
+  id                 String               @id @default(cuid())
+  StudentInformation StudentInformation[]
+  Track              Track
+  SessionYear        SessionYear[]
+  User               User                 @relation(fields: [userId], references: [id])
+  userId             String               @unique
+}
+
+// -======================= LECTURER END =========================
+
+// +======================= STUDENT START ========================
+model StudentInformation {
+  id           String @id @default(cuid())
+  matricNumber String
+  memberQuota  Int?
+  titleQuota   Int?
+
+  User                  User[]
+  Member                Member[]
+  Session               Session?             @relation(fields: [sessionId], references: [id])
+  sessionId             String?
+  SessionYear           SessionYear?         @relation(fields: [sessionYearId], references: [id])
+  sessionYearId         String?
+  LecturerInformation   LecturerInformation? @relation(fields: [lecturerInformationId], references: [id])
+  lecturerInformationId String?
+  Track                 Track
+}
+
+model Member {
+  id           String @id @default(cuid())
+  name         String
+  matricNumber String
+
+  StudentInformation   StudentInformation? @relation(fields: [studentInformationId], references: [id])
+  studentInformationId String?
+}
+
+model ProjectTitle {
+  id               String @id @default(cuid())
+  name             String
+  uploadedProposal String
+  uploadedAbstract String
+}
+
+// -======================= STUDENT END ======================= 
