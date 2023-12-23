@@ -39,20 +39,19 @@ model Session {
 }
 
 model User {
-  id                   String               @id @default(cuid())
-  name                 String?
-  email                String?              @unique
-  emailVerified        DateTime?
-  image                String?
-  hashedPassword       String?
-  createdAt            DateTime             @default(now())
-  updatedAt            DateTime             @updatedAt
-  accounts             Account[]
-  sessions             Session[]
-  role                 Role                 @default(STUDENT)
-  studentInformation   StudentInformation?  @relation(fields: [studentInformationId], references: [id])
-  studentInformationId String?
-  LecturerInformation  LecturerInformation?
+  id                  String               @id @default(cuid())
+  name                String?
+  email               String?              @unique
+  emailVerified       DateTime?
+  image               String?
+  hashedPassword      String?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  accounts            Account[]
+  sessions            Session[]
+  role                Role                 @default(STUDENT)
+  studentInformation  StudentInformation?
+  LecturerInformation LecturerInformation?
 }
 
 enum Role {
@@ -84,14 +83,11 @@ model SessionYear {
   yearOne Int
   yearTwo Int
 
+  globalMemberQuota Int @default(4)
+  globalTitleQuota  Int @default(3)
+
   StudentInformation StudentInformation[]
   Supervisor         LecturerInformation[]
-}
-
-model GlobalIdentifier {
-  id          String @id @default(cuid())
-  memberQuota Int    @default(4)
-  titleQuota  Int    @default(3)
 }
 
 // +======================= LECTURER START ======================= 
@@ -109,35 +105,38 @@ model LecturerInformation {
 // +======================= STUDENT START ========================
 model StudentInformation {
   id           String @id @default(cuid())
-  matricNumber String
+  matricNumber String @unique
   memberQuota  Int?
   titleQuota   Int?
 
-  User                  User[]
+  User                  User                 @relation(fields: [userId], references: [id])
+  userId                String               @unique
   Member                Member[]
   Session               Session?             @relation(fields: [sessionId], references: [id])
   sessionId             String?
-  SessionYear           SessionYear?         @relation(fields: [sessionYearId], references: [id])
-  sessionYearId         String?
+  SessionYear           SessionYear          @relation(fields: [sessionYearId], references: [id])
+  sessionYearId         String
   LecturerInformation   LecturerInformation? @relation(fields: [lecturerInformationId], references: [id])
   lecturerInformationId String?
+  ProjectTitle          ProjectTitle[]
   Track                 Track
 }
 
 model Member {
   id           String @id @default(cuid())
   name         String
-  matricNumber String
+  matricNumber String @unique
 
   StudentInformation   StudentInformation? @relation(fields: [studentInformationId], references: [id])
   studentInformationId String?
 }
 
 model ProjectTitle {
-  id               String @id @default(cuid())
-  name             String
-  uploadedProposal String
-  uploadedAbstract String
+  id                   String              @id @default(cuid())
+  name                 String
+  uploadedPoster       String?
+  StudentInformation   StudentInformation? @relation(fields: [studentInformationId], references: [id])
+  studentInformationId String?
 }
 
 // -======================= STUDENT END ======================= 
