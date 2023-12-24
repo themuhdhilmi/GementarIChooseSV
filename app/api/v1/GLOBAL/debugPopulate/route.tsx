@@ -183,33 +183,33 @@ export async function POST(request: NextRequest, response: NextResponse) {
         })
 
         const projectTitle = await prisma.projectTitle.create({
-            data : {
-                name : "Crab Game",
-                StudentInformation : {
-                    connect : {
-                        id : studentData.id
+            data: {
+                name: "Crab Game",
+                StudentInformation: {
+                    connect: {
+                        id: studentData.id
                     }
                 }
             }
         })
 
         const projectTitle2 = await prisma.projectTitle.create({
-            data : {
-                name : "Casino Slot",
-                StudentInformation : {
-                    connect : {
-                        id : studentData.id
+            data: {
+                name: "Casino Slot",
+                StudentInformation: {
+                    connect: {
+                        id: studentData.id
                     }
                 }
             }
         })
 
         const projectTitle3 = await prisma.projectTitle.create({
-            data : {
-                name : "VR Game",
-                StudentInformation : {
-                    connect : {
-                        id : studentData.id
+            data: {
+                name: "VR Game",
+                StudentInformation: {
+                    connect: {
+                        id: studentData.id
                     }
                 }
             }
@@ -220,13 +220,13 @@ export async function POST(request: NextRequest, response: NextResponse) {
         const getSessionList = await prisma.sessionYear.findMany({
             include: {
                 StudentInformation: {
-                    include : {
-                        User : true,
-                        Member : true,
-                        ProjectTitle : true,
-                        LecturerInformation : {
-                            include : {
-                                User : true
+                    include: {
+                        User: true,
+                        Member: true,
+                        ProjectTitle: true,
+                        LecturerInformation: {
+                            include: {
+                                User: true
                             }
                         }
                     }
