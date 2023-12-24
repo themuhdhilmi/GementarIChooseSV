@@ -205,8 +205,6 @@ const page = () => {
                 <ComponentCarousel />
               </div>
             </section>
-  
-  
           </main>
         </div>
       </div>

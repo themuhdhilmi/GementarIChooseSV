@@ -177,6 +177,7 @@ const schemaPUT = z.object({
     email: z.string().email().nullable(),
     password: z.string().min(4).nullable(),
     track: TrackEnum.nullable(),
+    supervisorQuota : z.number().nullable()
 })
 
 export async function PUT(request: NextRequest, response: NextResponse) {
@@ -219,6 +220,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
             },
             data: {
                 Track: body.track !== null ? body.track : undefined,
+                supervisorQuota : body.supervisorQuota !== null ? body.supervisorQuota : undefined,
             }
         })
 
