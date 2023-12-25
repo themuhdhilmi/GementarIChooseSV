@@ -5,11 +5,19 @@ import { useMediaQuery } from 'usehooks-ts'
 import { RxCross2 } from "react-icons/rx";
 import EditTable from './Admin/EditTable';
 import MainTable from './Admin/MainTable';
+import AddTable from './Admin/AddTable';
+
+export enum AdminTableList {
+    EditTable,
+    MainTable,
+    AddTable
+}
 
 const Admin = () => {
 
     const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`);
-    const [isEditing, setIsEditing] = useState(false);
+    const [currentPage, setCurrentPage] = useState(AdminTableList.MainTable);
+    const [editUserIndex, setEditUserIndex] = useState(-1);
 
     useEffect(() => {
         fetch('/api/v1/AUTH/manageUser/admin')
@@ -43,11 +51,17 @@ const Admin = () => {
 
     return (
         <>
-            {isEditing ?
-                <EditTable setIsEditing={setIsEditing}/>
+            {/* {isEditing ?
+                <EditTable setIsEditing={setIsEditing} adminData={adminData} editUserIndex={editUserIndex}/>
                 :
-                <MainTable setIsEditing={setIsEditing}/>
-            }</>
+                <MainTable setIsEditing={setIsEditing} adminData={adminData} setEditUserIndex={setEditUserIndex}/>
+            } */}
+
+            {currentPage === AdminTableList.MainTable ? <MainTable setCurrentPage={setCurrentPage} adminData={adminData} setEditUserIndex={setEditUserIndex}/> : null}
+            {currentPage === AdminTableList.EditTable ? <EditTable setCurrentPage={setCurrentPage} adminData={adminData} editUserIndex={editUserIndex}/> : null}
+            {currentPage === AdminTableList.AddTable ?  <AddTable/> : null}
+            
+        </>
     )
 }
 
