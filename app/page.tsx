@@ -1,45 +1,62 @@
 "use client";
-import Image from "next/image";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-export default function Home() {
-  const session = useSession();
-  const router = useRouter();
-
-  function checkIfAvailable() {
-    if (session.status === "unauthenticated") {
-      router.push("/api/auth/signin");
-    }
-
-    return true;
-  }
-
+export default function Page() {
   return (
-    <div className="hero min-h-screen bg-base-200">
-      {checkIfAvailable()}
-      <div className="hero-content flex-col lg:flex-row">
-        <Image
-          alt=""
-          width={500}
-          height={500}
-          src="https://cdna.artstation.com/p/assets/images/images/024/208/242/large/syed-ariff-2020-02-13-05-07-03-2.jpg?1581645769"
-          className="max-w-sm rounded-lg shadow-2xl"
-
-        />
-        <div>
-          <h1 className="text-5xl font-bold">Welcome to the 3rd Game</h1>
-          <p className="py-6">
-            Attention all citizens: The recents heroic intervention by Keluang
-            Man in the City of Light has led to the capture of the notorious
-            villain, Dark Wing. The citizens are advised to remain calm and
-            cooperate with the authorities in restoring peace and order to our
-            beloved city.
-          </p>
-          <Link href="/api/auth/signout">
-            <button className="btn btn-primary">Log Out</button>
-          </Link>
+    <div className="">
+      <div className="hero min-h-screen ">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <div className="text-center lg:text-left">
+            <h1 className="text-5xl font-bold">iChooseSV</h1>
+            <div className="py-6">
+              <div
+                className="tooltip tooltip-bottom"
+                data-tip="Good luck on your Final Year Project, from Gementar Team."
+              >
+                <h1 className="text-center lg:text-left">
+                  Crucial Step Toward Your Professional Development
+                </h1>
+                <h1 className="text-center lg:text-left">
+                  Behind Every Successful Project Lies Hours of Hard Work and
+                  Dedication.
+                </h1>
+              </div>
+            </div>
+          </div>
+          <div className="card shrink-0 w-full max-w-sm  bg-base-100">
+            <form className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  type="email"
+                  placeholder="email"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="password"
+                  className="input input-bordered"
+                  required
+                />
+                <label className="label">
+                  <a href="#" className="label-text-alt link link-hover">
+                    Forgot password?
+                  </a>
+                </label>
+              </div>
+              <div className="form-control mt-6">
+                <button className="btn btn-primary">Login</button>
+              </div>
+              <div className="text-center">Develop by GementarTeam</div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

@@ -2,8 +2,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Providers } from './providers'
-import TopHeader from './components/header/TopHeader'
-import BottomHeader from './components/header/BottomHeader'
+import Header from './components/Header'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,9 +23,8 @@ export default function RootLayout({
       <Providers>
 
         <body className={inter.className}>
-          <TopHeader />
+          <Header />
           {children}
-          <BottomHeader />
         </body>
 
       </Providers>
