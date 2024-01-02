@@ -2,7 +2,7 @@ import React from 'react'
 
 const Complete = () => {
   return (
-    <div className="hero min-h-14 border rounded-lg">
+    <div className="hero min-h-14  h-screen pb-7">
     <div className="hero-content text-center">
       <div className="max-w-md">
         <h1 className="text-5xl text-green-600 font-bold">COMPLETED</h1>

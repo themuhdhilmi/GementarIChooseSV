@@ -2,10 +2,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-export default function MyModal() {
+export default function ModalEditFyp() {
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
+    setIsOpen(false);
+  }
+
+  function applyAndCloseModal() {
     setIsOpen(false);
   }
 
@@ -15,9 +19,9 @@ export default function MyModal() {
 
   return (
     <>
-        <button type="button" onClick={openModal} className="">
-          Edit
-        </button>
+      <button type="button" onClick={openModal} className="">
+        Edit
+      </button>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -79,10 +83,18 @@ export default function MyModal() {
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
+                      onClick={applyAndCloseModal}
+                      className="btn btn-accent"
                     >
-                      Got it, thanks!
+                      Apply
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={closeModal}
+                      className="btn btn-error"
+                    >
+                      Close
                     </button>
                   </div>
                 </Dialog.Panel>

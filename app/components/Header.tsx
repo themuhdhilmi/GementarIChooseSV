@@ -52,7 +52,7 @@ const Header = () => {
           </li>
         </ul> */}
 
-        <button className="btn btn-neutral hover:btn-error">GEMENTAR TEAM ACADEMY</button>
+        <button className="btn btn-neutral hover:btn-error">GEMENTAR ACADEMY</button>
       </div>
     </div>
   );

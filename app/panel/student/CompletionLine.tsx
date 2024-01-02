@@ -14,7 +14,7 @@ const CompletionLine = () => {
       </li>
       <li data-content="✕" className="step step-neutral">
         Request SV
-      </li>r
+      </li>
       <li data-content="✕" className="step  step-neutral">
         Complete
       </li>
