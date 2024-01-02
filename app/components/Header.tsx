@@ -7,9 +7,9 @@ const Header = () => {
   const session = useSession();
 
   function checkIfAvailable() {
-    //   if (session.status === "unauthenticated") {
-    //     router.push("/api/auth/signin");
-    //   }
+      // if (session.status === "unauthenticated") {
+      //   router.push("/api/auth/signin");
+      // }
 
     if (session.status === "unauthenticated") {
       return false;
@@ -27,7 +27,7 @@ const Header = () => {
       //   checkIfAvailable() ? "block" : "hidden"
       // } shadow-md`}
 
-      className={`navbar bg-base-100 ${true ? "" : "hidden"} shadow-md`}
+      className={`navbar bg-base-100 ${checkIfAvailable() ? "" : "hidden"} shadow-md`}
     >
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">iChooseSV</a>
