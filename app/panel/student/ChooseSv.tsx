@@ -5,14 +5,6 @@ import { FaLock } from "react-icons/fa";
 const ChooseSv = () => {
   return (
     <div>
-      <div className="stats align-middle shadow w-full justify-center flex h-10">
-        <div className="flex p-2 space-x-2">
-          <div>
-            <FaLock />
-          </div>
-          <div>Complete all Steps</div>
-        </div>
-      </div>
 
       <div className="overflow-x-auto">
         <table className="table">
@@ -60,7 +52,7 @@ const ChooseSv = () => {
               </td>
               <th>
                 <div className="flex font-normal flex-row-reverse ">
-                <input type="checkbox" className="toggle toggle-success"/>
+                  <input type="checkbox" className="toggle toggle-success" />
                 </div>
               </th>
             </tr>
