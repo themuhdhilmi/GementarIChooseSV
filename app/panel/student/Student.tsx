@@ -10,6 +10,7 @@ import Decline from "./Decline";
 import { useMediaQuery } from "usehooks-ts";
 import { breakpoints } from "@/app/config/breakpoints";
 import CompleteAllSteps from "./Components/CompleteAllSteps";
+import ReviewSubmission from "./ReviewSubmission";
 
 export enum Progress {
   UPDATE_INFO = 1,
@@ -66,7 +67,7 @@ const Student = () => {
         <div className="lg:col-span-4 col-span-4 p-1">
           <div className="badge badge-neutral">STEP 4</div>
           <div className="badge">Review submission</div>
-          <div>{progress >= 4 ? "INFO HERE" : <CompleteAllSteps />}</div>
+          <div>{progress >= 4 ? <ReviewSubmission/> : <CompleteAllSteps />}</div>
         </div>
       </div>
 
