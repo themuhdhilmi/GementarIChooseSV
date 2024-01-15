@@ -2,14 +2,18 @@
 import { useSession } from "next-auth/react";
 import React from "react";
 import { Interface } from "readline";
+import { useMediaQuery } from "usehooks-ts";
+import { breakpoints } from "../config/breakpoints";
+import { FaGear } from "react-icons/fa6";
 
 const Header = () => {
   const session = useSession();
+  const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`);
 
   function checkIfAvailable() {
-      // if (session.status === "unauthenticated") {
-      //   router.push("/api/auth/signin");
-      // }
+    // if (session.status === "unauthenticated") {
+    //   router.push("/api/auth/signin");
+    // }
 
     if (session.status === "unauthenticated") {
       return false;
@@ -22,39 +26,54 @@ const Header = () => {
   }
 
   return (
-    <div
-      // className={`navbar bg-base-100 ${
-      //   checkIfAvailable() ? "block" : "hidden"
-      // } shadow-md`}
+    <>
+      <div
+        // className={`navbar bg-base-100 ${
+        //   checkIfAvailable() ? "block" : "hidden"
+        // } shadow-md`}
 
-      className={`navbar bg-base-100 ${checkIfAvailable() ? "" : "hidden"} shadow-md`}
-    >
-      <div className="flex-1">
-        <a className="btn btn-ghost text-xl">iChooseSV</a>
-      </div>
-      <div className="flex-none">
-        {/* <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Link</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2 bg-base-100 rounded-t-none">
-                <li>
-                  <a>Link 1</a>
-                </li>
-                <li>
-                  <a>Link 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-        </ul> */}
+        className={`navbar bg-base-100 ${
+          checkIfAvailable() ? "" : "hidden"
+        } shadow-md`}
+      >
+        <div className="flex-1">
+          <a className="btn btn-ghost text-xl">iChooseSV</a>
+        </div>
+        <div className="flex-none z-50">
+          <ul className="menu menu-horizontal px-1">
+            <li>
+              <details>
+                <summary>Menu List</summary>
+                <ul className="p-2 bg-base-100 rounded-t-none">
+                  <li>
+                    <a>Supervisor</a>
+                  </li>
+                  <li>
+                    <a>Link 2</a>
+                  </li>
+                </ul>
+              </details>
+            </li>
 
-        <button className="btn btn-neutral hover:btn-error">GEMENTAR ACADEMY</button>
+            {isTablet ? null : (
+              <li>
+                <a>
+                  <FaGear /> Settings
+                </a>
+              </li>
+            )}
+          </ul>
+
+          {isTablet ? (
+            ""
+          ) : (
+            <button className="btn btn-neutral hover:btn-error">
+              GEMENTAR ACADEMY
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

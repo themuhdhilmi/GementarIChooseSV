@@ -20,14 +20,14 @@ export enum Progress {
 }
 
 const Student = () => {
-  const [progress, setProgress] = useState(1);
+  const [progress, setProgress] = useState(4);
   const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`);
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   
   return (
     <div className={`py-5 ${isTablet ? "p-5" : isDesktop ? "p-24" : "p-40"}`}>
-      <Complete />
-      <Decline />
+      {/* <Complete /> */}
+      {/* <Decline /> */}
 
       <div className="py-2 grid grid-cols-4 grid-rows-1 gap-4 w-full">
         <div className="lg:col-span-4 col-span-4  p-1">
