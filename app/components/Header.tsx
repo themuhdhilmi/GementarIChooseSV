@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import React from "react";
 import { Interface } from "readline";
 import { useMediaQuery } from "usehooks-ts";
@@ -58,7 +58,7 @@ const Header = () => {
             {isTablet ? null : (
               <li>
                 <a>
-                  <FaGear /> Settings
+                  <button onClick={() => signOut()}>Sign Out</button>
                 </a>
               </li>
             )}
