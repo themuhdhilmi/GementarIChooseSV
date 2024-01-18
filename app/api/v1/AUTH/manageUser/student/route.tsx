@@ -3,81 +3,57 @@ import { getToken } from "next-auth/jwt";
 import bcrypt from "bcrypt";
 import prisma from "@/prisma/client";
 import { z } from "zod";
+import { apiDefaultPagination } from "@/app/config/api";
 
 export async function GET(request: NextRequest, response: NextResponse) {
   try {
     const { searchParams } = new URL(request.url);
-    const email = searchParams.get("email") as string;
-    const category = searchParams.get("category") as string;
+    const pageParam = parseInt(searchParams.get("pageParam") as string);
+    const pageSizeParam = parseInt(searchParams.get("session") as string);
 
-    if (category === "EMAIL") {
-      const student = await prisma.user.findUniqueOrThrow({
-        where: {
-          email: email,
-          role: "STUDENT",
-        },
-        include: {
-          studentInformation: {
-            include: {
-              Member: {
-                include: {
-                  StudentInformation: {
-                    include: {
-                      User: true,
-                    },
-                  },
-                },
-              },
-              SessionYear: true,
-              LecturerInformation: true,
-            },
-          },
-        },
-      });
-
-      return NextResponse.json(
-        {
-          student,
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    if (category === "SESSION") {
-        const student = await prisma.user.findUniqueOrThrow({
-          where: {
-            email: email,
-            role: 'STUDENT'
-          },
+    let page = pageParam ? pageParam : 1;
+    let pageSize = pageSizeParam ? pageSizeParam : apiDefaultPagination.pageSize;
+    const students = await prisma.user.findMany({
+      where: {
+        role: "STUDENT",
+      },
+      include: {
+        studentInformation: {
           include: {
-            studentInformation: {
-              include: {
-                Member: {
-                  include: {
-                    StudentInformation: {
-                      include: {
-                        User: true,
-                      },
-                    },
-                  },
-                },
-                SessionYear: true,
-                LecturerInformation: true,
-              },
+            Member: true,
+            SessionYear: true,
+            LecturerInformation: {
+              include : {
+                User : true
+              }
             },
           },
-        });
-        return NextResponse.json(
-          {
-            student,
-          },
-          {
-            status: 400,
-          }
-        );
+        },
+      },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    });
+
+    const studentsCount = await prisma.user.count({
+      where: {
+        role: "STUDENT",
+      },
+    });
+    const totalPages = Math.ceil(studentsCount / pageSize);
+
+    return NextResponse.json(
+      {
+        page,
+        pageSize,
+        totalPages,
+        studentsCount,
+        students,
+      },
+      {
+        status: 200,
       }
+    );
+
   } catch (error) {
     return NextResponse.json(
       {

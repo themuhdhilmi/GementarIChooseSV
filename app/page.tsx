@@ -10,10 +10,8 @@ export default function Page() {
             by Gementar Team
           </div>
           <div className="font-bold  text-base-content ">
-        
               Crucial Step Toward Your Professional Development Behind Every
               Successful Project Lies Hours of Hard Work and Dedication.
-        
           </div>
         </div>
       </div>
