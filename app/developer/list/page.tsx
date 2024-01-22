@@ -6,11 +6,13 @@ import { useGetsessions } from "@/app/utilities/storage/useGetSessions";
 import BreadCrumbs from "@/app/components/BreadCrumbs";
 import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
+import UseGetStudent from "./components/UseGetStudent";
 
 export enum Drawer {
   NONE,
   ADD,
   ADD_BULK,
+  VIEW,
 }
 
 const Page = () => {
@@ -39,12 +41,17 @@ const Page = () => {
     setOpenDrawer(Drawer.NONE);
   };
 
+  const funcViewStudent = () => {
+    setOpenDrawer(Drawer.VIEW);
+  };
+
   return (
-    <div className={`${isDesktop ? 'px-6' : 'px-24'}`}>
+    <div className={`${isDesktop ? "px-6" : "px-24"}`}>
       {openDrawer === Drawer.NONE ? (
         <div className="grid grid-cols-1 gap-4">
           <div className="col-span-3">
             <UseGetStudents
+              funcViewStudent={funcViewStudent}
               funcOpenAddStudent={funcOpenAddStudent}
               funcOpenBulkAddStudent={funcOpenBulkAddStudent}
             />
@@ -55,13 +62,18 @@ const Page = () => {
       )}
 
       {openDrawer === Drawer.ADD ? (
-        <div className={`grid ${isDesktop ? 'grid-cols-1' : 'grid-cols-4 gap-4'}  `}>
+        <div
+          className={`grid ${
+            isDesktop ? "grid-cols-1" : "grid-cols-4 gap-4"
+          }  `}
+        >
           <div className="col-span-1">
             <UseAddStudent funcCloseAll={funcCloseAll} />
           </div>
 
-          <div className={`${isDesktop ? '' : 'col-span-3'} `}>
+          <div className={`${isDesktop ? "" : "col-span-3"} `}>
             <UseGetStudents
+              funcViewStudent={funcViewStudent}
               funcOpenAddStudent={funcOpenAddStudent}
               funcOpenBulkAddStudent={funcOpenBulkAddStudent}
             />
@@ -71,14 +83,23 @@ const Page = () => {
         ""
       )}
 
+      {openDrawer === Drawer.VIEW ? (
+        <div>
+          <UseGetStudent funcCloseAll={funcCloseAll} />
+        </div>
+      ) : (
+        ""
+      )}
+
       {openDrawer === Drawer.ADD_BULK ? (
         <div className="grid grid-cols-4 gap-4">
           <div className="col-span-1">
-          <UseAddStudent funcCloseAll={funcCloseAll} />
+            <UseAddStudent funcCloseAll={funcCloseAll} />
           </div>
 
           <div className="col-span-3">
             <UseGetStudents
+              funcViewStudent={funcViewStudent}
               funcOpenAddStudent={funcOpenAddStudent}
               funcOpenBulkAddStudent={funcOpenBulkAddStudent}
             />

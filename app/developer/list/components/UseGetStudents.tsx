@@ -74,7 +74,7 @@ const UseGetStudents = (props: any) => {
                     )}
 
                     <td>
-                      <button className="">
+                      <button onClick={props.funcViewStudent} className="">
                         <div className="px-2">
                           <FaEye />
                         </div>
