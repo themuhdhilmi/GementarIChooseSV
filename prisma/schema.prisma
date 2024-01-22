@@ -87,6 +87,8 @@ model SessionYear {
   globalTitleQuota      Int @default(3)
   globalSupervisorQuota Int @default(3)
 
+  isSelected Boolean @default(false)
+
   StudentInformation StudentInformation[]
   Supervisor         LecturerInformation[]
 }

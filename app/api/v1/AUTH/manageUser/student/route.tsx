@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import prisma from "@/prisma/client";
 import { z } from "zod";
 import { apiDefaultPagination } from "@/app/config/api";
+import { Prisma } from "@prisma/client";
 
 export async function GET(request: NextRequest, response: NextResponse) {
   try {
@@ -14,6 +15,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
     let page = pageParam ? pageParam : 1;
     let pageSize = pageSizeParam ? pageSizeParam : apiDefaultPagination.pageSize;
     const students = await prisma.user.findMany({
+      orderBy: { createdAt: Prisma.SortOrder.desc } as any,
       where: {
         role: "STUDENT",
       },
@@ -95,6 +97,24 @@ export async function POST(request: NextRequest, response: NextResponse) {
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
+
+    const checkIfMaticNumberAlreadyExisted = await prisma.studentInformation.findFirst({
+      where : {
+        matricNumber : body.matricNumber
+      }
+    })
+
+    if(checkIfMaticNumberAlreadyExisted)
+    {
+      return NextResponse.json(
+        {
+          errors : [{message : `Matric number ${body.matricNumber} already existed`, path : ''}]
+        },
+        {
+          status: 400,
+        }
+      );
+    }
 
     const student = await prisma.user.create({
       data: {

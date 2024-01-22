@@ -9,7 +9,7 @@ type StudentStore = {
   fetchData: () => Promise<void>;
 };
 
-export const useStudents = create<StudentStore>((set) => ({
+export const useGetStudents = create<StudentStore>((set) => ({
   students: {},
   loading: false,
   add: () => set((state) => ({ students: state.students + 1 })),

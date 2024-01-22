@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
 import bcrypt from "bcrypt";
 import prisma from "@/prisma/client";
-import { number } from "zod";
-import { connect } from "http2";
 
 export async function POST(request: NextRequest, response: NextResponse) {
 
@@ -24,7 +21,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
             data: {
                 number: 1,
                 yearOne: 2023,
-                yearTwo: 2024
+                yearTwo: 2024,
+                isSelected : true
             }
         })
 
@@ -254,7 +252,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
     } catch (error) {
         return NextResponse.json(
             {
-                error
+                error,
+                note : 'has you migrate the database yet?'
             },
             {
                 status: 400
