@@ -23,6 +23,12 @@ const Page = () => {
   const { sessions, loading, fetchData } = useGetsessions();
   const [selectedSession, setSelectedSession] = useState("");
   const [openDrawer, setOpenDrawer] = useState<Drawer>(Drawer.NONE);
+  const [selectViewUser, setSelectViewUser] = useState<any>({})
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setSelectedSession(sessions.sessionSelected?.id);
@@ -54,6 +60,7 @@ const Page = () => {
               funcViewStudent={funcViewStudent}
               funcOpenAddStudent={funcOpenAddStudent}
               funcOpenBulkAddStudent={funcOpenBulkAddStudent}
+              setSelectViewUser={setSelectViewUser}
             />
           </div>
         </div>
@@ -76,6 +83,7 @@ const Page = () => {
               funcViewStudent={funcViewStudent}
               funcOpenAddStudent={funcOpenAddStudent}
               funcOpenBulkAddStudent={funcOpenBulkAddStudent}
+              setSelectViewUser={setSelectViewUser}
             />
           </div>
         </div>
@@ -85,7 +93,7 @@ const Page = () => {
 
       {openDrawer === Drawer.VIEW ? (
         <div>
-          <UseGetStudent funcCloseAll={funcCloseAll} />
+          <UseGetStudent selectViewUser={selectViewUser} funcCloseAll={funcCloseAll} />
         </div>
       ) : (
         ""
@@ -102,6 +110,7 @@ const Page = () => {
               funcViewStudent={funcViewStudent}
               funcOpenAddStudent={funcOpenAddStudent}
               funcOpenBulkAddStudent={funcOpenBulkAddStudent}
+              setSelectViewUser={setSelectViewUser}
             />
           </div>
         </div>

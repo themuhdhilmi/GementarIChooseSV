@@ -16,8 +16,7 @@ const UseAddStudent = (props : any) => {
     `(max-width: ${breakpoints.mobileLandscape})`
   );
   const { sendData, success, data } = useAddStudent();
-  const { sessions, loading, fetchData } = useGetsessions();
-  const { fetchData: fetchDataStudents } = useGetStudents();
+  const { sessions, loading } = useGetsessions();
   const [name, setName] = useState("");
   const [matricNumber, setMatricNumber] = useState("");
   const [selectedSession, setSelectedSession] = useState("");
@@ -33,13 +32,7 @@ const UseAddStudent = (props : any) => {
   };
 
   useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     setSelectedSession(sessions.sessionSelected?.id);
-    fetchDataStudents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessions, success]);
 
@@ -159,34 +152,8 @@ const UseAddStudent = (props : any) => {
               <option value={"SECURITY"}>SECURITY</option>
               <option value={"NETWORK"}>NETWORK</option>
             </select>
-            <div className="label">
-              <span className="label-text">Session</span>
-            </div>
-            <select
-              value={selectedSession}
-              onChange={(e) => setSelectedSession(e.target.value)}
-              className="select select-bordered w-full rounded-lg"
-            >
-              {loading
-                ? ""
-                : sessions.sessionsList?.map((item: any, index: number) => {
-                    if (item.isSelected) {
-                      return (
-                        <option value={item.id} key={index} selected>
-                          SESI {item.number} {item.yearOne}/{item.yearOne}
-                        </option>
-                      );
-                    } else {
-                      return (
-                        <option value={item.id} key={index}>
-                          SESI {item.number} {item.yearOne}/{item.yearOne}
-                        </option>
-                      );
-                    }
-                  })}
-            </select>
             {!loading ? (
-              <button type="submit" className="btn rounded-lg w-full my-5 bg-red-600 rounded-lg hover:bg-red-800 text-white">
+              <button type="submit" className="btn w-full my-5 bg-red-600 rounded-lg hover:bg-red-800 text-white">
                 Add Students
               </button>
             ) : (

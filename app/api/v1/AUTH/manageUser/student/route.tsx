@@ -9,52 +9,93 @@ import { Prisma } from "@prisma/client";
 export async function GET(request: NextRequest, response: NextResponse) {
   try {
     const { searchParams } = new URL(request.url);
-    const pageParam = parseInt(searchParams.get("pageParam") as string);
-    const pageSizeParam = parseInt(searchParams.get("session") as string);
+    const pageParam = parseInt(searchParams.get("page") as string);
+    const pageSizeParam = parseInt(searchParams.get("pageSize") as string);
+    const sessionParam = searchParams.get("session") as string;
+    const emailParam = searchParams.get("email") as string;
+    const typeParam = searchParams.get("type") as string;
 
-    let page = pageParam ? pageParam : 1;
-    let pageSize = pageSizeParam ? pageSizeParam : apiDefaultPagination.pageSize;
-    const students = await prisma.user.findMany({
-      orderBy: { createdAt: Prisma.SortOrder.desc } as any,
-      where: {
-        role: "STUDENT",
-      },
-      include: {
-        studentInformation: {
-          include: {
-            Member: true,
-            SessionYear: true,
-            LecturerInformation: {
-              include : {
-                User : true
+
+    if(typeParam === 'single')
+    {
+      const student = await prisma.user.findFirstOrThrow({
+        where : {
+          email : emailParam
+        },
+        include : {
+          studentInformation : {
+            include : {
+              Member : true,
+              LecturerInformation : {
+                include : {
+                  User : true
+                }
               }
+            }
+          }
+        }
+      })
+
+      return NextResponse.json(
+        {
+          student
+        },
+        {
+          status: 200,
+        }
+      );
+    }
+
+    if(typeParam === 'many')
+    {
+      let page = pageParam ? pageParam : 1;
+      let pageSize = pageSizeParam ? pageSizeParam : apiDefaultPagination.pageSize;
+      const students = await prisma.user.findMany({
+        orderBy: { createdAt: Prisma.SortOrder.desc } as any,
+        where: {
+          role: "STUDENT",
+          studentInformation : {
+            sessionYearId : sessionParam
+          }
+        },
+        include: {
+          studentInformation: {
+            include: {
+              Member: true,
+              SessionYear: true,
+              LecturerInformation: {
+                include : {
+                  User : true
+                }
+              },
             },
           },
         },
-      },
-      skip: (page - 1) * pageSize,
-      take: pageSize,
-    });
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      });
+  
+      const studentsCount = await prisma.user.count({
+        where: {
+          role: "STUDENT",
+        },
+      });
+      const totalPages = Math.ceil(studentsCount / pageSize);
+  
+      return NextResponse.json(
+        {
+          page,
+          pageSize,
+          totalPages,
+          studentsCount,
+          students,
+        },
+        {
+          status: 200,
+        }
+      );
+    }
 
-    const studentsCount = await prisma.user.count({
-      where: {
-        role: "STUDENT",
-      },
-    });
-    const totalPages = Math.ceil(studentsCount / pageSize);
-
-    return NextResponse.json(
-      {
-        page,
-        pageSize,
-        totalPages,
-        studentsCount,
-        students,
-      },
-      {
-        status: 200,
-      }
-    );
 
   } catch (error) {
     return NextResponse.json(

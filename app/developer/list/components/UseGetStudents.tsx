@@ -17,14 +17,13 @@ const UseGetStudents = (props: any) => {
     `(max-width: ${breakpoints.mobileLandscape})`
   );
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`);
-  const { fetchData } = useGetStudents();
-  const { sessions, loading, fetchData: fetchDataSession } = useGetsessions();
-  const { students } = useGetStudents();
+  const { students, fetchData } = useGetStudents();
+  const { sessions } = useGetsessions();
+
   useEffect(() => {
-    // Example: Fetch data when the component mounts
-    fetchData();
+    fetchData(sessions.sessionSelected?.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [sessions, students]);
 
   return (
     <div>
@@ -74,7 +73,10 @@ const UseGetStudents = (props: any) => {
                     )}
 
                     <td>
-                      <button onClick={props.funcViewStudent} className="">
+                      <button onClick={() => {
+                        props.funcViewStudent();
+                        props.setSelectViewUser(item);
+                      }}  className="">
                         <div className="px-2">
                           <FaEye />
                         </div>
