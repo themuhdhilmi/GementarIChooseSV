@@ -22,18 +22,19 @@ export async function GET(request: NextRequest, response: NextResponse) {
         where : {
           email : emailParam
         },
-        include : {
-          studentInformation : {
-            include : {
-              Member : true,
-              LecturerInformation : {
+        include: {
+          studentInformation: {
+            include: {
+              Member: true,
+              SessionYear: true,
+              LecturerInformation: {
                 include : {
                   User : true
                 }
-              }
-            }
-          }
-        }
+              },
+            },
+          },
+        },
       })
 
       return NextResponse.json(
