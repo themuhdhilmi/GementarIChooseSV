@@ -11,6 +11,7 @@ import { breakpoints } from "@/app/config/breakpoints";
 import { FaEye } from "react-icons/fa";
 import { BsPencilSquare } from "react-icons/bs";
 import { RiDeleteBinLine } from "react-icons/ri";
+import UseDeleteStudent from "./UseDeleteStudent";
 const UseGetStudents = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
@@ -73,24 +74,18 @@ const UseGetStudents = (props: any) => {
                     )}
 
                     <td>
-                      <button onClick={() => {
-                        props.funcViewStudent();
-                        props.setSelectViewUser(item);
-                      }}  className="">
+                      <button
+                        onClick={() => {
+                          props.funcViewStudent();
+                          props.setSelectViewUser(item);
+                        }}
+                        className=""
+                      >
                         <div className="px-2">
                           <FaEye />
                         </div>
                       </button>
-                      <button className="px-2">
-                        <div>
-                          <BsPencilSquare />
-                        </div>
-                      </button>
-                      <button className="text-red-600">
-                        <div className="px-2">
-                          <RiDeleteBinLine />
-                        </div>
-                      </button>
+                          <UseDeleteStudent email={item?.email} id={item?.studentInformation?.id}/>
                     </td>
                   </tr>
                 );

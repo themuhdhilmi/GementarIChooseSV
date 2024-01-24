@@ -7,6 +7,7 @@ import BreadCrumbs from "@/app/components/BreadCrumbs";
 import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
 import UseGetStudent from "./components/UseGetStudent";
+import UseDeleteStudent from "./components/UseDeleteStudent";
 
 export enum Drawer {
   NONE,
@@ -23,7 +24,7 @@ const Page = () => {
   const { sessions, loading, fetchData } = useGetsessions();
   const [selectedSession, setSelectedSession] = useState("");
   const [openDrawer, setOpenDrawer] = useState<Drawer>(Drawer.NONE);
-  const [selectViewUser, setSelectViewUser] = useState<any>({})
+  const [selectViewUser, setSelectViewUser] = useState<any>({});
 
   useEffect(() => {
     fetchData();
@@ -93,7 +94,10 @@ const Page = () => {
 
       {openDrawer === Drawer.VIEW ? (
         <div>
-          <UseGetStudent selectViewUser={selectViewUser} funcCloseAll={funcCloseAll} />
+          <UseGetStudent
+            selectViewUser={selectViewUser}
+            funcCloseAll={funcCloseAll}
+          />
         </div>
       ) : (
         ""

@@ -25,8 +25,12 @@ const UseGetStudent = (props: any) => {
               </button>
             </div>
           </div>
-          <div className={`flex ${!isDesktop ? 'flex-row' : 'flex-col'} flex-wrap `}>
-            <div className={`${!isDesktop ? 'w-1/4 ' : 'w-full '} px-1`}>
+          <div
+            className={`flex ${
+              !isDesktop ? "flex-row" : "flex-col"
+            } flex-wrap `}
+          >
+            <div className={`${!isDesktop ? "w-1/4 " : "w-full "} px-1`}>
               <div className="flex flex-row bg-red-600 rounded-lg shadow-lg">
                 <div>
                   <div className="avatar">
@@ -79,13 +83,13 @@ const UseGetStudent = (props: any) => {
               <div className="text-center mt-2 font-extrabold">
                 <p>Supervisor</p>
                 <p className="text-red-600">
-                  {props.selectViewUser.studentInformation?.LecturerInformation?.User?.name ??
-                    "NONE"}
+                  {props.selectViewUser.studentInformation?.LecturerInformation
+                    ?.User?.name ?? "NONE"}
                 </p>
               </div>
             </div>
 
-            <div className={`${!isDesktop ? 'w-3/4 ' : 'w-full '}  px-4 `}>
+            <div className={`${!isDesktop ? "w-3/4 " : "w-full "}  px-4 `}>
               <div className="overflow-x-auto px-5 rounded-lg shadow-lg">
                 <div className="badge font-bold">Team Members</div>
                 <table className="table ">
@@ -112,17 +116,17 @@ const UseGetStudent = (props: any) => {
                       (item: any, index: number) => {
                         return (
                           <tr key={index}>
-                            <th>
-                              {index + 1}{" "}
-
-                            </th>
+                            <th>{index + 1} </th>
                             <td>Title One</td>
-                            <td>                              <Link
+                            <td>
+                              {" "}
+                              <Link
                                 href={"/test"}
                                 className="text-blue-600 text-sm"
                               >
                                 Poster 1 (X)
-                              </Link></td>
+                              </Link>
+                            </td>
                           </tr>
                         );
                       }
