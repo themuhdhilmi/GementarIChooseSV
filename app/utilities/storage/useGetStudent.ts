@@ -1,23 +1,26 @@
 import { create } from "zustand";
 
-type StudentStore = {
-  students: any;
+type Studenttore = {
+  student: any;
   loading: boolean;
+  doneFetch: boolean;
   add: () => void;
   remove: () => void;
   removeAll: () => void;
-  fetchData: (email : string) => Promise<void>;
+  fetchData: (email: string) => Promise<void>;
 };
 
-export const useGetStudent = create<StudentStore>((set) => ({
-  students: {},
+export const useGetStudent = create<Studenttore>((set) => ({
+  student: {},
   loading: false,
-  add: () => set((state) => ({ students: state.students + 1 })),
-  remove: () => set((state) => ({ students: state.students - 1 })),
-  removeAll: () => set({ students: 0 }),
+  doneFetch: true,
+  add: () => set((state) => ({ student: state.student + 1 })),
+  remove: () => set((state) => ({ student: state.student - 1 })),
+  removeAll: () => set({ student: 0 }),
   fetchData: async (email: string) => {
     try {
       set({ loading: true });
+      set({ doneFetch: false });
       // Make your fetch API call here
       const response = await fetch(
         `/api/v1/AUTH/manageUser/student?email=${email}&type=single`
@@ -26,8 +29,9 @@ export const useGetStudent = create<StudentStore>((set) => ({
 
       // Update the state based on the fetched data
       set((state) => ({
-        students: data, // Adjust this based on your API response structure
+        student: data, // Adjust this based on your API response structure
         loading: false,
+        doneFetch: true,
       }));
     } catch (error) {
       console.error("Error fetching data:", error);

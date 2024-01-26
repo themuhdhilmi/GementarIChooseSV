@@ -6,7 +6,35 @@ import { z } from "zod";
 import { apiDefaultPagination } from "@/app/config/api";
 import { Prisma } from "@prisma/client";
 
+function censorName(name: any) {
+  const nameParts = name.split(" ");
+  const censoredParts = nameParts.map(
+    (part: string | any[]) => part[0] + "*".repeat(part.length - 1)
+  );
+  return censoredParts.join(" ");
+}
+
 export async function GET(request: NextRequest, response: NextResponse) {
+
+
+  let role = "";
+
+  try {
+    const token = await getToken({ req: request });
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: token?.sub,
+      },
+    });
+
+    if (user) {
+      role = user.role;
+    }
+  } catch (err) {
+  }
+  
+
   try {
     const { searchParams } = new URL(request.url);
     const pageParam = parseInt(searchParams.get("page") as string);
@@ -15,12 +43,10 @@ export async function GET(request: NextRequest, response: NextResponse) {
     const emailParam = searchParams.get("email") as string;
     const typeParam = searchParams.get("type") as string;
 
-
-    if(typeParam === 'single')
-    {
-      const student = await prisma.user.findFirstOrThrow({
-        where : {
-          email : emailParam
+    if (typeParam === "single") {
+      const studentRaw = await prisma.user.findFirstOrThrow({
+        where: {
+          email: emailParam,
         },
         include: {
           studentInformation: {
@@ -28,18 +54,51 @@ export async function GET(request: NextRequest, response: NextResponse) {
               Member: true,
               SessionYear: true,
               LecturerInformation: {
-                include : {
-                  User : true
-                }
+                include: {
+                  User: true,
+                },
               },
             },
           },
         },
-      })
+      });
+
+      if (role === "ADMIN") {
+        return NextResponse.json(
+          {
+            student: studentRaw,
+          },
+          {
+            status: 200,
+          }
+        );
+      }
+
+      const censoredStudent = {
+        ...studentRaw,
+        name: censorName(studentRaw.name),
+        email: censorName(studentRaw.email),
+        studentInformation: {
+          ...studentRaw.studentInformation,
+          matricNumber: censorName(studentRaw.studentInformation?.matricNumber),
+          Member: studentRaw.studentInformation?.Member.map((member) => ({
+            ...member,
+            name: censorName(member.name),
+            matricNumber: censorName(member.matricNumber),
+          })),
+          LecturerInformation: {
+            ...studentRaw.studentInformation?.LecturerInformation,
+            User: {
+              ...studentRaw.studentInformation?.LecturerInformation?.User,
+            },
+          },
+        },
+      };
+      
 
       return NextResponse.json(
         {
-          student
+          student: censoredStudent,
         },
         {
           status: 200,
@@ -47,17 +106,18 @@ export async function GET(request: NextRequest, response: NextResponse) {
       );
     }
 
-    if(typeParam === 'many')
-    {
+    if (typeParam === "many") {
       let page = pageParam ? pageParam : 1;
-      let pageSize = pageSizeParam ? pageSizeParam : apiDefaultPagination.pageSize;
+      let pageSize = pageSizeParam
+        ? pageSizeParam
+        : apiDefaultPagination.pageSize;
       const students = await prisma.user.findMany({
         orderBy: { createdAt: Prisma.SortOrder.desc } as any,
         where: {
           role: "STUDENT",
-          studentInformation : {
-            sessionYearId : sessionParam
-          }
+          studentInformation: {
+            sessionYearId: sessionParam,
+          },
         },
         include: {
           studentInformation: {
@@ -65,9 +125,9 @@ export async function GET(request: NextRequest, response: NextResponse) {
               Member: true,
               SessionYear: true,
               LecturerInformation: {
-                include : {
-                  User : true
-                }
+                include: {
+                  User: true,
+                },
               },
             },
           },
@@ -75,14 +135,14 @@ export async function GET(request: NextRequest, response: NextResponse) {
         skip: (page - 1) * pageSize,
         take: pageSize,
       });
-  
+
       const studentsCount = await prisma.user.count({
         where: {
           role: "STUDENT",
         },
       });
       const totalPages = Math.ceil(studentsCount / pageSize);
-  
+
       return NextResponse.json(
         {
           page,
@@ -96,8 +156,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
         }
       );
     }
-
-
   } catch (error) {
     return NextResponse.json(
       {
@@ -140,17 +198,22 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     // DEBUG : PLEASE ADD ADMIN VER
 
-    const checkIfMaticNumberAlreadyExisted = await prisma.studentInformation.findFirst({
-      where : {
-        matricNumber : body.matricNumber
-      }
-    })
+    const checkIfMaticNumberAlreadyExisted =
+      await prisma.studentInformation.findFirst({
+        where: {
+          matricNumber: body.matricNumber,
+        },
+      });
 
-    if(checkIfMaticNumberAlreadyExisted)
-    {
+    if (checkIfMaticNumberAlreadyExisted) {
       return NextResponse.json(
         {
-          errors : [{message : `Matric number ${body.matricNumber} already existed`, path : ''}]
+          errors: [
+            {
+              message: `Matric number ${body.matricNumber} already existed`,
+              path: "",
+            },
+          ],
         },
         {
           status: 400,

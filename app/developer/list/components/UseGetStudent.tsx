@@ -46,10 +46,10 @@ const UseGetStudent = (props: any) => {
                 </div>
                 <div className="my-3 w-full ">
                   <p className="text-sm font-bold text-white">
-                    {props.selectViewUser.name}
+                    {props.selectViewUser?.name}
                   </p>
                   <p className="text-sm text-slate-100">
-                    {props.selectViewUser.studentInformation?.matricNumber}
+                    {props.selectViewUser?.studentInformation?.matricNumber}
                   </p>
                   <p className="text-sm text-slate-100">
                     {props.selectViewUser?.email}
@@ -57,7 +57,7 @@ const UseGetStudent = (props: any) => {
                 </div>
               </div>
               <div className="font-extrabold text-red-600 my-2  py-2 text-center rounded-lg shadow-2xl">
-                {props.selectViewUser.studentInformation?.Track}
+                {props.selectViewUser?.studentInformation?.Track}
               </div>
               <div className="text-center mt-6 font-extrabold">
                 <p>STATUS</p>
@@ -67,7 +67,7 @@ const UseGetStudent = (props: any) => {
               <div className="text-center mt-2 font-extrabold">
                 <p>Team Member Quota</p>
                 <p className="text-red-600">
-                  {props.selectViewUser.studentInformation?.memberQuota ??
+                  {props.selectViewUser?.studentInformation?.memberQuota ??
                     "USING GLOBAL"}
                 </p>
               </div>
@@ -75,7 +75,7 @@ const UseGetStudent = (props: any) => {
               <div className="text-center mt-2 font-extrabold">
                 <p>Title Quota</p>
                 <p className="text-red-600">
-                  {props.selectViewUser.studentInformation?.titleQuota ??
+                  {props.selectViewUser?.studentInformation?.titleQuota ??
                     "USING GLOBAL"}
                 </p>
               </div>
@@ -83,7 +83,7 @@ const UseGetStudent = (props: any) => {
               <div className="text-center mt-2 font-extrabold">
                 <p>Supervisor</p>
                 <p className="text-red-600">
-                  {props.selectViewUser.studentInformation?.LecturerInformation
+                  {props.selectViewUser?.studentInformation?.LecturerInformation
                     ?.User?.name ?? "NONE"}
                 </p>
               </div>
@@ -94,7 +94,7 @@ const UseGetStudent = (props: any) => {
                 <div className="badge font-bold">Team Members</div>
                 <table className="table ">
                   <tbody>
-                    {props.selectViewUser.studentInformation.Member.map(
+                    {props.selectViewUser?.studentInformation?.Member.map(
                       (item: any, index: number) => {
                         return (
                           <tr key={index}>
@@ -112,7 +112,7 @@ const UseGetStudent = (props: any) => {
                 <div className="badge font-bold">Title</div>
                 <table className="table ">
                   <tbody>
-                    {props.selectViewUser.studentInformation.Member.map(
+                    {props.selectViewUser?.studentInformation?.Member.map(
                       (item: any, index: number) => {
                         return (
                           <tr key={index}>
