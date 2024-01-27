@@ -1,6 +1,6 @@
 "use client";
 import { breakpoints } from "@/app/config/breakpoints";
-import UseGetStudent from "@/app/developer/list/components/UseGetStudent";
+import UseGetStudent from "@/app/dashboard/admin/studentsManager/components/UseGetStudent";
 import { useGetStudent } from "@/app/utilities/storage/useGetStudent";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect } from "react";

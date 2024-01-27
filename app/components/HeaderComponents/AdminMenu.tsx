@@ -39,7 +39,7 @@ const AdminMenu = (props: any) => {
         <div className="flex flex-row gap-3 py-5">
           <Link
             href={`/dashboard/view/feed`}
-            className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${
+            className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${
               getFirstThreePathName() === "/dashboard/view/feed"
                 ? ""
                 : "bg-opacity-0"
@@ -51,7 +51,7 @@ const AdminMenu = (props: any) => {
 
           <Link
             href={`/dashboard/admin/globalValue`}
-            className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${
+            className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${
               getFirstThreePathName() === "/dashboard/admin/globalValue"
                 ? ""
                 : "bg-opacity-0"
@@ -63,7 +63,7 @@ const AdminMenu = (props: any) => {
 
           <Link
             href={`/dashboard/admin/studentsManager`}
-            className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${
+            className={`btn btn-sm rounded-lg border-0 bg-red-800 text-white hover:bg-red-900 ${
               getFirstThreePathName() === "/dashboard/admin/studentsManager"
                 ? ""
                 : "bg-opacity-0"
@@ -75,7 +75,7 @@ const AdminMenu = (props: any) => {
 
           <Link
             href={`/dashboard/admin/lecturersManager`}
-            className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${
+            className={`btn btn-sm rounded-lg border-0 bg-red-800 text-white hover:bg-red-900 ${
               getFirstThreePathName() === "/dashboard/admin/lecturersManager"
                 ? ""
                 : "bg-opacity-0"
@@ -87,8 +87,8 @@ const AdminMenu = (props: any) => {
 
           <Link
             href={`/dashboard/view/profileSettings`}
-            className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${
-              getFirstThreePathName() === "/dashboard/admin/globalValue"
+            className={`btn btn-sm rounded-lg border-0 bg-red-800 text-white hover:bg-red-900 ${
+              getFirstThreePathName() === "/dashboard/view/profileSettings"
                 ? ""
                 : "bg-opacity-0"
             }  `}

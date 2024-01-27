@@ -1,4 +1,5 @@
 "use client";
+import HereIsEmpty from "@/app/components/HereIsEmpty";
 import { breakpoints } from "@/app/config/breakpoints";
 import Image from "next/image";
 import Link from "next/link";
@@ -92,47 +93,63 @@ const UseGetStudent = (props: any) => {
             <div className={`${!isDesktop ? "w-3/4 " : "w-full "}  px-4 `}>
               <div className="overflow-x-auto px-5 rounded-lg shadow-lg">
                 <div className="badge font-bold">Team Members</div>
-                <table className="table ">
-                  <tbody>
-                    {props.selectViewUser?.studentInformation?.Member.map(
-                      (item: any, index: number) => {
-                        return (
-                          <tr key={index}>
-                            {!isDesktop ? <th>{index + 1}</th> : null}
-                            <td>{item.name}</td>
-                            <td>{item.matricNumber}</td>
-                          </tr>
-                        );
-                      }
-                    )}
-                  </tbody>
-                </table>
+
+                {props.selectViewUser?.studentInformation?.Member?.length ===
+                0 ? (
+                  <div className="py-6">
+                    <HereIsEmpty />
+                  </div>
+                ) : (
+                  <table className="table ">
+                    <tbody>
+                      {props.selectViewUser?.studentInformation?.Member.map(
+                        (item: any, index: number) => {
+                          return (
+                            <tr key={index}>
+                              {!isDesktop ? <th>{index + 1}</th> : null}
+                              <td>{item.name}</td>
+                              <td>{item.matricNumber}</td>
+                            </tr>
+                          );
+                        }
+                      )}
+                    </tbody>
+                  </table>
+                )}
               </div>
               <div className="overflow-x-auto px-5 my-5 rounded-lg shadow-lg">
                 <div className="badge font-bold">Title</div>
-                <table className="table ">
-                  <tbody>
-                    {props.selectViewUser?.studentInformation?.Member.map(
-                      (item: any, index: number) => {
-                        return (
-                          <tr key={index}>
-                            <th>{index + 1} </th>
-                            <td>Title One</td>
-                            <td>
-                              {" "}
-                              <Link
-                                href={"/test"}
-                                className="text-blue-600 text-sm"
-                              >
-                                Poster 1 (X)
-                              </Link>
-                            </td>
-                          </tr>
-                        );
-                      }
-                    )}
-                  </tbody>
-                </table>
+
+                {props.selectViewUser?.studentInformation?.Member?.length ===
+                0 ? (
+                  <div className="py-6">
+                    <HereIsEmpty />
+                  </div>
+                ) : (
+                  <table className="table ">
+                    <tbody>
+                      {props.selectViewUser?.studentInformation?.Member.map(
+                        (item: any, index: number) => {
+                          return (
+                            <tr key={index}>
+                              <th>{index + 1} </th>
+                              <td>Title One</td>
+                              <td>
+                                {" "}
+                                <Link
+                                  href={"/test"}
+                                  className="text-blue-600 text-sm"
+                                >
+                                  Poster 1 (X)
+                                </Link>
+                              </td>
+                            </tr>
+                          );
+                        }
+                      )}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
           </div>
