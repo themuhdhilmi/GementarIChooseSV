@@ -1,21 +1,28 @@
-"use client";
+'use client'
+import { breakpoints } from '@/app/config/breakpoints';
+import React from 'react'
+import { useMediaQuery } from 'usehooks-ts';
 
-export default function Page() {
+const Page = () => {
+  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 place-content-center h-screen">
-      <div className="text-center">
-        <div className="flex flex-col">
-          <div className="text-7xl font-bold  text-primary">iChooseSV</div>
-          <div className="text-5xl font-bold text-base-content">
-            by Gementar Team
+    <div className={`${isDesktop ? "px-6" : "px-24"}`}>
+    <div className="stats shadow"></div>
+    <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg">
+      <div className="overflow-x-auto">
+        <div className="flex flex-row py-5">
+          <div className="w-1/2 font-medium ">
+            <p className="underline decoration-1">Feeds News & Update</p>
           </div>
-          <div className="font-bold  text-base-content ">
-              Crucial Step Toward Your Professional Development Behind Every
-              Successful Project Lies Hours of Hard Work and Dedication.
-          </div>
+
         </div>
+
+
       </div>
-      <div>a</div>
     </div>
-  );
+  </div>
+  )
 }
+
+export default Page

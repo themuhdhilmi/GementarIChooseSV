@@ -1,5 +1,6 @@
 "use client";
 
+import { useUserInformation } from "@/app/utilities/storage/useUserInformation";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -7,6 +8,7 @@ import { ChangeEvent, useState } from "react";
 export const LoginForm = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const { fetchData } = useUserInformation();
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -14,7 +16,7 @@ export const LoginForm = () => {
   const [error, setError] = useState("");
 
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/profile";
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,7 +35,8 @@ export const LoginForm = () => {
 
       console.log(res);
       if (!res?.error) {
-        router.push(callbackUrl);
+        fetchData();
+        router.replace(callbackUrl);
       } else {
         setError("invalid email or password");
       }
@@ -57,7 +60,7 @@ export const LoginForm = () => {
         <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>
       )}
       <div>
-        <div className="form-control">
+        <div className="form-control ">
           <label className="label">
             <span className="label-text">Email</span>
           </label>
@@ -66,7 +69,7 @@ export const LoginForm = () => {
             required
             type="email"
             name="email"
-            className="input input-bordered"
+            className="input input-bordered rounded-lg"
             value={formValues.email}
             onChange={handleChange}
             placeholder="Email address"
@@ -86,18 +89,18 @@ export const LoginForm = () => {
             value={formValues.password}
             onChange={handleChange}
             placeholder="Password"
-            className="input input-bordered"
+            className="input input-bordered rounded-lg"
           />
         </div>
       </div>
 
       <div className="form-control mt-6">
-        <button type="submit" className="btn btn-primary" disabled={loading}>
+        <button type="submit" className="btn rounded-lg bg-red-600 hover:bg-red-400 text-white" disabled={loading}>
           {loading ? "loading..." : "Sign In"}
         </button>
       </div>
 
-      <div className="text-center py-4">Develop by GementarTeam</div>
+      {/* <div className="text-center py-4">Develop by GementarTeam</div> */}
     </form>
   );
 };

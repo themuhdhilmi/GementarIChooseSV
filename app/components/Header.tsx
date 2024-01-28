@@ -13,10 +13,12 @@ import Countdown from "react-countdown";
 import { useSession } from "next-auth/react";
 import { useUserInformation } from "../utilities/storage/useUserInformation";
 import AdminMenu from "./HeaderComponents/AdminMenu";
+import Link from "next/link";
 const Header = () => {
   const session = useSession();
 
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
+  const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`);
   const isMobileLandscape = useMediaQuery(
     `(max-width: ${breakpoints.mobileLandscape})`
   );
@@ -28,7 +30,7 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function checkIfAvailable() {
+  function checkIfUserLoggedIn() {
     if (session.status === "unauthenticated") {
       return false;
     }
@@ -46,19 +48,41 @@ const Header = () => {
 
   return (
     <div className="static">
-      <div
+      {checkIfUserLoggedIn() ? (
+        <div
+          className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${
+            isDesktop ? "min-h-screen" : "min-h-96"
+          } min-w-full px-5 py-2`}
+        />
+      ) : (
+        <div
+          className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${
+            isTablet ? "min-h-20" : isDesktop ? "min-h-screen" : "min-h-96"
+          } min-w-full px-5 py-2`}
+        />
+      )}
+
+      {/* <div
         className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${
-          isDesktop ? "min-h-screen" : "min-h-96"
+          !checkIfUserLoggedIn()
+            ? "min-h-20"
+            : isDesktop
+            ? "min-h-screen"
+            : "min-h-96"
         } min-w-full px-5 py-2`}
-      ></div>
+      /> */}
+
       <div className={`bg-none ${isDesktop ? "px-6" : "px-24"}  py-2`}>
         {!isDesktop ? (
           <div className="navbar rounded-lg p-0 ">
-            <div className="navbar-start text-white">
-              <a className="btn btn-ghost text-white text-xl">
+            <div className="navbar-start text-white ">
+              <Link
+                href={"/"}
+                className="btn btn-ghost text-white text-xl rounded-lg"
+              >
                 <SiHtmlacademy />
                 iChooseSV [{role}]
-              </a>
+              </Link>
             </div>
             <div className="navbar-center">
               <div className="badge badge-neutral">Final presentation</div>
@@ -68,21 +92,48 @@ const Header = () => {
               <div className="ml-2 badge badge-neutral">Session</div>
               <div className="badge ">1 2022/2023</div>
             </div>
-            <div className="navbar-end">
-              <button className="btn rounded-lg min-h-fit border-red-700 bg-red-700 text-white hover:bg-red-900 hover:border-red-700">
-                <div className="avatar">
-                  <div className="w-10 mask mask-hexagon">
-                    <Image
-                      alt=""
-                      width={500}
-                      height={500}
-                      src="/images/profile.jpg"
-                    />
+
+            {checkIfUserLoggedIn() ? (
+              <div className="navbar-end">
+                <button className="btn rounded-lg min-h-fit border-red-700 bg-red-700 text-white hover:bg-red-900 hover:border-red-700">
+                  <div className="avatar">
+                    <div className="w-10 mask mask-hexagon">
+                      <Image
+                        alt=""
+                        width={500}
+                        height={500}
+                        src="/images/profile.jpg"
+                      />
+                    </div>
                   </div>
-                </div>
-                <p className="text-ellipsis">{name}</p>
-              </button>
-            </div>
+                  <Link
+                    href={`/dashboard/view/profileSettings`}
+                    className="text-ellipsis"
+                  >
+                    {name}
+                  </Link>
+                </button>
+              </div>
+            ) : (
+              <div className="navbar-end">
+                <Link
+                  href={"/auth/signin"}
+                  className="btn rounded-lg min-h-fit border-red-700 bg-red-700 text-white hover:bg-red-900 hover:border-red-700"
+                >
+                  {/* <div className="avatar">
+                    <div className="w-10 mask mask-hexagon">
+                      <Image
+                        alt=""
+                        width={500}
+                        height={500}
+                        src="/images/profile.jpg"
+                      />
+                    </div>
+                  </div> */}
+                  <p className="text-ellipsis">Login</p>
+                </Link>
+              </div>
+            )}
           </div>
         ) : (
           <div className="navbar rounded-lg p-0 ">
@@ -97,7 +148,7 @@ const Header = () => {
           </div>
         )}
 
-        {role === 'ADMIN' ? <AdminMenu renderer={renderer} /> : ''}
+        {role === "ADMIN" ? <AdminMenu renderer={renderer} /> : ""}
       </div>
     </div>
   );

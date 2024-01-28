@@ -38,9 +38,9 @@ const AdminMenu = (props: any) => {
       {!isDesktop ? (
         <div className="flex flex-row gap-3 py-5">
           <Link
-            href={`/dashboard/view/feed`}
+            href={`/`}
             className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${
-              getFirstThreePathName() === "/dashboard/view/feed"
+              getFirstThreePathName() === "/"
                 ? ""
                 : "bg-opacity-0"
             }`}
@@ -171,9 +171,9 @@ const AdminMenu = (props: any) => {
           <div className="flex flex-wrap"></div>
           <div className="flex flex-wrap bg-red-500 rounded-lg">
             <Link
-              href={`/dashboard/view/feed`}
+              href={`/`}
               className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${
-                getFirstThreePathName() === "/dashboard/view/feed"
+                getFirstThreePathName() === "/"
                   ? ""
                   : "bg-opacity-0"
               } w-full`}
