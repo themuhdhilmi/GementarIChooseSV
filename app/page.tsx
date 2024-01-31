@@ -2,6 +2,7 @@
 import { breakpoints } from "@/app/config/breakpoints";
 import React from "react";
 import { useMediaQuery } from "usehooks-ts";
+import Loading from "./components/LoadingFullScreen";
 
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);

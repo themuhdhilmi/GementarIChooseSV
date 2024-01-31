@@ -29,6 +29,7 @@ export const useAddStudent = create<StudentStore>((set) => ({
   success: SuccessState.NONE,
   sendData: async (postData) => {
     try {
+      set({ loading: true, success: SuccessState.NONE });
       // Make your fetch API call here
       const response = await fetch("/api/v1/AUTH/manageUser/student", {
         method: "POST",

@@ -6,6 +6,7 @@ type UseStore = {
   email: string;
   role: string;
   image: string;
+  loading: boolean;
   fetchData: () => Promise<void>;
 };
 
@@ -15,9 +16,11 @@ export const useUserInformation = create<UseStore>((set) => ({
   email: "",
   role: "GUEST",
   image: "",
+  loading: false,
   bearerSessionKey: "",
   fetchData: async () => {
     try {
+      set({ loading: true });
       const response = await fetch("/api/v1/AUTH/global/user");
       const data = await response.json();
 
@@ -29,9 +32,9 @@ export const useUserInformation = create<UseStore>((set) => ({
           role: data.user.role,
           image: data.user.image ?? "",
         }));
-        set({ isLoggedIn: true });
+        set({ isLoggedIn: true, loading: false });
       } else {
-        set({ isLoggedIn: false });
+        set({ isLoggedIn: false, loading: false });
         set((state) => ({
           name: "Guest",
           email: "",
@@ -42,6 +45,7 @@ export const useUserInformation = create<UseStore>((set) => ({
     } catch (error) {
       console.error("Error fetching data:", error);
       set({ isLoggedIn: false });
+      set({ loading: false });
     }
   },
 }));
