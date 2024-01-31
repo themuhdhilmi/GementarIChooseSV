@@ -5,7 +5,7 @@ import { breakpoints } from "../config/breakpoints";
 import { SiHtmlacademy } from "react-icons/si";
 import Image from "next/image";
 import Countdown from "react-countdown";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useUserInformation } from "../utilities/storage/useUserInformation";
 import AdminMenu from "./HeaderComponents/AdminMenu";
 import Link from "next/link";
@@ -26,15 +26,28 @@ const Header = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // useEffect(() => {
+  //   if (session.status === "authenticated") {
+  //     if (role === "GUEST") {
+  //       signOut();
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [role]);
+
   function checkIfUserLoggedIn() {
     if (session.status === "unauthenticated") {
       return false;
+    } else {
+      if (role === "GUEST") {
+        //signOut();
+      }
     }
     return true;
   }
 
   if (session.status === "loading") {
-    return <Loading/>; // You can also render a loading indicator here if needed
+    return <Loading />; // You can also render a loading indicator here if needed
   }
 
   const renderer = ({ days }: any) => {

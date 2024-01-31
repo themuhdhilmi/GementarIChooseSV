@@ -6,6 +6,7 @@ import { useGetsessions } from "@/app/utilities/storage/useGetSessions";
 import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
 import UseGetStudent from "./components/UseGetStudent";
+import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 
 enum Drawer {
   NONE,
@@ -17,7 +18,7 @@ enum Drawer {
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`,
+    `(max-width: ${breakpoints.mobileLandscape})`
   );
   const { sessions, loading, fetchData } = useGetsessions();
   const [selectedSession, setSelectedSession] = useState("");
@@ -49,6 +50,10 @@ const Page = () => {
   const funcViewStudent = () => {
     setOpenDrawer(Drawer.VIEW);
   };
+
+  if (loading) {
+    return <LoadingLeftBottom />;
+  }
 
   return (
     <div className={`${isDesktop ? "px-6" : "px-24"}`}>

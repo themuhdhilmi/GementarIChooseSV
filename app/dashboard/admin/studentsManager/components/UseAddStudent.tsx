@@ -6,16 +6,18 @@ import { RoleEnum } from "@/app/config/interface";
 import ToastError from "@/app/components/ToastError";
 import { ToastContainer, toast } from "react-toastify";
 import { useGetsessions } from "@/app/utilities/storage/useGetSessions";
-import { useGetStudents } from "@/app/utilities/storage/useGetStudents";
+
 import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
+import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
+import LoadingFullScreen from "@/app/components/LoadingFullScreen";
 
 const UseAddStudent = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
     `(max-width: ${breakpoints.mobileLandscape})`,
   );
-  const { sendData, success, data } = useAddStudent();
+  const { sendData, success, data, loading : loadingAddStudent } = useAddStudent();
   const { sessions, loading } = useGetsessions();
   const [name, setName] = useState("");
   const [matricNumber, setMatricNumber] = useState("");
@@ -40,6 +42,16 @@ const UseAddStudent = (props: any) => {
     event.preventDefault();
     sendData(postData);
   };
+
+  if(loading)
+  {
+    return <LoadingLeftBottom/>
+  }
+
+  if(loadingAddStudent)
+  {
+    return <LoadingLeftBottom/>
+  }
 
   return (
     <div>

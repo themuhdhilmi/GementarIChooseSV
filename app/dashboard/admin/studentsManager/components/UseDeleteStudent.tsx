@@ -1,4 +1,6 @@
 "use client";
+import LoadingFullScreen from "@/app/components/LoadingFullScreen";
+import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 import { useDeleteStudent } from "@/app/utilities/storage/useDeleteStudent";
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
@@ -6,7 +8,12 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { RiDeleteBinLine } from "react-icons/ri";
 const UseDeleteStudent = (props: any) => {
   const [openModal, setOpenModal] = useState(false);
-  const { deleteStudent } = useDeleteStudent();
+  const { deleteStudent, loading } = useDeleteStudent();
+
+  if(loading)
+  {
+    return <LoadingLeftBottom/>
+  }
 
   const processDeleteStudent = () => {
     deleteStudent(props.id);
