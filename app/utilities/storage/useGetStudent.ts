@@ -23,7 +23,7 @@ export const useGetStudent = create<Studenttore>((set) => ({
       set({ doneFetch: false });
       // Make your fetch API call here
       const response = await fetch(
-        `/api/v1/AUTH/manageUser/student?email=${email}&type=single`
+        `/api/v1/AUTH/manageUser/student?email=${email}&type=single`,
       );
       const data = await response.json();
 

@@ -20,7 +20,7 @@ const Header = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
+    `(max-width: ${breakpoints.mobileLandscape})`,
   );
 
   const { fetchData, name, email, role } = useUserInformation();

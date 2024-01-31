@@ -19,7 +19,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }
@@ -56,28 +56,28 @@ export async function POST(request: NextRequest, response: NextResponse) {
     });
 
     const sessionSetAllFalse = await prisma.sessionYear.updateMany({
-        data  : {
-            isSelected : false
-        }
-    })
+      data: {
+        isSelected: false,
+      },
+    });
 
     const sessionSetTargetedTrue = await prisma.sessionYear.update({
-        where : {
-            id: body.sessionID,
-        },
-        data  : {
-            isSelected : true
-        }
-    })
+      where: {
+        id: body.sessionID,
+      },
+      data: {
+        isSelected: true,
+      },
+    });
 
     return NextResponse.json(
       {
         sessionSetTargetedTrue,
-        sessionSetAllFalse
+        sessionSetAllFalse,
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -86,7 +86,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }

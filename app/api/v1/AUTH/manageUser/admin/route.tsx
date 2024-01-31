@@ -31,7 +31,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -40,7 +40,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }

@@ -3,13 +3,11 @@ import React, { useEffect, useState } from "react";
 import UseGetStudents from "./components/UseGetStudents";
 import UseAddStudent from "./components/UseAddStudent";
 import { useGetsessions } from "@/app/utilities/storage/useGetSessions";
-import BreadCrumbs from "@/app/components/BreadCrumbs";
 import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
 import UseGetStudent from "./components/UseGetStudent";
-import UseDeleteStudent from "./components/UseDeleteStudent";
 
-export enum Drawer {
+enum Drawer {
   NONE,
   ADD,
   ADD_BULK,
@@ -19,7 +17,7 @@ export enum Drawer {
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
+    `(max-width: ${breakpoints.mobileLandscape})`,
   );
   const { sessions, loading, fetchData } = useGetsessions();
   const [selectedSession, setSelectedSession] = useState("");

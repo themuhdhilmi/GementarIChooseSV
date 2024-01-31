@@ -4,11 +4,10 @@ import { ToastContainer, toast } from "react-toastify";
 
 const ToastError = (props: any) => {
   useEffect(() => {
-
     if (props.errors?.length >= 1) {
       props.errors?.forEach((element: any) => {
         const path = element?.path[0];
-        toast.error(element.message + " at field" + path , {
+        toast.error(element.message + " at field" + path, {
           position: "top-right",
           autoClose: 15000,
           hideProgressBar: false,
@@ -24,7 +23,7 @@ const ToastError = (props: any) => {
     if (props.errors?.errors?.length >= 1) {
       props.errors?.errors?.forEach((element: any) => {
         const path = element?.path[0];
-        toast.error(element.message , {
+        toast.error(element.message, {
           position: "top-right",
           autoClose: 15000,
           hideProgressBar: false,
@@ -41,7 +40,7 @@ const ToastError = (props: any) => {
   return (
     <div>
       {JSON.stringify(props.errors?.length)}
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

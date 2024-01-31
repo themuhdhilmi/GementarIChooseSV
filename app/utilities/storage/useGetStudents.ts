@@ -6,7 +6,7 @@ type StudentStore = {
   add: () => void;
   remove: () => void;
   removeAll: () => void;
-  fetchData: (sessionId : string) => Promise<void>;
+  fetchData: (sessionId: string) => Promise<void>;
 };
 
 export const useGetStudents = create<StudentStore>((set) => ({
@@ -15,12 +15,12 @@ export const useGetStudents = create<StudentStore>((set) => ({
   add: () => set((state) => ({ students: state.students + 1 })),
   remove: () => set((state) => ({ students: state.students - 1 })),
   removeAll: () => set({ students: 0 }),
-  fetchData: async (sessionId : string) => {
+  fetchData: async (sessionId: string) => {
     try {
       set({ loading: true });
       // Make your fetch API call here
       const response = await fetch(
-        `/api/v1/AUTH/manageUser/student?type=many&session=${sessionId}`
+        `/api/v1/AUTH/manageUser/student?type=many&session=${sessionId}`,
       );
       const data = await response.json();
 

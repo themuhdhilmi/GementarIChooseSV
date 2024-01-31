@@ -16,7 +16,7 @@ import { signOut } from "next-auth/react";
 const AdminMenu = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
+    `(max-width: ${breakpoints.mobileLandscape})`,
   );
   const pathname = usePathname();
 
@@ -40,9 +40,7 @@ const AdminMenu = (props: any) => {
           <Link
             href={`/`}
             className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${
-              getFirstThreePathName() === "/"
-                ? ""
-                : "bg-opacity-0"
+              getFirstThreePathName() === "/" ? "" : "bg-opacity-0"
             }`}
           >
             <AiOutlineGlobal />
@@ -173,9 +171,7 @@ const AdminMenu = (props: any) => {
             <Link
               href={`/`}
               className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${
-                getFirstThreePathName() === "/"
-                  ? ""
-                  : "bg-opacity-0"
+                getFirstThreePathName() === "/" ? "" : "bg-opacity-0"
               } w-full`}
             >
               <AiOutlineGlobal />

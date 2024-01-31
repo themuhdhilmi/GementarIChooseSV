@@ -38,7 +38,14 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
-      <div className="text-center pt-5 px-20">Developed by Gementar Team. <p><Link href="href" className="text-red-800">Learn more about us.</Link></p></div>
+      <div className="text-center pt-5 px-20">
+        Developed by Gementar Team.{" "}
+        <p>
+          <Link href="href" className="text-red-800">
+            Learn more about us.
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }

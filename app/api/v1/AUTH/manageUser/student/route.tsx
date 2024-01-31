@@ -9,14 +9,12 @@ import { Prisma } from "@prisma/client";
 function censorName(name: any) {
   const nameParts = name.split(" ");
   const censoredParts = nameParts.map(
-    (part: string | any[]) => part[0] + "*".repeat(part.length - 1)
+    (part: string | any[]) => part[0] + "*".repeat(part.length - 1),
   );
   return censoredParts.join(" ");
 }
 
 export async function GET(request: NextRequest, response: NextResponse) {
-
-
   let role = "";
 
   try {
@@ -31,9 +29,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
     if (user) {
       role = user.role;
     }
-  } catch (err) {
-  }
-  
+  } catch (err) {}
 
   try {
     const { searchParams } = new URL(request.url);
@@ -70,7 +66,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
           },
           {
             status: 200,
-          }
+          },
         );
       }
 
@@ -94,7 +90,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
           },
         },
       };
-      
 
       return NextResponse.json(
         {
@@ -102,7 +97,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        }
+        },
       );
     }
 
@@ -153,7 +148,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        }
+        },
       );
     }
   } catch (error) {
@@ -163,7 +158,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }
@@ -217,7 +212,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         },
         {
           status: 400,
-        }
+        },
       );
     }
 
@@ -250,7 +245,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -259,7 +254,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }
@@ -324,7 +319,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -333,7 +328,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }
@@ -384,7 +379,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -393,7 +388,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }

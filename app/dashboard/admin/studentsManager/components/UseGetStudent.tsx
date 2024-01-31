@@ -111,7 +111,7 @@ const UseGetStudent = (props: any) => {
                               <td>{item.matricNumber}</td>
                             </tr>
                           );
-                        }
+                        },
                       )}
                     </tbody>
                   </table>
@@ -145,7 +145,7 @@ const UseGetStudent = (props: any) => {
                               </td>
                             </tr>
                           );
-                        }
+                        },
                       )}
                     </tbody>
                   </table>

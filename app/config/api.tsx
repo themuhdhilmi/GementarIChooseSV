@@ -1,3 +1,3 @@
 export const apiDefaultPagination = {
-    pageSize : 15,
-  }
+  pageSize: 15,
+};

@@ -10,7 +10,7 @@ import { getCsrfToken, getSession } from "next-auth/react";
 function censorName(name: any) {
   const nameParts = name.split(" ");
   const censoredParts = nameParts.map(
-    (part: string | any[]) => part[0] + "*".repeat(part.length - 1)
+    (part: string | any[]) => part[0] + "*".repeat(part.length - 1),
   );
   return censoredParts.join(" ");
 }
@@ -18,21 +18,21 @@ function censorName(name: any) {
 export async function GET(request: NextRequest, response: NextResponse) {
   const token = await getToken({ req: request });
 
-  const csrfToken = await getCsrfToken()
+  const csrfToken = await getCsrfToken();
 
-//   const user = await prisma.user.findUnique({
-//     where: {
-//       id: token?.sub,
-//     },
-//   });
+  //   const user = await prisma.user.findUnique({
+  //     where: {
+  //       id: token?.sub,
+  //     },
+  //   });
 
   return NextResponse.json(
     {
       token,
-      csrfToken
+      csrfToken,
     },
     {
       status: 200,
-    }
+    },
   );
 }

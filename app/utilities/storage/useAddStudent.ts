@@ -18,18 +18,17 @@ interface StudentData {
 
 type StudentStore = {
   loading: boolean;
-  data : any,
+  data: any;
   success: SuccessState;
   sendData: (postData: StudentData) => Promise<void>;
 };
 
 export const useAddStudent = create<StudentStore>((set) => ({
-  data : {},
+  data: {},
   loading: false,
   success: SuccessState.NONE,
   sendData: async (postData) => {
     try {
-
       // Make your fetch API call here
       const response = await fetch("/api/v1/AUTH/manageUser/student", {
         method: "POST",
@@ -48,15 +47,13 @@ export const useAddStudent = create<StudentStore>((set) => ({
           loading: false,
           success: SuccessState.SUCCESS,
         }));
-      } else
-      {
+      } else {
         set((state) => ({
           data: data, // Adjust this based on your API response structure
           loading: false,
           success: SuccessState.ERROR,
         }));
       }
-
     } catch (error) {
       console.error("Error fetching data:", error);
       set({ loading: false, success: SuccessState.ERROR });

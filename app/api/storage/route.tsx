@@ -1,17 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-import bcrypt from "bcrypt";
-import prisma from "@/prisma/client";
-import { z } from "zod";
 import getSupervisorListForCurrentSession from "./getSupervisorListForCurrentSession";
+import prisma from "@/prisma/client";
 
 export async function GET(request: NextRequest, response: NextResponse) {
+  const getFirstSessionSelected = await prisma.sessionYear.findFirst({
+    where: {
+      isSelected: true,
+    },
+  });
 
-        const debug = await getSupervisorListForCurrentSession("clqi38ax3000011kd46197nz4");
+  const debug = await getSupervisorListForCurrentSession(
+    getFirstSessionSelected!.id
+  );
 
-        return NextResponse.json(
-            {
-                debug
-            })
-
+  return NextResponse.json({
+    debug,
+  });
 }

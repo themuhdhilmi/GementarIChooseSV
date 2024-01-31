@@ -21,5 +21,14 @@ export async function GET(request: NextRequest, response: NextResponse) {
         status: 200,
       }
     );
-  } catch (error) {}
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error,
+      },
+      {
+        status: 400,
+      }
+    );
+  }
 }

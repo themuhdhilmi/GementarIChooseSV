@@ -10,10 +10,10 @@ import { useGetStudents } from "@/app/utilities/storage/useGetStudents";
 import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
 
-const UseAddStudent = (props : any) => {
+const UseAddStudent = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
+    `(max-width: ${breakpoints.mobileLandscape})`,
   );
   const { sendData, success, data } = useAddStudent();
   const { sessions, loading } = useGetsessions();
@@ -45,22 +45,22 @@ const UseAddStudent = (props : any) => {
     <div>
       <div className=" bg-white rounded-lg px-5 shadow-lg">
         <div className="py-5">
-        <button onClick={props.funcCloseAll} className="btn btn-circle">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+          <button onClick={props.funcCloseAll} className="btn btn-circle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </div>
 
         <ToastError errors={data} />
@@ -153,7 +153,10 @@ const UseAddStudent = (props : any) => {
               <option value={"NETWORK"}>NETWORK</option>
             </select>
             {!loading ? (
-              <button type="submit" className="btn w-full my-5 bg-red-600 rounded-lg hover:bg-red-800 text-white">
+              <button
+                type="submit"
+                className="btn w-full my-5 bg-red-600 rounded-lg hover:bg-red-800 text-white"
+              >
                 Add Students
               </button>
             ) : (

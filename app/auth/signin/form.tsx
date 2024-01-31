@@ -95,7 +95,11 @@ export const LoginForm = () => {
       </div>
 
       <div className="form-control mt-6">
-        <button type="submit" className="btn rounded-lg bg-red-600 hover:bg-red-400 text-white" disabled={loading}>
+        <button
+          type="submit"
+          className="btn rounded-lg bg-red-600 hover:bg-red-400 text-white"
+          disabled={loading}
+        >
           {loading ? "loading..." : "Sign In"}
         </button>
       </div>

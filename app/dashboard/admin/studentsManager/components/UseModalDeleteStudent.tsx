@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const UseModalDeleteStudent = () => {
-  return (
-    <div>UseModalDeleteStudent</div>
-  )
-}
+  return <div>UseModalDeleteStudent</div>;
+};
 
-export default UseModalDeleteStudent
+export default UseModalDeleteStudent;
