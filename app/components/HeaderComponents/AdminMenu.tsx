@@ -56,7 +56,7 @@ const AdminMenu = (props: any) => {
             } `}
           >
             <AiOutlineGlobal />
-            Global Value
+            Manage Sessions
           </Link>
 
           <Link
@@ -163,7 +163,7 @@ const AdminMenu = (props: any) => {
                   </div>
                 </div>
               )}
-              MUHAMMAD HILMI BIN KAMARUL AZMI
+              {props.name}
             </Link>
           </div>
           <div className="flex flex-wrap"></div>
@@ -187,7 +187,7 @@ const AdminMenu = (props: any) => {
               } w-full`}
             >
               <AiOutlineGlobal />
-              Global Value
+              Manage Sessions
             </Link>
 
             <Link

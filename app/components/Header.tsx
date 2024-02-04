@@ -10,31 +10,20 @@ import { useUserInformation } from "../utilities/storage/useUserInformation";
 import AdminMenu from "./HeaderComponents/AdminMenu";
 import Link from "next/link";
 import Loading from "./LoadingFullScreen";
+import GuestMenu from "./HeaderComponents/GuestMenu";
+import { useGetsessions } from "../utilities/storage/useGetSessions";
 const Header = () => {
   const session = useSession();
-
+  const { sessions, fetchData: fetchSession } = useGetsessions();
+  const { fetchData, name, email, role } = useUserInformation();
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`);
-  const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
-  );
-
-  const { fetchData, name, email, role } = useUserInformation();
 
   useEffect(() => {
+    fetchSession();
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   if (session.status === "authenticated") {
-  //     if (role === "GUEST") {
-  //       signOut();
-  //     }
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [role]);
-
   function checkIfUserLoggedIn() {
     if (session.status === "unauthenticated") {
       return false;
@@ -66,7 +55,7 @@ const Header = () => {
       ) : (
         <div
           className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${
-            isTablet ? "min-h-20" : isDesktop ? "min-h-screen" : "min-h-96"
+            isTablet ? "min-h-52" : isDesktop ? "min-h-52" : "min-h-52"
           } min-w-full px-5 py-2`}
         />
       )}
@@ -89,7 +78,11 @@ const Header = () => {
                 <Countdown date={"2025-02-01T01:02:03"} renderer={renderer} />
               </div>
               <div className="ml-2 badge badge-neutral">Session</div>
-              <div className="badge ">1 2022/2023</div>
+              <div className="badge ">
+                {sessions?.sessionSelected?.number}{" "}
+                {sessions?.sessionSelected?.yearOne}/
+                {sessions?.sessionSelected?.yearTwo}
+              </div>
             </div>
 
             {checkIfUserLoggedIn() ? (
@@ -146,7 +139,8 @@ const Header = () => {
             <div className="navbar-center"></div>
           </div>
         )}
-        {role === "ADMIN" ? <AdminMenu renderer={renderer} /> : ""}
+        {role === "ADMIN" ? <AdminMenu renderer={renderer} name={name} /> : ""}
+        {role === "GUEST" ? <GuestMenu renderer={renderer} /> : ""}
       </div>
     </div>
   );

@@ -8,10 +8,11 @@ import { FaEye } from "react-icons/fa";
 import UseDeleteStudent from "./UseDeleteStudent";
 import Link from "next/link";
 import HereIsEmpty from "@/app/components/HereIsEmpty";
+
 const UseGetStudents = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`,
+    `(max-width: ${breakpoints.mobileLandscape})`
   );
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`);
   const { students, fetchData } = useGetStudents();
@@ -74,26 +75,23 @@ const UseGetStudents = (props: any) => {
                       )}
 
                       <td>
-                        {/* <button
-                        onClick={() => {
-                          props.funcViewStudent();
-                          props.setSelectViewUser(item);
-                        }}
-                        className=""
-                      >
-                        <div className="px-2">
-                          <FaEye />
-                        </div>
-                      </button> */}
-                        <Link href={`/dashboard/view/student/${item?.email}`}>
-                          <div className="py-1">
-                            <FaEye />
+                        <div className="flex flex-row-reverse w-full">
+                          <div
+                            className={`${isMobile ? "flex flex-col max-w-min gap-2" : "flex flex-row max-w-min gap-2"} `}
+                          >
+                            <Link
+                              href={`/dashboard/view/student/${item?.email}`}
+                            >
+                              <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
+                                <FaEye />
+                              </button>
+                            </Link>
+                            <UseDeleteStudent
+                              email={item?.email}
+                              id={item?.studentInformation?.id}
+                            />
                           </div>
-                        </Link>
-                        <UseDeleteStudent
-                          email={item?.email}
-                          id={item?.studentInformation?.id}
-                        />
+                        </div>
                       </td>
                     </tr>
                   );

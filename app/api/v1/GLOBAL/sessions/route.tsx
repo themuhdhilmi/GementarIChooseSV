@@ -19,7 +19,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -86,7 +86,60 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
+      }
+    );
+  }
+}
+
+const schemaPUT = z.object({
+  sessionID: z.string().min(4),
+});
+
+export async function PUT(request: NextRequest, response: NextResponse) {
+  try {
+    const body = await request.json();
+
+    const validation = schemaPUT.safeParse(body);
+
+    if (!validation.success) {
+      return NextResponse.json(validation.error.errors, {
+        status: 400,
+      });
+    }
+
+    const sesssionGet = await prisma.sessionYear.findUnique({
+      where: {
+        id: body.sessionID,
+      }
+    });
+    //cls6djhth01cf10sbqgjnr2yl
+    const sesssion = await prisma.sessionYear.update({
+      where: {
+        id: body.sessionID,
       },
+      data: {
+        globalMemberQuota: body.globalMemberQuota ?? sesssionGet?.globalMemberQuota,
+        globalTitleQuota: body.globalTitleQuota ?? sesssionGet?.globalTitleQuota,
+        globalSupervisorQuota: body.globalSupervisorQuota ?? sesssionGet?.globalSupervisorQuota,
+      },
+    });
+
+    return NextResponse.json(
+      {
+        sesssion,
+      },
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error,
+      },
+      {
+        status: 400,
+      }
     );
   }
 }

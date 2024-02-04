@@ -15,9 +15,14 @@ import LoadingFullScreen from "@/app/components/LoadingFullScreen";
 const UseAddStudent = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`,
+    `(max-width: ${breakpoints.mobileLandscape})`
   );
-  const { sendData, success, data, loading : loadingAddStudent } = useAddStudent();
+  const {
+    sendData,
+    success,
+    data,
+    loading: loadingAddStudent,
+  } = useAddStudent();
   const { sessions, loading } = useGetsessions();
   const [name, setName] = useState("");
   const [matricNumber, setMatricNumber] = useState("");
@@ -43,14 +48,12 @@ const UseAddStudent = (props: any) => {
     sendData(postData);
   };
 
-  if(loading)
-  {
-    return <LoadingLeftBottom/>
+  if (loading) {
+    return <LoadingLeftBottom />;
   }
 
-  if(loadingAddStudent)
-  {
-    return <LoadingLeftBottom/>
+  if (loadingAddStudent) {
+    return <LoadingLeftBottom />;
   }
 
   return (

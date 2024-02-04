@@ -1,21 +1,51 @@
 "use client";
+import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 import { breakpoints } from "@/app/config/breakpoints";
-import React from "react";
+import { useGetsessions } from "@/app/utilities/storage/useGetSessions";
+import React, { useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import GlobalValue from "./components/GlobalValue";
+import SessionManager from "./components/SessionManager";
+import { useSetSessions } from "@/app/utilities/storage/useSetSessions";
+import { usePutSessions } from "@/app/utilities/storage/usePutSessions";
 
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
+  const { loading, fetchData, sessions } = useGetsessions();
+  const { sessions: setSessionsData, loading: setLoading } = useSetSessions();
+  const {
+    sessions: putSessionsData,
+    putSessionsGlobalMemberQuota,
+    putSessionsGLobalTitleQuota,
+    putSessionsGlobalSupervisorQuota,
+    loading: putLoading,
+  } = usePutSessions();
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setSessionsData, putSessionsData, putLoading]);
+
+  // if (loading) {
+  //   return <LoadingLeftBottom />;
+  // }
 
   return (
     <div className={`${isDesktop ? "px-6" : "px-24"}`}>
-      <div className="stats shadow"></div>
-      <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg">
-        <div className="overflow-x-auto">
-          <div className="flex flex-row py-5">
-            <div className="w-1/2 font-medium ">
-              <p className="underline decoration-1">Global Value</p>
-            </div>
-          </div>
+      <div>
+        <div>
+          <SessionManager
+            sessionList={sessions.sessionsList}
+            sessilnSelected={sessions.sessionSelected}
+            putSessionsGlobalMemberQuota={putSessionsGlobalMemberQuota}
+            putSessionsGLobalTitleQuota={putSessionsGLobalTitleQuota}
+            putSessionsGlobalSupervisorQuota={putSessionsGlobalSupervisorQuota}
+          />
         </div>
       </div>
     </div>
