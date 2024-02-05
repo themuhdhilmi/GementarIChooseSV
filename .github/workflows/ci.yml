@@ -11,7 +11,7 @@ on:
     branches: [main]
 
 env:
-  DATABASE_URL: mysql://root:password@127.0.0.1:3306/ichoosesv?schema=public&connect_timeout=60
+  DATABASE_URL: mysql://root:password@127.0.0.1:3306/ichoosesv
   NEXTAUTH_SECRET: RBs1Ool8Y8d0Y0WTurjvcykIZxZnuq7qTeMpORaRyWiLlReMoVeSoOn
   NEXTAUTH_URL: localhost
 
@@ -25,7 +25,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: ichoosesv
-          DATABASE_URL: mysql://root:password@127.0.0.1:3306/ichoosesv?schema=public&connect_timeout=60
+          DATABASE_URL: mysql://root:password@127.0.0.1:3306/ichoosesv
         ports:
             - '3306:3306'
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
