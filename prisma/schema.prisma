@@ -83,8 +83,13 @@ model SessionYear {
   yearOne Int
   yearTwo Int
 
-  globalMemberQuota Int @default(4)
-  globalTitleQuota  Int @default(3)
+  globalMemberQuota     Int @default(4)
+  globalTitleQuota      Int @default(3)
+  globalSupervisorQuota Int @default(3)
+
+  finalPresentationDate DateTime @default(now())
+
+  isSelected Boolean @default(false)
 
   StudentInformation StudentInformation[]
   Supervisor         LecturerInformation[]
@@ -94,10 +99,13 @@ model SessionYear {
 model LecturerInformation {
   id                 String               @id @default(cuid())
   StudentInformation StudentInformation[]
-  Track              Track
-  SessionYear        SessionYear[]
-  User               User                 @relation(fields: [userId], references: [id])
-  userId             String               @unique
+
+  supervisorQuota Int?
+
+  Track       Track
+  SessionYear SessionYear[]
+  User        User          @relation(fields: [userId], references: [id])
+  userId      String        @unique
 }
 
 // -======================= LECTURER END =========================
@@ -109,17 +117,25 @@ model StudentInformation {
   memberQuota  Int?
   titleQuota   Int?
 
-  User                  User                 @relation(fields: [userId], references: [id])
-  userId                String               @unique
-  Member                Member[]
-  Session               Session?             @relation(fields: [sessionId], references: [id])
-  sessionId             String?
-  SessionYear           SessionYear          @relation(fields: [sessionYearId], references: [id])
-  sessionYearId         String
-  LecturerInformation   LecturerInformation? @relation(fields: [lecturerInformationId], references: [id])
-  lecturerInformationId String?
-  ProjectTitle          ProjectTitle[]
-  Track                 Track
+  User                    User                       @relation(fields: [userId], references: [id])
+  userId                  String                     @unique
+  Member                  Member[]
+  Session                 Session?                   @relation(fields: [sessionId], references: [id])
+  sessionId               String?
+  SessionYear             SessionYear                @relation(fields: [sessionYearId], references: [id])
+  sessionYearId           String
+  LecturerInformation     LecturerInformation?       @relation(fields: [lecturerInformationId], references: [id])
+  lecturerInformationId   String?
+  lecturerAcceptedStudent SupervisorAcceptanceStatus @default(NONE)
+  ProjectTitle            ProjectTitle[]
+  Track                   Track
+}
+
+enum SupervisorAcceptanceStatus {
+  NONE
+  REQUESTED
+  ACCEPTED
+  DECLINED
 }
 
 model Member {

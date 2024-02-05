@@ -1,41 +1,26 @@
-'use client'
-import Image from 'next/image'
-import { useSession } from 'next-auth/react'
-import Link from 'next/link';
-import { useRouter } from 'next/navigation'
- 
+"use client";
+import { breakpoints } from "@/app/config/breakpoints";
+import React from "react";
+import { useMediaQuery } from "usehooks-ts";
+import Loading from "./components/LoadingFullScreen";
 
-export default function Home() {
-
-  const session = useSession();
-  const router = useRouter();
-
-  function checkIfAvailable()
-  {
-    if(session.status === 'unauthenticated')
-    {
-      router.push("/api/auth/signin");
-      
-    }
-
-    return true;
-  }
+const Page = () => {
+  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
 
   return (
-    
-<div className="hero min-h-screen bg-base-200">
-{checkIfAvailable()}
-  <div className="hero-content flex-col lg:flex-row">
-    <img src="https://cdna.artstation.com/p/assets/images/images/024/208/242/large/syed-ariff-2020-02-13-05-07-03-2.jpg?1581645769" className="max-w-sm rounded-lg shadow-2xl" />
-    <div>
-      <h1 className="text-5xl font-bold">Welcome to the 3rd Game</h1>
-      <p className="py-6">Attention all citizens: The recents heroic intervention by Keluang Man in the City of Light has led to the capture of the notorious villain, Dark Wing. The citizens are advised to remain calm and cooperate with the authorities in restoring peace and order to our beloved city.</p>
-      <Link href="/api/auth/signout">
-        <button className="btn btn-primary">Log Out</button>
-      </Link>
-      
+    <div className={`${isDesktop ? "px-6" : "px-24"}`}>
+      <div className="stats shadow"></div>
+      <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg">
+        <div className="overflow-x-auto">
+          <div className="flex flex-row py-5">
+            <div className="w-1/2 font-medium ">
+              <p className="underline decoration-1">Feeds News & Update</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-  )
-}
+  );
+};
+
+export default Page;
