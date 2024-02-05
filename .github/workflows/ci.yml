@@ -55,6 +55,12 @@ jobs:
     - name: Build Next.js App
       run: npm run build
 
+    - name : runDebugging
+      run: |
+        echo "DATABASE_URL: $DATABASE_URL"
+        echo "NEXTAUTH_SECRET: $NEXTAUTH_SECRET"
+        echo "NEXTAUTH_URL: $NEXTAUTH_URL"
+
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s) --network="host"
 
