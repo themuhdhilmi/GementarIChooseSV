@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import getSupervisorListForCurrentSession from "./getSupervisorListForCurrentSession";
 import prisma from "@/prisma/client";
 
 export async function GET(request: NextRequest, response: NextResponse) {
@@ -9,9 +8,18 @@ export async function GET(request: NextRequest, response: NextResponse) {
     },
   });
 
-  const debug = await getSupervisorListForCurrentSession(
-    getFirstSessionSelected!.id
-  );
+  const debug = await prisma.sessionYear.findFirst({
+    where: {
+      id: getFirstSessionSelected!.id,
+    },
+    include: {
+      Supervisor: {
+        include: {
+          User: true,
+        },
+      },
+    },
+  });
 
   return NextResponse.json({
     debug,
