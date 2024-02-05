@@ -11,7 +11,7 @@ on:
     branches: [main]
 
 env:
-  DATABASE_URL: "mysql://root:password@127.0.0.1:3306/ichoosesv"
+  DATABASE_URL: 'mysql://root:password@127.0.0.1:3306/ichoosesv'
   NEXTAUTH_SECRET: RBs1Ool8Y8d0Y0WTurjvcykIZxZnuq7qTeMpORaRyWiLlReMoVeSoOn
   NEXTAUTH_URL: localhost
 
@@ -25,6 +25,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: password
           MYSQL_DATABASE: ichoosesv
+          DATABASE_URL: 'mysql://root:password@127.0.0.1:3306/ichoosesv'
         ports:
             - '3306:3306'
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -45,6 +46,9 @@ jobs:
 
     - name: Install Dependencies
       run: npm install
+
+    - name: Run Prisma Generate
+      run: npx prisma generate
 
     - name: Run Prisma Migrate
       run: npx prisma migrate deploy
