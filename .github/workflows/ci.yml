@@ -34,7 +34,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: mysql -h 127.0.0.1 --port 3306 -u root -ppassword -e 'CREATE DATABASE IF NOT EXISTS ichoosesv;'
-
+      env:
+        DATABASE_URL: mysql://root:password@127.0.0.1:3306/ichoosesv
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -61,5 +62,7 @@ jobs:
         env
 
     - name: Build the Docker image
+      env:
+        DATABASE_URL: mysql://root:password@127.0.0.1:3306/ichoosesv
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s) --network="host"
 
