@@ -1,28 +1,17 @@
 "use client";
-import { useAddStudent } from "@/app/utilities/storage/student/useAddStudent";
 import React, { useEffect, useState } from "react";
-import InfoBadge from "./components/InfoBadge";
-import { RoleEnum } from "@/app/config/interface";
 import ToastError from "@/app/components/ToastError";
-import { ToastContainer, toast } from "react-toastify";
 import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
-
-import { breakpoints } from "@/app/config/breakpoints";
-import { useMediaQuery } from "usehooks-ts";
 import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
-import LoadingFullScreen from "@/app/components/LoadingFullScreen";
+import { useAddLecturer } from "@/app/utilities/storage/lecturer/useAddLecturer";
 
-const UseAddStudent = (props: any) => {
-  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
-  const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
-  );
+const UseAddLecturer = (props: any) => {
   const {
     sendData,
     success,
     data,
-    loading: loadingAddStudent,
-  } = useAddStudent();
+    loading: loadingAddLecturer,
+  } = useAddLecturer();
   const { sessions, loading } = useGetsessions();
   const [name, setName] = useState("");
   const [matricNumber, setMatricNumber] = useState("");
@@ -52,7 +41,7 @@ const UseAddStudent = (props: any) => {
     return <LoadingLeftBottom />;
   }
 
-  if (loadingAddStudent) {
+  if (loadingAddLecturer) {
     return <LoadingLeftBottom />;
   }
 
@@ -96,7 +85,7 @@ const UseAddStudent = (props: any) => {
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   ></path>
                 </svg>
-                <span>Student Creation Successfull</span>
+                <span>Lecturer Creation Successfull</span>
               </div>
             ) : (
               ""
@@ -116,7 +105,7 @@ const UseAddStudent = (props: any) => {
                     d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>Student Creation Failed</span>
+                <span>Lecturer Creation Failed</span>
               </div>
             ) : (
               ""
@@ -172,7 +161,7 @@ const UseAddStudent = (props: any) => {
                 type="submit"
                 className="btn w-full my-5 bg-red-600 rounded-lg hover:bg-red-800 text-white"
               >
-                Add Students
+                Add Lecturers
               </button>
             ) : (
               <button className="btn w-full my-5 btn-disabled">
@@ -187,4 +176,4 @@ const UseAddStudent = (props: any) => {
   );
 };
 
-export default UseAddStudent;
+export default UseAddLecturer;

@@ -1,27 +1,29 @@
 "use client";
-import { useGetStudents } from "@/app/utilities/storage/student/useGetStudents";
 import React, { useEffect } from "react";
 import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
 import { useMediaQuery } from "usehooks-ts";
 import { breakpoints } from "@/app/config/breakpoints";
 import { FaEye } from "react-icons/fa";
-import UseDeleteStudent from "./UseDeleteStudent";
 import Link from "next/link";
 import HereIsEmpty from "@/app/components/HereIsEmpty";
+import { useGetLecturers } from "@/app/utilities/storage/lecturer/useGetLecturers";
+import UseDeleteLecturer from "./UseDeleteLecturer";
+import { useDeleteLecturer } from "@/app/utilities/storage/lecturer/useDeleteLecturer";
 
-const UseGetStudents = (props: any) => {
+const UseGetLecturers = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
     `(max-width: ${breakpoints.mobileLandscape})`
   );
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`);
-  const { students, fetchData } = useGetStudents();
+  const { lecturers, fetchData } = useGetLecturers();
+  const { loading: loadingDelete } = useDeleteLecturer();
   const { sessions } = useGetsessions();
 
   useEffect(() => {
     fetchData(sessions.sessionSelected?.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessions]);
+  }, [sessions, loadingDelete]);
 
   return (
     <div>
@@ -30,18 +32,18 @@ const UseGetStudents = (props: any) => {
         <div className="overflow-x-auto">
           <div className="flex flex-row py-5">
             <div className="w-1/2 font-medium ">
-              <p className="underline decoration-1">Students Manager</p>
+              <p className="underline decoration-1">Lecturers Manager</p>
             </div>
             <div className="flex gap-2 py-1 flex-row-reverse w-1/2">
               <button
-                onClick={props.funcOpenAddStudent}
+                onClick={props.funcOpenAddLecturer}
                 className="btn btn-sm bg-red-600 rounded-lg hover:bg-red-800 text-white"
               >
-                Add Student
+                Add Lecturer
               </button>
             </div>
           </div>
-          {students.students?.length === 0 ? (
+          {lecturers.lecturers?.length === 0 ? (
             <div className="py-6">
               <HereIsEmpty />
             </div>
@@ -57,22 +59,29 @@ const UseGetStudents = (props: any) => {
                 </tr>
               </thead>
               <tbody>
-                {students.students?.map((item: any, index: number) => {
+                {lecturers.lecturers?.map((item: any, index: number) => {
+                  const hasMatchingID = item.SessionYear?.some(
+                    (session: any) => {
+                      return session.id === "cls6djhta01c910sbqc3amvgx";
+                    }
+                  );
+
                   return (
                     <tr key={index}>
                       {isMobileLandscape ? "" : <th>{index + 1}</th>}
                       {isMobileLandscape ? "" : <td>{item.name}</td>}
 
-                      <td>{item.studentInformation?.matricNumber}</td>
-                      {isMobile ? (
-                        ""
-                      ) : (
-                        <td>
-                          <div className="badge text-white badge-error">
-                            INCOMPLETE
+                      <td>{item.User?.name}</td>
+
+                      <td>
+                        {hasMatchingID ? (
+                          <div className="badge text-white badge-neutral">
+                            SV
                           </div>
-                        </td>
-                      )}
+                        ) : (
+                          <div className="badge text-white badge-error">NO</div>
+                        )}
+                      </td>
 
                       <td>
                         <div className="flex flex-row-reverse w-full">
@@ -80,15 +89,15 @@ const UseGetStudents = (props: any) => {
                             className={`${isMobile ? "flex flex-col max-w-min gap-2" : "flex flex-row max-w-min gap-2"} `}
                           >
                             <Link
-                              href={`/dashboard/view/student/${item?.email}`}
+                              href={`/dashboard/view/lecturer/${item?.email}`}
                             >
                               <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                                 <FaEye />
                               </button>
                             </Link>
-                            <UseDeleteStudent
+                            <UseDeleteLecturer
                               email={item?.email}
-                              id={item?.studentInformation?.id}
+                              id={item?.id}
                             />
                           </div>
                         </div>
@@ -114,4 +123,4 @@ const UseGetStudents = (props: any) => {
   );
 };
 
-export default UseGetStudents;
+export default UseGetLecturers;

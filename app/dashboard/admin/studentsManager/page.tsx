@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import UseGetStudents from "./components/UseGetStudents";
 import UseAddStudent from "./components/UseAddStudent";
-import { useGetsessions } from "@/app/utilities/storage/useGetSessions";
+import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
 import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
 import UseGetStudent from "./components/UseGetStudent";

@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserInformation } from "@/app/utilities/storage/useUserInformation";
+import { useUserInformation } from "@/app/utilities/storage/user/useUserInformation";
 import { signIn } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";

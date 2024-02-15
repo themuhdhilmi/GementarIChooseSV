@@ -1,14 +1,14 @@
 "use client"
 import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
-import { useDeleteStudent } from "@/app/utilities/storage/useDeleteStudent";
+import { useDeleteStudent } from "@/app/utilities/storage/student/useDeleteStudent";
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaArrowUpShortWide } from "react-icons/fa6";
-import { useSetSessions } from "@/app/utilities/storage/useSetSessions";
-import { useGetStudents } from "@/app/utilities/storage/useGetStudents";
-import { useGetsessions } from "@/app/utilities/storage/useGetSessions";
+import { useSetSessions } from "@/app/utilities/storage/user/useSetSessions";
+import { useGetStudents } from "@/app/utilities/storage/student/useGetStudents";
+import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
 const UseSetSession = (props: any) => {
   const [openModal, setOpenModal] = useState(false);
   const { setSessions, loading } = useSetSessions();

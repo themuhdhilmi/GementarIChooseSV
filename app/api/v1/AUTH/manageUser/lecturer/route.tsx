@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
 import bcrypt from "bcrypt";
 import prisma from "@/prisma/client";
 import { z } from "zod";
@@ -37,8 +36,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
           lecturer,
         },
         {
-          status: 400,
-        },
+          status: 200,
+        }
       );
     }
 
@@ -89,8 +88,30 @@ export async function GET(request: NextRequest, response: NextResponse) {
           session,
         },
         {
-          status: 400,
+          status: 200,
+        }
+      );
+    }
+
+    if (selection === "ALL") {
+      const lecturers = await prisma.lecturerInformation.findMany({
+        include: {
+          User: true,
+          SessionYear: {
+            where: {
+              isSelected: true,
+            },
+          },
         },
+      });
+
+      return NextResponse.json(
+        {
+          lecturers,
+        },
+        {
+          status: 200,
+        }
       );
     }
   } catch (error) {
@@ -100,7 +121,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -153,7 +174,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -162,7 +183,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -225,7 +246,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -234,7 +255,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -285,7 +306,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -294,7 +315,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }

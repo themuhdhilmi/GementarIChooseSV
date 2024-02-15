@@ -1,13 +1,13 @@
 "use client";
 import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 import { breakpoints } from "@/app/config/breakpoints";
-import { useGetsessions } from "@/app/utilities/storage/useGetSessions";
+import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
 import React, { useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import GlobalValue from "./components/GlobalValue";
 import SessionManager from "./components/SessionManager";
-import { useSetSessions } from "@/app/utilities/storage/useSetSessions";
-import { usePutSessions } from "@/app/utilities/storage/usePutSessions";
+import { useSetSessions } from "@/app/utilities/storage/user/useSetSessions";
+import { usePutSessions } from "@/app/utilities/storage/user/usePutSessions";
 
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);

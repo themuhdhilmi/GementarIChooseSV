@@ -6,12 +6,12 @@ import { SiHtmlacademy } from "react-icons/si";
 import Image from "next/image";
 import Countdown from "react-countdown";
 import { signOut, useSession } from "next-auth/react";
-import { useUserInformation } from "../utilities/storage/useUserInformation";
+import { useUserInformation } from "../utilities/storage/user/useUserInformation";
 import AdminMenu from "./HeaderComponents/AdminMenu";
 import Link from "next/link";
 import Loading from "./LoadingFullScreen";
 import GuestMenu from "./HeaderComponents/GuestMenu";
-import { useGetsessions } from "../utilities/storage/useGetSessions";
+import { useGetsessions } from "../utilities/storage/user/useGetSessions";
 const Header = () => {
   const session = useSession();
   const { sessions, fetchData: fetchSession } = useGetsessions();

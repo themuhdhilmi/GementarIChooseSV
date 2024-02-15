@@ -1,28 +1,29 @@
 "use client";
-import LoadingFullScreen from "@/app/components/LoadingFullScreen";
 import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
-import { useDeleteStudent } from "@/app/utilities/storage/student/useDeleteStudent";
+import { useDeleteLecturer } from "@/app/utilities/storage/lecturer/useDeleteLecturer";
 import { Button, Modal } from "flowbite-react";
 import { useState } from "react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { RiDeleteBinLine } from "react-icons/ri";
-const UseDeleteStudent = (props: any) => {
+const UseDeleteLecturer = (props: any) => {
   const [openModal, setOpenModal] = useState(false);
-  const { deleteStudent, loading } = useDeleteStudent();
+  const { deleteLecturer, loading } = useDeleteLecturer();
 
-  if(loading)
-  {
-    return <LoadingLeftBottom/>
+  if (loading) {
+    return <LoadingLeftBottom />;
   }
 
-  const processDeleteStudent = () => {
-    deleteStudent(props.id);
+  const processDeleteLecturer = () => {
+    deleteLecturer(props.id);
 
     setOpenModal(false);
   };
   return (
     <>
-      <button onClick={() => setOpenModal(true)} className="btn rounded-lg bg-red-600 hover:bg-red-800 text-white btn-sm">
+      <button
+        onClick={() => setOpenModal(true)}
+        className="btn rounded-lg bg-red-600 hover:bg-red-800 text-white btn-sm"
+      >
         <div>
           <RiDeleteBinLine />
         </div>
@@ -42,7 +43,7 @@ const UseDeleteStudent = (props: any) => {
               Are you sure you want to delete {props.email}
             </h3>
             <div className="flex justify-center gap-4">
-              <Button color="failure" onClick={() => processDeleteStudent()}>
+              <Button color="failure" onClick={() => processDeleteLecturer()}>
                 {"Yes, I'm sure"}
               </Button>
               <Button color="gray" onClick={() => setOpenModal(false)}>
@@ -56,4 +57,4 @@ const UseDeleteStudent = (props: any) => {
   );
 };
 
-export default UseDeleteStudent;
+export default UseDeleteLecturer;
