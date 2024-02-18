@@ -71,19 +71,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       });
     }
 
-    let user = await prisma.user.findUniqueOrThrow({
-      where: {
-        email: body.email,
-      },
-    });
-
-    const userStudent = await prisma.studentInformation.findFirstOrThrow({
-      where: {
-        User: user,
-      },
-    });
-
-    user = await prisma.user.findUniqueOrThrow({
+    const user = await prisma.user.findUniqueOrThrow({
       where: {
         email: body.email,
       },
@@ -96,6 +84,12 @@ export async function POST(request: NextRequest, response: NextResponse) {
             SessionYear: true,
           },
         },
+      },
+    });
+
+    const userStudent = await prisma.studentInformation.findFirstOrThrow({
+      where: {
+        id: user?.studentInformation?.id
       },
     });
 
@@ -122,6 +116,14 @@ export async function POST(request: NextRequest, response: NextResponse) {
       where: {
         User: userLecturer,
       },
+      include : {
+        SessionYear: {
+          where : {
+            id : user?.studentInformation?.SessionYear.id
+          }
+        },
+        StudentInformation : true
+      }
     });
 
     userLecturer = await prisma.user.findUniqueOrThrow({
@@ -130,16 +132,11 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
     });
 
-    const check = await getSupervisorStudentListForCurrentSession(
-      body.lecturerEmail,
-      userStudent.sessionYearId
-    );
-
-    if (check.isFull) {
+    if (!userLecturerInfo.SessionYear) {
       return NextResponse.json(
         {
           error: {
-            name: "Supervisor is already full",
+            name: "Not a supervisor",
           },
         },
         {
@@ -148,11 +145,16 @@ export async function POST(request: NextRequest, response: NextResponse) {
       );
     }
 
-    if (!check.isSupervisor) {
+    const countStudent = userLecturerInfo?.StudentInformation?.length ??  0;
+    const countSupervisorQuota = userLecturerInfo.supervisorQuota ?? userLecturerInfo.SessionYear[0].globalSupervisorQuota ?? 0;
+
+    if ((countStudent >= countSupervisorQuota)) {
       return NextResponse.json(
         {
           error: {
-            name: "Not a supervisor",
+            countStudent,
+            countSupervisorQuota,
+            name: "Supervisor is already full",
           },
         },
         {
@@ -166,13 +168,14 @@ export async function POST(request: NextRequest, response: NextResponse) {
         id: userStudent.id,
       },
       data: {
-        lecturerAcceptedStudent: "NONE",
+        lecturerAcceptedStudent: "REQUESTED",
         lecturerInformationId: userLecturerInfo.id,
       },
     });
 
     return NextResponse.json(
       {
+        countStudent,
         updateStudentSupervisor,
       },
       {
@@ -191,157 +194,3 @@ export async function POST(request: NextRequest, response: NextResponse) {
   }
 }
 
-const getSupervisorStudentListForCurrentSession = async (
-  email: string,
-  sessionId: string
-) => {
-  const getLecturer = await prisma.lecturerInformation.findFirstOrThrow({
-    where: {
-      User: {
-        email: email,
-      },
-    },
-    include: {
-      User: true,
-    },
-  });
-
-  const getLecturerSessionStudentNone = await prisma.sessionYear.findFirst({
-    where: {
-      id: sessionId,
-      StudentInformation: {
-        some: {
-          LecturerInformation: {
-            User: {
-              email: email,
-            },
-          },
-          lecturerAcceptedStudent: "NONE",
-        },
-      },
-    },
-    include: {
-      StudentInformation: true,
-    },
-  });
-
-  const getLecturerSessionStudentDeclined = await prisma.sessionYear.findFirst({
-    where: {
-      id: sessionId,
-      StudentInformation: {
-        some: {
-          LecturerInformation: {
-            User: {
-              email: email,
-            },
-          },
-          lecturerAcceptedStudent: "DECLINED",
-        },
-      },
-    },
-    include: {
-      StudentInformation: true,
-    },
-  });
-
-  const getLecturerSessionStudentAccepted = await prisma.sessionYear.findFirst({
-    where: {
-      id: sessionId,
-      StudentInformation: {
-        some: {
-          LecturerInformation: {
-            User: {
-              email: email,
-            },
-          },
-          lecturerAcceptedStudent: "ACCEPTED",
-        },
-      },
-    },
-    include: {
-      StudentInformation: true,
-    },
-  });
-
-  const getSupervisor = await prisma.sessionYear.findFirst({
-    where: {
-      id: sessionId,
-      Supervisor: {
-        some: {
-          User: {
-            email: email,
-          },
-        },
-      },
-    },
-    include: {
-      StudentInformation: true,
-    },
-  });
-
-  let isFull = false;
-  let supervisorQuota = 0;
-  let supervisorStudent = 0;
-  if (!getLecturer.supervisorQuota) {
-    const acceptedStudentCount =
-      getLecturerSessionStudentAccepted === null
-        ? 0
-        : getLecturerSessionStudentAccepted.StudentInformation.length;
-
-    if (
-      getLecturerSessionStudentNone!.globalSupervisorQuota <=
-      acceptedStudentCount
-    ) {
-      isFull = true;
-    }
-    supervisorQuota = getLecturerSessionStudentNone!.globalSupervisorQuota;
-    supervisorStudent = acceptedStudentCount;
-  } else {
-    const acceptedStudentCount =
-      getLecturerSessionStudentAccepted === null
-        ? 0
-        : getLecturerSessionStudentAccepted.StudentInformation.length;
-
-    if (getLecturer.supervisorQuota <= acceptedStudentCount) {
-      isFull = true;
-    }
-    supervisorQuota = getLecturer.supervisorQuota;
-    supervisorStudent = acceptedStudentCount;
-  }
-
-  return {
-    lecturer: {
-      email: getLecturer.User.email,
-      name: getLecturer.User.name,
-      session: {
-        number: getLecturerSessionStudentNone?.number,
-        yearOne: getLecturerSessionStudentNone?.yearOne,
-        yearTwo: getLecturerSessionStudentNone?.yearTwo,
-      },
-    },
-    isFull,
-    isSupervisor: getSupervisor !== null ? true : false,
-    supervisorQuota,
-    supervisorAccptedStudent: supervisorStudent,
-    getRequestedStudent:
-      getLecturerSessionStudentNone === null
-        ? 0
-        : getLecturerSessionStudentNone.StudentInformation.length,
-    getDeclinedStudent:
-      getLecturerSessionStudentDeclined === null
-        ? 0
-        : getLecturerSessionStudentDeclined.StudentInformation.length,
-    getLecturerSessionStudentNone:
-      getLecturerSessionStudentNone === null
-        ? null
-        : getLecturerSessionStudentNone.StudentInformation,
-    getLecturerSessionStudentDeclined:
-      getLecturerSessionStudentDeclined === null
-        ? null
-        : getLecturerSessionStudentDeclined.StudentInformation,
-    acceptedLecturerStudentAccepted:
-      getLecturerSessionStudentAccepted === null
-        ? null
-        : getLecturerSessionStudentAccepted.StudentInformation,
-  };
-};

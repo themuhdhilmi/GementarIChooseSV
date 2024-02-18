@@ -6,22 +6,14 @@ enum SuccessState {
   ERROR = "ERROR",
 }
 
-interface LecturerData {
-  name: string
-  email: string
-  password: string
-  confirmPassword: string
-  track: string
-}
-
-type LecturerStore = {
+type StudentStore = {
   loading: boolean;
   data: any;
   success: SuccessState;
-  sendData: (postData: LecturerData) => Promise<void>;
+  sendData: (postData: any) => Promise<void>;
 };
 
-export const useAddLecturer = create<LecturerStore>((set) => ({
+export const useUpdateStudentTitle = create<StudentStore>((set) => ({
   data: {},
   loading: false,
   success: SuccessState.NONE,
@@ -29,8 +21,8 @@ export const useAddLecturer = create<LecturerStore>((set) => ({
     try {
       set({ loading: true, success: SuccessState.NONE });
       // Make your fetch API call here
-      const response = await fetch("/api/v1/AUTH/manageUser/lecturer", {
-        method: "POST",
+      const response = await fetch("/api/v1/AUTH/manageUser/studentProjectTitle", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

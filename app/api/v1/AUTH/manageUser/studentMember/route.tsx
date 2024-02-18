@@ -5,7 +5,7 @@ import { z } from "zod";
 const schemaPOST = z.object({
   emailLead: z.string().min(4),
   name: z.string().min(4),
-  matricNumber: z.string().min(5).max(15),
+  matricNumber: z.string().min(5).max(15)
 });
 export async function POST(request: NextRequest, response: NextResponse) {
   try {

@@ -9,7 +9,7 @@ import { Prisma } from "@prisma/client";
 function censorName(name: any) {
   const nameParts = name.split(" ");
   const censoredParts = nameParts.map(
-    (part: string | any[]) => part[0] + "*".repeat(part.length - 1),
+    (part: string | any[]) => part[0] + "*".repeat(part.length - 1)
   );
   return censoredParts.join(" ");
 }
@@ -48,6 +48,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
           studentInformation: {
             include: {
               Member: true,
+              ProjectTitle: true,
               SessionYear: true,
               LecturerInformation: {
                 include: {
@@ -66,7 +67,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
           },
           {
             status: 200,
-          },
+          }
         );
       }
 
@@ -97,7 +98,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        },
+        }
       );
     }
 
@@ -148,7 +149,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        },
+        }
       );
     }
   } catch (error) {
@@ -158,7 +159,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -212,7 +213,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         },
         {
           status: 400,
-        },
+        }
       );
     }
 
@@ -245,7 +246,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -254,7 +255,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -274,7 +275,11 @@ const schemaPUT = z.object({
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
     const body = await request.json();
-    const passwordEncrypt = await bcrypt.hash(body.password, 10);
+    let passwordEncrypt = null;
+
+    if (body.password !== null) {
+      passwordEncrypt = await bcrypt.hash(body.password, 10);
+    }
 
     const validation = schemaPUT.safeParse(body);
 
@@ -292,9 +297,9 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         id: body.id,
       },
       data: {
-        name: body.name !== null ? body.name : undefined,
-        email: body.email !== null ? body.email : undefined,
-        hashedPassword: body.password !== null ? passwordEncrypt : undefined,
+        name: body.name ?? undefined,
+        email: body.email ?? undefined,
+        hashedPassword: passwordEncrypt ?? undefined,
       },
     });
 
@@ -303,23 +308,30 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         userId: student.id,
       },
       data: {
-        Track: body.track !== null ? body.track : undefined,
-        matricNumber:
-          body.matricNumber !== null ? body.matricNumber : undefined,
-        memberQuota: body.memberQuota,
-        titleQuota: body.titleQuota,
-        sessionYearId:
-          body.sessionYearId !== null ? body.sessionYearId : undefined,
+        Track: body.track ?? undefined,
+        matricNumber: body.matricNumber ?? undefined,
+        memberQuota: body.memberQuota ?? null,
+        titleQuota: body.titleQuota ?? null,
+        sessionYearId: body.sessionYearId ?? undefined,
       },
+    });
+
+    const studentResult = await prisma.user.findFirst({
+      where: {
+        id: body.id,
+      },
+      include : {
+        studentInformation : true
+      }
     });
 
     return NextResponse.json(
       {
-        studentData,
+        studentResult,
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -328,7 +340,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -379,7 +391,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -388,7 +400,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }

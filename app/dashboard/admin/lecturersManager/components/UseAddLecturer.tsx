@@ -4,6 +4,7 @@ import ToastError from "@/app/components/ToastError";
 import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
 import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 import { useAddLecturer } from "@/app/utilities/storage/lecturer/useAddLecturer";
+import { useGetLecturers } from "@/app/utilities/storage/lecturer/useGetLecturers";
 
 const UseAddLecturer = (props: any) => {
   const {
@@ -13,22 +14,20 @@ const UseAddLecturer = (props: any) => {
     loading: loadingAddLecturer,
   } = useAddLecturer();
   const { sessions, loading } = useGetsessions();
+  const { fetchData } = useGetLecturers();
   const [name, setName] = useState("");
-  const [matricNumber, setMatricNumber] = useState("");
-  const [selectedSession, setSelectedSession] = useState("");
+  const [email, setEmail] = useState("");
   const [track, setTrack] = useState("SOFTWARE");
   const postData = {
     name: name,
-    email: matricNumber + "@mail.com",
-    matricNumber: matricNumber,
-    password: matricNumber,
-    confirmPassword: matricNumber,
-    sessionYearID: selectedSession,
+    email: email,
+    password: email,
+    confirmPassword: email,
     track: track,
   };
 
   useEffect(() => {
-    setSelectedSession(sessions.sessionSelected?.id);
+    fetchData(sessions.sessionSelected?.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessions, success]);
 
@@ -127,20 +126,20 @@ const UseAddLecturer = (props: any) => {
               <span className="label-text-alt">Minimum 4 characters</span>
             </div>
             <div className="label">
-              <span className="label-text">Matric Number</span>
+              <span className="label-text">Email</span>
             </div>
             <input
               required
               type="text"
-              placeholder="01DDT20F1122"
-              value={matricNumber}
-              onChange={(e) => setMatricNumber(e.target.value)}
+              placeholder="hilmi@gementar.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="input input-bordered w-full rounded-lg"
               pattern="^\S{12,}$"
             />
             <div className="label">
               <span className="label-text-alt"></span>
-              <span className="label-text-alt">Ex : 01DDT20F1122</span>
+              <span className="label-text-alt">Ex : hilmi@gementar.com</span>
             </div>
             <div className="label">
               <span className="label-text">Track</span>

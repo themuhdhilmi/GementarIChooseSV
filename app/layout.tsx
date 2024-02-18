@@ -5,6 +5,7 @@ import { Providers } from "./providers";
 import Header from "./components/Header";
 import "react-toastify/dist/ReactToastify.css";
 import { ThemeModeScript } from "flowbite-react";
+import LoadingLeftBottom from "./components/LoadingLeftBottom";
 
 const inter = Inter({ subsets: ["latin"] });
 

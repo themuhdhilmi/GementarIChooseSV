@@ -11,6 +11,7 @@ import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
 import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 import LoadingFullScreen from "@/app/components/LoadingFullScreen";
+import { useGetStudents } from "@/app/utilities/storage/student/useGetStudents";
 
 const UseAddStudent = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
@@ -24,6 +25,7 @@ const UseAddStudent = (props: any) => {
     loading: loadingAddStudent,
   } = useAddStudent();
   const { sessions, loading } = useGetsessions();
+  const { fetchData } = useGetStudents();
   const [name, setName] = useState("");
   const [matricNumber, setMatricNumber] = useState("");
   const [selectedSession, setSelectedSession] = useState("");
@@ -40,6 +42,7 @@ const UseAddStudent = (props: any) => {
 
   useEffect(() => {
     setSelectedSession(sessions.sessionSelected?.id);
+    fetchData(sessions.sessionSelected?.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessions, success]);
 

@@ -5,7 +5,7 @@ import UseAddStudent from "./components/UseAddStudent";
 import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
 import { breakpoints } from "@/app/config/breakpoints";
 import { useMediaQuery } from "usehooks-ts";
-import UseGetStudent from "./components/UseGetStudent";
+import UseGetStudent from "../../view/student/[email]/components/UseGetStudent";
 import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 
 enum Drawer {

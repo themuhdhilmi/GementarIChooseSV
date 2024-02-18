@@ -44,29 +44,17 @@ export async function GET(request: NextRequest, response: NextResponse) {
     if (selection === "SESSION") {
       const sessionID = searchParams.get("sessionID") as string;
 
-      const session = await prisma.sessionYear.findMany({
+      const session = await prisma.sessionYear.findFirst({
         where: {
           id: sessionID,
         },
         include: {
           Supervisor: {
-            where: {
-              User: {
-                email: email,
-              },
-            },
             include: {
               User: true,
             },
           },
           StudentInformation: {
-            where: {
-              LecturerInformation: {
-                User: {
-                  email: email,
-                },
-              },
-            },
             include: {
               User: true,
               Member: {

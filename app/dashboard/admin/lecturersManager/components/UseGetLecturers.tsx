@@ -62,7 +62,7 @@ const UseGetLecturers = (props: any) => {
                 {lecturers.lecturers?.map((item: any, index: number) => {
                   const hasMatchingID = item.SessionYear?.some(
                     (session: any) => {
-                      return session.id === "cls6djhta01c910sbqc3amvgx";
+                      return session.id === sessions?.sessionSelected?.id;
                     }
                   );
 
