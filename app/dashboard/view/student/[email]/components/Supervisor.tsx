@@ -22,8 +22,10 @@ const Supervisor = (props: any) => {
   };
 
   return (
-    <div className="overflow-x-auto px-5 rounded-lg shadow-lg">
-      <div className="badge font-bold">Supervisor</div>
+    <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
+      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">
+        Supervisor
+      </div>
       <div className="flex flex-col border mx-10 my-4 py-5 rounded-lg text-center">
         <div>Your Selected Lecturer</div>
         <div>
@@ -47,34 +49,38 @@ const Supervisor = (props: any) => {
             ""
           ) : (
             <div className="mx-10 my-4">
-              <div className="join w-full ">
-                <div className="w-full">
-                  <select
-                    value={selectedValue}
-                    onChange={(e: any) => {
-                      setSelectedValue(e.target.value);
-                    }}
-                    className="select w-full max-w-full select-bordered  rounded-l-lg"
+              {props.canEdit ? (
+                <div className="join w-full ">
+                  <div className="w-full">
+                    <select
+                      value={selectedValue}
+                      onChange={(e: any) => {
+                        setSelectedValue(e.target.value);
+                      }}
+                      className="select w-full max-w-full select-bordered  rounded-l-lg"
+                    >
+                      <option>Choose supervisor...</option>
+                      {lecturers.session.Supervisor.map(
+                        (item: any, index: number) => {
+                          return (
+                            <option value={item.User.email} key={index}>
+                              {item.User.name}
+                            </option>
+                          );
+                        }
+                      )}
+                    </select>
+                  </div>
+                  <button
+                    onClick={() => sendData(postData)}
+                    className="btn join-item text-white bg-blue-950  rounded-lg"
                   >
-                    <option>Choose supervisor...</option>
-                    {lecturers.session.Supervisor.map(
-                      (item: any, index: number) => {
-                        return (
-                          <option value={item.User.email} key={index}>
-                            {item.User.name}
-                          </option>
-                        );
-                      }
-                    )}
-                  </select>
+                    Select
+                  </button>
                 </div>
-                <button
-                  onClick={() => sendData(postData)}
-                  className="btn join-item text-white bg-blue-950  rounded-lg"
-                >
-                  Select
-                </button>
-              </div>
+              ) : (
+                ""
+              )}
             </div>
           )}
         </div>

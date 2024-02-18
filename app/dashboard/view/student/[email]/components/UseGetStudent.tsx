@@ -27,12 +27,26 @@ const UseGetStudent = (props: any) => {
               >
                 CLOSE
               </button>
-              <button
-                onClick={() => setEditQuota(!editQuota)}
-                className="btn btn-sm  rounded-lg text-white bg-blue-950"
-              >
-                Edit Quota
-              </button>
+              {props.canEditAdmin ? (
+                <button
+                  onClick={() => setEditQuota(!editQuota)}
+                  className="btn btn-sm  rounded-lg text-white bg-blue-950"
+                >
+                  Reset Password
+                </button>
+              ) : (
+                ""
+              )}
+              {props.canEditAdmin ? (
+                <button
+                  onClick={() => setEditQuota(!editQuota)}
+                  className="btn btn-sm  rounded-lg text-white bg-blue-950"
+                >
+                  Edit Quota
+                </button>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div
@@ -43,12 +57,14 @@ const UseGetStudent = (props: any) => {
             <SideInfo
               selectViewUser={props.selectViewUser}
               isDesktop={isDesktop}
+              canEdit={props.canEdit}
             />
             <div className={`${!isDesktop ? "w-3/4 " : "w-full "}  px-4 `}>
               {editQuota ? (
                 <EditQuota
                   selectViewUser={props.selectViewUser}
                   isDesktop={isDesktop}
+                  canEdit={props.canEdit}
                 />
               ) : (
                 ""
@@ -57,14 +73,17 @@ const UseGetStudent = (props: any) => {
               <TeamMembers
                 selectViewUser={props.selectViewUser}
                 isDesktop={isDesktop}
+                canEdit={props.canEdit}
               />
               <Title
                 selectViewUser={props.selectViewUser}
                 isDesktop={isDesktop}
+                canEdit={props.canEdit}
               />
               <Supervisor
                 selectViewUser={props.selectViewUser}
                 isDesktop={isDesktop}
+                canEdit={props.canEdit}
               />
             </div>
           </div>

@@ -54,15 +54,24 @@ const TeamMembers = (props: any) => {
   };
 
   return (
-    <div className="overflow-x-auto px-5 rounded-lg shadow-lg">
-      <div className="badge font-bold">Team Members</div>
+    <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
+      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">
+        Team Members
+      </div>
       {/* {props.selectViewUser?.studentInformation?.Member?.length === 0 ? ( */}
       {false ? (
         <div className="py-6">
           <HereIsEmpty />
         </div>
       ) : (
-        <table className="table ">
+        <table className="table table-zebra">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Matric Number</th>
+            </tr>
+          </thead>
           <tbody>
             {/* {props.selectViewUser?.studentInformation?.Member.map( */}
             {items.map((item: any, index: number) => {
@@ -86,7 +95,9 @@ const TeamMembers = (props: any) => {
               if (editTeamMember === index) {
                 return (
                   <tr key={index}>
-                    {!props.isDesktop ? <th>{index + 1}</th> : null}
+                    {!props.isDesktop ? (
+                      <th className="w-4">{index + 1}</th>
+                    ) : null}
                     <td>
                       <input
                         value={name}
@@ -96,7 +107,7 @@ const TeamMembers = (props: any) => {
                         }}
                         type="text"
                         placeholder="Type here"
-                        className="input input-bordered w-full max-w-xs rounded-lg"
+                        className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                       />
                     </td>
                     <td>
@@ -108,10 +119,16 @@ const TeamMembers = (props: any) => {
                         }}
                         type="text"
                         placeholder="Type here"
-                        className="input input-bordered w-full max-w-xs rounded-lg"
+                        className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                       />
                     </td>
-                    <td>
+                    <td className="flex flex-row-reverse">
+                      <button
+                        onClick={() => setEditTeamMember(99)}
+                        className="btn btn-sm text-white bg-red-700 rounded-lg"
+                      >
+                        Cancel
+                      </button>
                       <button
                         onClick={() => {
                           setEditTeamMember(99);
@@ -125,12 +142,6 @@ const TeamMembers = (props: any) => {
                       >
                         Confirm
                       </button>
-                      <button
-                        onClick={() => setEditTeamMember(99)}
-                        className="btn btn-sm text-white bg-red-700 rounded-lg"
-                      >
-                        Cancel
-                      </button>
                     </td>
                   </tr>
                 );
@@ -138,7 +149,9 @@ const TeamMembers = (props: any) => {
 
               return (
                 <tr key={index}>
-                  {!props.isDesktop ? <th>{index + 1}</th> : null}
+                  {!props.isDesktop ? (
+                    <th className="w-4">{index + 1}</th>
+                  ) : null}
                   <td>
                     {props.selectViewUser?.studentInformation?.Member[index]
                       ?.name ?? "None"}
@@ -147,26 +160,30 @@ const TeamMembers = (props: any) => {
                     {props.selectViewUser?.studentInformation?.Member[index]
                       ?.matricNumber ?? "None"}
                   </td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        setEditTeamMember(index);
-                        setName(
-                          props.selectViewUser?.studentInformation?.Member[
-                            index
-                          ]?.name ?? "None"
-                        );
-                        setMatricNumber(
-                          props.selectViewUser?.studentInformation?.Member[
-                            index
-                          ]?.matricNumber ?? "None"
-                        );
-                      }}
-                      className="btn btn-sm text-white bg-blue-950 rounded-lg"
-                    >
-                      Edit
-                    </button>
-                  </td>
+                  {props.canEdit ? (
+                    <td className="flex flex-row-reverse">
+                      <button
+                        onClick={() => {
+                          setEditTeamMember(index);
+                          setName(
+                            props.selectViewUser?.studentInformation?.Member[
+                              index
+                            ]?.name ?? "None"
+                          );
+                          setMatricNumber(
+                            props.selectViewUser?.studentInformation?.Member[
+                              index
+                            ]?.matricNumber ?? "None"
+                          );
+                        }}
+                        className="btn btn-sm text-white bg-blue-950 rounded-lg"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  ) : (
+                    ""
+                  )}
                 </tr>
               );
             })}

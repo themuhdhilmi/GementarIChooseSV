@@ -52,8 +52,8 @@ const Title = (props: any) => {
   };
 
   return (
-    <div className="overflow-x-auto px-5 rounded-lg shadow-lg my-7">
-      <div className="badge font-bold">
+    <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
+      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">
         Project Title
       </div>
       {/* {props.selectViewUser?.studentInformation?.ProjectTitle?.length === 0 ? ( */}
@@ -62,7 +62,14 @@ const Title = (props: any) => {
           <HereIsEmpty />
         </div>
       ) : (
-        <table className="table ">
+        <table className="table table-zebra">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Poster</th>
+            </tr>
+          </thead>
           <tbody>
             {/* {props.selectViewUser?.studentInformation?.ProjectTitle.map( */}
             {items.map((item: any, index: number) => {
@@ -86,7 +93,9 @@ const Title = (props: any) => {
               if (editTeamTitle === index) {
                 return (
                   <tr key={index}>
-                    {!props.isDesktop ? <th>{index + 1}</th> : null}
+                    {!props.isDesktop ? (
+                      <th className="w-4">{index + 1}</th>
+                    ) : null}
                     <td>
                       <input
                         value={name}
@@ -96,22 +105,17 @@ const Title = (props: any) => {
                         }}
                         type="text"
                         placeholder="Type here"
-                        className="input input-bordered w-full max-w-xs rounded-lg"
+                        className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                       />
                     </td>
-                    {/* <td>
-                      <input
-                        value={matricTitleId}
-                        // onClick={}
-                        onChange={(e: any) => {
-                          setMatricTitleId(e.target.value);
-                        }}
-                        type="text"
-                        placeholder="Type here"
-                        className="input input-bordered w-full max-w-xs"
-                      />
-                    </td> */}
-                    <td>
+                    <td>Uploaded</td>
+                    <td className="flex flex-row-reverse">
+                      <button
+                        onClick={() => setEditTeamTitle(99)}
+                        className="btn btn-sm text-white bg-red-700 rounded-lg"
+                      >
+                        Cancel
+                      </button>
                       <button
                         onClick={() => {
                           setEditTeamTitle(99);
@@ -128,12 +132,6 @@ const Title = (props: any) => {
                       >
                         Confirm
                       </button>
-                      <button
-                        onClick={() => setEditTeamTitle(99)}
-                        className="btn btn-sm text-white bg-red-700 rounded-lg"
-                      >
-                        Cancel
-                      </button>
                     </td>
                   </tr>
                 );
@@ -141,34 +139,37 @@ const Title = (props: any) => {
 
               return (
                 <tr key={index}>
-                  {!props.isDesktop ? <th>{index + 1}</th> : null}
+                  {!props.isDesktop ? (
+                    <th className="w-4">{index + 1}</th>
+                  ) : null}
                   <td>
                     {props.selectViewUser?.studentInformation?.ProjectTitle[
                       index
                     ]?.name ?? "None"}
                   </td>
-                  {/* <td>
-                    {props.selectViewUser?.studentInformation?.ProjectTitle[index]
-                      ?.matricTitleId ?? "None"}
-                  </td> */}
-                  <td>
-                    <button
-                      onClick={() => {
-                        setEditTeamTitle(index);
-                        setName(
-                          props.selectViewUser?.studentInformation
-                            ?.ProjectTitle[index]?.name ?? "None"
-                        );
-                        setMatricTitleId(
-                          props.selectViewUser?.studentInformation
-                            ?.ProjectTitle[index]?.id ?? ""
-                        );
-                      }}
-                      className="btn btn-sm text-white bg-blue-950 rounded-lg"
-                    >
-                      Edit
-                    </button>
-                  </td>
+                  <td>Uploaded</td>
+                  {props.canEdit ? (
+                    <td className="flex flex-row-reverse">
+                      <button
+                        onClick={() => {
+                          setEditTeamTitle(index);
+                          setName(
+                            props.selectViewUser?.studentInformation
+                              ?.ProjectTitle[index]?.name ?? "None"
+                          );
+                          setMatricTitleId(
+                            props.selectViewUser?.studentInformation
+                              ?.ProjectTitle[index]?.id ?? ""
+                          );
+                        }}
+                        className="btn btn-sm text-white bg-blue-950 rounded-lg"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  ) : (
+                    ""
+                  )}
                 </tr>
               );
             })}

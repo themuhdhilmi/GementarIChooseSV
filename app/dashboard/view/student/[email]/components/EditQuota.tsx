@@ -56,8 +56,8 @@ const EditQuota = (props: any) => {
   };
 
   return (
-    <div className="overflow-x-auto px-5 rounded-lg shadow-lg my-4">
-      <div className="badge font-bold">Edit Quota</div>
+    <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
+      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">Edit Quota</div>
       <div className="mx-10 my-4">
         <div className="join w-full ">
           <div className="w-full">
@@ -68,7 +68,7 @@ const EditQuota = (props: any) => {
               }}
               className="select w-full max-w-full select-bordered  rounded-l-lg"
             >
-              <option value={99}>Set Global</option>
+              <option value={99}>Set Member Quota Global</option>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>
@@ -99,7 +99,7 @@ const EditQuota = (props: any) => {
               }}
               className="select w-full max-w-full select-bordered  rounded-l-lg"
             >
-              <option value={99}>Set Global</option>
+              <option value={99}>Set Project Title Quota Global</option>
               <option value={1}>1</option>
               <option value={2}>2</option>
               <option value={3}>3</option>
