@@ -7,10 +7,12 @@ import Title from "./Title";
 import SideInfo from "./SideInfo";
 import Supervisor from "./Supervisor";
 import EditQuota from "./EditQuota";
+import ResetPassword from "./ResetPassword";
 
 const UseGetStudent = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const [editQuota, setEditQuota] = useState(false);
+  const [resetPassword, setResetPassword] = useState(false);
   return (
     <div className="mb-5 ">
       <div className="stats shadow"></div>
@@ -29,8 +31,8 @@ const UseGetStudent = (props: any) => {
               </button>
               {props.canEditAdmin ? (
                 <button
-                  onClick={() => setEditQuota(!editQuota)}
-                  className="btn btn-sm  rounded-lg text-white bg-blue-950"
+                  onClick={() => setResetPassword(!resetPassword)}
+                  className={`btn btn-sm  rounded-lg text-white ${resetPassword ? "bg-red-700" : "bg-blue-950"} `}
                 >
                   Reset Password
                 </button>
@@ -40,7 +42,7 @@ const UseGetStudent = (props: any) => {
               {props.canEditAdmin ? (
                 <button
                   onClick={() => setEditQuota(!editQuota)}
-                  className="btn btn-sm  rounded-lg text-white bg-blue-950"
+                  className={`btn btn-sm  rounded-lg text-white ${editQuota ? "bg-red-700" : "bg-blue-950"} `}
                 >
                   Edit Quota
                 </button>
@@ -62,6 +64,16 @@ const UseGetStudent = (props: any) => {
             <div className={`${!isDesktop ? "w-3/4 " : "w-full "}  px-4 `}>
               {editQuota ? (
                 <EditQuota
+                  selectViewUser={props.selectViewUser}
+                  isDesktop={isDesktop}
+                  canEdit={props.canEdit}
+                />
+              ) : (
+                ""
+              )}
+
+              {resetPassword ? (
+                <ResetPassword
                   selectViewUser={props.selectViewUser}
                   isDesktop={isDesktop}
                   canEdit={props.canEdit}

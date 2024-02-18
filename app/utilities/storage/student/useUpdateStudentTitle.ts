@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { create } from "zustand";
 
 enum SuccessState {
@@ -36,12 +37,33 @@ export const useUpdateStudentTitle = create<StudentStore>((set) => ({
 
       // Update the state based on the fetched data
       if (response.ok) {
+        toast.success("Sucessfully updated student title", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
         set((state) => ({
           data: data, // Adjust this based on your API response structure
           loading: false,
           success: SuccessState.SUCCESS,
         }));
       } else {
+        toast.error("Failed update student title", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
         set((state) => ({
           data: data, // Adjust this based on your API response structure
           loading: false,

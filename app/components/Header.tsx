@@ -13,6 +13,7 @@ import Loading from "./LoadingFullScreen";
 import GuestMenu from "./HeaderComponents/GuestMenu";
 import { useGetsessions } from "../utilities/storage/user/useGetSessions";
 import LoadingLeftBottom from "./LoadingLeftBottom";
+import ToastSuccess from "./ToastSuccess";
 const Header = () => {
   const session = useSession();
   const { sessions, fetchData: fetchSession } = useGetsessions();
@@ -48,6 +49,7 @@ const Header = () => {
   return (
     <div className="static">
       <LoadingLeftBottom />
+      <ToastSuccess />
       {checkIfUserLoggedIn() ? (
         <div
           className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${

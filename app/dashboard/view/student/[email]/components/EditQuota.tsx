@@ -1,9 +1,9 @@
 "use client";
 import { useUpdateStudent } from "@/app/utilities/storage/student/useUpdateStudent";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const EditQuota = (props: any) => {
-  const { sendData } = useUpdateStudent();
+  const { sendData, success } = useUpdateStudent();
   const [memberQuota, setMemberQuota] = useState(99);
   const [titleQuota, setTitleQuota] = useState(99);
 
@@ -67,7 +67,7 @@ const EditQuota = (props: any) => {
 
   return (
     <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
-      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">
+      <div className="badge font-bold w-full rounded-t-lg bg-red-700 text-white">
         Edit Quota
       </div>
       <div className="mx-10 my-4">
