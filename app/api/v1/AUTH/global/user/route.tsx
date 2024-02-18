@@ -19,7 +19,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }

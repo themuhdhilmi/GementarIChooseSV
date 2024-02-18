@@ -135,7 +135,7 @@ const TeamMembers = (props: any) => {
                           sendDataMember(
                             props.selectViewUser?.studentInformation?.Member[
                               index
-                            ]?.matricNumber ?? "None"
+                            ]?.matricNumber ?? "None",
                           );
                         }}
                         className="btn btn-sm text-white bg-blue-950 rounded-lg mr-1"
@@ -168,12 +168,12 @@ const TeamMembers = (props: any) => {
                           setName(
                             props.selectViewUser?.studentInformation?.Member[
                               index
-                            ]?.name ?? "None"
+                            ]?.name ?? "None",
                           );
                           setMatricNumber(
                             props.selectViewUser?.studentInformation?.Member[
                               index
-                            ]?.matricNumber ?? "None"
+                            ]?.matricNumber ?? "None",
                           );
                         }}
                         className="btn btn-sm text-white bg-blue-950 rounded-lg"

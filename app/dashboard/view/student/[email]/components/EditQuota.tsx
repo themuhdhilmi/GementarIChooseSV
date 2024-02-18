@@ -24,8 +24,13 @@ const EditQuota = (props: any) => {
       password: null,
       track: null,
       sessionYearID: null,
-      memberQuota: parseInt(memberQuotaFilter.toString()) !== 99 ? parseInt(memberQuotaFilter.toString()) : null,
-      titleQuota: parseInt(props?.selectViewUser?.studentInformation?.titleQuota),
+      memberQuota:
+        parseInt(memberQuotaFilter.toString()) !== 99
+          ? parseInt(memberQuotaFilter.toString())
+          : null,
+      titleQuota: parseInt(
+        props?.selectViewUser?.studentInformation?.titleQuota,
+      ),
     };
 
     sendData(postData);
@@ -48,8 +53,13 @@ const EditQuota = (props: any) => {
       password: null,
       track: null,
       sessionYearID: null,
-      memberQuota: parseInt(props?.selectViewUser?.studentInformation?.memberQuota),
-      titleQuota: parseInt(titleQuotaFilter.toString()) !== 99 ? parseInt(titleQuotaFilter.toString()) : null,
+      memberQuota: parseInt(
+        props?.selectViewUser?.studentInformation?.memberQuota,
+      ),
+      titleQuota:
+        parseInt(titleQuotaFilter.toString()) !== 99
+          ? parseInt(titleQuotaFilter.toString())
+          : null,
     };
 
     sendData(postData);
@@ -57,7 +67,9 @@ const EditQuota = (props: any) => {
 
   return (
     <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
-      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">Edit Quota</div>
+      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">
+        Edit Quota
+      </div>
       <div className="mx-10 my-4">
         <div className="join w-full ">
           <div className="w-full">

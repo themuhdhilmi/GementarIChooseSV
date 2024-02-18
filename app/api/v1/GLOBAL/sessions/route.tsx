@@ -19,7 +19,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }
@@ -77,7 +77,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -86,7 +86,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }
@@ -110,7 +110,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
     const sesssionGet = await prisma.sessionYear.findUnique({
       where: {
         id: body.sessionID,
-      }
+      },
     });
     //cls6djhth01cf10sbqgjnr2yl
     const sesssion = await prisma.sessionYear.update({
@@ -118,9 +118,12 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         id: body.sessionID,
       },
       data: {
-        globalMemberQuota: body.globalMemberQuota ?? sesssionGet?.globalMemberQuota,
-        globalTitleQuota: body.globalTitleQuota ?? sesssionGet?.globalTitleQuota,
-        globalSupervisorQuota: body.globalSupervisorQuota ?? sesssionGet?.globalSupervisorQuota,
+        globalMemberQuota:
+          body.globalMemberQuota ?? sesssionGet?.globalMemberQuota,
+        globalTitleQuota:
+          body.globalTitleQuota ?? sesssionGet?.globalTitleQuota,
+        globalSupervisorQuota:
+          body.globalSupervisorQuota ?? sesssionGet?.globalSupervisorQuota,
       },
     });
 
@@ -130,7 +133,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -139,7 +142,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }

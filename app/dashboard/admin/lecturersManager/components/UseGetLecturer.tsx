@@ -84,8 +84,8 @@ const UseGetLecturer = (props: any) => {
               <div className="text-center mt-2 font-extrabold">
                 <p>Supervisor</p>
                 <p className="text-red-600">
-                  {props.selectViewUser?.lecturerInformation?.LecturerInformation
-                    ?.User?.name ?? "NONE"}
+                  {props.selectViewUser?.lecturerInformation
+                    ?.LecturerInformation?.User?.name ?? "NONE"}
                 </p>
               </div>
             </div>

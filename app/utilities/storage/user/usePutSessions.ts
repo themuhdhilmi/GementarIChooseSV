@@ -5,15 +5,15 @@ type SessionStore = {
   loading: boolean;
   putSessionsGlobalMemberQuota: (
     sessionId: string,
-    globalMemberQuota: number
+    globalMemberQuota: number,
   ) => Promise<void>;
   putSessionsGLobalTitleQuota: (
     sessionId: string,
-    globalTitleQuota: number
+    globalTitleQuota: number,
   ) => Promise<void>;
   putSessionsGlobalSupervisorQuota: (
     sessionId: string,
-    globalSupervisorQuota: number
+    globalSupervisorQuota: number,
   ) => Promise<void>;
 };
 
@@ -22,7 +22,7 @@ export const usePutSessions = create<SessionStore>((set) => ({
   loading: false,
   putSessionsGlobalMemberQuota: async (
     sessionId: string,
-    globalMemberQuota: number
+    globalMemberQuota: number,
   ) => {
     try {
       set({ loading: true });
@@ -53,7 +53,7 @@ export const usePutSessions = create<SessionStore>((set) => ({
 
   putSessionsGLobalTitleQuota: async (
     sessionId: string,
-    globalTitleQuota: number
+    globalTitleQuota: number,
   ) => {
     try {
       set({ loading: true });
@@ -84,7 +84,7 @@ export const usePutSessions = create<SessionStore>((set) => ({
 
   putSessionsGlobalSupervisorQuota: async (
     sessionId: string,
-    globalSupervisorQuota: number
+    globalSupervisorQuota: number,
   ) => {
     try {
       set({ loading: true });

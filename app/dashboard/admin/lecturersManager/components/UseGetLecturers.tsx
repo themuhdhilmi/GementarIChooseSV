@@ -13,7 +13,7 @@ import { useDeleteLecturer } from "@/app/utilities/storage/lecturer/useDeleteLec
 const UseGetLecturers = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
+    `(max-width: ${breakpoints.mobileLandscape})`,
   );
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`);
   const { lecturers, fetchData } = useGetLecturers();
@@ -63,7 +63,7 @@ const UseGetLecturers = (props: any) => {
                   const hasMatchingID = item.SessionYear?.some(
                     (session: any) => {
                       return session.id === sessions?.sessionSelected?.id;
-                    }
+                    },
                   );
 
                   return (

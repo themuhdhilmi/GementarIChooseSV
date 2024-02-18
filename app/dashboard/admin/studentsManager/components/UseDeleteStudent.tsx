@@ -10,9 +10,8 @@ const UseDeleteStudent = (props: any) => {
   const [openModal, setOpenModal] = useState(false);
   const { deleteStudent, loading } = useDeleteStudent();
 
-  if(loading)
-  {
-    return <LoadingLeftBottom/>
+  if (loading) {
+    return <LoadingLeftBottom />;
   }
 
   const processDeleteStudent = () => {
@@ -22,7 +21,10 @@ const UseDeleteStudent = (props: any) => {
   };
   return (
     <>
-      <button onClick={() => setOpenModal(true)} className="btn rounded-lg bg-red-600 hover:bg-red-800 text-white btn-sm">
+      <button
+        onClick={() => setOpenModal(true)}
+        className="btn rounded-lg bg-red-600 hover:bg-red-800 text-white btn-sm"
+      >
         <div>
           <RiDeleteBinLine />
         </div>

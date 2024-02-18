@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 import { useDeleteStudent } from "@/app/utilities/storage/student/useDeleteStudent";
 import { Button, Modal } from "flowbite-react";
@@ -12,12 +12,11 @@ import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
 const UseSetSession = (props: any) => {
   const [openModal, setOpenModal] = useState(false);
   const { setSessions, loading } = useSetSessions();
-  const {fetchData} = useGetStudents();
-  const {fetchData : fetchSessions} = useGetsessions();
+  const { fetchData } = useGetStudents();
+  const { fetchData: fetchSessions } = useGetsessions();
 
-  if(loading)
-  {
-    return <LoadingLeftBottom/>
+  if (loading) {
+    return <LoadingLeftBottom />;
   }
 
   const processDeleteStudent = () => {
@@ -28,9 +27,12 @@ const UseSetSession = (props: any) => {
   };
   return (
     <>
-      <button onClick={() => setOpenModal(true)} className="btn rounded-lg bg-slate-600 hover:bg-slate-800 text-white btn-sm">
+      <button
+        onClick={() => setOpenModal(true)}
+        className="btn rounded-lg bg-slate-600 hover:bg-slate-800 text-white btn-sm"
+      >
         <div>
-        <FaArrowUpShortWide />
+          <FaArrowUpShortWide />
         </div>
       </button>
 

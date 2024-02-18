@@ -21,13 +21,16 @@ export const useUpdateStudentTitle = create<StudentStore>((set) => ({
     try {
       set({ loading: true, success: SuccessState.NONE });
       // Make your fetch API call here
-      const response = await fetch("/api/v1/AUTH/manageUser/studentProjectTitle", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "/api/v1/AUTH/manageUser/studentProjectTitle",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postData),
         },
-        body: JSON.stringify(postData),
-      });
+      );
 
       const data = await response.json();
 

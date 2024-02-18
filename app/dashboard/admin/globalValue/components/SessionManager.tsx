@@ -37,7 +37,7 @@ const SessionManager = (props: any) => {
           {isMobile ? (
             <div className={`grid grid-rows-1 gap-4 py-1`}>
               <div className="w-full bg-white p-5 rounded-lg">
-              <div>Supervisors Global Value</div>
+                <div>Supervisors Global Value</div>
                 <SetGlobalMemberQuota
                   function={props?.putSessionsGlobalSupervisorQuota}
                   value={props?.sessilnSelected?.globalSupervisorQuota}

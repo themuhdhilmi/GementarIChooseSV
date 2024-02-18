@@ -16,7 +16,7 @@ import { useGetStudents } from "@/app/utilities/storage/student/useGetStudents";
 const UseAddStudent = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
+    `(max-width: ${breakpoints.mobileLandscape})`,
   );
   const {
     sendData,

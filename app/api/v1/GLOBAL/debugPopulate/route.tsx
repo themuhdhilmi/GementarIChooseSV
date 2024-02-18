@@ -10,7 +10,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const deleteProject = await prisma.projectTitle.deleteMany({});
     const deleteJob = await prisma.studentInformation.deleteMany({});
     const deleteTesterInformation = await prisma.lecturerInformation.deleteMany(
-      {}
+      {},
     );
     const deleteReqInformation = await prisma.sessionYear.deleteMany({});
     const deletedUsers = await prisma.user.deleteMany({});
@@ -18,16 +18,16 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const session = await prisma.sessionYear.create({
       data: {
         number: 1,
-        yearOne: 2020 ,
-        yearTwo: 2021 ,
+        yearOne: 2020,
+        yearTwo: 2021,
       },
     });
 
     const session2 = await prisma.sessionYear.create({
       data: {
         number: 2,
-        yearOne: 2020 ,
-        yearTwo: 2021 ,
+        yearOne: 2020,
+        yearTwo: 2021,
       },
     });
 
@@ -251,7 +251,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -261,7 +261,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }

@@ -67,7 +67,7 @@ const Supervisor = (props: any) => {
                               {item.User.name}
                             </option>
                           );
-                        }
+                        },
                       )}
                     </select>
                   </div>

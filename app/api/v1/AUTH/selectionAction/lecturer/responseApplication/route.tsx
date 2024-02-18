@@ -11,6 +11,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
     },
     {
       status: 400,
-    }
+    },
   );
 }

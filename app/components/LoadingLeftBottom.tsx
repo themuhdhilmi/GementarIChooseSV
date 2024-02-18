@@ -16,7 +16,7 @@ import { useGetLecturers } from "../utilities/storage/lecturer/useGetLecturers";
 import { useGetLecturersPerSession } from "../utilities/storage/lecturer/useGetLecturersPerSession";
 import { useAddStudentMember } from "../utilities/storage/student/useAddStudentMember";
 import { useUpdateStudentMember } from "../utilities/storage/student/useUpdateStudentMember";
-import { useUpdateStudent } from '../utilities/storage/student/useUpdateStudent';
+import { useUpdateStudent } from "../utilities/storage/student/useUpdateStudent";
 import { useAddStudentTitle } from "../utilities/storage/student/useAddStudentTitle";
 import { useUpdateStudentTitle } from "../utilities/storage/student/useUpdateStudentTitle";
 

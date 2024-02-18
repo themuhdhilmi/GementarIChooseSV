@@ -12,7 +12,7 @@ import HereIsEmpty from "@/app/components/HereIsEmpty";
 const UseGetStudents = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`
+    `(max-width: ${breakpoints.mobileLandscape})`,
   );
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`);
   const { students, fetchData } = useGetStudents();

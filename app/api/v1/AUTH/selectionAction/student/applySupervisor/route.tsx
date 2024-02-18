@@ -42,7 +42,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -51,7 +51,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const userStudent = await prisma.studentInformation.findFirstOrThrow({
       where: {
-        id: user?.studentInformation?.id
+        id: user?.studentInformation?.id,
       },
     });
 
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         },
         {
           status: 400,
-        }
+        },
       );
     }
 
@@ -116,14 +116,14 @@ export async function POST(request: NextRequest, response: NextResponse) {
       where: {
         User: userLecturer,
       },
-      include : {
+      include: {
         SessionYear: {
-          where : {
-            id : user?.studentInformation?.SessionYear.id
-          }
+          where: {
+            id: user?.studentInformation?.SessionYear.id,
+          },
         },
-        StudentInformation : true
-      }
+        StudentInformation: true,
+      },
     });
 
     userLecturer = await prisma.user.findUniqueOrThrow({
@@ -141,14 +141,17 @@ export async function POST(request: NextRequest, response: NextResponse) {
         },
         {
           status: 400,
-        }
+        },
       );
     }
 
-    const countStudent = userLecturerInfo?.StudentInformation?.length ??  0;
-    const countSupervisorQuota = userLecturerInfo.supervisorQuota ?? userLecturerInfo.SessionYear[0].globalSupervisorQuota ?? 0;
+    const countStudent = userLecturerInfo?.StudentInformation?.length ?? 0;
+    const countSupervisorQuota =
+      userLecturerInfo.supervisorQuota ??
+      userLecturerInfo.SessionYear[0].globalSupervisorQuota ??
+      0;
 
-    if ((countStudent >= countSupervisorQuota)) {
+    if (countStudent >= countSupervisorQuota) {
       return NextResponse.json(
         {
           error: {
@@ -159,7 +162,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         },
         {
           status: 400,
-        }
+        },
       );
     }
 
@@ -180,7 +183,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      }
+      },
     );
   } catch (error) {
     return NextResponse.json(
@@ -189,8 +192,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      }
+      },
     );
   }
 }
-

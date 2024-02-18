@@ -7,11 +7,11 @@ enum SuccessState {
 }
 
 interface LecturerData {
-  name: string
-  email: string
-  password: string
-  confirmPassword: string
-  track: string
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  track: string;
 }
 
 type LecturerStore = {
