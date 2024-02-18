@@ -1,5 +1,4 @@
 "use client";
-import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
 import { breakpoints } from "@/app/config/breakpoints";
 import UseGetStudent from "@/app/dashboard/view/student/[email]/components/UseGetStudent";
 import { useAddStudentMember } from "@/app/utilities/storage/student/useAddStudentMember";
@@ -18,6 +17,7 @@ import { useMediaQuery } from "usehooks-ts";
 //TODO Add Reset Password
 //TODO Supervisor disable on selection if the supervisor quota is full
 //TODO Disable student edit when supervisor status -> ACCEPTED
+//TODO Change the email placeholder
 
 const Page = () => {
   const params = useParams<{ email: string }>();
