@@ -3,6 +3,7 @@ import HereIsEmpty from "@/app/components/HereIsEmpty";
 import { useAddStudentTitle } from "@/app/utilities/storage/student/useAddStudentTitle";
 import React, { useEffect, useState } from "react";
 import { useUpdateStudentTitle } from "../../../../../utilities/storage/student/useUpdateStudentTitle";
+import { FileInput } from "flowbite-react";
 
 const Title = (props: any) => {
   const [editTeamTitle, setEditTeamTitle] = useState(99);
@@ -108,7 +109,11 @@ const Title = (props: any) => {
                         className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                       />
                     </td>
-                    <td>Uploaded</td>
+                    <td>
+                      <div>
+                        <FileInput id="file-upload" />
+                      </div>
+                    </td>
                     <td className="flex flex-row-reverse">
                       <button
                         onClick={() => setEditTeamTitle(99)}
@@ -147,8 +152,13 @@ const Title = (props: any) => {
                       index
                     ]?.name ?? "None"}
                   </td>
-                  <td>Uploaded</td>
-                  {props.canEdit ? (
+                  <td>
+                    {" "}
+                    {props.selectViewUser?.studentInformation?.ProjectTitle[
+                      index
+                    ]?.uploadedPoster ?? "None"}
+                  </td>
+                  {props.canEdit && props.isMemberCompleted ? (
                     <td className="flex flex-row-reverse">
                       {props?.selectViewUser?.studentInformation
                         ?.lecturerAcceptedStudent === "ACCEPTED" ? (

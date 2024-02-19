@@ -15,6 +15,8 @@ import { useMediaQuery } from "usehooks-ts";
 
 //TODO Add upload project poster
 //TODO Change the email placeholder
+//TODO If lecturer full and student requested, when they are viewed. remove the request and set to declined
+//TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and remove all requested students.
 
 const Page = () => {
   const params = useParams<{ email: string }>();

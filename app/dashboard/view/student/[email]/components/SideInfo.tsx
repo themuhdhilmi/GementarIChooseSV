@@ -37,7 +37,8 @@ const SideInfo = (props: any) => {
       </div>
       <div className="text-center mt-6 font-extrabold">
         <p>STATUS</p>
-        <p className="badge bg-red-600 text-white">INCOMPLETE (X)</p>
+        { props.isSupervisorDeclined ? <p className="badge bg-red-600 text-white">1/3</p> :  props.isSupervisorAccepted ? <p className="badge bg-green-600 text-white">3/3 ✓</p> : props.isTitleCompleted ? <p className="badge bg-red-600 text-white">2/3</p>: props.isMemberCompleted ? <p className="badge bg-red-600 text-white">1/3</p> : <p className="badge bg-red-600 text-white">0/3</p>}
+
       </div>
 
       <div className="text-center mt-2 font-extrabold">
@@ -63,7 +64,7 @@ const SideInfo = (props: any) => {
             ?.name ?? ""}
         </p>
 
-        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent ===
+        {/* {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent ===
         "ACCEPTED" ? (
           <p className="text-green-600">
             {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent}
@@ -72,7 +73,10 @@ const SideInfo = (props: any) => {
           <p className="text-red-600">
             {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent}
           </p>
-        )}
+        )} */}
+        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === "REQUESTED" ? <p className="text-red-700">[Waiting for approval]</p> : ""}
+        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === "DECLINED" ? <p className="text-red-700">[Approval declined by supervisor]</p> : ""}
+        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === "ACCEPTED" ? <p className="text-green-800">[Approved]</p> : ""}
       </div>
 
     </div>

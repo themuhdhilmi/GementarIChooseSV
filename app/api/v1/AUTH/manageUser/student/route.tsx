@@ -119,6 +119,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
           studentInformation: {
             include: {
               Member: true,
+              ProjectTitle: true,
               SessionYear: true,
               LecturerInformation: {
                 include: {

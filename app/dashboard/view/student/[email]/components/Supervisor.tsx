@@ -36,7 +36,9 @@ const Supervisor = (props: any) => {
           }
         </div>
         <div>
-          {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent}
+        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === "REQUESTED" ? <p className="text-red-700">[Waiting for approval]</p> : ""}
+        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === "DECLINED" ? <p className="text-red-700">[Approval declined by supervisor]</p> : ""}
+        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === "ACCEPTED" ? <p className="text-green-800">[Approved]</p> : ""}
         </div>
       </div>
       {(lecturers?.session?.Supervisor?.length ?? 0) === 0 ? (
@@ -50,7 +52,7 @@ const Supervisor = (props: any) => {
             ""
           ) : (
             <div className="mx-10 my-4">
-              {props.canEdit ? (
+              {props.canEdit && props.isTitleCompleted && props.isMemberCompleted ? (
                 <div className="join w-full ">
                   <div className="w-full">
                     <select
@@ -73,11 +75,10 @@ const Supervisor = (props: any) => {
 
                           return (
                             <option value={item.User.email} key={index}>
-                              {item.User.name} 
-                              {/* | accepted :{" "}
-                              {item?.acceptedStudentsCount}/
-                              {item?.supervisorQuota ??
-                                lecturers?.session?.globalSupervisorQuota} */}
+                              {item.User.name}
+                              - accepted : {item?.acceptedStudentsCount}/{item?.supervisorQuota ?? lecturers?.session?.globalSupervisorQuota} -
+                              Requested : {item?.requestedStudentsCount} -
+                              Declined : {item?.declinedStudentsCount}
                             </option>
                           );
                         }

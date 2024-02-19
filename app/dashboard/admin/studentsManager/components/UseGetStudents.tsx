@@ -12,7 +12,7 @@ import HereIsEmpty from "@/app/components/HereIsEmpty";
 const UseGetStudents = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
   const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`,
+    `(max-width: ${breakpoints.mobileLandscape})`
   );
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`);
   const { students, fetchData } = useGetStudents();
@@ -58,19 +58,57 @@ const UseGetStudents = (props: any) => {
               </thead>
               <tbody>
                 {students.students?.map((item: any, index: number) => {
+                  const studentProgress = {
+                    memberQuota:
+                      item?.studentInformation?.memberQuota ??
+                      item?.studentInformation?.SessionYear
+                        ?.globalMemberQuota ??
+                      0,
+                    titleQuota:
+                      item?.studentInformation?.titleQuota ??
+                      item?.studentInformation?.SessionYear?.globalTitleQuota ??
+                      0,
+                    currentMemberQuota:
+                      item?.studentInformation?.Member?.length,
+                    currentTitleQuota:
+                      item?.studentInformation?.ProjectTitle?.length,
+                    isMemberCompleted:
+                      (item?.studentInformation?.memberQuota ??
+                        item?.studentInformation?.SessionYear
+                          ?.globalMemberQuota ??
+                        0) <= item?.studentInformation?.Member?.length,
+                    isTitleCompleted:
+                      (item?.studentInformation?.titleQuota ??
+                        item?.studentInformation?.SessionYear
+                          ?.globalTitleQuota ??
+                        0) <= item?.studentInformation?.ProjectTitle?.length,
+                    supervisorStatus:
+                      item?.studentInformation?.lecturerAcceptedStudent,
+                  };
+
                   return (
                     <tr key={index}>
                       {isMobileLandscape ? "" : <th>{index + 1}</th>}
                       {isMobileLandscape ? "" : <td>{item.name}</td>}
-
                       <td>{item.studentInformation?.matricNumber}</td>
                       {isMobile ? (
                         ""
                       ) : (
                         <td>
-                          <div className="badge text-white badge-error">
-                            INCOMPLETE
-                          </div>
+                          {studentProgress.supervisorStatus === "DECLINED" ? (
+                            <p className="badge bg-red-600 text-white">1/3</p>
+                          ) : studentProgress.supervisorStatus ===
+                            "ACCEPTED" ? (
+                            <p className="badge bg-green-600 text-white">
+                              3/3 ✓
+                            </p>
+                          ) : studentProgress.isTitleCompleted ? (
+                            <p className="badge bg-red-600 text-white">2/3</p>
+                          ) : studentProgress.isMemberCompleted ? (
+                            <p className="badge bg-red-600 text-white">1/3</p>
+                          ) : (
+                            <p className="badge bg-red-600 text-white">0/3</p>
+                          )}
                         </td>
                       )}
 
