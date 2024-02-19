@@ -28,6 +28,7 @@ const Supervisor = (props: any) => {
       </div>
       <div className="flex flex-col border mx-10 my-4 py-5 rounded-lg text-center">
         <div>Your Selected Lecturer</div>
+        {/* {JSON.stringify(lecturers?.session?.Supervisor)} */}
         <div>
           {
             props?.selectViewUser?.studentInformation?.LecturerInformation?.User
@@ -62,12 +63,24 @@ const Supervisor = (props: any) => {
                       <option>Choose supervisor...</option>
                       {lecturers.session.Supervisor.map(
                         (item: any, index: number) => {
+                          if (
+                            item?.acceptedStudentsCount >=
+                            (item?.supervisorQuota ??
+                              lecturers?.session?.globalSupervisorQuota)
+                          ) {
+                            return <></>;
+                          }
+
                           return (
                             <option value={item.User.email} key={index}>
-                              {item.User.name}
+                              {item.User.name} 
+                              {/* | accepted :{" "}
+                              {item?.acceptedStudentsCount}/
+                              {item?.supervisorQuota ??
+                                lecturers?.session?.globalSupervisorQuota} */}
                             </option>
                           );
-                        },
+                        }
                       )}
                     </select>
                   </div>

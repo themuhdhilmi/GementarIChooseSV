@@ -121,11 +121,11 @@ const Title = (props: any) => {
                           setEditTeamTitle(99);
                           setMatricTitleId(
                             props.selectViewUser?.studentInformation
-                              ?.ProjectTitle[index]?.id ?? "",
+                              ?.ProjectTitle[index]?.id ?? ""
                           );
                           sendDataTitle(
                             props.selectViewUser?.studentInformation
-                              ?.ProjectTitle[index]?.matricTitleId ?? "None",
+                              ?.ProjectTitle[index]?.matricTitleId ?? "None"
                           );
                         }}
                         className="btn btn-sm text-white bg-blue-950 rounded-lg mr-1"
@@ -150,22 +150,27 @@ const Title = (props: any) => {
                   <td>Uploaded</td>
                   {props.canEdit ? (
                     <td className="flex flex-row-reverse">
-                      <button
-                        onClick={() => {
-                          setEditTeamTitle(index);
-                          setName(
-                            props.selectViewUser?.studentInformation
-                              ?.ProjectTitle[index]?.name ?? "None",
-                          );
-                          setMatricTitleId(
-                            props.selectViewUser?.studentInformation
-                              ?.ProjectTitle[index]?.id ?? "",
-                          );
-                        }}
-                        className="btn btn-sm text-white bg-blue-950 rounded-lg"
-                      >
-                        Edit
-                      </button>
+                      {props?.selectViewUser?.studentInformation
+                        ?.lecturerAcceptedStudent === "ACCEPTED" ? (
+                        ""
+                      ) : (
+                        <button
+                          onClick={() => {
+                            setEditTeamTitle(index);
+                            setName(
+                              props.selectViewUser?.studentInformation
+                                ?.ProjectTitle[index]?.name ?? "None"
+                            );
+                            setMatricTitleId(
+                              props.selectViewUser?.studentInformation
+                                ?.ProjectTitle[index]?.id ?? ""
+                            );
+                          }}
+                          className="btn btn-sm text-white bg-blue-950 rounded-lg"
+                        >
+                          Edit
+                        </button>
+                      )}
                     </td>
                   ) : (
                     ""

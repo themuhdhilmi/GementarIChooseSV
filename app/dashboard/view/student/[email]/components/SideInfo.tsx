@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import Image from "next/image";
+import { Button, Timeline } from "flowbite-react";
+import { HiArrowNarrowRight } from "react-icons/hi";
 
 const SideInfo = (props: any) => {
   return (
@@ -72,6 +74,7 @@ const SideInfo = (props: any) => {
           </p>
         )}
       </div>
+
     </div>
   );
 };

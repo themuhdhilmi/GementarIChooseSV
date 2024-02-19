@@ -14,9 +14,6 @@ import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
 //TODO Add upload project poster
-//TODO Add Reset Password
-//TODO Supervisor disable on selection if the supervisor quota is full
-//TODO Disable student edit when supervisor status -> ACCEPTED
 //TODO Change the email placeholder
 
 const Page = () => {

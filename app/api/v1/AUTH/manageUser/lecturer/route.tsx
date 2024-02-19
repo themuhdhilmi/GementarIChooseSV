@@ -37,7 +37,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        },
+        }
       );
     }
 
@@ -52,23 +52,30 @@ export async function GET(request: NextRequest, response: NextResponse) {
           Supervisor: {
             include: {
               User: true,
-            },
-          },
-          StudentInformation: {
-            include: {
-              User: true,
-              Member: {
-                include: {
-                  StudentInformation: {
-                    include: {
-                      User: true,
-                    },
-                  },
-                },
-              },
+              StudentInformation: true,
             },
           },
         },
+      });
+
+      session?.Supervisor.forEach((supervisor: any) => {
+        // Count the number of accepted students for the current supervisor
+        const acceptedCount = supervisor.StudentInformation.filter(
+          (student: any) => student.lecturerAcceptedStudent === "ACCEPTED"
+        ).length;
+        // Count the number of requested students for the current supervisor
+        const requestCount = supervisor.StudentInformation.filter(
+          (student: any) => student.lecturerAcceptedStudent === "REQUESTED"
+        ).length;
+        // Count the number of declined students for the current supervisor
+        const declinedCount = supervisor.StudentInformation.filter(
+          (student: any) => student.lecturerAcceptedStudent === "DECLINED"
+        ).length;
+
+        // Add counts to the supervisor object
+        supervisor.acceptedStudentsCount = acceptedCount;
+        supervisor.requestedStudentsCount = requestCount;
+        supervisor.declinedStudentsCount = declinedCount;
       });
 
       return NextResponse.json(
@@ -77,7 +84,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        },
+        }
       );
     }
 
@@ -99,7 +106,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        },
+        }
       );
     }
   } catch (error) {
@@ -109,7 +116,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -136,7 +143,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
-
     const lecturer = await prisma.user.create({
       data: {
         name: body.name,
@@ -162,7 +168,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -171,7 +177,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -234,7 +240,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -243,7 +249,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
@@ -294,7 +300,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
+      }
     );
   } catch (error) {
     return NextResponse.json(
@@ -303,7 +309,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
+      }
     );
   }
 }
