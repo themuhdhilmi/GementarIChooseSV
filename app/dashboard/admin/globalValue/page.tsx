@@ -1,58 +1,46 @@
-"use client";
-import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
-import { breakpoints } from "@/app/config/breakpoints";
-import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
-import React, { useEffect } from "react";
-import { useMediaQuery } from "usehooks-ts";
-import GlobalValue from "./components/GlobalValue";
-import SessionManager from "./components/SessionManager";
-import { useSetSessions } from "@/app/utilities/storage/user/useSetSessions";
-import { usePutSessions } from "@/app/utilities/storage/user/usePutSessions";
+'use client'
+import LoadingLeftBottom from '@/app/components/LoadingLeftBottom'
+import { breakpoints } from '@/app/config/breakpoints'
+import { useGetsessions } from '@/app/utilities/storage/user/useGetSessions'
+import React, { useEffect } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
+import GlobalValue from './components/GlobalValue'
+import SessionManager from './components/SessionManager'
+import { useSetSessions } from '@/app/utilities/storage/user/useSetSessions'
+import { usePutSessions } from '@/app/utilities/storage/user/usePutSessions'
 
 //TODO Add Final Presentation Date
 //TODO Update Final presentation Date Counter Header
 
 const Page = () => {
-  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
-  const { loading, fetchData, sessions } = useGetsessions();
-  const { sessions: setSessionsData, loading: setLoading } = useSetSessions();
-  const {
-    sessions: putSessionsData,
-    putSessionsGlobalMemberQuota,
-    putSessionsGLobalTitleQuota,
-    putSessionsGlobalSupervisorQuota,
-    loading: putLoading,
-  } = usePutSessions();
+  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
+  const { loading, fetchData, sessions } = useGetsessions()
+  const { sessions: setSessionsData, loading: setLoading } = useSetSessions()
+  const { sessions: putSessionsData, putSessionsGlobalMemberQuota, putSessionsGLobalTitleQuota, putSessionsGlobalSupervisorQuota, loading: putLoading } = usePutSessions()
 
   useEffect(() => {
-    fetchData();
+    fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   useEffect(() => {
-    fetchData();
+    fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setSessionsData, putSessionsData, putLoading]);
+  }, [setSessionsData, putSessionsData, putLoading])
 
   // if (loading) {
   //   return <LoadingLeftBottom />;
   // }
 
   return (
-    <div className={`${isDesktop ? "px-6" : "px-24"}`}>
+    <div className={`${isDesktop ? 'px-6' : 'px-24'}`}>
       <div>
         <div>
-          <SessionManager
-            sessionList={sessions.sessionsList}
-            sessilnSelected={sessions.sessionSelected}
-            putSessionsGlobalMemberQuota={putSessionsGlobalMemberQuota}
-            putSessionsGLobalTitleQuota={putSessionsGLobalTitleQuota}
-            putSessionsGlobalSupervisorQuota={putSessionsGlobalSupervisorQuota}
-          />
+          <SessionManager sessionList={sessions.sessionsList} sessilnSelected={sessions.sessionSelected} putSessionsGlobalMemberQuota={putSessionsGlobalMemberQuota} putSessionsGLobalTitleQuota={putSessionsGLobalTitleQuota} putSessionsGlobalSupervisorQuota={putSessionsGlobalSupervisorQuota} />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

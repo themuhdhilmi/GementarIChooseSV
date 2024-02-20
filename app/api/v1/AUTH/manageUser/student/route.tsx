@@ -1,47 +1,46 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-import bcrypt from "bcrypt";
-import prisma from "@/prisma/client";
-import { z } from "zod";
-import { apiDefaultPagination } from "@/app/config/api";
-import { Prisma } from "@prisma/client";
+import { NextRequest, NextResponse } from 'next/server'
+import { getToken } from 'next-auth/jwt'
+import bcrypt from 'bcrypt'
+import prisma from '@/prisma/client'
+import { z } from 'zod'
+import { apiDefaultPagination } from '@/app/config/api'
+import { Prisma } from '@prisma/client'
 
 function censorName(name: any) {
-  const nameParts = name.split(" ");
-  const censoredParts = nameParts.map(
-    (part: string | any[]) => part[0] + "*".repeat(part.length - 1),
-  );
-  return censoredParts.join(" ");
+  const nameParts = name.split(' ')
+  const censoredParts = nameParts.map((part: string | any[]) => part[0] + '*'.repeat(part.length - 1))
+  return censoredParts.join(' ')
 }
 
 export async function GET(request: NextRequest, response: NextResponse) {
-  let role = "";
+  let role = ''
 
   try {
-    const token = await getToken({ req: request });
+    const token = await getToken({
+      req: request,
+    })
 
     const user = await prisma.user.findUnique({
       where: {
         id: token?.sub,
       },
-    });
+    })
 
     if (user) {
-      role = user.role;
+      role = user.role
     }
   } catch (err) {}
 
   try {
-    const { searchParams } = new URL(request.url);
-    const pageParam = parseInt(searchParams.get("page") as string);
-    const pageSizeParam = parseInt(searchParams.get("pageSize") as string);
-    const sessionParam = searchParams.get("session") as string;
-    const emailParam = searchParams.get("email") as string;
-    const typeParam = searchParams.get("type") as string;
+    const { searchParams } = new URL(request.url)
+    const pageParam = parseInt(searchParams.get('page') as string)
+    const pageSizeParam = parseInt(searchParams.get('pageSize') as string)
+    const sessionParam = searchParams.get('session') as string
+    const emailParam = searchParams.get('email') as string
+    const typeParam = searchParams.get('type') as string
 
-    if (typeParam === "single") {
-
-      const studentRaw : any = await prisma.user.findFirstOrThrow({
+    if (typeParam === 'single') {
+      const studentRaw: any = await prisma.user.findFirstOrThrow({
         where: {
           email: emailParam,
         },
@@ -54,53 +53,23 @@ export async function GET(request: NextRequest, response: NextResponse) {
               LecturerInformation: {
                 include: {
                   User: true,
-                  StudentInformation: true
+                  StudentInformation: true,
                 },
               },
             },
           },
         },
-      });
+      })
 
-      // return NextResponse.json(
-      //   {
-      //     student: studentRaw?.studentInformation?.LecturerInformation,
-      //   },
-      //   {
-      //     status: 200
-      //   },
-      // );
-
-      //TODO CHECK IF LECTURER REQUESTED ARE FULL
-      studentRaw?.studentInformation?.LecturerInformation.forEach((supervisor: any) => {
-        // Count the number of accepted students for the current supervisor
-        const acceptedCount = supervisor.StudentInformation.filter(
-          (student: any) => student.lecturerAcceptedStudent === "ACCEPTED"
-        ).length;
-        // Count the number of requested students for the current supervisor
-        const requestCount = supervisor.StudentInformation.filter(
-          (student: any) => student.lecturerAcceptedStudent === "REQUESTED"
-        ).length;
-        // Count the number of declined students for the current supervisor
-        const declinedCount = supervisor.StudentInformation.filter(
-          (student: any) => student.lecturerAcceptedStudent === "DECLINED"
-        ).length;
-
-        // Add counts to the supervisor object
-        supervisor.acceptedStudentsCount = acceptedCount;
-        supervisor.requestedStudentsCount = requestCount;
-        supervisor.declinedStudentsCount = declinedCount;
-      });
-
-      if (role === "ADMIN") {
+      if (role === 'ADMIN') {
         return NextResponse.json(
           {
             student: studentRaw,
           },
           {
             status: 200,
-          },
-        );
+          }
+        )
       }
 
       const censoredStudent = {
@@ -110,7 +79,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         studentInformation: {
           ...studentRaw.studentInformation,
           matricNumber: censorName(studentRaw.studentInformation?.matricNumber),
-          Member: studentRaw.studentInformation?.Member.map((member : any) => ({
+          Member: studentRaw.studentInformation?.Member.map((member: any) => ({
             ...member,
             name: censorName(member.name),
             matricNumber: censorName(member.matricNumber),
@@ -122,7 +91,28 @@ export async function GET(request: NextRequest, response: NextResponse) {
             },
           },
         },
-      };
+      }
+
+      /////////////////////////////////////////  FUNCTION UPDATE STUDENT DECLINED IF SV FULL /////////////////////////////////////////
+      const acceptedCount = censoredStudent?.studentInformation?.LecturerInformation.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'ACCEPTED').length
+
+      const requestCount = censoredStudent?.studentInformation?.LecturerInformation.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'REQUESTED').length
+
+      const declinedCount = censoredStudent?.studentInformation?.LecturerInformation.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'DECLINED').length
+
+      if (censoredStudent?.studentInformation?.lecturerAcceptedStudent === 'REQUESTED') {
+        if (acceptedCount >= (censoredStudent?.studentInformation?.LecturerInformation?.supervisorQuota ?? censoredStudent?.studentInformation?.SessionYear?.globalSupervisorQuota ?? 0)) {
+          const studentData = await prisma.studentInformation.update({
+            where: {
+              userId: studentRaw.id,
+            },
+            data: {
+              lecturerAcceptedStudent: 'DECLINED',
+            },
+          })
+        }
+      }
+      /////////////////////////////////////////  FUNCTION UPDATE STUDENT DECLINED IF SV FULL /////////////////////////////////////////
 
       return NextResponse.json(
         {
@@ -130,19 +120,19 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        },
-      );
+        }
+      )
     }
 
-    if (typeParam === "many") {
-      let page = pageParam ? pageParam : 1;
-      let pageSize = pageSizeParam
-        ? pageSizeParam
-        : apiDefaultPagination.pageSize;
+    if (typeParam === 'many') {
+      let page = pageParam ? pageParam : 1
+      let pageSize = pageSizeParam ? pageSizeParam : apiDefaultPagination.pageSize
       const students = await prisma.user.findMany({
-        orderBy: { createdAt: Prisma.SortOrder.desc } as any,
+        orderBy: {
+          createdAt: Prisma.SortOrder.desc,
+        } as any,
         where: {
-          role: "STUDENT",
+          role: 'STUDENT',
           studentInformation: {
             sessionYearId: sessionParam,
           },
@@ -163,14 +153,14 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         skip: (page - 1) * pageSize,
         take: pageSize,
-      });
+      })
 
       const studentsCount = await prisma.user.count({
         where: {
-          role: "STUDENT",
+          role: 'STUDENT',
         },
-      });
-      const totalPages = Math.ceil(studentsCount / pageSize);
+      })
+      const totalPages = Math.ceil(studentsCount / pageSize)
 
       return NextResponse.json(
         {
@@ -182,8 +172,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
         {
           status: 200,
-        },
-      );
+        }
+      )
     }
   } catch (error) {
     return NextResponse.json(
@@ -192,12 +182,12 @@ export async function GET(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
-    );
+      }
+    )
   }
 }
 
-const TrackEnum = z.enum(["SOFTWARE", "SECURITY", "NETWORK"]);
+const TrackEnum = z.enum(['SOFTWARE', 'SECURITY', 'NETWORK'])
 const schema = z.object({
   name: z.string().min(4),
   email: z.string().email(),
@@ -206,33 +196,32 @@ const schema = z.object({
   confirmPassword: z.string().min(4),
   sessionYearID: z.string(),
   track: TrackEnum,
-});
+})
 
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
+    const body = await request.json()
 
-    let passwordEncrypt = null;
+    let passwordEncrypt = null
     if (body.password) {
-      passwordEncrypt = await bcrypt.hash(body.password, 10);
+      passwordEncrypt = await bcrypt.hash(body.password, 10)
     }
 
-    const validation = schema.safeParse(body);
+    const validation = schema.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
 
-    const checkIfMaticNumberAlreadyExisted =
-      await prisma.studentInformation.findFirst({
-        where: {
-          matricNumber: body.matricNumber,
-        },
-      });
+    const checkIfMaticNumberAlreadyExisted = await prisma.studentInformation.findFirst({
+      where: {
+        matricNumber: body.matricNumber,
+      },
+    })
 
     if (checkIfMaticNumberAlreadyExisted) {
       return NextResponse.json(
@@ -240,14 +229,14 @@ export async function POST(request: NextRequest, response: NextResponse) {
           errors: [
             {
               message: `Matric number ${body.matricNumber} already existed`,
-              path: "",
+              path: '',
             },
           ],
         },
         {
           status: 400,
-        },
-      );
+        }
+      )
     }
 
     const student = await prisma.user.create({
@@ -255,22 +244,26 @@ export async function POST(request: NextRequest, response: NextResponse) {
         name: body.name,
         email: body.email,
         hashedPassword: passwordEncrypt,
-        role: "STUDENT",
+        role: 'STUDENT',
       },
-    });
+    })
 
     const studentData = await prisma.studentInformation.create({
       data: {
         Track: body.track,
         matricNumber: body.matricNumber,
         SessionYear: {
-          connect: { id: body.sessionYearID },
+          connect: {
+            id: body.sessionYearID,
+          },
         },
         User: {
-          connect: { id: student.id },
+          connect: {
+            id: student.id,
+          },
         },
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -279,8 +272,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
-    );
+      }
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -288,8 +281,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
-    );
+      }
+    )
   }
 }
 
@@ -300,26 +293,25 @@ const schemaPUT = z.object({
   matricNumber: z.string().min(5).max(15).nullable(),
   password: z.string().min(4).nullable(),
   track: TrackEnum.nullable(),
-
   sessionYearID: z.string().nullable(),
   memberQuota: z.number().nullable(),
   titleQuota: z.number().nullable(),
-});
+})
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
-    let passwordEncrypt = null;
+    const body = await request.json()
+    let passwordEncrypt = null
 
     if (body.password !== null) {
-      passwordEncrypt = await bcrypt.hash(body.password, 10);
+      passwordEncrypt = await bcrypt.hash(body.password, 10)
     }
 
-    const validation = schemaPUT.safeParse(body);
+    const validation = schemaPUT.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
@@ -334,7 +326,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         email: body.email ?? undefined,
         hashedPassword: passwordEncrypt ?? undefined,
       },
-    });
+    })
 
     const studentData = await prisma.studentInformation.update({
       where: {
@@ -347,7 +339,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         titleQuota: body.titleQuota ?? null,
         sessionYearId: body.sessionYearId ?? undefined,
       },
-    });
+    })
 
     const studentResult = await prisma.user.findFirst({
       where: {
@@ -356,7 +348,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       include: {
         studentInformation: true,
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -364,8 +356,8 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
-    );
+      }
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -373,24 +365,24 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
-    );
+      }
+    )
   }
 }
 
 const schemaDELETE = z.object({
   id: z.string(),
-});
+})
 export async function DELETE(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
+    const body = await request.json()
 
-    const validation = schemaDELETE.safeParse(body);
+    const validation = schemaDELETE.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
@@ -403,19 +395,19 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       include: {
         User: true,
       },
-    });
+    })
 
     const deleteStudent = await prisma.studentInformation.delete({
       where: {
         id: findStudent.id,
       },
-    });
+    })
 
     const deleteUser = await prisma.user.delete({
       where: {
         id: findStudent.User.id,
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -424,8 +416,8 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
-    );
+      }
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -433,7 +425,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
-    );
+      }
+    )
   }
 }

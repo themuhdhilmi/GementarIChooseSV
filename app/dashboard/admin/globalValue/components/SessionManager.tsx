@@ -1,12 +1,12 @@
-import { Button } from "flowbite-react";
-import React from "react";
-import UseSetSession from "./UseSetSession";
-import SetGlobalMemberQuota from "./components/SetGlobalMemberQuota";
-import { breakpoints } from "@/app/config/breakpoints";
-import { useMediaQuery } from "usehooks-ts";
+import { Button } from 'flowbite-react'
+import React from 'react'
+import UseSetSession from './UseSetSession'
+import SetGlobalMemberQuota from './components/SetGlobalMemberQuota'
+import { breakpoints } from '@/app/config/breakpoints'
+import { useMediaQuery } from 'usehooks-ts'
 
 const SessionManager = (props: any) => {
-  const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet})`);
+  const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
   return (
     <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg">
       <div className="overflow-x-auto">
@@ -19,9 +19,7 @@ const SessionManager = (props: any) => {
           <div className="bg-white rounded-lg w-full text-center font-bold flex flex-col py-5">
             <div className="font-normal text-slate-500">Selected</div>
             <div>
-              SESI {props?.sessilnSelected?.number}{" "}
-              {props?.sessilnSelected?.yearOne}/
-              {props?.sessilnSelected?.yearTwo}
+              SESI {props?.sessilnSelected?.number} {props?.sessilnSelected?.yearOne}/{props?.sessilnSelected?.yearTwo}
             </div>
 
             <div className="font-normal text-slate-500 ">Supervisee Quota</div>
@@ -38,52 +36,22 @@ const SessionManager = (props: any) => {
             <div className={`grid grid-rows-1 gap-4 py-1`}>
               <div className="w-full bg-white p-5 rounded-lg">
                 <div>Supervisors Global Value</div>
-                <SetGlobalMemberQuota
-                  function={props?.putSessionsGlobalSupervisorQuota}
-                  value={props?.sessilnSelected?.globalSupervisorQuota}
-                  name={"Supervisee Quota"}
-                  sessionId={props?.sessilnSelected?.id}
-                />
+                <SetGlobalMemberQuota function={props?.putSessionsGlobalSupervisorQuota} value={props?.sessilnSelected?.globalSupervisorQuota} name={'Supervisee Quota'} sessionId={props?.sessilnSelected?.id} />
                 <div>Students Global Value</div>
-                <SetGlobalMemberQuota
-                  function={props?.putSessionsGLobalTitleQuota}
-                  value={props?.sessilnSelected?.globalTitleQuota}
-                  name={"Title Quota"}
-                  sessionId={props?.sessilnSelected?.id}
-                />
-                <SetGlobalMemberQuota
-                  function={props?.putSessionsGlobalMemberQuota}
-                  value={props?.sessilnSelected?.globalMemberQuota}
-                  name={"Member Quota"}
-                  sessionId={props?.sessilnSelected?.id}
-                />
+                <SetGlobalMemberQuota function={props?.putSessionsGLobalTitleQuota} value={props?.sessilnSelected?.globalTitleQuota} name={'Title Quota'} sessionId={props?.sessilnSelected?.id} />
+                <SetGlobalMemberQuota function={props?.putSessionsGlobalMemberQuota} value={props?.sessilnSelected?.globalMemberQuota} name={'Member Quota'} sessionId={props?.sessilnSelected?.id} />
               </div>
             </div>
           ) : (
             <div className={`grid grid-cols-2 gap-4 py-5`}>
               <div className="w-full bg-white p-5 rounded-lg ">
                 <div>Supervisors Global Value</div>
-                <SetGlobalMemberQuota
-                  function={props?.putSessionsGlobalSupervisorQuota}
-                  value={props?.sessilnSelected?.globalSupervisorQuota}
-                  name={"Supervisee Quota"}
-                  sessionId={props?.sessilnSelected?.id}
-                />
+                <SetGlobalMemberQuota function={props?.putSessionsGlobalSupervisorQuota} value={props?.sessilnSelected?.globalSupervisorQuota} name={'Supervisee Quota'} sessionId={props?.sessilnSelected?.id} />
               </div>
               <div className="w-full bg-white p-5 rounded-lg">
                 <div>Students Global Value</div>
-                <SetGlobalMemberQuota
-                  function={props?.putSessionsGLobalTitleQuota}
-                  value={props?.sessilnSelected?.globalTitleQuota}
-                  name={"Title Quota"}
-                  sessionId={props?.sessilnSelected?.id}
-                />
-                <SetGlobalMemberQuota
-                  function={props?.putSessionsGlobalMemberQuota}
-                  value={props?.sessilnSelected?.globalMemberQuota}
-                  name={"Member Quota"}
-                  sessionId={props?.sessilnSelected?.id}
-                />
+                <SetGlobalMemberQuota function={props?.putSessionsGLobalTitleQuota} value={props?.sessilnSelected?.globalTitleQuota} name={'Title Quota'} sessionId={props?.sessilnSelected?.id} />
+                <SetGlobalMemberQuota function={props?.putSessionsGlobalMemberQuota} value={props?.sessilnSelected?.globalMemberQuota} name={'Member Quota'} sessionId={props?.sessilnSelected?.id} />
               </div>
             </div>
           )}
@@ -101,9 +69,7 @@ const SessionManager = (props: any) => {
               <tr className="bg-red-700 text-white shadow-lg rounded-lg">
                 <th></th>
                 <td>
-                  SESI {props?.sessilnSelected?.number}{" "}
-                  {props?.sessilnSelected?.yearOne}/
-                  {props?.sessilnSelected?.yearTwo}
+                  SESI {props?.sessilnSelected?.number} {props?.sessilnSelected?.yearOne}/{props?.sessilnSelected?.yearTwo}
                 </td>
                 <td></td>
                 <td>
@@ -136,7 +102,7 @@ const SessionManager = (props: any) => {
                         </div>
                       </td>
                     </tr>
-                  );
+                  )
                 }
 
                 return (
@@ -150,22 +116,19 @@ const SessionManager = (props: any) => {
                       <div className="form-control">
                         <label className="label cursor-pointer">
                           <span className="label-text"></span>
-                          <UseSetSession
-                            sessionId={item.id}
-                            sessionLabel={`SESI ${item.number} ${item.yearOne}/${item.yearTwo}`}
-                          />
+                          <UseSetSession sessionId={item.id} sessionLabel={`SESI ${item.number} ${item.yearOne}/${item.yearTwo}`} />
                         </label>
                       </div>
                     </td>
                   </tr>
-                );
+                )
               })}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SessionManager;
+export default SessionManager

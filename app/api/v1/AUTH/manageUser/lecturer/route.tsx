@@ -1,20 +1,20 @@
-import { NextRequest, NextResponse } from "next/server";
-import bcrypt from "bcrypt";
-import prisma from "@/prisma/client";
-import { z } from "zod";
+import { NextRequest, NextResponse } from 'next/server'
+import bcrypt from 'bcrypt'
+import prisma from '@/prisma/client'
+import { z } from 'zod'
 
 export async function GET(request: NextRequest, response: NextResponse) {
   try {
-    const { searchParams } = new URL(request.url);
+    const { searchParams } = new URL(request.url)
 
-    const selection = searchParams.get("selection") as string;
-    const email = searchParams.get("email") as string;
+    const selection = searchParams.get('selection') as string
+    const email = searchParams.get('email') as string
 
-    if (selection === "EMAIL") {
+    if (selection === 'EMAIL') {
       const lecturer = await prisma.user.findUniqueOrThrow({
         where: {
           email: email,
-          role: "LECTURER",
+          role: 'LECTURER',
         },
         include: {
           LecturerInformation: {
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
             },
           },
         },
-      });
+      })
 
       return NextResponse.json(
         {
@@ -38,11 +38,11 @@ export async function GET(request: NextRequest, response: NextResponse) {
         {
           status: 200,
         }
-      );
+      )
     }
 
-    if (selection === "SESSION") {
-      const sessionID = searchParams.get("sessionID") as string;
+    if (selection === 'SESSION') {
+      const sessionID = searchParams.get('sessionID') as string
 
       const session = await prisma.sessionYear.findFirst({
         where: {
@@ -56,27 +56,21 @@ export async function GET(request: NextRequest, response: NextResponse) {
             },
           },
         },
-      });
+      })
 
       session?.Supervisor.forEach((supervisor: any) => {
         // Count the number of accepted students for the current supervisor
-        const acceptedCount = supervisor.StudentInformation.filter(
-          (student: any) => student.lecturerAcceptedStudent === "ACCEPTED"
-        ).length;
+        const acceptedCount = supervisor.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'ACCEPTED').length
         // Count the number of requested students for the current supervisor
-        const requestCount = supervisor.StudentInformation.filter(
-          (student: any) => student.lecturerAcceptedStudent === "REQUESTED"
-        ).length;
+        const requestCount = supervisor.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'REQUESTED').length
         // Count the number of declined students for the current supervisor
-        const declinedCount = supervisor.StudentInformation.filter(
-          (student: any) => student.lecturerAcceptedStudent === "DECLINED"
-        ).length;
+        const declinedCount = supervisor.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'DECLINED').length
 
         // Add counts to the supervisor object
-        supervisor.acceptedStudentsCount = acceptedCount;
-        supervisor.requestedStudentsCount = requestCount;
-        supervisor.declinedStudentsCount = declinedCount;
-      });
+        supervisor.acceptedStudentsCount = acceptedCount
+        supervisor.requestedStudentsCount = requestCount
+        supervisor.declinedStudentsCount = declinedCount
+      })
 
       return NextResponse.json(
         {
@@ -85,10 +79,10 @@ export async function GET(request: NextRequest, response: NextResponse) {
         {
           status: 200,
         }
-      );
+      )
     }
 
-    if (selection === "ALL") {
+    if (selection === 'ALL') {
       const lecturers = await prisma.lecturerInformation.findMany({
         include: {
           User: true,
@@ -98,7 +92,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
             },
           },
         },
-      });
+      })
 
       return NextResponse.json(
         {
@@ -107,7 +101,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         {
           status: 200,
         }
-      );
+      )
     }
   } catch (error) {
     return NextResponse.json(
@@ -117,29 +111,29 @@ export async function GET(request: NextRequest, response: NextResponse) {
       {
         status: 400,
       }
-    );
+    )
   }
 }
 
-const TrackEnum = z.enum(["SOFTWARE", "SECURITY", "NETWORK"]);
+const TrackEnum = z.enum(['SOFTWARE', 'SECURITY', 'NETWORK'])
 const schemaPOST = z.object({
   name: z.string().min(4),
   email: z.string().email(),
   password: z.string().min(4),
   confirmPassword: z.string().min(4),
   track: TrackEnum,
-});
+})
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
-    const passwordEncrypt = await bcrypt.hash(body.password, 10);
+    const body = await request.json()
+    const passwordEncrypt = await bcrypt.hash(body.password, 10)
 
-    const validation = schemaPOST.safeParse(body);
+    const validation = schemaPOST.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
@@ -148,18 +142,20 @@ export async function POST(request: NextRequest, response: NextResponse) {
         name: body.name,
         email: body.email,
         hashedPassword: passwordEncrypt,
-        role: "LECTURER",
+        role: 'LECTURER',
       },
-    });
+    })
 
     const lecturerData = await prisma.lecturerInformation.create({
       data: {
         Track: body.track,
         User: {
-          connect: { id: lecturer.id },
+          connect: {
+            id: lecturer.id,
+          },
         },
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -169,7 +165,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       {
         status: 200,
       }
-    );
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -178,7 +174,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       {
         status: 400,
       }
-    );
+    )
   }
 }
 
@@ -189,23 +185,23 @@ const schemaPUT = z.object({
   password: z.string().min(4).nullable(),
   track: TrackEnum.nullable(),
   supervisorQuota: z.number().nullable(),
-});
+})
 
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
+    const body = await request.json()
 
-    let passwordEncrypt = null;
+    let passwordEncrypt = null
     if (body.password) {
-      passwordEncrypt = await bcrypt.hash(body.password, 10);
+      passwordEncrypt = await bcrypt.hash(body.password, 10)
     }
 
-    const validation = schemaPUT.safeParse(body);
+    const validation = schemaPUT.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
@@ -220,7 +216,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         email: body.email !== null ? body.email : undefined,
         hashedPassword: body.password !== null ? passwordEncrypt : undefined,
       },
-    });
+    })
 
     const lecturerData = await prisma.lecturerInformation.update({
       where: {
@@ -228,10 +224,9 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       data: {
         Track: body.track !== null ? body.track : undefined,
-        supervisorQuota:
-          body.supervisorQuota !== null ? body.supervisorQuota : undefined,
+        supervisorQuota: body.supervisorQuota !== null ? body.supervisorQuota : undefined,
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -241,7 +236,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       {
         status: 200,
       }
-    );
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -250,23 +245,23 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       {
         status: 400,
       }
-    );
+    )
   }
 }
 
 const schemaDELETE = z.object({
   id: z.string(),
-});
+})
 export async function DELETE(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
+    const body = await request.json()
 
-    const validation = schemaDELETE.safeParse(body);
+    const validation = schemaDELETE.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
@@ -279,19 +274,19 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       include: {
         User: true,
       },
-    });
+    })
 
     const deleteLecturer = await prisma.lecturerInformation.delete({
       where: {
         id: findLecturer.id,
       },
-    });
+    })
 
     const deleteUser = await prisma.user.delete({
       where: {
         id: findLecturer.User.id,
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -301,7 +296,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       {
         status: 200,
       }
-    );
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -310,6 +305,6 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       {
         status: 400,
       }
-    );
+    )
   }
 }

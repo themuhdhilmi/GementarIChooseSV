@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const page = () => {
   return (
@@ -8,17 +8,9 @@ const page = () => {
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">iChooseSV</h1>
             <div className="py-6">
-              <div
-                className="tooltip tooltip-bottom"
-                data-tip="Good luck on your Final Year Project, from Gementar Team."
-              >
-                <h1 className="text-center lg:text-left">
-                  Crucial Step Toward Your Professional Development
-                </h1>
-                <h1 className="text-center lg:text-left">
-                  Behind Every Successful Project Lies Hours of Hard Work and
-                  Dedication.
-                </h1>
+              <div className="tooltip tooltip-bottom" data-tip="Good luck on your Final Year Project, from Gementar Team.">
+                <h1 className="text-center lg:text-left">Crucial Step Toward Your Professional Development</h1>
+                <h1 className="text-center lg:text-left">Behind Every Successful Project Lies Hours of Hard Work and Dedication.</h1>
               </div>
             </div>
           </div>
@@ -28,23 +20,13 @@ const page = () => {
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
-                <input
-                  type="email"
-                  placeholder="email"
-                  className="input input-bordered"
-                  required
-                />
+                <input type="email" placeholder="email" className="input input-bordered" required />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  required
-                />
+                <input type="password" placeholder="password" className="input input-bordered" required />
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
@@ -60,7 +42,7 @@ const page = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default page;
+export default page

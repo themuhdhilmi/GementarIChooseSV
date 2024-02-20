@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const InfoBadge = (props: any) => {
   return (
@@ -8,7 +8,7 @@ const InfoBadge = (props: any) => {
       </div>
       <div className="badge badge-outline">{props.value}</div>
     </div>
-  );
-};
+  )
+}
 
-export default InfoBadge;
+export default InfoBadge

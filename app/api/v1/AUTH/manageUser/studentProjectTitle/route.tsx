@@ -1,20 +1,20 @@
-import { NextRequest, NextResponse } from "next/server";
-import prisma from "@/prisma/client";
-import { z } from "zod";
+import { NextRequest, NextResponse } from 'next/server'
+import prisma from '@/prisma/client'
+import { z } from 'zod'
 
 const schemaPOST = z.object({
   emailLead: z.string().min(4),
   name: z.string().min(4),
-});
+})
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
-    const validation = schemaPOST.safeParse(body);
+    const body = await request.json()
+    const validation = schemaPOST.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     // DEBUG : PLEASE ADD ADMIN VER
@@ -23,47 +23,47 @@ export async function POST(request: NextRequest, response: NextResponse) {
       where: {
         User: {
           email: body.emailLead,
-          role: "STUDENT",
+          role: 'STUDENT',
         },
       },
       include: {
         ProjectTitle: true,
       },
-    });
+    })
 
     const sessionGet = await prisma.sessionYear.findFirstOrThrow({
       where: {
         id: checkLead.sessionYearId,
       },
-    });
+    })
 
     if (!checkLead.titleQuota) {
       if (checkLead.ProjectTitle.length >= sessionGet.globalTitleQuota) {
         return NextResponse.json(
           {
-            error: "ExceedGlobalProjectTitleQuotaError",
+            error: 'ExceedGlobalProjectTitleQuotaError',
             globalQuota: sessionGet.globalTitleQuota,
             currentQuota: checkLead.ProjectTitle.length,
-            code: "P4310",
+            code: 'P4310',
           },
           {
             status: 400,
-          },
-        );
+          }
+        )
       }
     } else {
       if (checkLead.ProjectTitle.length >= checkLead.titleQuota) {
         return NextResponse.json(
           {
-            error: "ExceedInternalProjectTitleQuotaError",
+            error: 'ExceedInternalProjectTitleQuotaError',
             internalQuota: checkLead.titleQuota,
             currentQuota: checkLead.ProjectTitle.length,
-            code: "P4310",
+            code: 'P4310',
           },
           {
             status: 400,
-          },
-        );
+          }
+        )
       }
     }
 
@@ -72,19 +72,19 @@ export async function POST(request: NextRequest, response: NextResponse) {
         name: body.name,
         studentInformationId: checkLead.id,
       },
-    });
+    })
 
     checkLead = await prisma.studentInformation.findFirstOrThrow({
       where: {
         User: {
           email: body.emailLead,
-          role: "STUDENT",
+          role: 'STUDENT',
         },
       },
       include: {
         ProjectTitle: true,
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -94,8 +94,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
-    );
+      }
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -103,8 +103,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
-    );
+      }
+    )
   }
 }
 
@@ -112,16 +112,16 @@ const schemaPUT = z.object({
   emailLead: z.string().min(4),
   projectTitleId: z.string(),
   name: z.string().min(4),
-});
+})
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
-    const validation = schemaPUT.safeParse(body);
+    const body = await request.json()
+    const validation = schemaPUT.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     const emailLead = await prisma.studentInformation.findFirstOrThrow({
@@ -135,13 +135,13 @@ export async function PUT(request: NextRequest, response: NextResponse) {
           },
         },
       },
-    });
+    })
 
     const projectTitle = await prisma.projectTitle.findFirstOrThrow({
       where: {
         id: body.projectTitleId,
       },
-    });
+    })
 
     const deleteProjectTitle = await prisma.projectTitle.update({
       where: {
@@ -150,7 +150,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       data: {
         name: body.name,
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -158,8 +158,8 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
-    );
+      }
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -167,24 +167,24 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
-    );
+      }
+    )
   }
 }
 
 const schemaDELETE = z.object({
   emailLead: z.string().min(4),
   projectTitleId: z.string(),
-});
+})
 export async function DELETE(request: NextRequest, response: NextResponse) {
   try {
-    const body = await request.json();
-    const validation = schemaDELETE.safeParse(body);
+    const body = await request.json()
+    const validation = schemaDELETE.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
-      });
+      })
     }
 
     const emailLead = await prisma.studentInformation.findFirstOrThrow({
@@ -198,19 +198,19 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
           },
         },
       },
-    });
+    })
 
     const projectTitle = await prisma.projectTitle.findFirstOrThrow({
       where: {
         id: body.projectTitleId,
       },
-    });
+    })
 
     const deleteProjectTitle = await prisma.projectTitle.delete({
       where: {
         id: projectTitle.id,
       },
-    });
+    })
 
     return NextResponse.json(
       {
@@ -218,8 +218,8 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 200,
-      },
-    );
+      }
+    )
   } catch (error) {
     return NextResponse.json(
       {
@@ -227,7 +227,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
       {
         status: 400,
-      },
-    );
+      }
+    )
   }
 }

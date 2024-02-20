@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const GlobalValue = () => {
   return (
@@ -49,7 +49,7 @@ const GlobalValue = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default GlobalValue;
+export default GlobalValue

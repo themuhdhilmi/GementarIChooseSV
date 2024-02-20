@@ -1,14 +1,14 @@
-"use client";
-import { breakpoints } from "@/app/config/breakpoints";
-import React from "react";
-import { useMediaQuery } from "usehooks-ts";
-import Loading from "./components/LoadingFullScreen";
+'use client'
+import { breakpoints } from '@/app/config/breakpoints'
+import React from 'react'
+import { useMediaQuery } from 'usehooks-ts'
+import Loading from './components/LoadingFullScreen'
 
 const Page = () => {
-  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
+  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 
   return (
-    <div className={`${isDesktop ? "px-6" : "px-24"}`}>
+    <div className={`${isDesktop ? 'px-6' : 'px-24'}`}>
       <div className="stats shadow"></div>
       <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg">
         <div className="overflow-x-auto">
@@ -20,7 +20,7 @@ const Page = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

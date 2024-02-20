@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const UseModalDeleteLecturer = () => {
-  return <div>UseModalDeleteLecturer</div>;
-};
+  return <div>UseModalDeleteLecturer</div>
+}
 
-export default UseModalDeleteLecturer;
+export default UseModalDeleteLecturer

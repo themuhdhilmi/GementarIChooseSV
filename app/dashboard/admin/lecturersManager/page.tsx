@@ -1,12 +1,12 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
-import { breakpoints } from "@/app/config/breakpoints";
-import { useMediaQuery } from "usehooks-ts";
-import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
-import UseGetLecturers from "./components/UseGetLecturers";
-import UseAddLecturer from "./components/UseAddLecturer";
-import UseGetLecturer from "./components/UseGetLecturer";
+'use client'
+import React, { useEffect, useState } from 'react'
+import { useGetsessions } from '@/app/utilities/storage/user/useGetSessions'
+import { breakpoints } from '@/app/config/breakpoints'
+import { useMediaQuery } from 'usehooks-ts'
+import LoadingLeftBottom from '@/app/components/LoadingLeftBottom'
+import UseGetLecturers from './components/UseGetLecturers'
+import UseAddLecturer from './components/UseAddLecturer'
+import UseGetLecturer from './components/UseGetLecturer'
 
 enum Drawer {
   NONE,
@@ -16,94 +16,75 @@ enum Drawer {
 }
 
 const Page = () => {
-  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
-  const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`,
-  );
-  const { sessions, loading, fetchData } = useGetsessions();
-  const [selectedSession, setSelectedSession] = useState("");
-  const [openDrawer, setOpenDrawer] = useState<Drawer>(Drawer.NONE);
-  const [selectViewUser, setSelectViewUser] = useState<any>({});
+  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
+  const isMobileLandscape = useMediaQuery(`(max-width: ${breakpoints.mobileLandscape})`)
+  const { sessions, loading, fetchData } = useGetsessions()
+  const [selectedSession, setSelectedSession] = useState('')
+  const [openDrawer, setOpenDrawer] = useState<Drawer>(Drawer.NONE)
+  const [selectViewUser, setSelectViewUser] = useState<any>({})
 
   useEffect(() => {
-    fetchData();
+    fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [])
 
   useEffect(() => {
-    setSelectedSession(sessions.sessionSelected?.id);
+    setSelectedSession(sessions.sessionSelected?.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessions]);
+  }, [sessions])
 
   const funcOpenAddLecturer = () => {
-    setOpenDrawer(Drawer.ADD);
-  };
+    setOpenDrawer(Drawer.ADD)
+  }
 
   const funcOpenBulkAddLecturer = () => {
-    setOpenDrawer(Drawer.ADD_BULK);
-  };
+    setOpenDrawer(Drawer.ADD_BULK)
+  }
 
   const funcCloseAll = () => {
-    setOpenDrawer(Drawer.NONE);
-  };
+    setOpenDrawer(Drawer.NONE)
+  }
 
   const funcViewLecturer = () => {
-    setOpenDrawer(Drawer.VIEW);
-  };
+    setOpenDrawer(Drawer.VIEW)
+  }
 
   if (loading) {
-    return <LoadingLeftBottom />;
+    return <LoadingLeftBottom />
   }
 
   return (
-    <div className={`${isDesktop ? "px-6" : "px-24"}`}>
+    <div className={`${isDesktop ? 'px-6' : 'px-24'}`}>
       {openDrawer === Drawer.NONE ? (
         <div className="grid grid-cols-1 gap-4">
           <div className="col-span-3">
-            <UseGetLecturers
-              funcViewLecturer={funcViewLecturer}
-              funcOpenAddLecturer={funcOpenAddLecturer}
-              funcOpenBulkAddLecturer={funcOpenBulkAddLecturer}
-              setSelectViewUser={setSelectViewUser}
-            />
+            <UseGetLecturers funcViewLecturer={funcViewLecturer} funcOpenAddLecturer={funcOpenAddLecturer} funcOpenBulkAddLecturer={funcOpenBulkAddLecturer} setSelectViewUser={setSelectViewUser} />
           </div>
         </div>
       ) : (
-        ""
+        ''
       )}
 
       {openDrawer === Drawer.ADD ? (
-        <div
-          className={`grid ${
-            isDesktop ? "grid-cols-1" : "grid-cols-4 gap-4"
-          }  `}
-        >
+        <div className={`grid ${isDesktop ? 'grid-cols-1' : 'grid-cols-4 gap-4'}  `}>
           <div className="col-span-1">
             <UseAddLecturer funcCloseAll={funcCloseAll} />
           </div>
 
-          <div className={`${isDesktop ? "" : "col-span-3"} `}>
-            <UseGetLecturers
-              funcViewLecturer={funcViewLecturer}
-              funcOpenAddLecturer={funcOpenAddLecturer}
-              funcOpenBulkAddLecturer={funcOpenBulkAddLecturer}
-              setSelectViewUser={setSelectViewUser}
-            />
+          <div className={`${isDesktop ? '' : 'col-span-3'} `}>
+            <UseGetLecturers funcViewLecturer={funcViewLecturer} funcOpenAddLecturer={funcOpenAddLecturer} funcOpenBulkAddLecturer={funcOpenBulkAddLecturer} setSelectViewUser={setSelectViewUser} />
           </div>
         </div>
       ) : (
-        ""
+        ''
       )}
 
       {openDrawer === Drawer.VIEW ? (
         <div>
-          <UseGetLecturer
-            selectViewUser={selectViewUser}
-            funcCloseAll={funcCloseAll}
-          />
+          <UseGetLecturer selectViewUser={selectViewUser} funcCloseAll={funcCloseAll} />
         </div>
       ) : (
-        ""
+        ''
       )}
 
       {openDrawer === Drawer.ADD_BULK ? (
@@ -113,19 +94,14 @@ const Page = () => {
           </div>
 
           <div className="col-span-3">
-            <UseGetLecturers
-              funcViewLecturer={funcViewLecturer}
-              funcOpenAddLecturer={funcOpenAddLecturer}
-              funcOpenBulkAddLecturer={funcOpenBulkAddLecturer}
-              setSelectViewUser={setSelectViewUser}
-            />
+            <UseGetLecturers funcViewLecturer={funcViewLecturer} funcOpenAddLecturer={funcOpenAddLecturer} funcOpenBulkAddLecturer={funcOpenBulkAddLecturer} setSelectViewUser={setSelectViewUser} />
           </div>
         </div>
       ) : (
-        ""
+        ''
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

@@ -1,47 +1,39 @@
-"use client";
-import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
-import { useDeleteStudent } from "@/app/utilities/storage/student/useDeleteStudent";
-import { Button, Modal } from "flowbite-react";
-import { useState } from "react";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { RiDeleteBinLine } from "react-icons/ri";
-import { FaArrowUpShortWide } from "react-icons/fa6";
-import { useSetSessions } from "@/app/utilities/storage/user/useSetSessions";
-import { useGetStudents } from "@/app/utilities/storage/student/useGetStudents";
-import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
+'use client'
+import LoadingLeftBottom from '@/app/components/LoadingLeftBottom'
+import { useDeleteStudent } from '@/app/utilities/storage/student/useDeleteStudent'
+import { Button, Modal } from 'flowbite-react'
+import { useState } from 'react'
+import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { RiDeleteBinLine } from 'react-icons/ri'
+import { FaArrowUpShortWide } from 'react-icons/fa6'
+import { useSetSessions } from '@/app/utilities/storage/user/useSetSessions'
+import { useGetStudents } from '@/app/utilities/storage/student/useGetStudents'
+import { useGetsessions } from '@/app/utilities/storage/user/useGetSessions'
 const UseSetSession = (props: any) => {
-  const [openModal, setOpenModal] = useState(false);
-  const { setSessions, loading } = useSetSessions();
-  const { fetchData } = useGetStudents();
-  const { fetchData: fetchSessions } = useGetsessions();
+  const [openModal, setOpenModal] = useState(false)
+  const { setSessions, loading } = useSetSessions()
+  const { fetchData } = useGetStudents()
+  const { fetchData: fetchSessions } = useGetsessions()
 
   if (loading) {
-    return <LoadingLeftBottom />;
+    return <LoadingLeftBottom />
   }
 
   const processDeleteStudent = () => {
-    setSessions(props.sessionId);
-    fetchSessions();
-    fetchData(props.sessionId);
-    setOpenModal(false);
-  };
+    setSessions(props.sessionId)
+    fetchSessions()
+    fetchData(props.sessionId)
+    setOpenModal(false)
+  }
   return (
     <>
-      <button
-        onClick={() => setOpenModal(true)}
-        className="btn rounded-lg bg-slate-600 hover:bg-slate-800 text-white btn-sm"
-      >
+      <button onClick={() => setOpenModal(true)} className="btn rounded-lg bg-slate-600 hover:bg-slate-800 text-white btn-sm">
         <div>
           <FaArrowUpShortWide />
         </div>
       </button>
 
-      <Modal
-        show={openModal}
-        size="md"
-        onClose={() => setOpenModal(false)}
-        popup
-      >
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
@@ -61,7 +53,7 @@ const UseSetSession = (props: any) => {
         </Modal.Body>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default UseSetSession;
+export default UseSetSession

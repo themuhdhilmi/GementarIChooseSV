@@ -1,5 +1,5 @@
-import React from "react";
-import { VscEmptyWindow } from "react-icons/vsc";
+import React from 'react'
+import { VscEmptyWindow } from 'react-icons/vsc'
 
 const HereIsEmpty = () => {
   return (
@@ -15,7 +15,7 @@ const HereIsEmpty = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HereIsEmpty;
+export default HereIsEmpty

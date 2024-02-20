@@ -1,45 +1,34 @@
-"use client";
-import HereIsEmpty from "@/app/components/HereIsEmpty";
-import { useAddStudentMember } from "@/app/utilities/storage/student/useAddStudentMember";
-import { useUpdateStudentMember } from "@/app/utilities/storage/student/useUpdateStudentMember";
-import React, { useEffect, useState } from "react";
+'use client'
+import HereIsEmpty from '@/app/components/HereIsEmpty'
+import { useAddStudentMember } from '@/app/utilities/storage/student/useAddStudentMember'
+import { useUpdateStudentMember } from '@/app/utilities/storage/student/useUpdateStudentMember'
+import React, { useEffect, useState } from 'react'
 
 const TeamMembers = (props: any) => {
-  const [editTeamMember, setEditTeamMember] = useState(99);
+  const [editTeamMember, setEditTeamMember] = useState(99)
 
-  const [emailLead, setEmailLead] = useState("");
-  const [name, setName] = useState("");
-  const [matricNumber, setMatricNumber] = useState("");
-  const { sendData: sendAddStudentMember } = useAddStudentMember();
-  const { sendData: sendUpdateStudentMember } = useUpdateStudentMember();
-  const items = [
-    "Item 1",
-    "Item 2",
-    "Item 3",
-    "Item 4",
-    "Item 5",
-    "Item 6",
-    "Item 7",
-    "Item 8",
-    "Item 9",
-    "Item 10",
-  ];
+  const [emailLead, setEmailLead] = useState('')
+  const [name, setName] = useState('')
+  const [matricNumber, setMatricNumber] = useState('')
+  const { sendData: sendAddStudentMember } = useAddStudentMember()
+  const { sendData: sendUpdateStudentMember } = useUpdateStudentMember()
+  const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10']
 
   useEffect(() => {
-    setEmailLead(props.selectViewUser?.email);
+    setEmailLead(props.selectViewUser?.email)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.selectViewUser?.email]);
+  }, [props.selectViewUser?.email])
 
   const sendDataMember = (e: any) => {
-    if (e === "None") {
-      if (name === "None" && matricNumber === "None") {
+    if (e === 'None') {
+      if (name === 'None' && matricNumber === 'None') {
       } else {
         const postData = {
           emailLead: emailLead,
           name: name,
           matricNumber: matricNumber,
-        };
-        sendAddStudentMember(postData);
+        }
+        sendAddStudentMember(postData)
       }
     } else {
       const postData = {
@@ -47,17 +36,15 @@ const TeamMembers = (props: any) => {
         name: name,
         matricNumber: e,
         newMatricNumber: matricNumber,
-      };
+      }
 
-      sendUpdateStudentMember(postData);
+      sendUpdateStudentMember(postData)
     }
-  };
+  }
 
   return (
     <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
-      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">
-        Team Members
-      </div>
+      <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">Team Members</div>
       {/* {props.selectViewUser?.studentInformation?.Member?.length === 0 ? ( */}
       {false ? (
         <div className="py-6">
@@ -75,35 +62,26 @@ const TeamMembers = (props: any) => {
           <tbody>
             {/* {props.selectViewUser?.studentInformation?.Member.map( */}
             {items.map((item: any, index: number) => {
-              let quota =
-                props?.selectViewUser?.studentInformation?.memberQuota ??
-                props?.selectViewUser?.studentInformation?.SessionYear
-                  ?.globalMemberQuota ??
-                0;
+              let quota = props?.selectViewUser?.studentInformation?.memberQuota ?? props?.selectViewUser?.studentInformation?.SessionYear?.globalMemberQuota ?? 0
 
-              if (
-                index - 1 >=
-                props.selectViewUser?.studentInformation?.Member?.length
-              ) {
-                return <></>;
+              if (index - 1 >= props.selectViewUser?.studentInformation?.Member?.length) {
+                return <></>
               }
 
               if (index >= quota) {
-                return <></>;
+                return <></>
               }
 
               if (editTeamMember === index) {
                 return (
                   <tr key={index}>
-                    {!props.isDesktop ? (
-                      <th className="w-4">{index + 1}</th>
-                    ) : null}
+                    {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                     <td>
                       <input
                         value={name}
                         // onClick={}
                         onChange={(e: any) => {
-                          setName(e.target.value);
+                          setName(e.target.value)
                         }}
                         type="text"
                         placeholder="Type here"
@@ -115,7 +93,7 @@ const TeamMembers = (props: any) => {
                         value={matricNumber}
                         // onClick={}
                         onChange={(e: any) => {
-                          setMatricNumber(e.target.value);
+                          setMatricNumber(e.target.value)
                         }}
                         type="text"
                         placeholder="Type here"
@@ -123,20 +101,13 @@ const TeamMembers = (props: any) => {
                       />
                     </td>
                     <td className="flex flex-row-reverse">
-                      <button
-                        onClick={() => setEditTeamMember(99)}
-                        className="btn btn-sm text-white bg-red-700 rounded-lg"
-                      >
+                      <button onClick={() => setEditTeamMember(99)} className="btn btn-sm text-white bg-red-700 rounded-lg">
                         Cancel
                       </button>
                       <button
                         onClick={() => {
-                          setEditTeamMember(99);
-                          sendDataMember(
-                            props.selectViewUser?.studentInformation?.Member[
-                              index
-                            ]?.matricNumber ?? "None"
-                          );
+                          setEditTeamMember(99)
+                          sendDataMember(props.selectViewUser?.studentInformation?.Member[index]?.matricNumber ?? 'None')
                         }}
                         className="btn btn-sm text-white bg-blue-950 rounded-lg mr-1"
                       >
@@ -144,41 +115,24 @@ const TeamMembers = (props: any) => {
                       </button>
                     </td>
                   </tr>
-                );
+                )
               }
 
               return (
                 <tr key={index}>
-                  {!props.isDesktop ? (
-                    <th className="w-4">{index + 1}</th>
-                  ) : null}
-                  <td>
-                    {props.selectViewUser?.studentInformation?.Member[index]
-                      ?.name ?? "None"}
-                  </td>
-                  <td>
-                    {props.selectViewUser?.studentInformation?.Member[index]
-                      ?.matricNumber ?? "None"}
-                  </td>
+                  {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
+                  <td>{props.selectViewUser?.studentInformation?.Member[index]?.name ?? 'None'}</td>
+                  <td>{props.selectViewUser?.studentInformation?.Member[index]?.matricNumber ?? 'None'}</td>
                   {props.canEdit ? (
                     <td className="flex flex-row-reverse">
-                      {props?.selectViewUser?.studentInformation
-                        ?.lecturerAcceptedStudent === "ACCEPTED" ? (
-                        ""
+                      {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'ACCEPTED' ? (
+                        ''
                       ) : (
                         <button
                           onClick={() => {
-                            setEditTeamMember(index);
-                            setName(
-                              props.selectViewUser?.studentInformation?.Member[
-                                index
-                              ]?.name ?? "None"
-                            );
-                            setMatricNumber(
-                              props.selectViewUser?.studentInformation?.Member[
-                                index
-                              ]?.matricNumber ?? "None"
-                            );
+                            setEditTeamMember(index)
+                            setName(props.selectViewUser?.studentInformation?.Member[index]?.name ?? 'None')
+                            setMatricNumber(props.selectViewUser?.studentInformation?.Member[index]?.matricNumber ?? 'None')
                           }}
                           className="btn btn-sm text-white bg-blue-950 rounded-lg"
                         >
@@ -187,16 +141,16 @@ const TeamMembers = (props: any) => {
                       )}
                     </td>
                   ) : (
-                    ""
+                    ''
                   )}
                 </tr>
-              );
+              )
             })}
           </tbody>
         </table>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TeamMembers;
+export default TeamMembers

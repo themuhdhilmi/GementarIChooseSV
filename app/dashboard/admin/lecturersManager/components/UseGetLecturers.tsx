@@ -1,29 +1,27 @@
-"use client";
-import React, { useEffect } from "react";
-import { useGetsessions } from "@/app/utilities/storage/user/useGetSessions";
-import { useMediaQuery } from "usehooks-ts";
-import { breakpoints } from "@/app/config/breakpoints";
-import { FaEye } from "react-icons/fa";
-import Link from "next/link";
-import HereIsEmpty from "@/app/components/HereIsEmpty";
-import { useGetLecturers } from "@/app/utilities/storage/lecturer/useGetLecturers";
-import UseDeleteLecturer from "./UseDeleteLecturer";
-import { useDeleteLecturer } from "@/app/utilities/storage/lecturer/useDeleteLecturer";
+'use client'
+import React, { useEffect } from 'react'
+import { useGetsessions } from '@/app/utilities/storage/user/useGetSessions'
+import { useMediaQuery } from 'usehooks-ts'
+import { breakpoints } from '@/app/config/breakpoints'
+import { FaEye } from 'react-icons/fa'
+import Link from 'next/link'
+import HereIsEmpty from '@/app/components/HereIsEmpty'
+import { useGetLecturers } from '@/app/utilities/storage/lecturer/useGetLecturers'
+import UseDeleteLecturer from './UseDeleteLecturer'
+import { useDeleteLecturer } from '@/app/utilities/storage/lecturer/useDeleteLecturer'
 
 const UseGetLecturers = (props: any) => {
-  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`);
-  const isMobileLandscape = useMediaQuery(
-    `(max-width: ${breakpoints.mobileLandscape})`,
-  );
-  const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`);
-  const { lecturers, fetchData } = useGetLecturers();
-  const { loading: loadingDelete } = useDeleteLecturer();
-  const { sessions } = useGetsessions();
+  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
+  const isMobileLandscape = useMediaQuery(`(max-width: ${breakpoints.mobileLandscape})`)
+  const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`)
+  const { lecturers, fetchData } = useGetLecturers()
+  const { loading: loadingDelete } = useDeleteLecturer()
+  const { sessions } = useGetsessions()
 
   useEffect(() => {
-    fetchData(sessions.sessionSelected?.id);
+    fetchData(sessions.sessionSelected?.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessions, loadingDelete]);
+  }, [sessions, loadingDelete])
 
   return (
     <div>
@@ -35,10 +33,7 @@ const UseGetLecturers = (props: any) => {
               <p className="underline decoration-1">Lecturers Manager</p>
             </div>
             <div className="flex gap-2 py-1 flex-row-reverse w-1/2">
-              <button
-                onClick={props.funcOpenAddLecturer}
-                className="btn btn-sm bg-red-600 rounded-lg hover:bg-red-800 text-white"
-              >
+              <button onClick={props.funcOpenAddLecturer} className="btn btn-sm bg-red-600 rounded-lg hover:bg-red-800 text-white">
                 Add Lecturer
               </button>
             </div>
@@ -51,66 +46,49 @@ const UseGetLecturers = (props: any) => {
             <table className="table table-xs">
               <thead>
                 <tr>
-                  {isMobileLandscape ? "" : <th></th>}
-                  {isMobileLandscape ? "" : <th>Name</th>}
+                  {isMobileLandscape ? '' : <th></th>}
+                  {isMobileLandscape ? '' : <th>Name</th>}
                   <th>Matric Number</th>
-                  {isMobile ? "" : <th>Completion Status</th>}
+                  {isMobile ? '' : <th>Completion Status</th>}
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 {lecturers.lecturers?.map((item: any, index: number) => {
-                  const hasMatchingID = item.SessionYear?.some(
-                    (session: any) => {
-                      return session.id === sessions?.sessionSelected?.id;
-                    },
-                  );
+                  const hasMatchingID = item.SessionYear?.some((session: any) => {
+                    return session.id === sessions?.sessionSelected?.id
+                  })
 
                   return (
                     <tr key={index}>
-                      {isMobileLandscape ? "" : <th>{index + 1}</th>}
-                      {isMobileLandscape ? "" : <td>{item.name}</td>}
+                      {isMobileLandscape ? '' : <th>{index + 1}</th>}
+                      {isMobileLandscape ? '' : <td>{item.name}</td>}
 
                       <td>{item.User?.name}</td>
 
-                      <td>
-                        {hasMatchingID ? (
-                          <div className="badge text-white badge-neutral">
-                            SV
-                          </div>
-                        ) : (
-                          <div className="badge text-white badge-error">NO</div>
-                        )}
-                      </td>
+                      <td>{hasMatchingID ? <div className="badge text-white badge-neutral">SV</div> : <div className="badge text-white badge-error">NO</div>}</td>
 
                       <td>
                         <div className="flex flex-row-reverse w-full">
-                          <div
-                            className={`${isMobile ? "flex flex-col max-w-min gap-2" : "flex flex-row max-w-min gap-2"} `}
-                          >
-                            <Link
-                              href={`/dashboard/view/lecturer/${item?.email}`}
-                            >
+                          <div className={`${isMobile ? 'flex flex-col max-w-min gap-2' : 'flex flex-row max-w-min gap-2'} `}>
+                            <Link href={`/dashboard/view/lecturer/${item?.email}`}>
                               <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                                 <FaEye />
                               </button>
                             </Link>
-                            <UseDeleteLecturer
-                              email={item?.email}
-                              id={item?.id}
-                            />
+                            <UseDeleteLecturer email={item?.email} id={item?.id} />
                           </div>
                         </div>
                       </td>
                     </tr>
-                  );
+                  )
                 })}
               </tbody>
               <tfoot>
                 <tr>
-                  {isMobileLandscape ? "" : <th></th>}
-                  {isMobileLandscape ? "" : <th>Name</th>}
-                  {isMobile ? "" : <th>Matric Number</th>}
+                  {isMobileLandscape ? '' : <th></th>}
+                  {isMobileLandscape ? '' : <th>Name</th>}
+                  {isMobile ? '' : <th>Matric Number</th>}
                   <th>Completion Status</th>
                   <th></th>
                 </tr>
@@ -120,7 +98,7 @@ const UseGetLecturers = (props: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UseGetLecturers;
+export default UseGetLecturers

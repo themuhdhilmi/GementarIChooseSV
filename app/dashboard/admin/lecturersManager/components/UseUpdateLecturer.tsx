@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const UseUpdateLecturer = () => {
-  return <div>UseUpdateLecturer</div>;
-};
+  return <div>UseUpdateLecturer</div>
+}
 
-export default UseUpdateLecturer;
+export default UseUpdateLecturer

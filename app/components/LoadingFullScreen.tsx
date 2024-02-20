@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 const LoadingFullScreen = () => {
   return (
@@ -9,7 +9,7 @@ const LoadingFullScreen = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoadingFullScreen;
+export default LoadingFullScreen

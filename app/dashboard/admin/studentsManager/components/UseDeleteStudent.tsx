@@ -1,48 +1,38 @@
-"use client";
-import LoadingFullScreen from "@/app/components/LoadingFullScreen";
-import LoadingLeftBottom from "@/app/components/LoadingLeftBottom";
-import { useDeleteStudent } from "@/app/utilities/storage/student/useDeleteStudent";
-import { Button, Modal } from "flowbite-react";
-import { useState } from "react";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { RiDeleteBinLine } from "react-icons/ri";
+'use client'
+import LoadingFullScreen from '@/app/components/LoadingFullScreen'
+import LoadingLeftBottom from '@/app/components/LoadingLeftBottom'
+import { useDeleteStudent } from '@/app/utilities/storage/student/useDeleteStudent'
+import { Button, Modal } from 'flowbite-react'
+import { useState } from 'react'
+import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { RiDeleteBinLine } from 'react-icons/ri'
 const UseDeleteStudent = (props: any) => {
-  const [openModal, setOpenModal] = useState(false);
-  const { deleteStudent, loading } = useDeleteStudent();
+  const [openModal, setOpenModal] = useState(false)
+  const { deleteStudent, loading } = useDeleteStudent()
 
   if (loading) {
-    return <LoadingLeftBottom />;
+    return <LoadingLeftBottom />
   }
 
   const processDeleteStudent = () => {
-    deleteStudent(props.id);
+    deleteStudent(props.id)
 
-    setOpenModal(false);
-  };
+    setOpenModal(false)
+  }
   return (
     <>
-      <button
-        onClick={() => setOpenModal(true)}
-        className="btn rounded-lg bg-red-600 hover:bg-red-800 text-white btn-sm"
-      >
+      <button onClick={() => setOpenModal(true)} className="btn rounded-lg bg-red-600 hover:bg-red-800 text-white btn-sm">
         <div>
           <RiDeleteBinLine />
         </div>
       </button>
 
-      <Modal
-        show={openModal}
-        size="md"
-        onClose={() => setOpenModal(false)}
-        popup
-      >
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
           <div className="text-center">
             <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete {props.email}
-            </h3>
+            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete {props.email}</h3>
             <div className="flex justify-center gap-4">
               <Button color="failure" onClick={() => processDeleteStudent()}>
                 {"Yes, I'm sure"}
@@ -55,7 +45,7 @@ const UseDeleteStudent = (props: any) => {
         </Modal.Body>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default UseDeleteStudent;
+export default UseDeleteStudent
