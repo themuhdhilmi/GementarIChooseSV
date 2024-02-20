@@ -40,7 +40,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
     const typeParam = searchParams.get("type") as string;
 
     if (typeParam === "single") {
-      const studentRaw = await prisma.user.findFirstOrThrow({
+
+      const studentRaw : any = await prisma.user.findFirstOrThrow({
         where: {
           email: emailParam,
         },
@@ -53,11 +54,42 @@ export async function GET(request: NextRequest, response: NextResponse) {
               LecturerInformation: {
                 include: {
                   User: true,
+                  StudentInformation: true
                 },
               },
             },
           },
         },
+      });
+
+      // return NextResponse.json(
+      //   {
+      //     student: studentRaw?.studentInformation?.LecturerInformation,
+      //   },
+      //   {
+      //     status: 200
+      //   },
+      // );
+
+      //TODO CHECK IF LECTURER REQUESTED ARE FULL
+      studentRaw?.studentInformation?.LecturerInformation.forEach((supervisor: any) => {
+        // Count the number of accepted students for the current supervisor
+        const acceptedCount = supervisor.StudentInformation.filter(
+          (student: any) => student.lecturerAcceptedStudent === "ACCEPTED"
+        ).length;
+        // Count the number of requested students for the current supervisor
+        const requestCount = supervisor.StudentInformation.filter(
+          (student: any) => student.lecturerAcceptedStudent === "REQUESTED"
+        ).length;
+        // Count the number of declined students for the current supervisor
+        const declinedCount = supervisor.StudentInformation.filter(
+          (student: any) => student.lecturerAcceptedStudent === "DECLINED"
+        ).length;
+
+        // Add counts to the supervisor object
+        supervisor.acceptedStudentsCount = acceptedCount;
+        supervisor.requestedStudentsCount = requestCount;
+        supervisor.declinedStudentsCount = declinedCount;
       });
 
       if (role === "ADMIN") {
@@ -78,7 +110,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
         studentInformation: {
           ...studentRaw.studentInformation,
           matricNumber: censorName(studentRaw.studentInformation?.matricNumber),
-          Member: studentRaw.studentInformation?.Member.map((member) => ({
+          Member: studentRaw.studentInformation?.Member.map((member : any) => ({
             ...member,
             name: censorName(member.name),
             matricNumber: censorName(member.matricNumber),
