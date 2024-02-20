@@ -61,17 +61,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
       })
 
-      if (role === 'ADMIN') {
-        return NextResponse.json(
-          {
-            student: studentRaw,
-          },
-          {
-            status: 200,
-          }
-        )
-      }
-
       const censoredStudent = {
         ...studentRaw,
         name: censorName(studentRaw.name),
@@ -96,12 +85,8 @@ export async function GET(request: NextRequest, response: NextResponse) {
       /////////////////////////////////////////  FUNCTION UPDATE STUDENT DECLINED IF SV FULL /////////////////////////////////////////
       const acceptedCount = censoredStudent?.studentInformation?.LecturerInformation.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'ACCEPTED').length
 
-      const requestCount = censoredStudent?.studentInformation?.LecturerInformation.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'REQUESTED').length
-
-      const declinedCount = censoredStudent?.studentInformation?.LecturerInformation.StudentInformation.filter((student: any) => student.lecturerAcceptedStudent === 'DECLINED').length
-
       if (censoredStudent?.studentInformation?.lecturerAcceptedStudent === 'REQUESTED') {
-        if (acceptedCount >= (censoredStudent?.studentInformation?.LecturerInformation?.supervisorQuota ?? censoredStudent?.studentInformation?.SessionYear?.globalSupervisorQuota ?? 0)) {
+        if (acceptedCount >= (censoredStudent?.studentInformation?.LecturerInformation?.supervisorQuota ?? censoredStudent?.studentInformation?.SessionYear?.globalSupervisorQuota)) {
           const studentData = await prisma.studentInformation.update({
             where: {
               userId: studentRaw.id,
@@ -113,6 +98,16 @@ export async function GET(request: NextRequest, response: NextResponse) {
         }
       }
       /////////////////////////////////////////  FUNCTION UPDATE STUDENT DECLINED IF SV FULL /////////////////////////////////////////
+      if (role === 'ADMIN') {
+        return NextResponse.json(
+          {
+            student: studentRaw,
+          },
+          {
+            status: 200,
+          }
+        )
+      }
 
       return NextResponse.json(
         {

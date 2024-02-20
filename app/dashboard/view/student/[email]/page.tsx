@@ -15,14 +15,13 @@ import { useMediaQuery } from 'usehooks-ts'
 
 //TODO Add upload project poster
 //TODO Change the email placeholder
-//TODO If lecturer full and student requested, when they are viewed. remove the request and set to declined
 //TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and remove all requested students.
 
 const Page = () => {
   const params = useParams<{
     email: string
   }>()
-  const { student, fetchData, doneFetch } = useGetStudent()
+  const { student, fetchData } = useGetStudent()
   const { data: studentApplySupervisor } = useStudentApplySupervisor()
   const { data: studentAddMember } = useAddStudentMember()
   const { data: studentUpdateMember } = useUpdateStudentMember()
@@ -53,11 +52,19 @@ const Page = () => {
     router.back()
   }
 
-  return (
-    <div className={`${isDesktop ? 'px-6' : 'px-24'}`}>
-      <UseGetStudent selectViewUser={student.student} funcCloseAll={funcCloseAll} canEdit={canEdit} canEditAdmin={canEditAdmin} />
-    </div>
-  )
+  if (isDesktop) {
+    return (
+      <div className={`px-6`}>
+        <UseGetStudent selectViewUser={student.student} funcCloseAll={funcCloseAll} canEdit={canEdit} canEditAdmin={canEditAdmin} />
+      </div>
+    )
+  } else {
+    return (
+      <div className={`px-24`}>
+        <UseGetStudent selectViewUser={student.student} funcCloseAll={funcCloseAll} canEdit={canEdit} canEditAdmin={canEditAdmin} />
+      </div>
+    )
+  }
 }
 
 export default Page

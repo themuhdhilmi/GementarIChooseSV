@@ -48,9 +48,8 @@ const UseGetLecturers = (props: any) => {
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
-                  <th>Matric Number</th>
+                  <th>Email</th>
                   {isMobile ? '' : <th>Completion Status</th>}
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -62,12 +61,9 @@ const UseGetLecturers = (props: any) => {
                   return (
                     <tr key={index}>
                       {isMobileLandscape ? '' : <th>{index + 1}</th>}
-                      {isMobileLandscape ? '' : <td>{item.name}</td>}
-
                       <td>{item.User?.name}</td>
-
+                      <td>{item.User?.email}</td>
                       <td>{hasMatchingID ? <div className="badge text-white badge-neutral">SV</div> : <div className="badge text-white badge-error">NO</div>}</td>
-
                       <td>
                         <div className="flex flex-row-reverse w-full">
                           <div className={`${isMobile ? 'flex flex-col max-w-min gap-2' : 'flex flex-row max-w-min gap-2'} `}>

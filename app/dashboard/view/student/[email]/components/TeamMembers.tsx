@@ -45,7 +45,6 @@ const TeamMembers = (props: any) => {
   return (
     <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
       <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">Team Members</div>
-      {/* {props.selectViewUser?.studentInformation?.Member?.length === 0 ? ( */}
       {false ? (
         <div className="py-6">
           <HereIsEmpty />
@@ -60,16 +59,15 @@ const TeamMembers = (props: any) => {
             </tr>
           </thead>
           <tbody>
-            {/* {props.selectViewUser?.studentInformation?.Member.map( */}
             {items.map((item: any, index: number) => {
               let quota = props?.selectViewUser?.studentInformation?.memberQuota ?? props?.selectViewUser?.studentInformation?.SessionYear?.globalMemberQuota ?? 0
 
               if (index - 1 >= props.selectViewUser?.studentInformation?.Member?.length) {
-                return <></>
+                return null
               }
 
               if (index >= quota) {
-                return <></>
+                return null
               }
 
               if (editTeamMember === index) {

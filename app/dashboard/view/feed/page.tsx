@@ -7,7 +7,7 @@ const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 
   return (
-    <div className={`${isDesktop ? 'px-6' : 'px-24'}`}>
+    <div className={`${!isDesktop ? 'px-24' : 'px-6'}`}>
       <div className="stats shadow"></div>
       <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg">
         <div className="overflow-x-auto">

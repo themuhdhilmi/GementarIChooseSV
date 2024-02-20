@@ -25,7 +25,7 @@ const UseAddStudent = (props: any) => {
   const [track, setTrack] = useState('SOFTWARE')
   const postData = {
     name: name,
-    email: matricNumber + '@mail.com',
+    email: matricNumber + '@student.puo.edu.my',
     matricNumber: matricNumber,
     password: matricNumber,
     confirmPassword: matricNumber,

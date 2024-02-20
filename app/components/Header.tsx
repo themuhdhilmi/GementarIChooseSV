@@ -5,7 +5,7 @@ import { breakpoints } from '../config/breakpoints'
 import { SiHtmlacademy } from 'react-icons/si'
 import Image from 'next/image'
 import Countdown from 'react-countdown'
-import { signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { useUserInformation } from '../utilities/storage/user/useUserInformation'
 import AdminMenu from './HeaderComponents/AdminMenu'
 import Link from 'next/link'
@@ -52,7 +52,7 @@ const Header = () => {
       <ToastSuccess />
       {checkIfUserLoggedIn() ? <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
 
-      <div className={`bg-none ${isDesktop ? 'px-6' : 'px-24'}  py-2`}>
+      <div className={`bg-none ${!isDesktop ? 'px-24' : 'px-6'}  py-2`}>
         {!isDesktop ? (
           <div className="navbar rounded-lg p-0 ">
             <div className="navbar-start text-white ">

@@ -64,11 +64,11 @@ const Title = (props: any) => {
               let quota = props?.selectViewUser?.studentInformation?.titleQuota ?? props?.selectViewUser?.studentInformation?.SessionYear?.globalTitleQuota ?? 0
 
               if (index - 1 >= props.selectViewUser?.studentInformation?.ProjectTitle?.length) {
-                return <></>
+                return null
               }
 
               if (index >= quota) {
-                return <></>
+                return null
               }
 
               if (editTeamTitle === index) {

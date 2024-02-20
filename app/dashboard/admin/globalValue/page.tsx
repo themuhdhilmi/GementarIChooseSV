@@ -1,10 +1,8 @@
 'use client'
-import LoadingLeftBottom from '@/app/components/LoadingLeftBottom'
 import { breakpoints } from '@/app/config/breakpoints'
 import { useGetsessions } from '@/app/utilities/storage/user/useGetSessions'
 import React, { useEffect } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
-import GlobalValue from './components/GlobalValue'
 import SessionManager from './components/SessionManager'
 import { useSetSessions } from '@/app/utilities/storage/user/useSetSessions'
 import { usePutSessions } from '@/app/utilities/storage/user/usePutSessions'
@@ -33,7 +31,7 @@ const Page = () => {
   // }
 
   return (
-    <div className={`${isDesktop ? 'px-6' : 'px-24'}`}>
+    <div className={`${!isDesktop ? 'px-24' : 'px-6'}`}>
       <div>
         <div>
           <SessionManager sessionList={sessions.sessionsList} sessilnSelected={sessions.sessionSelected} putSessionsGlobalMemberQuota={putSessionsGlobalMemberQuota} putSessionsGLobalTitleQuota={putSessionsGLobalTitleQuota} putSessionsGlobalSupervisorQuota={putSessionsGlobalSupervisorQuota} />

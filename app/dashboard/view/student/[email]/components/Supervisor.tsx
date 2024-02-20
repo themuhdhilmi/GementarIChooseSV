@@ -57,7 +57,7 @@ const Supervisor = (props: any) => {
                       <option>Choose supervisor...</option>
                       {lecturers.session.Supervisor.map((item: any, index: number) => {
                         if (item?.acceptedStudentsCount >= (item?.supervisorQuota ?? lecturers?.session?.globalSupervisorQuota)) {
-                          return <></>
+                          return null
                         }
 
                         return (
