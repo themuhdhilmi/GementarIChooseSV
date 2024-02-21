@@ -1,5 +1,4 @@
 'use client'
-
 import { useUserInformation } from '@/app/utilities/storage/user/useUserInformation'
 import { signIn } from 'next-auth/react'
 import { useSearchParams, useRouter } from 'next/navigation'

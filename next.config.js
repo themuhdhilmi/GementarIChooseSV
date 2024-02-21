@@ -11,5 +11,5 @@ module.exports = {
   images: {
     domains: ["cdna.artstation.com", "picsum.photos"],
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  // secret: process.env.NEXTAUTH_SECRET,
 };

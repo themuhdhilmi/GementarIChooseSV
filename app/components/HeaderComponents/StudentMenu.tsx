@@ -9,7 +9,7 @@ import { FaPerson } from 'react-icons/fa6'
 import Image from 'next/image'
 import Countdown from 'react-countdown'
 import { breakpoints } from '@/app/config/breakpoints'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 
@@ -17,6 +17,9 @@ const StudentMenu = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isMobileLandscape = useMediaQuery(`(max-width: ${breakpoints.mobileLandscape})`)
   const pathname = usePathname()
+  const params = useParams<{
+    email: string
+  }>()
 
   const getFirstThreePathName = () => {
     // Split the URL path by "/"
@@ -40,7 +43,7 @@ const StudentMenu = (props: any) => {
             Feed
           </Link>
 
-          <Link href={`/dashboard/view/student/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/view/student/' ? '' : 'bg-opacity-0'} `}>
+          <Link href={`/dashboard/view/student/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${(getFirstThreePathName() + `/${decodeURIComponent(params.email)}`) === ('/dashboard/view/student'  + `/${props.email}`) ? '' : 'bg-opacity-0'} `}>
             <AiOutlineGlobal />
             Supervisor Selection
           </Link>
@@ -103,7 +106,7 @@ const StudentMenu = (props: any) => {
               Feed
             </Link>
 
-            <Link href={`/dashboard/view/student/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/view/student/' ? '' : 'bg-opacity-0'} w-full`}>
+            <Link href={`/dashboard/view/student/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${(getFirstThreePathName() + `/${props.email}`) === ('/dashboard/view/student'  + `/${props.email}`) ? '' : 'bg-opacity-0'} w-full`}>
               <AiOutlineGlobal />
               Supervisor Selection
             </Link>
