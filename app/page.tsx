@@ -10,7 +10,7 @@ import { useMediaQuery } from 'usehooks-ts'
 //TODO [Admin Dashboard]    Update Final presentation Date Counter Header.
 //TODO [Global Dashboard]   Per-session result.
 //TODO [Lecturer Dashbaord] Lecturer Profile.
-//TODO [Lecturer Directory] Lecturer List Page.
+//TODO [Lecturer Directory] Lecturer List Page. https://directory.upsi.edu.my
 //TODO [Lecturer Directory] Lecturer View Page.
 
 //TODO Populate Feed Pages
