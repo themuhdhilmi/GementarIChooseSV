@@ -3,7 +3,6 @@ import HereIsEmpty from '@/app/components/HereIsEmpty'
 import { useAddStudentTitle } from '@/app/utilities/storage/student/useAddStudentTitle'
 import React, { useEffect, useState } from 'react'
 import { useUpdateStudentTitle } from '../../../../../utilities/storage/student/useUpdateStudentTitle'
-import { FileInput } from 'flowbite-react'
 import { useUploadStudentPoster } from '@/app/utilities/storage/student/useUploadStudentPoster'
 import { toast } from 'react-toastify'
 
@@ -45,25 +44,14 @@ const Title = (props: any) => {
   }
 
   const [file, setFile] = useState<File | null>(null)
+  const [titleId, setTitleId] = useState('')
 
-  
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!file) return
 
     try {
-      // const data = new FormData()
-      // data.set('fileName', 'lol')
-      // data.set('file', file)
-
-      // const res = await fetch('https://storage.ichoosesv.gementar.com/gementar/storage/upload', {
-      //   method: 'POST',
-      //   body: data
-      // })
-      // // handle the error
-      // if (!res.ok) throw new Error(await res.text())
-
-      sendUploadStudentPoster(file);
+      sendUploadStudentPoster(file, props?.selectViewUser?.email, titleId)
     } catch (e: any) {
       // Handle errors here
       console.error(e)
@@ -88,7 +76,6 @@ const Title = (props: any) => {
             </tr>
           </thead>
           <tbody>
-            {/* {props.selectViewUser?.studentInformation?.ProjectTitle.map( */}
             {items.map((item: any, index: number) => {
               let quota = props?.selectViewUser?.studentInformation?.titleQuota ?? props?.selectViewUser?.studentInformation?.SessionYear?.globalTitleQuota ?? 0
 
@@ -105,23 +92,23 @@ const Title = (props: any) => {
                   <tr key={index}>
                     {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                     <td>
-                      {JSON.stringify(pdfPoster)}
+                      asd{props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster === null}
+                      {JSON.stringify(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster === null)}
                       {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster === null ? (
                         <input
                           value={'Waiting for poster upload..'}
-                          // onClick={}
+                          
                           onChange={(e: any) => {
                             setName('None')
                           }}
                           type="text"
                           placeholder="Type here"
                           className="input input-bordered w-full max-w-xs rounded-lg input-xs"
-                          disabled
                         />
                       ) : (
                         <input
                           value={name}
-                          // onClick={}
+                          
                           onChange={(e: any) => {
                             setName(e.target.value)
                           }}
@@ -133,12 +120,27 @@ const Title = (props: any) => {
                     </td>
                     <td>
                       <div>
-                        {/* <FileInput id="file-upload" accept="application/pdf,application/vnd.ms-excel" onChange={(event: any) => setPdfPoster({ selectedFile: event.target.files[0] })} />sendUploadStudentPoster */}
-                        {/* <input type='file' id="input" accept="application/pdf,application/vnd.ms-excel" onChange={handleFileChange} />
-                        <button onClick={handleUpload}>upload</button> */}
                         <form onSubmit={onSubmit}>
-                          <input type="file" name="file" onChange={(e : any) => setFile(e.target.files?.[0])} />
-                          <input type="submit" value="Upload" />
+
+                          <div className="join">
+                            <div>
+                              <div>
+                                <input
+                                  className="file-input file-input-ghost w-full max-w-xs rounded-l-lg"
+                                  type="file"
+                                  name="file"
+                                  required
+                                  onChange={(e: any) => {
+                                    setTitleId(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id)
+                                    setFile(e.target.files?.[0])
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <div className="indicator">
+                              <input className="btn join-item rounded-r-lg bg-blue-950 text-white" type="submit" value="Upload" />
+                            </div>
+                          </div>
                         </form>
                       </div>
                     </td>

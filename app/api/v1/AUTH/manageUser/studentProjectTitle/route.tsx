@@ -111,7 +111,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 const schemaPUT = z.object({
   emailLead: z.string().min(4),
   projectTitleId: z.string(),
-  name: z.string().min(4),
+  name: z.string().min(4).nullable(),
 })
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
@@ -123,6 +123,8 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         status: 400,
       })
     }
+
+
 
     const emailLead = await prisma.studentInformation.findFirstOrThrow({
       where: {
@@ -137,24 +139,26 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
     })
 
+    
     const projectTitle = await prisma.projectTitle.findFirstOrThrow({
       where: {
         id: body.projectTitleId,
       },
     })
 
-    const deleteProjectTitle = await prisma.projectTitle.update({
+    const updateProjectTitle = await prisma.projectTitle.update({
       where: {
         id: projectTitle.id,
       },
       data: {
-        name: body.name,
+        name: body.name ?? undefined,
+        uploadedPoster: body.projectTitleId,
       },
     })
 
     return NextResponse.json(
       {
-        deleteProjectTitle,
+        updateProjectTitle,
       },
       {
         status: 200,

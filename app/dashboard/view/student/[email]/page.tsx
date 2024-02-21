@@ -8,12 +8,13 @@ import { useStudentApplySupervisor } from '@/app/utilities/storage/student/useSt
 import { useUpdateStudent } from '@/app/utilities/storage/student/useUpdateStudent'
 import { useUpdateStudentMember } from '@/app/utilities/storage/student/useUpdateStudentMember'
 import { useUpdateStudentTitle } from '@/app/utilities/storage/student/useUpdateStudentTitle'
+import { useUploadStudentPoster } from '@/app/utilities/storage/student/useUploadStudentPoster'
 import { useUserInformation } from '@/app/utilities/storage/user/useUserInformation'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
-//TODO Add upload project poster (1/2)
+//TODO Add upload project, fix bug where there's no title so it cant detect anything.
 //TODO Change the email placeholder
 //TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and remove all requested students.
 
@@ -28,6 +29,7 @@ const Page = () => {
   const { data: studentUpdate } = useUpdateStudent()
   const { data: studentAddTitle } = useAddStudentTitle()
   const { data: studentUpdateTitle } = useUpdateStudentTitle()
+  const { data: studentUploadPoster } = useUploadStudentPoster()
   const { role, email } = useUserInformation()
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const [canEdit, setCanEdit] = useState(false)
@@ -46,7 +48,7 @@ const Page = () => {
 
     fetchData(params.email)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [studentApplySupervisor, studentAddMember, studentUpdateMember, studentUpdate, studentAddTitle, studentUpdateTitle, role])
+  }, [studentApplySupervisor, studentAddMember, studentUpdateMember, studentUpdate, studentAddTitle, studentUpdateTitle, studentUploadPoster, role])
 
   const funcCloseAll = () => {
     router.back()

@@ -19,6 +19,7 @@ import { useUpdateStudentMember } from '../utilities/storage/student/useUpdateSt
 import { useUpdateStudent } from '../utilities/storage/student/useUpdateStudent'
 import { useAddStudentTitle } from '../utilities/storage/student/useAddStudentTitle'
 import { useUpdateStudentTitle } from '../utilities/storage/student/useUpdateStudentTitle'
+import { useUploadStudentPoster } from '../utilities/storage/student/useUploadStudentPoster'
 
 const LoadingLeftBottom = () => {
   const { loading: loading1 } = useGetsessions()
@@ -48,8 +49,9 @@ const LoadingLeftBottom = () => {
   const { loading: loading25 } = useUpdateStudent()
   const { loading: loading26 } = useAddStudentTitle()
   const { loading: loading27 } = useUpdateStudentTitle()
+  const { loading: loading28 } = useUploadStudentPoster()
 
-  if (loading1 || loading2 || loading3 || loading4 || loading5 || loading6 || loading7 || loading8 || loading9 || loading10 || loading11 || loading12 || loading13 || loading14 || loading15 || loading16 || loading17 || loading18 || loading19 || loading20 || loading21 || loading22 || loading23 || loading24 || loading25 || loading26 || loading27) {
+  if (loading1 || loading2 || loading3 || loading4 || loading5 || loading6 || loading7 || loading8 || loading9 || loading10 || loading11 || loading12 || loading13 || loading14 || loading15 || loading16 || loading17 || loading18 || loading19 || loading20 || loading21 || loading22 || loading23 || loading24 || loading25 || loading26 || loading27 || loading28) {
     return (
       <>
         <div

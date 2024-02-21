@@ -2,15 +2,15 @@ import { toast } from 'react-toastify'
 import { create } from 'zustand'
 
 type StudentStore = {
-  students: any
+  data: any
   loading: boolean
-  sendData: (file: any) => Promise<void>
+  sendData: (file: any, emailLead :string, projectTitleId : string) => Promise<void>
 }
 
 export const useUploadStudentPoster = create<StudentStore>((set) => ({
-  students: {},
+  data: {},
   loading: false,
-  sendData: async (file) => {
+  sendData: async (file,emailLead,projectTitleId) => {
     try {
       set({
         loading: true,
@@ -26,20 +26,64 @@ export const useUploadStudentPoster = create<StudentStore>((set) => ({
       })
 
       if (response.ok) {
-        toast.success('Sucessfully upload poster', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
+        // toast.success('Sucessfully upload poster', {
+        //   position: 'top-right',
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'light',
+        // })
+
+        const postData = {
+          emailLead: emailLead,
+          projectTitleId:projectTitleId,
+          name: null,
+        }
+
+        const response2 = await fetch('/api/v1/AUTH/manageUser/studentProjectTitle', {
+          method: 'PUT',
+          body: JSON.stringify(postData),
         })
 
-        set((state) => ({
-          loading: false,
-        }))
+        if(response2.ok)
+        {
+          toast.success('Sucessfully upload poster', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          })
+
+          set((state) => ({
+            loading: false,
+            data: response.body
+          }))
+        }else
+        {
+          toast.error('Failed upload poster', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+          })
+          set((state) => ({
+            loading: false,
+            data: response.body
+          }))
+        }
+
+
       } else {
         toast.error('Failed upload poster', {
           position: 'top-right',
