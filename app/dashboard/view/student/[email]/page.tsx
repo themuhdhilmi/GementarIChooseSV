@@ -13,7 +13,7 @@ import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
-//TODO Add upload project poster
+//TODO Add upload project poster (1/2)
 //TODO Change the email placeholder
 //TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and remove all requested students.
 

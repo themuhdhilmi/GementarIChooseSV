@@ -4,15 +4,18 @@ import { useAddStudentTitle } from '@/app/utilities/storage/student/useAddStuden
 import React, { useEffect, useState } from 'react'
 import { useUpdateStudentTitle } from '../../../../../utilities/storage/student/useUpdateStudentTitle'
 import { FileInput } from 'flowbite-react'
+import { useUploadStudentPoster } from '@/app/utilities/storage/student/useUploadStudentPoster'
+import { toast } from 'react-toastify'
 
 const Title = (props: any) => {
   const [editTeamTitle, setEditTeamTitle] = useState(99)
-
+  const [pdfPoster, setPdfPoster] = useState({})
   const [emailLead, setEmailLead] = useState('')
   const [name, setName] = useState('')
   const [matricTitleId, setMatricTitleId] = useState('')
   const { sendData: sendAddStudentTitle } = useAddStudentTitle()
   const { sendData: sendUpdateStudentTitle } = useUpdateStudentTitle()
+  const { sendData: sendUploadStudentPoster } = useUploadStudentPoster()
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10']
 
   useEffect(() => {
@@ -38,6 +41,32 @@ const Title = (props: any) => {
       }
 
       sendUpdateStudentTitle(postData)
+    }
+  }
+
+  const [file, setFile] = useState<File | null>(null)
+
+  
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!file) return
+
+    try {
+      // const data = new FormData()
+      // data.set('fileName', 'lol')
+      // data.set('file', file)
+
+      // const res = await fetch('https://storage.ichoosesv.gementar.com/gementar/storage/upload', {
+      //   method: 'POST',
+      //   body: data
+      // })
+      // // handle the error
+      // if (!res.ok) throw new Error(await res.text())
+
+      sendUploadStudentPoster(file);
+    } catch (e: any) {
+      // Handle errors here
+      console.error(e)
     }
   }
 
@@ -76,20 +105,41 @@ const Title = (props: any) => {
                   <tr key={index}>
                     {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                     <td>
-                      <input
-                        value={name}
-                        // onClick={}
-                        onChange={(e: any) => {
-                          setName(e.target.value)
-                        }}
-                        type="text"
-                        placeholder="Type here"
-                        className="input input-bordered w-full max-w-xs rounded-lg input-xs"
-                      />
+                      {JSON.stringify(pdfPoster)}
+                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster === null ? (
+                        <input
+                          value={'Waiting for poster upload..'}
+                          // onClick={}
+                          onChange={(e: any) => {
+                            setName('None')
+                          }}
+                          type="text"
+                          placeholder="Type here"
+                          className="input input-bordered w-full max-w-xs rounded-lg input-xs"
+                          disabled
+                        />
+                      ) : (
+                        <input
+                          value={name}
+                          // onClick={}
+                          onChange={(e: any) => {
+                            setName(e.target.value)
+                          }}
+                          type="text"
+                          placeholder="Type here"
+                          className="input input-bordered w-full max-w-xs rounded-lg input-xs"
+                        />
+                      )}
                     </td>
                     <td>
                       <div>
-                        <FileInput id="file-upload" />
+                        {/* <FileInput id="file-upload" accept="application/pdf,application/vnd.ms-excel" onChange={(event: any) => setPdfPoster({ selectedFile: event.target.files[0] })} />sendUploadStudentPoster */}
+                        {/* <input type='file' id="input" accept="application/pdf,application/vnd.ms-excel" onChange={handleFileChange} />
+                        <button onClick={handleUpload}>upload</button> */}
+                        <form onSubmit={onSubmit}>
+                          <input type="file" name="file" onChange={(e : any) => setFile(e.target.files?.[0])} />
+                          <input type="submit" value="Upload" />
+                        </form>
                       </div>
                     </td>
                     <td className="flex flex-row-reverse">
