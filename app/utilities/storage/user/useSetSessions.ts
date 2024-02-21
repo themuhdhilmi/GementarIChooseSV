@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
 type SessionStore = {
-  sessions: any
+  data: any
   loading: boolean
   setSessions: (sessionId: string) => Promise<void>
 }
 
 export const useSetSessions = create<SessionStore>((set) => ({
-  sessions: {},
+  data: {},
   loading: false,
   setSessions: async (sessionId: string) => {
     try {
@@ -27,11 +27,17 @@ export const useSetSessions = create<SessionStore>((set) => ({
 
       const data = await response.json()
 
+      if (response.ok) {
+        set((state) => ({
+          loading: false,
+          data: data,
+        }))
+      } else {
+        set((state) => ({
+          loading: false,
+        }))
+      }
       // Update the state based on the fetched data
-      set((state) => ({
-        loading: false,
-        sessions: data,
-      }))
     } catch (error) {
       console.error('Error fetching data:', error)
       set({

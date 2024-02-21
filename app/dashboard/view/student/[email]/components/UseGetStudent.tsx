@@ -60,12 +60,13 @@ const UseGetStudent = (props: any) => {
               isTitleCompleted={studentProgress.isTitleCompleted}
               isSupervisorAccepted={studentProgress.supervisorStatus === 'ACCEPTED'}
               isSupervisorDeclined={studentProgress.supervisorStatus === 'DECLINED'}
+              isSupervisorRequested={studentProgress.supervisorStatus === 'REQUESTED'}
               selectViewUser={props.selectViewUser}
               isDesktop={isDesktop}
               canEdit={props.canEdit}
             />
             <div className={`${!isDesktop ? 'w-3/4 ' : 'w-full '}  px-4 `}>
-              <ul className="steps w-full">
+              {/* <ul className="steps w-full">
                 {studentProgress.isMemberCompleted ? (
                   <li data-content="✓" className="step step-neutral">
                     Team Member
@@ -115,7 +116,7 @@ const UseGetStudent = (props: any) => {
                     Accepted
                   </li>
                 )}
-              </ul>
+              </ul> */}
 
               {editQuota ? <EditQuota selectViewUser={props.selectViewUser} isDesktop={isDesktop} canEdit={props.canEdit} /> : ''}
 

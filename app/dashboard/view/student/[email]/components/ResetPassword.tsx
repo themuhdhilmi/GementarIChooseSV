@@ -33,7 +33,7 @@ const ResetPassword = (props: any) => {
                 setPassword(e.target.value)
               }}
               type="text"
-              placeholder="Type here"
+              placeholder="password"
               className="input input-bordered  w-full rounded-l-lg"
             />
           </div>

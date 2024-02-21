@@ -16,7 +16,7 @@ const UseGetLecturers = (props: any) => {
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`)
   const { lecturers, fetchData } = useGetLecturers()
   const { loading: loadingDelete } = useDeleteLecturer()
-  const { sessions } = useGetsessions()
+  const { data : sessions } = useGetsessions()
 
   useEffect(() => {
     fetchData(sessions.sessionSelected?.id)

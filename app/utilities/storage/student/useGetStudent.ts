@@ -1,31 +1,16 @@
 import { create } from 'zustand'
 
 type Studenttore = {
-  student: any
+  data: any
   loading: boolean
   doneFetch: boolean
-  add: () => void
-  remove: () => void
-  removeAll: () => void
   fetchData: (email: string) => Promise<void>
 }
 
 export const useGetStudent = create<Studenttore>((set) => ({
-  student: {},
+  data: {},
   loading: false,
   doneFetch: true,
-  add: () =>
-    set((state) => ({
-      student: state.student + 1,
-    })),
-  remove: () =>
-    set((state) => ({
-      student: state.student - 1,
-    })),
-  removeAll: () =>
-    set({
-      student: 0,
-    }),
   fetchData: async (email: string) => {
     try {
       set({
@@ -40,7 +25,7 @@ export const useGetStudent = create<Studenttore>((set) => ({
 
       // Update the state based on the fetched data
       set((state) => ({
-        student: data, // Adjust this based on your API response structure
+        data: data, // Adjust this based on your API response structure
         loading: false,
         doneFetch: true,
       }))

@@ -8,18 +8,20 @@ import { FaEye } from 'react-icons/fa'
 import UseDeleteStudent from './UseDeleteStudent'
 import Link from 'next/link'
 import HereIsEmpty from '@/app/components/HereIsEmpty'
+import { useDeleteStudent } from '@/app/utilities/storage/student/useDeleteStudent'
 
 const UseGetStudents = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isMobileLandscape = useMediaQuery(`(max-width: ${breakpoints.mobileLandscape})`)
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`)
-  const { students, fetchData } = useGetStudents()
-  const { sessions } = useGetsessions()
+  const { data: students, fetchData } = useGetStudents()
+  const { data: sessions } = useGetsessions()
+  const { loading: loadingUseDeleteStudent } = useDeleteStudent()
 
   useEffect(() => {
     fetchData(sessions.sessionSelected?.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessions])
+  }, [sessions, loadingUseDeleteStudent])
 
   return (
     <div>
@@ -36,7 +38,7 @@ const UseGetStudents = (props: any) => {
               </button>
             </div>
           </div>
-          {students.students?.length === 0 ? (
+          {students?.students?.length === 0 ? (
             <div className="py-6">
               <HereIsEmpty />
             </div>
@@ -52,7 +54,7 @@ const UseGetStudents = (props: any) => {
                 </tr>
               </thead>
               <tbody>
-                {students.students?.map((item: any, index: number) => {
+                {students?.students?.map((item: any, index: number) => {
                   const studentProgress = {
                     memberQuota: item?.studentInformation?.memberQuota ?? item?.studentInformation?.SessionYear?.globalMemberQuota ?? 0,
                     titleQuota: item?.studentInformation?.titleQuota ?? item?.studentInformation?.SessionYear?.globalTitleQuota ?? 0,
@@ -73,15 +75,17 @@ const UseGetStudents = (props: any) => {
                       ) : (
                         <td>
                           {studentProgress.supervisorStatus === 'DECLINED' ? (
-                            <p className="badge bg-red-600 text-white">1/3</p>
+                            <p className="badge bg-yellow-500 text-white">3/4</p>
                           ) : studentProgress.supervisorStatus === 'ACCEPTED' ? (
-                            <p className="badge bg-green-600 text-white">3/3 ✓</p>
+                            <p className="badge bg-green-600 text-white">4/4 ✓</p>
+                          ) : studentProgress.supervisorStatus === 'REQUESTED' ? (
+                            <p className="badge bg-yellow-500 text-white">3/4</p>
                           ) : studentProgress.isTitleCompleted ? (
-                            <p className="badge bg-red-600 text-white">2/3</p>
+                            <p className="badge bg-red-600 text-white">2/4</p>
                           ) : studentProgress.isMemberCompleted ? (
-                            <p className="badge bg-red-600 text-white">1/3</p>
+                            <p className="badge bg-red-600 text-white">1/4</p>
                           ) : (
-                            <p className="badge bg-red-600 text-white">0/3</p>
+                            <p className="badge bg-red-600 text-white">0/4</p>
                           )}
                         </td>
                       )}
