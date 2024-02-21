@@ -3,6 +3,28 @@ import { breakpoints } from '@/app/config/breakpoints'
 import React from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
+//// Database Design
+//// [API] Login API
+//// [API] RESTFULL  GET|PUT|POST Lecturer
+//// [API] RESTFULL  GET|PUT|POST Student
+//// [API] RESTFULL  GET|PUT|POST StudentMember
+//// [API] RESTFULL  GET|PUT|POST StudentProjectTitle
+//// [API] RESTFULL  GET          admin
+//// [API] RESTFULL  GET|POST     sessions
+//// [API] RESTFULL  GET          Lecturer
+//// [API] EXPRESSJS GET|POST     poster
+//// [MAIN TEMPLATE] Login
+//// [MAIN TEMPLATE] Student View Data
+//// [MAIN TEMPLATE] Student View Edit Password | Setting SV
+//// [MAIN TEMPLATE] Student View Individual Quota Member and Title
+//// [MAIN TEMPLATE] Login   Supervisor Selection
+//// [MAIN TEMPLATE] Mobile  Adjustment
+//// [MAIN TEMPLATE] Admin   Add/Remove Student
+//// [MAIN TEMPLATE] Admin   Add/Remove Lecturer
+//// [MAIN TEMPLATE] Admin   Manage Global Session
+//// [MAIN TEMPLATE] Permission view pages
+//// [MAIN TEMPLATE] Mobile  Adjustment
+
 //TODO [Global Dashboard]   Implement profile setting (Implement change password).
 //TODO [Lecturer Dashbaord] Implement Lecturer Manage Supervisee.
 //TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and decline all requested students.
