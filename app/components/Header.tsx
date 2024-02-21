@@ -14,10 +14,11 @@ import GuestMenu from './HeaderComponents/GuestMenu'
 import { useGetsessions } from '../utilities/storage/user/useGetSessions'
 import LoadingLeftBottom from './LoadingLeftBottom'
 import ToastSuccess from './ToastSuccess'
+import StudentMenu from './HeaderComponents/StudentMenu'
 const Header = () => {
   const session = useSession()
   const { data : sessions, fetchData: fetchSession } = useGetsessions()
-  const { fetchData, name, role } = useUserInformation()
+  const { fetchData, name, role, email } = useUserInformation()
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
 
@@ -113,6 +114,7 @@ const Header = () => {
           </div>
         )}
         {role === 'ADMIN' ? <AdminMenu renderer={renderer} name={name} /> : ''}
+        {role === 'STUDENT' ? <StudentMenu renderer={renderer} name={name} email={email} /> : ''}
         {role === 'GUEST' ? <GuestMenu renderer={renderer} /> : ''}
       </div>
     </div>
