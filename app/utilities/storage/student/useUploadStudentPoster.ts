@@ -35,15 +35,13 @@ export const useUploadStudentPoster = create<StudentStore>((set) => ({
         const titleId = data.newProjectTitle.id
 
         if (responseTitle.ok) {
-          const postData = {
-            emailLead: emailLead,
-            projectTitleId: titleId,
-            name: null,
-          }
+          const data = new FormData()
+          data.set('fileName', titleId)
+          data.set('file', file)
 
-          const responseTitle2 = await fetch('/api/v1/AUTH/manageUser/studentProjectTitle', {
-            method: 'PUT',
-            body: JSON.stringify(postData),
+          const responseTitle2 = await fetch('https://storage.ichoosesv.gementar.com/gementar/storage/upload', {
+            method: 'POST',
+            body: data,
           })
 
           if (responseTitle2.ok) {
@@ -95,7 +93,7 @@ export const useUploadStudentPoster = create<StudentStore>((set) => ({
         }
       } else {
         const data = new FormData()
-        data.set('fileName', 'lol2')
+        data.set('fileName', projectTitleId)
         data.set('file', file)
 
         const response = await fetch('https://storage.ichoosesv.gementar.com/gementar/storage/upload', {

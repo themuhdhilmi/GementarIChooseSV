@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useUpdateStudentTitle } from '../../../../../utilities/storage/student/useUpdateStudentTitle'
 import { useUploadStudentPoster } from '@/app/utilities/storage/student/useUploadStudentPoster'
 import { toast } from 'react-toastify'
+import Link from 'next/link'
 
 const Title = (props: any) => {
   const [editTeamTitle, setEditTeamTitle] = useState(99)
@@ -92,30 +93,33 @@ const Title = (props: any) => {
                   <tr key={index}>
                     {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                     <td>
-                      {props.selectViewUser?.studentInformation?.ProjectTitle[index] ?? (
+                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name === 'None' ? (
+                        <input
+                          value={name}
+                          onChange={(e: any) => {
+                            setName(e.target.value)
+                          }}
+                          type="text"
+                          placeholder="Name"
+                          className="input input-bordered w-full max-w-xs rounded-lg input-xs"
+                        />
+                      ) : (
+                        ''
+                      )}
+
+                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name !== 'None' ? (
                         <input
                           value={'Waiting for poster upload..'}
                           onChange={(e: any) => {
                             setName('None')
                           }}
                           type="text"
-                          placeholder="Type here"
+                          placeholder="Name"
                           className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                           disabled
                         />
-                      )}
-                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster ? (
-                        <input
-                        value={name}
-                        onChange={(e: any) => {
-                          setName(e.target.value)
-                        }}
-                        type="text"
-                        placeholder="Type here"
-                        className="input input-bordered w-full max-w-xs rounded-lg input-xs"
-                      />
                       ) : (
-                        <></>
+                        ''
                       )}
                     </td>
                     <td>
@@ -166,9 +170,11 @@ const Title = (props: any) => {
                 <tr key={index}>
                   {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                   <td>{props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name ?? 'None'}</td>
-                  <td> {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster ?? 'None'}</td>
+                  <td className=" "><div className='flex flex-row-reverse'>{props.selectViewUser?.studentInformation?.ProjectTitle[index] == null ? 'None' : <Link className='btn btn-sm text-white bg-blue-950 rounded-lg' href={'https://storage.ichoosesv.gementar.com/gementar/storage/file/' + props.selectViewUser.studentInformation.ProjectTitle[index].id + '.pdf'}>Download Poster</Link>}</div></td>
+
                   {props.canEdit && props.isMemberCompleted ? (
-                    <td className="flex flex-row-reverse">
+                    <td className="w-6">
+                      <div>
                       {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'ACCEPTED' ? (
                         ''
                       ) : (
@@ -183,6 +189,8 @@ const Title = (props: any) => {
                           Edit
                         </button>
                       )}
+                      </div>
+
                     </td>
                   ) : (
                     ''

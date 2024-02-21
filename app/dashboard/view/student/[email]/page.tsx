@@ -14,9 +14,8 @@ import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
-//TODO Add upload project, fix bug where there's no title so it cant detect anything.
 //TODO Change the email placeholder
-//TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and remove all requested students.
+//TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and decline all requested students.
 
 const Page = () => {
   const params = useParams<{

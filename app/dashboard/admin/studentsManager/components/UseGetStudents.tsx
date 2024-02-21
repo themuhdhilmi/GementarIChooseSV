@@ -14,14 +14,14 @@ const UseGetStudents = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isMobileLandscape = useMediaQuery(`(max-width: ${breakpoints.mobileLandscape})`)
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`)
-  const { data : students, fetchData } = useGetStudents()
-  const { data : sessions } = useGetsessions()
-  const { loading: loadingUseDeleteStudent } = useDeleteStudent();
+  const { data: students, fetchData } = useGetStudents()
+  const { data: sessions } = useGetsessions()
+  const { loading: loadingUseDeleteStudent } = useDeleteStudent()
 
   useEffect(() => {
     fetchData(sessions.sessionSelected?.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessions,loadingUseDeleteStudent])
+  }, [sessions, loadingUseDeleteStudent])
 
   return (
     <div>
@@ -75,15 +75,17 @@ const UseGetStudents = (props: any) => {
                       ) : (
                         <td>
                           {studentProgress.supervisorStatus === 'DECLINED' ? (
-                            <p className="badge bg-red-600 text-white">1/3</p>
+                            <p className="badge bg-yellow-500 text-white">3/4</p>
                           ) : studentProgress.supervisorStatus === 'ACCEPTED' ? (
-                            <p className="badge bg-green-600 text-white">3/3 ✓</p>
+                            <p className="badge bg-green-600 text-white">4/4 ✓</p>
+                          ) : studentProgress.supervisorStatus === 'REQUESTED' ? (
+                            <p className="badge bg-yellow-500 text-white">3/4</p>
                           ) : studentProgress.isTitleCompleted ? (
-                            <p className="badge bg-red-600 text-white">2/3</p>
+                            <p className="badge bg-red-600 text-white">2/4</p>
                           ) : studentProgress.isMemberCompleted ? (
-                            <p className="badge bg-red-600 text-white">1/3</p>
+                            <p className="badge bg-red-600 text-white">1/4</p>
                           ) : (
-                            <p className="badge bg-red-600 text-white">0/3</p>
+                            <p className="badge bg-red-600 text-white">0/4</p>
                           )}
                         </td>
                       )}

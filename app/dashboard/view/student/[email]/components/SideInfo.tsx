@@ -24,16 +24,19 @@ const SideInfo = (props: any) => {
       <div className="font-extrabold text-red-600 my-2  py-2 text-center rounded-lg shadow-2xl">{props.selectViewUser?.studentInformation?.Track}</div>
       <div className="text-center mt-6 font-extrabold">
         <p>STATUS</p>
+
         {props.isSupervisorDeclined ? (
-          <p className="badge bg-red-600 text-white">1/3</p>
+          <p className="badge bg-yellow-500 text-white">3/4</p>
         ) : props.isSupervisorAccepted ? (
-          <p className="badge bg-green-600 text-white">3/3 ✓</p>
+          <p className="badge bg-green-600 text-white">4/4 ✓</p>
+        ) : props.isSupervisorRequested ? (
+          <p className="badge bg-yellow-500 text-white">3/4</p>
         ) : props.isTitleCompleted ? (
-          <p className="badge bg-red-600 text-white">2/3</p>
+          <p className="badge bg-red-600 text-white">2/4</p>
         ) : props.isMemberCompleted ? (
-          <p className="badge bg-red-600 text-white">1/3</p>
+          <p className="badge bg-red-600 text-white">1/4</p>
         ) : (
-          <p className="badge bg-red-600 text-white">0/3</p>
+          <p className="badge bg-red-600 text-white">0/4</p>
         )}
       </div>
 

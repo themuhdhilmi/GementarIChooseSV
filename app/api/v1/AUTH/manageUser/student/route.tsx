@@ -15,7 +15,6 @@ function censorName(name: any) {
 export async function GET(request: NextRequest, response: NextResponse) {
   let role = ''
 
-  try {
     const token = await getToken({
       req: request,
     })
@@ -29,7 +28,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
     if (user) {
       role = user.role
     }
-  } catch (err) {}
 
   try {
     const { searchParams } = new URL(request.url)
@@ -108,6 +106,22 @@ export async function GET(request: NextRequest, response: NextResponse) {
             status: 200,
           }
         )
+      }
+
+      if (role === 'STUDENT') {
+
+        if(studentRaw.id === user?.id)
+        {
+          return NextResponse.json(
+            {
+              student: studentRaw,
+            },
+            {
+              status: 200,
+            }
+          )
+        }
+
       }
 
       return NextResponse.json(

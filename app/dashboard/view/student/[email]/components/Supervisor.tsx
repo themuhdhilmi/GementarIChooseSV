@@ -25,7 +25,7 @@ const Supervisor = (props: any) => {
     <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
       <div className="badge font-bold w-full rounded-t-lg bg-blue-950 text-white">Supervisor</div>
       <div className="flex flex-col border mx-10 my-4 py-5 rounded-lg text-center">
-        <div>Your Selected Lecturer</div>
+        <div>Selected Lecturer</div>
         {/* {JSON.stringify(lecturers?.session?.Supervisor)} */}
         <div>{props?.selectViewUser?.studentInformation?.LecturerInformation?.User?.name}</div>
         <div>
