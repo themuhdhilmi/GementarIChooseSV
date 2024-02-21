@@ -3,6 +3,7 @@ import { breakpoints } from '@/app/config/breakpoints'
 import React from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
+
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 

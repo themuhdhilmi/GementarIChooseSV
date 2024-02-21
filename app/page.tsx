@@ -3,6 +3,19 @@ import { breakpoints } from '@/app/config/breakpoints'
 import React from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
+//TODO [Global Dashboard]   Implement profile setting (Implement change password).
+//TODO [Lecturer Dashbaord] Implement Lecturer Manage Supervisee.
+//TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and decline all requested students.
+//TODO [Admin Dashboard]    Add Final Presentation Date.
+//TODO [Admin Dashboard]    Update Final presentation Date Counter Header.
+//TODO [Global Dashboard]   Per-session result.
+//TODO [Lecturer Dashbaord] Lecturer Profile.
+//TODO [Lecturer Directory] Lecturer List Page.
+//TODO [Lecturer Directory] Lecturer View Page.
+
+//TODO Populate Feed Pages
+
+
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 

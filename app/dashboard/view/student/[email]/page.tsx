@@ -14,9 +14,6 @@ import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
-//TODO Change the email placeholder
-//TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and decline all requested students.
-
 const Page = () => {
   const params = useParams<{
     email: string
