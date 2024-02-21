@@ -41,7 +41,7 @@ const Page = () => {
       setCanEdit(true)
       setCanEditAdmin(true)
     } else if (role === 'STUDENT') {
-      if (params.email === email) {
+      if (decodeURIComponent(params.email) === email) {
         setCanEdit(true)
       }
     }
