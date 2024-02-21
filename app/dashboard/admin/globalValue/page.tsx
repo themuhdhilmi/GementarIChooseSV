@@ -12,9 +12,9 @@ import { usePutSessions } from '@/app/utilities/storage/user/usePutSessions'
 
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
-  const { loading, fetchData, sessions } = useGetsessions()
-  const { sessions: setSessionsData, loading: setLoading } = useSetSessions()
-  const { sessions: putSessionsData, putSessionsGlobalMemberQuota, putSessionsGLobalTitleQuota, putSessionsGlobalSupervisorQuota, loading: putLoading } = usePutSessions()
+  const { loading, fetchData, data : sessions } = useGetsessions()
+  const { data: setSessionsData, loading: setLoading } = useSetSessions()
+  const { data : putSessionsData, putSessionsGlobalMemberQuota, putSessionsGLobalTitleQuota, putSessionsGlobalSupervisorQuota, loading: putLoading } = usePutSessions()
 
   useEffect(() => {
     fetchData()

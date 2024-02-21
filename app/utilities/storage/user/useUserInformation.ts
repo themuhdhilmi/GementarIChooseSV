@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 
 type UseStore = {
+  data: any
   isLoggedIn: boolean
   name: string
   email: string
@@ -11,6 +12,7 @@ type UseStore = {
 }
 
 export const useUserInformation = create<UseStore>((set) => ({
+  data: {},
   isLoggedIn: false,
   name: 'Guest',
   email: '',
@@ -29,6 +31,7 @@ export const useUserInformation = create<UseStore>((set) => ({
       // Update the state based on the fetched data
       if (response.ok) {
         set((state) => ({
+          data: data,
           name: data.user.name,
           email: data.user.email,
           role: data.user.role,

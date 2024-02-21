@@ -16,8 +16,8 @@ import LoadingLeftBottom from './LoadingLeftBottom'
 import ToastSuccess from './ToastSuccess'
 const Header = () => {
   const session = useSession()
-  const { sessions, fetchData: fetchSession } = useGetsessions()
-  const { fetchData, name, email, role } = useUserInformation()
+  const { data : sessions, fetchData: fetchSession } = useGetsessions()
+  const { fetchData, name, role } = useUserInformation()
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
 

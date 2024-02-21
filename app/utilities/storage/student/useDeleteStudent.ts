@@ -2,36 +2,20 @@ import { toast } from 'react-toastify'
 import { create } from 'zustand'
 
 type StudentStore = {
-  students: any
+  data: any
   loading: boolean
-  add: () => void
-  remove: () => void
-  removeAll: () => void
   deleteStudent: (id: string) => Promise<void>
 }
 
 export const useDeleteStudent = create<StudentStore>((set) => ({
-  students: {},
+  data: {},
   loading: false,
-  add: () =>
-    set((state) => ({
-      students: state.students + 1,
-    })),
-  remove: () =>
-    set((state) => ({
-      students: state.students - 1,
-    })),
-  removeAll: () =>
-    set({
-      students: 0,
-    }),
   deleteStudent: async (studentId) => {
     try {
       set({
         loading: true,
       })
 
-      // Make your DELETE API call here with JSON payload
       const response = await fetch('/api/v1/AUTH/manageUser/student', {
         method: 'DELETE',
         headers: {

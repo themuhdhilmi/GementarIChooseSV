@@ -17,7 +17,7 @@ const UseAddStudent = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isMobileLandscape = useMediaQuery(`(max-width: ${breakpoints.mobileLandscape})`)
   const { sendData, success, data, loading: loadingAddStudent } = useAddStudent()
-  const { sessions, loading } = useGetsessions()
+  const { data : sessions, loading } = useGetsessions()
   const { fetchData } = useGetStudents()
   const [name, setName] = useState('')
   const [matricNumber, setMatricNumber] = useState('')

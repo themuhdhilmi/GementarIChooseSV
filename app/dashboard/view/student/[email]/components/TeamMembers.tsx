@@ -82,7 +82,7 @@ const TeamMembers = (props: any) => {
                           setName(e.target.value)
                         }}
                         type="text"
-                        placeholder="Type here"
+                        placeholder="Hilmi Azmi"
                         className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                       />
                     </td>
@@ -94,7 +94,7 @@ const TeamMembers = (props: any) => {
                           setMatricNumber(e.target.value)
                         }}
                         type="text"
-                        placeholder="Type here"
+                        placeholder="01DDT20F1122"
                         className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                       />
                     </td>

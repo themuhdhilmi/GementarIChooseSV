@@ -15,7 +15,6 @@ function censorName(name: any) {
 export async function GET(request: NextRequest, response: NextResponse) {
   let role = ''
 
-  try {
     const token = await getToken({
       req: request,
     })
@@ -29,7 +28,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
     if (user) {
       role = user.role
     }
-  } catch (err) {}
 
   try {
     const { searchParams } = new URL(request.url)
@@ -38,8 +36,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
     const sessionParam = searchParams.get('session') as string
     const emailParam = searchParams.get('email') as string
     const typeParam = searchParams.get('type') as string
-
-
 
     if (typeParam === 'single') {
       const studentRaw: any = await prisma.user.findFirstOrThrow({
@@ -84,8 +80,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
         },
       }
 
-      
-
       /////////////////////////////////////////  FUNCTION UPDATE STUDENT DECLINED IF SV FULL /////////////////////////////////////////
       const acceptedCount = censoredStudent?.studentInformation?.LecturerInformation?.StudentInformation?.filter((student: any) => student.lecturerAcceptedStudent === 'ACCEPTED').length
 
@@ -112,6 +106,22 @@ export async function GET(request: NextRequest, response: NextResponse) {
             status: 200,
           }
         )
+      }
+
+      if (role === 'STUDENT') {
+
+        if(studentRaw.id === user?.id)
+        {
+          return NextResponse.json(
+            {
+              student: studentRaw,
+            },
+            {
+              status: 200,
+            }
+          )
+        }
+
       }
 
       return NextResponse.json(
