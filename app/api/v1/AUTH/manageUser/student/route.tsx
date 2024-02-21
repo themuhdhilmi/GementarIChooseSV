@@ -39,8 +39,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
     const emailParam = searchParams.get('email') as string
     const typeParam = searchParams.get('type') as string
 
-
-
     if (typeParam === 'single') {
       const studentRaw: any = await prisma.user.findFirstOrThrow({
         where: {
@@ -83,8 +81,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
           },
         },
       }
-
-      
 
       /////////////////////////////////////////  FUNCTION UPDATE STUDENT DECLINED IF SV FULL /////////////////////////////////////////
       const acceptedCount = censoredStudent?.studentInformation?.LecturerInformation?.StudentInformation?.filter((student: any) => student.lecturerAcceptedStudent === 'ACCEPTED').length

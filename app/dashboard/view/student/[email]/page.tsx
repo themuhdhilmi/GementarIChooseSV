@@ -22,7 +22,7 @@ const Page = () => {
   const params = useParams<{
     email: string
   }>()
-  const { student, fetchData } = useGetStudent()
+  const { data : student, fetchData } = useGetStudent()
   const { data: studentApplySupervisor } = useStudentApplySupervisor()
   const { data: studentAddMember } = useAddStudentMember()
   const { data: studentUpdateMember } = useUpdateStudentMember()

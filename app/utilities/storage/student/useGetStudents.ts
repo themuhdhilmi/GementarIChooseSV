@@ -1,29 +1,14 @@
 import { create } from 'zustand'
 
 type StudentStore = {
-  students: any
+  data: any
   loading: boolean
-  add: () => void
-  remove: () => void
-  removeAll: () => void
   fetchData: (sessionId: string) => Promise<void>
 }
 
 export const useGetStudents = create<StudentStore>((set) => ({
-  students: {},
+  data: {},
   loading: false,
-  add: () =>
-    set((state) => ({
-      students: state.students + 1,
-    })),
-  remove: () =>
-    set((state) => ({
-      students: state.students - 1,
-    })),
-  removeAll: () =>
-    set({
-      students: 0,
-    }),
   fetchData: async (sessionId: string) => {
     try {
       set({
@@ -33,11 +18,18 @@ export const useGetStudents = create<StudentStore>((set) => ({
       const response = await fetch(`/api/v1/AUTH/manageUser/student?type=many&session=${sessionId}`)
       const data = await response.json()
 
-      // Update the state based on the fetched data
-      set((state) => ({
-        students: data, // Adjust this based on your API response structure
-        loading: false,
-      }))
+      if (response.ok) {
+        // Update the state based on the fetched data
+        set((state) => ({
+          loading: false,
+          data: data,
+        }))
+      } else {
+        // Update the state based on the fetched data
+        set((state) => ({
+          loading: false,
+        }))
+      }
     } catch (error) {
       console.error('Error fetching data:', error)
       set({

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 type SessionStore = {
-  sessions: any
+  data: any
   loading: boolean
   putSessionsGlobalMemberQuota: (sessionId: string, globalMemberQuota: number) => Promise<void>
   putSessionsGLobalTitleQuota: (sessionId: string, globalTitleQuota: number) => Promise<void>
@@ -9,7 +9,7 @@ type SessionStore = {
 }
 
 export const usePutSessions = create<SessionStore>((set) => ({
-  sessions: {},
+  data: {},
   loading: false,
   putSessionsGlobalMemberQuota: async (sessionId: string, globalMemberQuota: number) => {
     try {
@@ -30,11 +30,18 @@ export const usePutSessions = create<SessionStore>((set) => ({
 
       const data = await response.json()
 
-      // Update the state based on the fetched data
-      set((state) => ({
-        loading: false,
-        sessions: data,
-      }))
+      if (response.ok) {
+        // Update the state based on the fetched data
+        set((state) => ({
+          loading: false,
+          data: data,
+        }))
+      } else {
+        // Update the state based on the fetched data
+        set((state) => ({
+          loading: false,
+        }))
+      }
     } catch (error) {
       console.error('Error fetching data:', error)
       set({
@@ -62,11 +69,18 @@ export const usePutSessions = create<SessionStore>((set) => ({
 
       const data = await response.json()
 
-      // Update the state based on the fetched data
-      set((state) => ({
-        loading: false,
-        sessions: data,
-      }))
+      if (response.ok) {
+        // Update the state based on the fetched data
+        set((state) => ({
+          loading: false,
+          data: data,
+        }))
+      } else {
+        // Update the state based on the fetched data
+        set((state) => ({
+          loading: false,
+        }))
+      }
     } catch (error) {
       console.error('Error fetching data:', error)
       set({
@@ -94,11 +108,18 @@ export const usePutSessions = create<SessionStore>((set) => ({
 
       const data = await response.json()
 
-      // Update the state based on the fetched data
-      set((state) => ({
-        loading: false,
-        sessions: data,
-      }))
+      if (response.ok) {
+        // Update the state based on the fetched data
+        set((state) => ({
+          loading: false,
+          data: data,
+        }))
+      } else {
+        // Update the state based on the fetched data
+        set((state) => ({
+          loading: false,
+        }))
+      }
     } catch (error) {
       console.error('Error fetching data:', error)
       set({

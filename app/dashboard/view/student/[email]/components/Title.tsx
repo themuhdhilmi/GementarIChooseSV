@@ -92,36 +92,35 @@ const Title = (props: any) => {
                   <tr key={index}>
                     {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                     <td>
-                      asd{props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster === null}
-                      {JSON.stringify(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster === null)}
-                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster === null ? (
+                      {props.selectViewUser?.studentInformation?.ProjectTitle[index] ?? (
                         <input
                           value={'Waiting for poster upload..'}
-                          
                           onChange={(e: any) => {
                             setName('None')
                           }}
                           type="text"
                           placeholder="Type here"
                           className="input input-bordered w-full max-w-xs rounded-lg input-xs"
+                          disabled
                         />
-                      ) : (
+                      )}
+                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.uploadedPoster ? (
                         <input
-                          value={name}
-                          
-                          onChange={(e: any) => {
-                            setName(e.target.value)
-                          }}
-                          type="text"
-                          placeholder="Type here"
-                          className="input input-bordered w-full max-w-xs rounded-lg input-xs"
-                        />
+                        value={name}
+                        onChange={(e: any) => {
+                          setName(e.target.value)
+                        }}
+                        type="text"
+                        placeholder="Type here"
+                        className="input input-bordered w-full max-w-xs rounded-lg input-xs"
+                      />
+                      ) : (
+                        <></>
                       )}
                     </td>
                     <td>
                       <div>
                         <form onSubmit={onSubmit}>
-
                           <div className="join">
                             <div>
                               <div>
