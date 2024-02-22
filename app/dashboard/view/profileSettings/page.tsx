@@ -18,19 +18,21 @@ const Page = () => {
     password: newPassword,
   }
 
-  const resetPassword = () => {
+  const resetPassword = (event: any) => {
+    event.preventDefault()
 
-    //FIXME Complete this reset password
-
-    if(newPassword === "")
-    {
+    if (newPassword === '') {
       return null
     }
+
     sendData(postData)
+    setCurrentPassword("")
+    setNewPassword("")
+    setNewPasswordConfirm("")
   }
 
   return (
-    <div className={`${!isDesktop ? 'px-24' : 'px-6'}`}>
+    <div className={`${!isDesktop ? 'px-24' : 'px-0'}`}>
       <div className="stats shadow"></div>
       <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg">
         <div className="overflow-x-auto">
@@ -47,7 +49,7 @@ const Page = () => {
                       <input
                         required
                         value={currentPassword}
-                        onChange={(e: any) => {
+                        onChange={(e) => {
                           setCurrentPassword(e.target.value)
                         }}
                         type="password"
@@ -64,7 +66,7 @@ const Page = () => {
                       <input
                         required
                         value={newPassword}
-                        onChange={(e: any) => {
+                        onChange={(e) => {
                           setNewPassword(e.target.value)
                         }}
                         type="password"
@@ -81,7 +83,7 @@ const Page = () => {
                       <input
                         required
                         value={newPasswordConfirm}
-                        onChange={(e: any) => {
+                        onChange={(e) => {
                           setNewPasswordConfirm(e.target.value)
                         }}
                         type="password"
@@ -91,10 +93,6 @@ const Page = () => {
                     </div>
                   </label>
                 </div>
-
-                {/* <button onClick={() => sendResetPasswordMember()} className="btn join-item text-white bg-blue-950  rounded-lg">
-                  Set Password
-                </button> */}
 
                 <button type="submit" className="btn w-full my-5 bg-red-600 rounded-lg hover:bg-red-800 text-white">
                   Change Password

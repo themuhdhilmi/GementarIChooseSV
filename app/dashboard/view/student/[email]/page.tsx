@@ -52,7 +52,7 @@ const Page = () => {
 
   if (isDesktop) {
     return (
-      <div className={`px-6`}>
+      <div className={`px-0`}>
         <UseGetStudent selectViewUser={student.student} funcCloseAll={funcCloseAll} canEdit={canEdit} canEditAdmin={canEditAdmin} />
       </div>
     )

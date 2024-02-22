@@ -31,7 +31,7 @@ const Page = () => {
   // }
 
   return (
-    <div className={`${!isDesktop ? 'px-24' : 'px-6'}`}>
+    <div className={`${!isDesktop ? 'px-24' : 'px-0'}`}>
       <div>
         <div>
           <SessionManager sessionList={sessions.sessionsList} sessilnSelected={sessions.sessionSelected} putSessionsGlobalMemberQuota={putSessionsGlobalMemberQuota} putSessionsGLobalTitleQuota={putSessionsGLobalTitleQuota} putSessionsGlobalSupervisorQuota={putSessionsGlobalSupervisorQuota} />

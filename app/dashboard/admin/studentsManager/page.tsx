@@ -54,7 +54,7 @@ const Page = () => {
   }
 
   return (
-    <div className={`${!isDesktop ? 'px-24' : 'px-6'}`}>
+    <div className={`${!isDesktop ? 'px-24' : 'px-0'}`}>
       {openDrawer === Drawer.NONE ? (
         <div className="grid grid-cols-1 gap-4">
           <div className="col-span-3">

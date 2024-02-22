@@ -53,7 +53,7 @@ const Header = () => {
       <ToastSuccess />
       {checkIfUserLoggedIn() ? <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
 
-      <div className={`bg-none ${!isDesktop ? 'px-24' : 'px-6'}  py-2`}>
+      <div className={`bg-none ${!isDesktop ? 'px-24' : 'px-0'}  py-2`}>
         {!isDesktop ? (
           <div className="navbar rounded-lg p-0 ">
             <div className="navbar-start text-white ">

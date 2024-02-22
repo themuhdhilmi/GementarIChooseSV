@@ -24,12 +24,13 @@ import { useMediaQuery } from 'usehooks-ts'
 //// [MAIN TEMPLATE] Admin   Manage Global Session
 //// [MAIN TEMPLATE] Permission view pages
 //// [MAIN TEMPLATE] Mobile  Adjustment
+//// [Global Dashboard]   Implement profile setting (Implement change password).
 
-//TODO [Global Dashboard]   Implement profile setting (Implement change password).
 //TODO [Lecturer Dashbaord] Implement Lecturer Manage Supervisee.
 //TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and decline all requested students.
 //TODO [Admin Dashboard]    Add Final Presentation Date.
 //TODO [Admin Dashboard]    Update Final presentation Date Counter Header.
+//TODO [Admin Dashboard]    Add Moderator Account.
 //TODO [Global Dashboard]   Per-session result.
 //TODO [Lecturer Dashbaord] Lecturer Profile.
 //TODO [Lecturer Directory] Lecturer List Page. https://directory.upsi.edu.my
@@ -42,7 +43,7 @@ const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 
   return (
-    <div className={`${!isDesktop ? 'px-24' : 'px-6'}`}>
+    <div className={`${!isDesktop ? 'px-24' : 'px-0'}`}>
       <div className="stats shadow"></div>
       <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg">
         <div className="overflow-x-auto">
