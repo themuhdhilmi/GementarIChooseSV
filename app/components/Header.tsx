@@ -15,6 +15,7 @@ import { useGetsessions } from '../utilities/storage/user/useGetSessions'
 import LoadingLeftBottom from './LoadingLeftBottom'
 import ToastSuccess from './ToastSuccess'
 import StudentMenu from './HeaderComponents/StudentMenu'
+import LecturerMenu from './HeaderComponents/LecturerMenu'
 const Header = () => {
   const session = useSession()
   const { data : sessions, fetchData: fetchSession } = useGetsessions()
@@ -115,7 +116,9 @@ const Header = () => {
         )}
         {role === 'ADMIN' ? <AdminMenu renderer={renderer} name={name} /> : ''}
         {role === 'STUDENT' ? <StudentMenu renderer={renderer} name={name} email={email} /> : ''}
+        {role === 'LECTURER' ? <LecturerMenu renderer={renderer} name={name} email={email} /> : ''}
         {role === 'GUEST' ? <GuestMenu renderer={renderer} /> : ''}
+        
       </div>
     </div>
   )
