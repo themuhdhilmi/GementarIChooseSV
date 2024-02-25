@@ -41,12 +41,12 @@ const LecturerMenu = (props: any) => {
             Feed
           </Link>
 
-          <Link href={`/dashboard/view/lecturer/studentManage/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${(getFirstThreePathName() + `/${decodeURIComponent(params.email)}`) === ('/ddashboard/view/lecturer/studentManage'  + `/${props.email}`) ? '' : 'bg-opacity-0'} `}>
+          <Link href={`/dashboard/lecturer/studentManage/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${(getFirstThreePathName() + `/${decodeURIComponent(params.email)}`) === ('/dashboard/lecturer/studentManage'  + `/${props.email}`) ? '' : 'bg-opacity-0'} `}>
             <AiOutlineGlobal />
             Manage Supervisee
           </Link>
 
-          <Link href={`/dashboard/view/lecturer/lecturerManage/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${(getFirstThreePathName() + `/${decodeURIComponent(params.email)}`) === ('/ddashboard/view/lecturer/lecturerManage'  + `/${props.email}`) ? '' : 'bg-opacity-0'} `}>
+          <Link href={`/dashboard/lecturer/lecturerManage/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${(getFirstThreePathName() + `/${decodeURIComponent(params.email)}`) === ('/dashboard/lecturer/lecturerManage'  + `/${props.email}`) ? '' : 'bg-opacity-0'} `}>
             <AiOutlineGlobal />
             Manage Lecturer Profile
           </Link>
