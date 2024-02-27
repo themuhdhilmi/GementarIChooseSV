@@ -16,6 +16,7 @@ import LoadingLeftBottom from './LoadingLeftBottom'
 import ToastSuccess from './ToastSuccess'
 import StudentMenu from './HeaderComponents/StudentMenu'
 import LecturerMenu from './HeaderComponents/LecturerMenu'
+import NotifyUser from './HeaderComponents/NotifyUser'
 const Header = () => {
   const session = useSession()
   const { data : sessions, fetchData: fetchSession } = useGetsessions()
@@ -52,6 +53,7 @@ const Header = () => {
     <div className="static">
       <LoadingLeftBottom />
       <ToastSuccess />
+      <NotifyUser/>
       {checkIfUserLoggedIn() ? <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
 
       <div className={`bg-none ${!isDesktop ? 'px-24' : 'px-0'}  py-2`}>

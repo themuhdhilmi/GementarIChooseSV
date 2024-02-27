@@ -3,27 +3,12 @@ import { create } from 'zustand'
 type LecturerStore = {
   lecturers: any
   loading: boolean
-  add: () => void
-  remove: () => void
-  removeAll: () => void
   fetchData: (sessionId: string) => Promise<void>
 }
 
 export const useGetLecturersPerSession = create<LecturerStore>((set) => ({
   lecturers: {},
   loading: false,
-  add: () =>
-    set((state) => ({
-      lecturers: state.lecturers + 1,
-    })),
-  remove: () =>
-    set((state) => ({
-      lecturers: state.lecturers - 1,
-    })),
-  removeAll: () =>
-    set({
-      lecturers: 0,
-    }),
   fetchData: async (sessionId: string) => {
     try {
       set({
