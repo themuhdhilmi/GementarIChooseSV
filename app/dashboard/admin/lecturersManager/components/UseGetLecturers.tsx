@@ -9,6 +9,9 @@ import HereIsEmpty from '@/app/components/HereIsEmpty'
 import { useGetLecturers } from '@/app/utilities/storage/lecturer/useGetLecturers'
 import UseDeleteLecturer from './UseDeleteLecturer'
 import { useDeleteLecturer } from '@/app/utilities/storage/lecturer/useDeleteLecturer'
+import { FaHandPointer } from 'react-icons/fa'
+import { BsToggles } from 'react-icons/bs'
+import { useSetLecturerAsSupervisor } from '@/app/utilities/storage/lecturer/useSetLecturerAsSupervisor'
 
 const UseGetLecturers = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
@@ -16,13 +19,19 @@ const UseGetLecturers = (props: any) => {
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.mobile})`)
   const { lecturers, fetchData } = useGetLecturers()
   const { loading: loadingDelete } = useDeleteLecturer()
-  const { data : sessions } = useGetsessions()
-
+  const { data: sessions } = useGetsessions()
+  const { data: useSetLecturerAsSupervisorData, sendData } = useSetLecturerAsSupervisor()
   useEffect(() => {
     fetchData(sessions.sessionSelected?.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessions, loadingDelete])
+  }, [sessions, loadingDelete, useSetLecturerAsSupervisorData])
 
+  const toggleSv = (email: any) => {
+    const postData = {
+      lecturerEmail: email,
+    }
+    sendData(postData)
+  }
   return (
     <div>
       <div className="stats shadow"></div>
@@ -67,12 +76,20 @@ const UseGetLecturers = (props: any) => {
                       <td>
                         <div className="flex flex-row-reverse w-full">
                           <div className={`${isMobile ? 'flex flex-col max-w-min gap-2' : 'flex flex-row max-w-min gap-2'} `}>
-                            <Link href={`/dashboard/view/lecturer/${item?.email}`}>
+                              <button onClick={() => toggleSv(item.User?.email)} className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
+                                <BsToggles />
+                              </button>
+                            <Link href={`/dashboard/lecturer/studentManage/${item.User?.email}`}>
+                              <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
+                                <FaHandPointer />
+                              </button>
+                            </Link>
+                            <Link href={`/dashboard/view/lecturer/${item.User?.email}`}>
                               <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                                 <FaEye />
                               </button>
                             </Link>
-                            <UseDeleteLecturer email={item?.email} id={item?.id} />
+                            <UseDeleteLecturer email={item.User?.email} id={item?.id} />
                           </div>
                         </div>
                       </td>

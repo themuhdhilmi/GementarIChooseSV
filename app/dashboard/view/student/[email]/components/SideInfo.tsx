@@ -26,7 +26,7 @@ const SideInfo = (props: any) => {
         <p>STATUS</p>
 
         {props.isSupervisorDeclined ? (
-          <p className="badge bg-yellow-500 text-white">3/4</p>
+          <p className="badge bg-yellow-500 text-white">2/4</p>
         ) : props.isSupervisorAccepted ? (
           <p className="badge bg-green-600 text-white">4/4 ✓</p>
         ) : props.isSupervisorRequested ? (

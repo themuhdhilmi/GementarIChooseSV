@@ -17,26 +17,31 @@ import ToastSuccess from './ToastSuccess'
 import StudentMenu from './HeaderComponents/StudentMenu'
 import LecturerMenu from './HeaderComponents/LecturerMenu'
 import NotifyUser from './HeaderComponents/NotifyUser'
+import { OneTimePassword } from './HeaderComponents/OneTimePassword'
+import { useUpdatePassword } from '../utilities/storage/user/useUpdatePassword'
 const Header = () => {
   const session = useSession()
-  const { data : sessions, fetchData: fetchSession } = useGetsessions()
+  const { data: sessions, fetchData: fetchSession } = useGetsessions()
   const { fetchData, name, role, email } = useUserInformation()
+  const {  data : updatePasswordData } = useUpdatePassword()
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
 
   useEffect(() => {
     fetchSession()
     fetchData()
+    checkIfUserLoggedIn()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  function checkIfUserLoggedIn() {
+  }, [role, updatePasswordData])
+  function checkIfUserLoggedIn()  {
     if (session.status === 'unauthenticated') {
       return false
-    } else {
-      if (role === 'GUEST') {
-        //signOut();
-      }
     }
+
+    if (role === 'GUEST') {
+      return false
+    }
+
     return true
   }
 
@@ -53,8 +58,9 @@ const Header = () => {
     <div className="static">
       <LoadingLeftBottom />
       <ToastSuccess />
-      <NotifyUser/>
-      {checkIfUserLoggedIn() ? <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
+      <NotifyUser />
+      <OneTimePassword />
+      {checkIfUserLoggedIn()  ? <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
 
       <div className={`bg-none ${!isDesktop ? 'px-24' : 'px-0'}  py-2`}>
         {!isDesktop ? (
@@ -76,7 +82,7 @@ const Header = () => {
               </div>
             </div>
 
-            {checkIfUserLoggedIn() ? (
+            {checkIfUserLoggedIn()  ? (
               <div className="navbar-end">
                 <button className="btn rounded-lg min-h-fit border-red-700 bg-red-700 text-white hover:bg-red-900 hover:border-red-700">
                   <div className="avatar">
@@ -106,7 +112,7 @@ const Header = () => {
               </Link>
             </div>
 
-            {checkIfUserLoggedIn() ? (
+            {checkIfUserLoggedIn()  ? (
               ''
             ) : (
               <Link href={'/auth/signin'} className="navbar-end text-white">
@@ -116,11 +122,11 @@ const Header = () => {
             <div className="navbar-center"></div>
           </div>
         )}
+
         {role === 'ADMIN' ? <AdminMenu renderer={renderer} name={name} /> : ''}
         {role === 'STUDENT' ? <StudentMenu renderer={renderer} name={name} email={email} /> : ''}
         {role === 'LECTURER' ? <LecturerMenu renderer={renderer} name={name} email={email} /> : ''}
         {role === 'GUEST' ? <GuestMenu renderer={renderer} /> : ''}
-        
       </div>
     </div>
   )

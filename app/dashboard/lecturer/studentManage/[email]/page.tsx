@@ -37,7 +37,7 @@ const Page = () => {
         <div className="overflow-x-auto">
           <div className="flex flex-row py-5">
             <div className="w-full font-medium ">
-              <p className="underline decoration-1">Student Manager</p>
+              <p className="underline decoration-1">Student Manager [{decodeURIComponent(params.email)}]</p>
               <div className="w-full">
                 {requestForSupervisor?.map((item: any, index: number) => {
                   return (

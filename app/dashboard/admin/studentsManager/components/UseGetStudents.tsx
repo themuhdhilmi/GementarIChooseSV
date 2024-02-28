@@ -75,7 +75,7 @@ const UseGetStudents = (props: any) => {
                       ) : (
                         <td>
                           {studentProgress.supervisorStatus === 'DECLINED' ? (
-                            <p className="badge bg-yellow-500 text-white">3/4</p>
+                            <p className="badge bg-yellow-500 text-white">2/4</p>
                           ) : studentProgress.supervisorStatus === 'ACCEPTED' ? (
                             <p className="badge bg-green-600 text-white">4/4 ✓</p>
                           ) : studentProgress.supervisorStatus === 'REQUESTED' ? (
