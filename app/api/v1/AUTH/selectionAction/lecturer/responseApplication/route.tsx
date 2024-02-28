@@ -138,9 +138,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const quotaCount2 = findLecturerAfterJob?.supervisorQuota ?? findCurrentSession?.globalSupervisorQuota
 
     if (supervisorAceptedStudentCountAfterJob >= quotaCount2) {
-      //Declined all other user
-      //TODO FIX THIS. OTHERS IS GOING FINE
-      const updateManyStudent = prisma.studentInformation.updateMany({
+      const updateManyStudent = await prisma.studentInformation.updateMany({
         where: {
           LecturerInformation: {
             id: findLecturerAfterJob.id

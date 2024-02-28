@@ -26,8 +26,8 @@ import { useMediaQuery } from 'usehooks-ts'
 //// [MAIN TEMPLATE] Mobile  Adjustment
 //// [Global Dashboard]   Implement profile setting (Implement change password).
 //// [Lecturer Dashbaord] Implement Lecturer Manage Supervisee.
+//// [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and decline all requested students.
 
-//TODO [Lecturer Dashbaord] Above same for when lecturer accepted student in API then check and decline all requested students.
 //TODO [Student] Make Alert On top if student didn't complete their task to 3/4
 
 //TODO [Admin Dashboard]    Add Final Presentation Date.
