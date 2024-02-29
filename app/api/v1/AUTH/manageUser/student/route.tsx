@@ -13,22 +13,6 @@ function censorName(name: any) {
 }
 
 export async function GET(request: NextRequest, response: NextResponse) {
-  let role = ''
-
-    const token = await getToken({
-      req: request,
-    })
-
-    const user = await prisma.user.findUnique({
-      where: {
-        id: token?.sub,
-      },
-    })
-
-    if (user) {
-      role = user.role
-    }
-
   try {
     const { searchParams } = new URL(request.url)
     const pageParam = parseInt(searchParams.get('page') as string)
@@ -97,6 +81,34 @@ export async function GET(request: NextRequest, response: NextResponse) {
       }
 
       /////////////////////////////////////////  FUNCTION UPDATE STUDENT DECLINED IF SV FULL /////////////////////////////////////////
+
+      let role = ''
+      let user : any = {}
+
+      try {
+        
+
+        const token = await getToken({
+          req: request,
+        })
+    
+        user = await prisma.user.findUnique({
+          where: {
+            id: token?.sub,
+          },
+        })
+    
+        if (user) {
+          role = user.role
+        }
+    
+      } catch (error) {
+        
+      }
+
+
+
+
       if (role === 'ADMIN') {
         return NextResponse.json(
           {
