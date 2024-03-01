@@ -4,6 +4,7 @@ import UseSetSession from './UseSetSession'
 import SetGlobalMemberQuota from './components/SetGlobalMemberQuota'
 import { breakpoints } from '@/app/config/breakpoints'
 import { useMediaQuery } from 'usehooks-ts'
+import SetGlobalEndDate from './components/SetGlobalEndDate'
 
 const SessionManager = (props: any) => {
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
@@ -30,6 +31,9 @@ const SessionManager = (props: any) => {
 
             <div className="font-normal text-slate-500">Member Quota</div>
             <div>{props?.sessilnSelected?.globalMemberQuota}</div>
+
+            <div className="font-normal text-slate-500">Final Presentation Date</div>
+            <div>{props?.sessilnSelected?.finalPresentationDate}</div>
           </div>
 
           {isMobile ? (
@@ -40,6 +44,8 @@ const SessionManager = (props: any) => {
                 <div>Students Global Value</div>
                 <SetGlobalMemberQuota function={props?.putSessionsGLobalTitleQuota} value={props?.sessilnSelected?.globalTitleQuota} name={'Title Quota'} sessionId={props?.sessilnSelected?.id} />
                 <SetGlobalMemberQuota function={props?.putSessionsGlobalMemberQuota} value={props?.sessilnSelected?.globalMemberQuota} name={'Member Quota'} sessionId={props?.sessilnSelected?.id} />
+                <div>Students Global Value</div>
+                <SetGlobalEndDate function={props?.putSessionsGlobalFinalPresentationDate} value={props?.sessilnSelected?.globalTitleQuota} name={''} sessionId={props?.sessilnSelected?.id} />
               </div>
             </div>
           ) : (
@@ -52,6 +58,10 @@ const SessionManager = (props: any) => {
                 <div>Students Global Value</div>
                 <SetGlobalMemberQuota function={props?.putSessionsGLobalTitleQuota} value={props?.sessilnSelected?.globalTitleQuota} name={'Title Quota'} sessionId={props?.sessilnSelected?.id} />
                 <SetGlobalMemberQuota function={props?.putSessionsGlobalMemberQuota} value={props?.sessilnSelected?.globalMemberQuota} name={'Member Quota'} sessionId={props?.sessilnSelected?.id} />
+              </div>
+              <div className="w-full bg-white p-5 col-span-2 rounded-lg">
+                <div>Final Presentation Date</div>
+                <SetGlobalEndDate function={props?.putSessionsGlobalFinalPresentationDate} value={props?.sessilnSelected?.globalTitleQuota} name={''} sessionId={props?.sessilnSelected?.id} />
               </div>
             </div>
           )}

@@ -19,6 +19,7 @@ import LecturerMenu from './HeaderComponents/LecturerMenu'
 import NotifyUser from './HeaderComponents/NotifyUser'
 import { OneTimePassword } from './HeaderComponents/OneTimePassword'
 import { useUpdatePassword } from '../utilities/storage/user/useUpdatePassword'
+import { usePathname } from 'next/navigation'
 const Header = () => {
   const session = useSession()
   const { data: sessions, fetchData: fetchSession } = useGetsessions()
@@ -26,7 +27,8 @@ const Header = () => {
   const {  data : updatePasswordData } = useUpdatePassword()
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
-
+  const pathname = usePathname()
+  
   useEffect(() => {
     fetchSession()
     fetchData()
@@ -54,6 +56,12 @@ const Header = () => {
     return <span>{days}</span>
   }
 
+
+  if(pathname.includes('/dashboard/view/summary/'))
+  {
+    return(<></>)
+  }
+
   return (
     <div className="static">
       <LoadingLeftBottom />
@@ -74,7 +82,8 @@ const Header = () => {
             <div className="navbar-center">
               <div className="badge badge-neutral">Final presentation</div>
               <div className="badge ">
-                <Countdown date={'2025-02-01T01:02:03'} renderer={renderer} />
+                {/* {JSON.stringify(sessions?.sessionSelected?.finalPresentationDate)} */}
+                <Countdown date={sessions?.sessionSelected?.finalPresentationDate ?? '2025-02-01T01:02:03'} renderer={renderer} />
               </div>
               <div className="ml-2 badge badge-neutral">Session</div>
               <div className="badge ">

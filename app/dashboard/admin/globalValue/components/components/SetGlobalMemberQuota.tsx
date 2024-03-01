@@ -10,16 +10,6 @@ const SetGlobalMemberQuota = (props: any) => {
   }, [props.value])
 
   const setValueSet = (e: any) => {
-    // if (!e.target.value) {
-    //   setValue("0");
-    // } else {
-    //   if (parseInt(e.target.value) < 0) {
-    //     setValue("0");
-    //   } else {
-    //     setValue(e.target.value);
-    //   }
-    // }
-
     setValue(e.target.value)
   }
   return (

@@ -14,7 +14,7 @@ const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const { loading, fetchData, data : sessions } = useGetsessions()
   const { data: setSessionsData, loading: setLoading } = useSetSessions()
-  const { data : putSessionsData, putSessionsGlobalMemberQuota, putSessionsGLobalTitleQuota, putSessionsGlobalSupervisorQuota, loading: putLoading } = usePutSessions()
+  const { data : putSessionsData, putSessionsGlobalMemberQuota, putSessionsGLobalTitleQuota, putSessionsGlobalSupervisorQuota, putSessionsGlobalFinalPresentationDate ,loading: putLoading } = usePutSessions()
 
   useEffect(() => {
     fetchData()
@@ -34,7 +34,7 @@ const Page = () => {
     <div className={`${!isDesktop ? 'px-24' : 'px-0'}`}>
       <div>
         <div>
-          <SessionManager sessionList={sessions.sessionsList} sessilnSelected={sessions.sessionSelected} putSessionsGlobalMemberQuota={putSessionsGlobalMemberQuota} putSessionsGLobalTitleQuota={putSessionsGLobalTitleQuota} putSessionsGlobalSupervisorQuota={putSessionsGlobalSupervisorQuota} />
+          <SessionManager sessionList={sessions.sessionsList} sessilnSelected={sessions.sessionSelected} putSessionsGlobalMemberQuota={putSessionsGlobalMemberQuota}  putSessionsGlobalFinalPresentationDate={putSessionsGlobalFinalPresentationDate} putSessionsGLobalTitleQuota={putSessionsGLobalTitleQuota} putSessionsGlobalSupervisorQuota={putSessionsGlobalSupervisorQuota} />
         </div>
       </div>
     </div>

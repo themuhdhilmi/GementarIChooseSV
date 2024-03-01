@@ -30,9 +30,10 @@ import { useMediaQuery } from 'usehooks-ts'
 //// [Admin Dashboard] Toggle SV
 //// [Student] Make Alert On top if student didn't complete their task to 3/4
 //// [User] Account One Time Password
+//// [Admin Dashboard]    Add Final Presentation Date.
+//// [Admin Dashboard]    Update Final presentation Date Counter Header.
 
-//TODO [Admin Dashboard]    Add Final Presentation Date.
-//TODO [Admin Dashboard]    Update Final presentation Date Counter Header.
+
 //TODO [Global Dashboard]   Per-session result.
 //TODO [Lecturer Dashbaord] Lecturer Profile.
 //TODO [Lecturer Directory] Lecturer List Page. https://directory.upsi.edu.my
@@ -43,7 +44,6 @@ import { useMediaQuery } from 'usehooks-ts'
 //TODO Populate Feed Pages
 
 //TODO [====FINAL BOSS====] IMPLEMENT SECURITY IN API SIDE
-
 
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)

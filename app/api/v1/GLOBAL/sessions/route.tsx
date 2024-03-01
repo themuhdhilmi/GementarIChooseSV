@@ -121,6 +121,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         globalMemberQuota: body.globalMemberQuota ?? sesssionGet?.globalMemberQuota,
         globalTitleQuota: body.globalTitleQuota ?? sesssionGet?.globalTitleQuota,
         globalSupervisorQuota: body.globalSupervisorQuota ?? sesssionGet?.globalSupervisorQuota,
+        finalPresentationDate: body.finalPresentationDate ?? sesssionGet?.finalPresentationDate,
       },
     })
 
