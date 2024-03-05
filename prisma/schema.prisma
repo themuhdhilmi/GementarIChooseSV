@@ -158,3 +158,36 @@ model ProjectTitle {
 }
 
 // -======================= STUDENT END ======================= 
+
+// +======================= QUESTION START ========================
+
+model StudentSubject {
+  id       String     @id @default(cuid())
+  title    String
+  Question Question[]
+}
+
+model Question {
+  id               String         @id @default(cuid())
+  title            String
+  subject          StudentSubject @relation(fields: [studentSubjectId], references: [id])
+  askedQuestion    AskedQuestion  @relation(fields: [askedQuestionId], references: [id])
+  askedQuestionId  String
+  studentSubjectId String
+}
+
+model AskedQuestion {
+  id       String         @id @default(cuid())
+  body     String
+  answer   AnswerString[]
+  Question Question[]
+}
+
+model AnswerString {
+  id              String         @id @default(cuid())
+  string          String
+  AskedQuestion   AskedQuestion? @relation(fields: [askedQuestionId], references: [id])
+  askedQuestionId String?
+}
+
+// -======================= QUESTION START ========================
