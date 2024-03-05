@@ -42,10 +42,6 @@ const Page = () => {
             <div  key={index}>
 
 
-
-
-
-
             </div>
           )
         })}
