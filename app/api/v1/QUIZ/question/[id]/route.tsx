@@ -11,9 +11,18 @@ export async function GET(request: NextRequest, { params }: any) {
         include: {
             childQuestion: {
                 include: {
-                    answerDummy: true
+                  questionBody: 
+                  {
+                    include : {
+                      answer : true
+                    }
+                  },
+                    answerDummy: true,
+                    
                 }
             },
+            
+
 
         }
     })

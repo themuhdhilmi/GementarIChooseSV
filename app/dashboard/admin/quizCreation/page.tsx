@@ -30,12 +30,15 @@ const Page = () => {
   return (
     <div>
       <div>
+      This is SUBJECT LIST
+      </div>
+      <div>
         <input value={titleSubject} onChange={(e) => setTitleSubject(e.target.value)}></input> <button  onClick={() => addSubject()} className="btn ">ADD</button>
       </div>
       {dataGetSubject?.subject?.map((item: any, index: number) => {
         return <div className='my-3' key={index}>{item.title}
 
-        <Link href="href"><button className="btn ">VIEW</button></Link>
+        <Link href={`/dashboard/admin/quizCreation/questionCreation/${item?.id}`}><button className="btn ">VIEW</button></Link>
         </div>
       })}
     </div>
