@@ -8,7 +8,7 @@ import { useGetLecturers } from '@/app/utilities/storage/lecturer/useGetLecturer
 
 const UseAddLecturer = (props: any) => {
   const { sendData, success, data, loading: loadingAddLecturer } = useAddLecturer()
-  const { data : sessions, loading } = useGetsessions()
+  const { data: sessions, loading } = useGetsessions()
   const { fetchData } = useGetLecturers()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')

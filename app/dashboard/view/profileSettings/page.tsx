@@ -26,9 +26,9 @@ const Page = () => {
     }
 
     sendData(postData)
-    setCurrentPassword("")
-    setNewPassword("")
-    setNewPasswordConfirm("")
+    setCurrentPassword('')
+    setNewPassword('')
+    setNewPasswordConfirm('')
   }
 
   return (

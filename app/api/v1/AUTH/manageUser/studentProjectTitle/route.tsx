@@ -124,8 +124,6 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       })
     }
 
-
-
     const emailLead = await prisma.studentInformation.findFirstOrThrow({
       where: {
         User: {
@@ -139,7 +137,6 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
     })
 
-    
     const projectTitle = await prisma.projectTitle.findFirstOrThrow({
       where: {
         id: body.projectTitleId,

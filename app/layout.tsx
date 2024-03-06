@@ -27,13 +27,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           className={inter.className}
           style={{
             minHeight: '100vh',
-            paddingBottom: "50px"
+            paddingBottom: '50px',
           }}
         >
           <Header />
-          <Suspense>
-          {children}
-          </Suspense>
+          <Suspense>{children}</Suspense>
         </body>
       </Providers>
     </html>

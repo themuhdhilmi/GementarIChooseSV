@@ -18,7 +18,7 @@ enum Drawer {
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isMobileLandscape = useMediaQuery(`(max-width: ${breakpoints.mobileLandscape})`)
-  const { data : sessions, loading, fetchData } = useGetsessions()
+  const { data: sessions, loading, fetchData } = useGetsessions()
   const [selectedSession, setSelectedSession] = useState('')
   const [openDrawer, setOpenDrawer] = useState<Drawer>(Drawer.NONE)
   const [selectViewUser, setSelectViewUser] = useState<any>({})

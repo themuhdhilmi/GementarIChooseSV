@@ -24,18 +24,18 @@ const Header = () => {
   const session = useSession()
   const { data: sessions, fetchData: fetchSession } = useGetsessions()
   const { fetchData, name, role, email } = useUserInformation()
-  const {  data : updatePasswordData } = useUpdatePassword()
+  const { data: updatePasswordData } = useUpdatePassword()
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const isTablet = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
   const pathname = usePathname()
-  
+
   useEffect(() => {
     fetchSession()
     fetchData()
     checkIfUserLoggedIn()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [role, updatePasswordData])
-  function checkIfUserLoggedIn()  {
+  function checkIfUserLoggedIn() {
     if (session.status === 'unauthenticated') {
       return false
     }
@@ -56,10 +56,8 @@ const Header = () => {
     return <span>{days}</span>
   }
 
-
-  if(pathname.includes('/dashboard/view/summary/'))
-  {
-    return(<></>)
+  if (pathname.includes('/dashboard/view/summary/')) {
+    return <></>
   }
 
   return (
@@ -68,7 +66,7 @@ const Header = () => {
       <ToastSuccess />
       <NotifyUser />
       <OneTimePassword />
-      {checkIfUserLoggedIn()  ? <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
+      {checkIfUserLoggedIn() ? <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
 
       <div className={`bg-none ${!isDesktop ? 'px-24' : 'px-0'}  py-2`}>
         {!isDesktop ? (
@@ -91,7 +89,7 @@ const Header = () => {
               </div>
             </div>
 
-            {checkIfUserLoggedIn()  ? (
+            {checkIfUserLoggedIn() ? (
               <div className="navbar-end">
                 <button className="btn rounded-lg min-h-fit border-red-700 bg-red-700 text-white hover:bg-red-900 hover:border-red-700">
                   <div className="avatar">
@@ -121,7 +119,7 @@ const Header = () => {
               </Link>
             </div>
 
-            {checkIfUserLoggedIn()  ? (
+            {checkIfUserLoggedIn() ? (
               ''
             ) : (
               <Link href={'/auth/signin'} className="navbar-end text-white">

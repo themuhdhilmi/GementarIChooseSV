@@ -170,24 +170,34 @@ const Title = (props: any) => {
                 <tr key={index}>
                   {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                   <td>{props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name ?? 'None'}</td>
-                  <td className=" "><div className='flex flex-row-reverse'>{props.selectViewUser?.studentInformation?.ProjectTitle[index] == null ? 'None' : <Link className='btn btn-sm text-white bg-blue-950 rounded-lg' href={'https://storage.ichoosesv.gementar.com/gementar/storage/file/' + props.selectViewUser.studentInformation.ProjectTitle[index].id + '.pdf'}>View Poster</Link>}</div></td>
+                  <td className=" ">
+                    <div className="flex flex-row-reverse">
+                      {props.selectViewUser?.studentInformation?.ProjectTitle[index] == null ? (
+                        'None'
+                      ) : (
+                        <Link className="btn btn-sm text-white bg-blue-950 rounded-lg" href={'https://storage.ichoosesv.gementar.com/gementar/storage/file/' + props.selectViewUser.studentInformation.ProjectTitle[index].id + '.pdf'}>
+                          View Poster
+                        </Link>
+                      )}
+                    </div>
+                  </td>
                   {props.canEdit && props.isMemberCompleted ? (
                     <td className="w-6">
                       <div>
-                      {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'ACCEPTED' ? (
-                        ''
-                      ) : (
-                        <button
-                          onClick={() => {
-                            setEditTeamTitle(index)
-                            setName(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name ?? 'None')
-                            setMatricTitleId(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id ?? '')
-                          }}
-                          className="btn btn-sm text-white bg-blue-950 rounded-lg"
-                        >
-                          Edit
-                        </button>
-                      )}
+                        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'ACCEPTED' ? (
+                          ''
+                        ) : (
+                          <button
+                            onClick={() => {
+                              setEditTeamTitle(index)
+                              setName(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name ?? 'None')
+                              setMatricTitleId(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id ?? '')
+                            }}
+                            className="btn btn-sm text-white bg-blue-950 rounded-lg"
+                          >
+                            Edit
+                          </button>
+                        )}
                       </div>
                     </td>
                   ) : (

@@ -38,11 +38,7 @@ const Page = () => {
             //   {/* {JSON.stringify(item)} */}
             // </div>
 
-
-            <div  key={index}>
-
-
-            </div>
+            <div key={index}></div>
           )
         })}
       </div>

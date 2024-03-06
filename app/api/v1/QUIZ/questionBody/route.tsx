@@ -19,9 +19,9 @@ export async function POST(request: NextRequest, response: NextResponse) {
     // }
 
     const createAnswer = await prisma.answerString.create({
-        data : {
-            string: body.answerString
-        }
+      data: {
+        string: body.answerString,
+      },
     })
 
     const createQuestionBody = await prisma.questionBody.create({
@@ -30,11 +30,9 @@ export async function POST(request: NextRequest, response: NextResponse) {
         string: body.string,
         stringBefore: body.sringBefore ?? undefined,
         point: body.point,
-        answerStringId: createAnswer.id
+        answerStringId: createAnswer.id,
       },
     })
-
-    
 
     return NextResponse.json(
       {

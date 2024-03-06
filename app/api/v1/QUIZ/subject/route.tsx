@@ -59,14 +59,14 @@ export async function GET(request: NextRequest, response: NextResponse) {
     const subject = await prisma.subject.findMany({
       include: {
         Question: {
-            include: {
-                childQuestion: {
-                    include: {
-                        questionBody : true,
-                        answerDummy: true
-                    }
-                }
-            }
+          include: {
+            childQuestion: {
+              include: {
+                questionBody: true,
+                answerDummy: true,
+              },
+            },
+          },
         },
       },
     })

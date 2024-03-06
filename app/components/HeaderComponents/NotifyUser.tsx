@@ -12,7 +12,7 @@ const NotifyUser = () => {
   const { role, email } = useUserInformation()
   const { data: sessionData } = useGetsessions()
   const { data: responseApplicationData } = useResponseApplication()
-  const {data : studentApplySupervisorData} = useStudentApplySupervisor();
+  const { data: studentApplySupervisorData } = useStudentApplySupervisor()
 
   const [isAlertHaveStudentRequest, setIsAlertHaveStudentRequest] = useState(false)
   const [isAlertStudentNotFinish, setIsAlertStudentNotFinish] = useState(false)
@@ -40,7 +40,6 @@ const NotifyUser = () => {
   }, [role, sessionData, responseApplicationData])
 
   useEffect(() => {
-
     setIsAlertStudentNotFinish(false)
     const fetchData = async () => {
       if (role === 'STUDENT') {

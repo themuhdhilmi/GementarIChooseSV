@@ -76,9 +76,9 @@ const UseGetLecturers = (props: any) => {
                       <td>
                         <div className="flex flex-row-reverse w-full">
                           <div className={`${isMobile ? 'flex flex-col max-w-min gap-2' : 'flex flex-row max-w-min gap-2'} `}>
-                              <button onClick={() => toggleSv(item.User?.email)} className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
-                                <BsToggles />
-                              </button>
+                            <button onClick={() => toggleSv(item.User?.email)} className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
+                              <BsToggles />
+                            </button>
                             <Link href={`/dashboard/lecturer/studentManage/${item.User?.email}`}>
                               <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                                 <FaHandPointer />

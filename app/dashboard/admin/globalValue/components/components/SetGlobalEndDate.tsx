@@ -3,7 +3,6 @@ import { Datepicker } from 'flowbite-react'
 import React, { useState } from 'react'
 
 const SetGlobalEndDate = (props: any) => {
-
   return (
     <div className="w-full text-black">
       <label className="form-control w-full ">
@@ -12,13 +11,12 @@ const SetGlobalEndDate = (props: any) => {
         </div>
         <div className="join w-full">
           {/* <Datepicker onSelectedDateChanged={( date : any) => setDate(date)} className='w-full'/> */}
-          <Datepicker onSelectedDateChanged={( date : any) => props.function(props.sessionId, date)} className='w-full'/>
+          <Datepicker onSelectedDateChanged={(date: any) => props.function(props.sessionId, date)} className="w-full" />
         </div>
       </label>
     </div>
   )
 }
-
 
 // props.function(props.sessionId, parseInt(value))
 

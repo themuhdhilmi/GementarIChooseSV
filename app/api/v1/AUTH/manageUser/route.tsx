@@ -32,7 +32,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       data: {
         hashedPassword: passwordEncrypt,
-        hasChangeOneTimePassword: true
+        hasChangeOneTimePassword: true,
       },
     })
 

@@ -141,7 +141,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       const updateManyStudent = await prisma.studentInformation.updateMany({
         where: {
           LecturerInformation: {
-            id: findLecturerAfterJob.id
+            id: findLecturerAfterJob.id,
           },
           lecturerAcceptedStudent: 'REQUESTED',
         },
@@ -165,7 +165,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
     return NextResponse.json(
       {
         updateStudent,
-        
       },
       {
         status: 200,

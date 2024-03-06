@@ -51,7 +51,36 @@ const LoadingLeftBottom = () => {
   const { loading: loading27 } = useUpdateStudentTitle()
   const { loading: loading28 } = useUploadStudentPoster()
 
-  if (loading1 || loading2 || loading3 || loading4 || loading5 || loading6 || loading7 || loading8 || loading9 || loading10 || loading11 || loading12 || loading13 || loading14 || loading15 || loading16 || loading17 || loading18 || loading19 || loading20 || loading21 || loading22 || loading23 || loading24 || loading25 || loading26 || loading27 || loading28) {
+  if (
+    loading1 ||
+    loading2 ||
+    loading3 ||
+    loading4 ||
+    loading5 ||
+    loading6 ||
+    loading7 ||
+    loading8 ||
+    loading9 ||
+    loading10 ||
+    loading11 ||
+    loading12 ||
+    loading13 ||
+    loading14 ||
+    loading15 ||
+    loading16 ||
+    loading17 ||
+    loading18 ||
+    loading19 ||
+    loading20 ||
+    loading21 ||
+    loading22 ||
+    loading23 ||
+    loading24 ||
+    loading25 ||
+    loading26 ||
+    loading27 ||
+    loading28
+  ) {
     return (
       <>
         <div

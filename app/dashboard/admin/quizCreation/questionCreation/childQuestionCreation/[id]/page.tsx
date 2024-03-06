@@ -42,8 +42,7 @@ const Page = () => {
     <div>
       {JSON.stringify(data)}
 
-
-      <ChildQuestionList/>
+      <ChildQuestionList />
     </div>
   )
 }

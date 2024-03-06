@@ -190,7 +190,6 @@ export const usePutSessions = create<SessionStore>((set) => ({
     }
   },
 
-
   putSessionsGlobalFinalPresentationDate: async (sessionId: string, finalPresentationDate: any) => {
     try {
       set({

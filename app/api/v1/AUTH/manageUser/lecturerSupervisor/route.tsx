@@ -34,35 +34,34 @@ export async function POST(request: NextRequest, response: NextResponse) {
     const lecturerIndex = getCurrentSession.Supervisor.findIndex((item) => item.User.email === body.lecturerEmail)
 
     const getFirstSession = await prisma.sessionYear.findFirstOrThrow({
-        where : {
-            isSelected: true
-        }
-      })
+      where: {
+        isSelected: true,
+      },
+    })
 
-      const getLecturerUser = await prisma.user.findFirstOrThrow({
-        where: {
-            email  : body.lecturerEmail
-        }
-      })
+    const getLecturerUser = await prisma.user.findFirstOrThrow({
+      where: {
+        email: body.lecturerEmail,
+      },
+    })
 
     if (lecturerIndex !== -1) {
-
       const updateCurrentSessionRevokeSv = await prisma.sessionYear.update({
         where: {
-            id: getFirstSession.id
+          id: getFirstSession.id,
         },
-        data : {
-            Supervisor: {
-                disconnect : {
-                    userId: getLecturerUser.id
-                }
-            }
-        }
+        data: {
+          Supervisor: {
+            disconnect: {
+              userId: getLecturerUser.id,
+            },
+          },
+        },
       })
 
       return NextResponse.json(
         {
-            updateCurrentSessionRevokeSv,
+          updateCurrentSessionRevokeSv,
         },
         {
           status: 200,
@@ -71,17 +70,17 @@ export async function POST(request: NextRequest, response: NextResponse) {
     }
 
     const updateCurrentSessionSetSv = await prisma.sessionYear.update({
-        where: {
-            id: getFirstSession.id
+      where: {
+        id: getFirstSession.id,
+      },
+      data: {
+        Supervisor: {
+          connect: {
+            userId: getLecturerUser.id,
+          },
         },
-        data : {
-            Supervisor: {
-                connect : {
-                    userId: getLecturerUser.id
-                }
-            }
-        }
-      })
+      },
+    })
 
     return NextResponse.json(
       {

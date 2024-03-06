@@ -3,7 +3,7 @@ import { create } from 'zustand'
 type SessionStore = {
   data: any
   loading: boolean
-  fetchData: (id : string) => Promise<void>
+  fetchData: (id: string) => Promise<void>
 }
 
 export const useGetSubjectById = create<SessionStore>((set) => ({

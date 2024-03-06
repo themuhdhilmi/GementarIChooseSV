@@ -83,31 +83,23 @@ export async function GET(request: NextRequest, response: NextResponse) {
       /////////////////////////////////////////  FUNCTION UPDATE STUDENT DECLINED IF SV FULL /////////////////////////////////////////
 
       let role = ''
-      let user : any = {}
+      let user: any = {}
 
       try {
-        
-
         const token = await getToken({
           req: request,
         })
-    
+
         user = await prisma.user.findUnique({
           where: {
             id: token?.sub,
           },
         })
-    
+
         if (user) {
           role = user.role
         }
-    
-      } catch (error) {
-        
-      }
-
-
-
+      } catch (error) {}
 
       if (role === 'ADMIN') {
         return NextResponse.json(
@@ -121,9 +113,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       }
 
       if (role === 'STUDENT') {
-
-        if(studentRaw.id === user?.id)
-        {
+        if (studentRaw.id === user?.id) {
           return NextResponse.json(
             {
               student: studentRaw,
@@ -133,7 +123,6 @@ export async function GET(request: NextRequest, response: NextResponse) {
             }
           )
         }
-
       }
 
       return NextResponse.json(

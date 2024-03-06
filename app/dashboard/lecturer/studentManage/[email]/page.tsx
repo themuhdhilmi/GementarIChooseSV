@@ -47,14 +47,12 @@ const Page = () => {
                   )
                 })}
                 {SupervisorDecline?.map((item: any, index: number) => {
-                  return (
-                    <>
-                      {/* <StudentDeclined student={item} /> */}
-                    </>
-                  )
+                  return <>{/* <StudentDeclined student={item} /> */}</>
                 })}
                 <div className="py-9 px-2 bg-slate-50 rounded-lg round my-5">
-                  <p>Approved Student({SupervisorAccepted?.length ?? 0}/{lecturerData?.lecturer?.LecturerInformation?.supervisorQuota ?? sessionData?.sessionSelected?.globalSupervisorQuota})</p>
+                  <p>
+                    Approved Student({SupervisorAccepted?.length ?? 0}/{lecturerData?.lecturer?.LecturerInformation?.supervisorQuota ?? sessionData?.sessionSelected?.globalSupervisorQuota})
+                  </p>
                   {SupervisorAccepted?.map((item: any, index: number) => {
                     return (
                       <>
