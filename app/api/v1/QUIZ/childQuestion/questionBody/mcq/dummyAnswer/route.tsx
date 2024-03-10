@@ -1,87 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server'
-import bcrypt from 'bcrypt'
 import prisma from '@/prisma/client'
 import { z } from 'zod'
 
-const schemaPOST = z.object({
-  questionId: z.string(),
-  questionType: z.enum(['MULTI_CHOICE', 'ESSAY', 'FILL_IN_THE_BLANKS']),
+//TODO Change answer to dummyanswer
+
+const schemaCREATE = z.object({
+  childQuestionId: z.string(),
 })
 export async function POST(request: NextRequest, response: NextResponse) {
   try {
     const body = await request.json()
 
-    const validation = schemaPOST.safeParse(body)
+    const validation = schemaCREATE.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
         status: 400,
       })
     }
-
-    const getGreatestChildQuestion = await prisma.childQuestion.findFirst({
-      where: {
-        questionId: body.questionId,
-      },
-      orderBy: [
-        {
-          sortingPosition: 'desc',
-        },
-      ],
-    })
-
-    const createChildQuestion = await prisma.childQuestion.create({
+    const createAnswer = await prisma.answerString.create({
       data: {
-        questionType: body.questionType,
-        questionId: body.questionId,
-        sortingPosition: (getGreatestChildQuestion?.sortingPosition ?? 0) + 1,
+        string: 'Empty Answer',
+        point: 1,
+        QuestionBody: {
+          connect: {
+            id: body.childQuestionId,
+          },
+        },
       },
     })
 
     return NextResponse.json(
       {
-        createChildQuestion,
-      },
-      {
-        status: 200,
-      }
-    )
-  } catch (error) {
-    return NextResponse.json(
-      {
-        error,
-      },
-      {
-        status: 400,
-      }
-    )
-  }
-}
-
-const schemaDELETE = z.object({
-  childQuestionId: z.string(),
-})
-export async function DELETE(request: NextRequest, response: NextResponse) {
-  try {
-    const body = await request.json()
-
-    const validation = schemaDELETE.safeParse(body)
-
-    if (!validation.success) {
-      return NextResponse.json(validation.error.errors, {
-        status: 400,
-      })
-    }
-
-    const deleteChildQuestion = await prisma.childQuestion.delete({
-      where: {
-        id: body.childQuestionId,
-      },
-    })
-
-    return NextResponse.json(
-      {
-        deleteChildQuestion,
+        createAnswer,
       },
       {
         status: 200,
@@ -100,8 +51,9 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
 }
 
 const schemaUPDATE = z.object({
-  childQuestionId: z.string(),
-  label: z.string().nullable(),
+  answerStringId: z.string(),
+  answerString: z.string(),
+  point: z.number(),
 })
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
@@ -115,18 +67,62 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       })
     }
 
-    const updateLabel = await prisma.childQuestion.update({
+    // IMPLEMENT
+    const updateAnswer = await prisma.answerString.update({
       where: {
-        id: body.childQuestionId,
+        id: body.answerStringId,
       },
       data: {
-        label: body.label ?? undefined,
+        string: body.answerString,
+        point: body.point,
       },
     })
 
     return NextResponse.json(
       {
-        updateLabel,
+        updateAnswer,
+      },
+      {
+        status: 200,
+      }
+    )
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error,
+      },
+      {
+        status: 400,
+      }
+    )
+  }
+}
+
+const schemaDELETE = z.object({
+  answerStringId: z.string(),
+})
+export async function DELETE(request: NextRequest, response: NextResponse) {
+  try {
+    const body = await request.json()
+
+    const validation = schemaDELETE.safeParse(body)
+
+    if (!validation.success) {
+      return NextResponse.json(validation.error.errors, {
+        status: 400,
+      })
+    }
+
+    // IMPLEMENT
+    const deleteAnswer = await prisma.answerString.delete({
+      where: {
+        id: body.answerStringId,
+      },
+    })
+
+    return NextResponse.json(
+      {
+        deleteAnswer,
       },
       {
         status: 200,

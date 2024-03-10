@@ -186,32 +186,31 @@ model Question {
 }
 
 model ChildQuestion {
-  id           String              @id @default(cuid())
-  questionBody QuestionBody[]
-  questionType QuestionType        @default(MULTI_CHOICE)
-  answerDummy  AnswerStringDummy[]
-  StudentScore StudentScore[]
-  Question     Question?           @relation(fields: [questionId], references: [id])
-  questionId   String?
+  id              String              @id @default(cuid())
+  label           String              @default("Empty Label")
+  sortingPosition Int                 @default(1)
+  questionBody    QuestionBody[]
+  questionType    QuestionType        @default(MULTI_CHOICE)
+  answerDummy     AnswerStringDummy[]
+  StudentScore    StudentScore[]
+  Question        Question?           @relation(fields: [questionId], references: [id])
+  questionId      String?
 }
 
 model QuestionBody {
   id              String         @id @default(cuid())
   string          String
   stringBefore    String?
-  point           Int            @default(1)
-  answer          AnswerString   @relation(fields: [answerStringId], references: [id])
+  answer          AnswerString[]
   childQuestion   ChildQuestion? @relation(fields: [childQuestionId], references: [id])
   childQuestionId String?
-  studentScoreId  String?
-  answerStringId  String
 }
 
 model AnswerString {
-  id              String         @id @default(cuid())
-  string          String
-  questionBodyId  String?
-  QuestionBody    QuestionBody[]
+  id             String         @id @default(cuid())
+  string         String
+  point          Int            @default(1)
+  QuestionBody   QuestionBody[]
 }
 
 model AnswerStringDummy {

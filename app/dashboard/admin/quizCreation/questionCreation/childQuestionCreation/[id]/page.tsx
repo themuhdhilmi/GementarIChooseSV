@@ -1,48 +1,80 @@
 'use client'
-import { useAddQuestion } from '@/app/utilities/storage/quiz/useAddQuestion'
 import { useGetQuestionById } from '@/app/utilities/storage/quiz/useGetQuestionById'
-import { useGetSubject } from '@/app/utilities/storage/quiz/useGetSubject'
-import { useGetSubjectById } from '@/app/utilities/storage/quiz/useGetSubjectById'
-import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { ChildQuestionList } from './components/ChildQuestionList'
-
+import { Button, Tooltip } from 'flowbite-react'
+import { breakpoints } from '@/app/config/breakpoints'
+import { useMediaQuery } from 'usehooks-ts'
+import { useAddChildQuestion } from '@/app/utilities/storage/quiz/useAddChildQuestion'
+import { useDeleteChildQuestion } from '@/app/utilities/storage/quiz/useDeleteChildQuestion'
+import { useSortChildQuestion } from '@/app/utilities/storage/quiz/useSortChildQuestion'
+import { useUpdateChildQuestion } from '@/app/utilities/storage/quiz/useUpdateChildQuestion'
+import { useUpdateChildQuestionBodyMCQ } from '@/app/utilities/storage/quiz/useUpdateChildQuestionBodyMCQ'
+import { useAddAnswerMCQ } from '@/app/utilities/storage/quiz/useAddAnswerMCQ'
+import { useAddDummyAnswerMCQ } from '@/app/utilities/storage/quiz/useAddDummyAnswerMCQ'
+import { useDeleteAnswerMCQ } from '@/app/utilities/storage/quiz/useDeleteAnswerMCQ'
+// questionType: z.enum(['MULTI_CHOICE', 'ESSAY', 'FILL_IN_THE_BLANKS']),
 const Page = () => {
   const params = useParams<{
     id: string
   }>()
 
   const { fetchData, data } = useGetQuestionById()
-  const { sendData, data: addQuestionData } = useAddQuestion()
+  const { sendData, data: addChildQuestionData } = useAddChildQuestion()
 
-  const [title, setTitle] = useState('')
-  const [timer, setTimer] = useState(30)
+  const { data: deleteChildQuestionData } = useDeleteChildQuestion()
+  const { data: userSortChildrenQuestionData } = useSortChildQuestion()
+  const { data: useUpdateChildQuestionData } = useUpdateChildQuestion()
+  const { data: MCQQuestionData } = useUpdateChildQuestionBodyMCQ()
+  const { data: sendAddDummyAnswerMCQ } = useAddDummyAnswerMCQ()
+  const { data: sendAddAnswerMCQ } = useAddAnswerMCQ()
+  const { data: sendDeleteAnswerMCQ } = useDeleteAnswerMCQ()
+  const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 
   useEffect(() => {
     fetchData(decodeURIComponent(params.id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addQuestionData])
+  }, [addChildQuestionData, deleteChildQuestionData, userSortChildrenQuestionData, useUpdateChildQuestionData, MCQQuestionData, sendAddDummyAnswerMCQ, sendAddAnswerMCQ,sendDeleteAnswerMCQ])
 
-  const addSubject = () => {
-    if (title === '') return
-
+  const createChildQuestion = (type: string) => {
     const postData = {
-      title: title,
-      timeLimit: timer,
-      subjectId: params.id,
+      questionId: params.id,
+      questionType: type,
     }
 
-    // sendDataAddSubject(postData)
     sendData(postData)
-    setTitle('')
   }
 
   return (
-    <div>
-      {JSON.stringify(data)}
-
-      <ChildQuestionList />
+    <div className={`${!isDesktop ? 'px-24' : 'px-0'}`}>
+      <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg py-5">
+        <div className="overflow-x-auto">
+          <div className="flex flex-row py-5">
+            <div className="w-1/2 font-medium ">
+              <p className="underline decoration-1 ">Session Manager</p>
+            </div>
+          </div>
+          <div className="bg-slate-50 flex flex-row-reverse gap-1 pr-4 py-3">
+            <Tooltip content="Essay">
+              <button onClick={() => createChildQuestion('ESSAY')} className="btn btn-xs rounded-lg">
+                Add Essay Question
+              </button>
+            </Tooltip>
+            <Tooltip content="Fill In The Blank Question">
+              <button onClick={() => createChildQuestion('FILL_IN_THE_BLANKS')} className="btn btn-xs rounded-lg">
+                Add FITB Question
+              </button>
+            </Tooltip>
+            <Tooltip content="Multiple Choice Question">
+              <button onClick={() => createChildQuestion('MULTI_CHOICE')} className="btn btn-xs rounded-lg">
+                Add MCQ Question
+              </button>
+            </Tooltip>
+          </div>
+          <ChildQuestionList questionId={params.id} childQuestion={data?.subject?.childQuestion} />
+        </div>
+      </div>
     </div>
   )
 }

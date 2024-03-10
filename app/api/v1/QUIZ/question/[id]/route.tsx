@@ -9,6 +9,9 @@ export async function GET(request: NextRequest, { params }: any) {
       },
       include: {
         childQuestion: {
+          orderBy: {
+            sortingPosition: 'asc', // Order by sortingPosition ascending to get the next item
+          },
           include: {
             questionBody: {
               include: {
