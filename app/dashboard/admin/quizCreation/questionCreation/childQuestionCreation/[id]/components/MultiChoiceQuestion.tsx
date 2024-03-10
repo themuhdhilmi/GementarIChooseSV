@@ -1,10 +1,13 @@
 'use client'
-import { useAddAnswerMCQ } from '@/app/utilities/storage/quiz/useAddAnswerMCQ'
-import { useAddDummyAnswerMCQ } from '@/app/utilities/storage/quiz/useAddDummyAnswerMCQ'
-import { useDeleteAnswerMCQ } from '@/app/utilities/storage/quiz/useDeleteAnswerMCQ'
+import { useAddAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useAddAnswerMCQ'
+import { useAddDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useAddDummyAnswerMCQ'
+import { useDeleteAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteAnswerMCQ'
 import { useUpdateChildQuestion } from '@/app/utilities/storage/quiz/useUpdateChildQuestion'
-import { useUpdateChildQuestionBodyMCQ } from '@/app/utilities/storage/quiz/useUpdateChildQuestionBodyMCQ'
+import { useUpdateChildQuestionBodyMCQ } from '@/app/utilities/storage/quiz/MCQ/useUpdateChildQuestionBodyMCQ'
 import React, { useEffect, useState } from 'react'
+import Answer from './MCQ/Answer'
+import { useDeleteDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteDummyAnswerMCQ'
+import DummyAnswer from './MCQ/DummyAnswer'
 
 const MultiChoiceQuestion = (props: any) => {
   const [canEditLabel, setCanEditLabel] = useState(false)
@@ -13,9 +16,10 @@ const MultiChoiceQuestion = (props: any) => {
   const [question, setQuestion] = useState(props?.questionBody[0]?.string)
   const { sendData } = useUpdateChildQuestion()
   const { sendData: sendDataMCQQuestion } = useUpdateChildQuestionBodyMCQ()
-  const { sendData: sendAddDummyAnswerMCQ } = useAddDummyAnswerMCQ()
   const { sendData: sendAddAnswerMCQ } = useAddAnswerMCQ()
   const { sendData: sendDeleteAnswerMCQ } = useDeleteAnswerMCQ()
+  const { sendData: sendAddDummyAnswerMCQ } = useAddDummyAnswerMCQ()
+  const { sendData: sendDeleteDummyAnswerMCQ } = useDeleteDummyAnswerMCQ()
 
   const doEditLabel = () => {
     const postData = {
@@ -39,7 +43,7 @@ const MultiChoiceQuestion = (props: any) => {
 
   const doAddDummyAnswer = () => {
     const postData = {
-      childQuestionId: props?.questionBody[0]?.id,
+      childQuestionId: props?.questionId,
     }
 
     sendAddDummyAnswerMCQ(postData)
@@ -53,12 +57,20 @@ const MultiChoiceQuestion = (props: any) => {
     sendAddAnswerMCQ(postData)
   }
 
-  const doDeleteAnswer = (id : string) => {
+  const doDeleteAnswer = (id: string) => {
     const postData = {
       answerStringId: id,
     }
 
     sendDeleteAnswerMCQ(postData)
+  }
+
+  const doDeleteDummyAnswer = (id: string) => {
+    const postData = {
+      answerStringDummyId: id,
+    }
+
+    sendDeleteDummyAnswerMCQ(postData)
   }
 
   return (
@@ -134,14 +146,7 @@ const MultiChoiceQuestion = (props: any) => {
                   {item?.answer?.map((item: any, index: number) => {
                     return (
                       <div key={index} className="flex w-full">
-                        <div className='basis-4/6'>{item.string}</div>
-                        <div className='basis-1/6'>[{item.point} Score]</div>
-                        <div className='basis-1/6'>
-                          <div className="flex flex-row-reverse w-full gap-1 ">
-                            <button onClick={() => doDeleteAnswer(item?.id)} className="btn btn-xs bg-red-700 text-white rounded-lg">Delete</button>
-                            <button className="btn btn-xs rounded-lg">Edit</button>
-                          </div>
-                        </div>
+                        <Answer string={item?.string} point={item?.point} doDeleteAnswer={doDeleteAnswer} id={item?.id} />
                       </div>
                     )
                   })}
@@ -161,24 +166,17 @@ const MultiChoiceQuestion = (props: any) => {
           </div>
         </div>
         {props?.answerDummy?.map((item: any, index: number) => {
+
+
           return (
-            <div key={index}>
-              <div className="flex flex-row w-full py-1">
-                <div className="flex-none">{item.string}</div>
-                <div className="flex flex-row-reverse w-full">
-                  <div className="flex flex-row-reverse w-full gap-1">
-                    {index === 0 ? '' : <button className="btn btn-xs bg-red-700 text-white rounded-lg">Delete</button>}
-                    <button className="btn btn-xs rounded-lg">Edit</button>
-                  </div>
-                </div>
-              </div>
+            <div key={index} className="flex w-full">
+              <DummyAnswer string={item?.string} point={item?.point} doDeleteAnswer={doDeleteDummyAnswer} id={item?.id} />
             </div>
           )
         })}
       </div>
       <div className="bg-slate-50 p-3">
-        <div>Total Score [please do da logic]</div>
-        {props?.questionBody[0]?.point}
+        <div>Total Score [{props?.questionBody[0]?.answer.reduce((acc: any, currentValue: any) => acc + currentValue.point, 0)}]</div>
       </div>
     </div>
   )

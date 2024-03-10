@@ -30,10 +30,16 @@ export function ChildQuestionList(props: any) {
     <div className="bg-white">
       <Accordion alwaysOpen>
         {props?.childQuestion?.map((item: any, index: number) => {
+          const totalPoints = item?.questionBody.reduce((acc: any, currentValue: any) => {
+            // For each object in the outer array, sum up the points in the answer array
+            const pointsFromAnswers = currentValue.answer.reduce((subAcc: any, answer: any) => subAcc + answer.point, 0)
+            return acc + pointsFromAnswers
+          }, 0)
+
           return (
             <Accordion.Panel key={index}>
               <Accordion.Title>
-                {item?.label ?? 'Empty label'} [{item?.questionType}] {item?.sortingPosition}
+                {item?.label ?? 'Empty label'} [{item?.questionType}]  [Total Score : {totalPoints}]
               </Accordion.Title>
               <Accordion.Content>
                 <MultiChoiceQuestion questionId={item?.id} label={item?.label ?? 'Empty label'} questionBody={item?.questionBody} answerDummy={item?.answerDummy} />

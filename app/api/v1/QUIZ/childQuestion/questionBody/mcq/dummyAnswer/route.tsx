@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/prisma/client'
 import { z } from 'zod'
 
-//TODO Change answer to dummyanswer
-
 const schemaCREATE = z.object({
   childQuestionId: z.string(),
 })
@@ -18,11 +16,10 @@ export async function POST(request: NextRequest, response: NextResponse) {
         status: 400,
       })
     }
-    const createAnswer = await prisma.answerString.create({
+    const createAnswer = await prisma.answerStringDummy.create({
       data: {
-        string: 'Empty Answer',
-        point: 1,
-        QuestionBody: {
+        string: 'Empty Dummy Answer',
+        childQuestion: {
           connect: {
             id: body.childQuestionId,
           },
@@ -51,9 +48,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
 }
 
 const schemaUPDATE = z.object({
-  answerStringId: z.string(),
+  answerStringDummyId: z.string(),
   answerString: z.string(),
-  point: z.number(),
 })
 export async function PUT(request: NextRequest, response: NextResponse) {
   try {
@@ -68,13 +64,12 @@ export async function PUT(request: NextRequest, response: NextResponse) {
     }
 
     // IMPLEMENT
-    const updateAnswer = await prisma.answerString.update({
+    const updateAnswer = await prisma.answerStringDummy.update({
       where: {
-        id: body.answerStringId,
+        id: body.answerStringDummyId,
       },
       data: {
         string: body.answerString,
-        point: body.point,
       },
     })
 
@@ -99,7 +94,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
 }
 
 const schemaDELETE = z.object({
-  answerStringId: z.string(),
+  answerStringDummyId: z.string(),
 })
 export async function DELETE(request: NextRequest, response: NextResponse) {
   try {
@@ -114,9 +109,9 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
     }
 
     // IMPLEMENT
-    const deleteAnswer = await prisma.answerString.delete({
+    const deleteAnswer = await prisma.answerStringDummy.delete({
       where: {
-        id: body.answerStringId,
+        id: body.answerStringDummyId,
       },
     })
 

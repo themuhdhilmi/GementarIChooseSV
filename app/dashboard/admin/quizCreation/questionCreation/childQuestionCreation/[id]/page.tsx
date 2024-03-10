@@ -10,10 +10,13 @@ import { useAddChildQuestion } from '@/app/utilities/storage/quiz/useAddChildQue
 import { useDeleteChildQuestion } from '@/app/utilities/storage/quiz/useDeleteChildQuestion'
 import { useSortChildQuestion } from '@/app/utilities/storage/quiz/useSortChildQuestion'
 import { useUpdateChildQuestion } from '@/app/utilities/storage/quiz/useUpdateChildQuestion'
-import { useUpdateChildQuestionBodyMCQ } from '@/app/utilities/storage/quiz/useUpdateChildQuestionBodyMCQ'
-import { useAddAnswerMCQ } from '@/app/utilities/storage/quiz/useAddAnswerMCQ'
-import { useAddDummyAnswerMCQ } from '@/app/utilities/storage/quiz/useAddDummyAnswerMCQ'
-import { useDeleteAnswerMCQ } from '@/app/utilities/storage/quiz/useDeleteAnswerMCQ'
+import { useUpdateChildQuestionBodyMCQ } from '@/app/utilities/storage/quiz/MCQ/useUpdateChildQuestionBodyMCQ'
+import { useAddAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useAddAnswerMCQ'
+import { useAddDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useAddDummyAnswerMCQ'
+import { useDeleteAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteAnswerMCQ'
+import { useUpdateAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useUpdateAnswerMCQ'
+import { useDeleteDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteDummyAnswerMCQ'
+import { useUpdateDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useUpdateDummyAnswerMCQ'
 // questionType: z.enum(['MULTI_CHOICE', 'ESSAY', 'FILL_IN_THE_BLANKS']),
 const Page = () => {
   const params = useParams<{
@@ -30,12 +33,15 @@ const Page = () => {
   const { data: sendAddDummyAnswerMCQ } = useAddDummyAnswerMCQ()
   const { data: sendAddAnswerMCQ } = useAddAnswerMCQ()
   const { data: sendDeleteAnswerMCQ } = useDeleteAnswerMCQ()
+  const { data : updateAnswerMCQ } = useUpdateAnswerMCQ()
+  const { data: sendDeleteDummyAnswerMCQ } = useDeleteDummyAnswerMCQ()
+  const { data: updateDummyAnswerMCQData } = useUpdateDummyAnswerMCQ()
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 
   useEffect(() => {
     fetchData(decodeURIComponent(params.id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [addChildQuestionData, deleteChildQuestionData, userSortChildrenQuestionData, useUpdateChildQuestionData, MCQQuestionData, sendAddDummyAnswerMCQ, sendAddAnswerMCQ,sendDeleteAnswerMCQ])
+  }, [updateDummyAnswerMCQData, addChildQuestionData, deleteChildQuestionData, userSortChildrenQuestionData, useUpdateChildQuestionData, MCQQuestionData, sendAddDummyAnswerMCQ, sendAddAnswerMCQ,sendDeleteAnswerMCQ, updateAnswerMCQ, sendDeleteDummyAnswerMCQ])
 
   const createChildQuestion = (type: string) => {
     const postData = {
@@ -52,7 +58,7 @@ const Page = () => {
         <div className="overflow-x-auto">
           <div className="flex flex-row py-5">
             <div className="w-1/2 font-medium ">
-              <p className="underline decoration-1 ">Session Manager</p>
+              <p className="underline decoration-1 ">Question Creation</p>
             </div>
           </div>
           <div className="bg-slate-50 flex flex-row-reverse gap-1 pr-4 py-3">

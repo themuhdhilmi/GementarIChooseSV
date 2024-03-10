@@ -23,8 +23,11 @@ import { useUploadStudentPoster } from '../utilities/storage/student/useUploadSt
 import { useAddChildQuestion } from '../utilities/storage/quiz/useAddChildQuestion'
 import { useSortChildQuestion } from '../utilities/storage/quiz/useSortChildQuestion'
 import { useUpdateChildQuestion } from '../utilities/storage/quiz/useUpdateChildQuestion'
-import { useUpdateChildQuestionBodyMCQ } from '../utilities/storage/quiz/useUpdateChildQuestionBodyMCQ'
-import { useDeleteAnswerMCQ } from '../utilities/storage/quiz/useDeleteAnswerMCQ'
+import { useUpdateChildQuestionBodyMCQ } from '../utilities/storage/quiz/MCQ/useUpdateChildQuestionBodyMCQ'
+import { useDeleteAnswerMCQ } from '../utilities/storage/quiz/MCQ/useDeleteAnswerMCQ'
+import { useUpdateAnswerMCQ } from '../utilities/storage/quiz/MCQ/useUpdateAnswerMCQ'
+import { useDeleteDummyAnswerMCQ } from '../utilities/storage/quiz/MCQ/useDeleteDummyAnswerMCQ'
+import { useUpdateDummyAnswerMCQ } from '../utilities/storage/quiz/MCQ/useUpdateDummyAnswerMCQ'
 
 const LoadingLeftBottom = () => {
   const { loading: loading1 } = useGetsessions()
@@ -58,8 +61,11 @@ const LoadingLeftBottom = () => {
   const { loading: loading29 } = useAddChildQuestion()
   const { loading: loading30 } = useSortChildQuestion()
   const { loading: loading31 } = useUpdateChildQuestion()
-  const { loading: loading32 }= useUpdateChildQuestionBodyMCQ()
+  const { loading: loading32 } = useUpdateChildQuestionBodyMCQ()
   const { loading: loading33 } = useDeleteAnswerMCQ()
+  const { loading: loading34 } = useUpdateAnswerMCQ()
+  const { loading: loading35 } = useDeleteDummyAnswerMCQ()
+  const { loading: loading36 } = useUpdateDummyAnswerMCQ()
   if (
     loading1 ||
     loading2 ||
@@ -93,7 +99,10 @@ const LoadingLeftBottom = () => {
     loading30 ||
     loading31 ||
     loading32 ||
-    loading33
+    loading33 ||
+    loading34 ||
+    loading35 ||
+    loading36
   ) {
     return (
       <>
