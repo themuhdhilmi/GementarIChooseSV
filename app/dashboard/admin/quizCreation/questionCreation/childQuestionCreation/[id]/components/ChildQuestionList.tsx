@@ -3,6 +3,7 @@ import { Accordion } from 'flowbite-react'
 import MultiChoiceQuestion from './MultiChoiceQuestion'
 import { useDeleteChildQuestion } from '@/app/utilities/storage/quiz/useDeleteChildQuestion'
 import { useSortChildQuestion } from '@/app/utilities/storage/quiz/useSortChildQuestion'
+import EssayQuestion from './EssayQuestion'
 
 export function ChildQuestionList(props: any) {
   const { sendData } = useDeleteChildQuestion()
@@ -42,7 +43,9 @@ export function ChildQuestionList(props: any) {
                 {item?.label ?? 'Empty label'} [{item?.questionType}]  [Total Score : {totalPoints}]
               </Accordion.Title>
               <Accordion.Content>
-                <MultiChoiceQuestion questionId={item?.id} label={item?.label ?? 'Empty label'} questionBody={item?.questionBody} answerDummy={item?.answerDummy} />
+                {item?.questionType === "MULTI_CHOICE" ? <MultiChoiceQuestion questionId={item?.id} label={item?.label ?? 'Empty label'} questionBody={item?.questionBody} answerDummy={item?.answerDummy} /> : ''}
+                {item?.questionType === "ESSAY" ? <EssayQuestion questionId={item?.id} label={item?.label ?? 'Empty label'} item={item} questionBody={item?.questionBody} /> : ''}
+                
                 <div className="flex flex-row-reverse py-3 px-3 gap-1">
                   <div>
                     <button

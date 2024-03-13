@@ -7,9 +7,6 @@ import SessionManager from './components/SessionManager'
 import { useSetSessions } from '@/app/utilities/storage/user/useSetSessions'
 import { usePutSessions } from '@/app/utilities/storage/user/usePutSessions'
 
-//TODO Add Final Presentation Date
-//TODO Update Final presentation Date Counter Header
-
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
   const { loading, fetchData, data: sessions } = useGetsessions()
