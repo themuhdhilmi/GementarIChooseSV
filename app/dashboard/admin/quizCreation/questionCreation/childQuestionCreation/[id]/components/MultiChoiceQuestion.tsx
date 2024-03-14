@@ -175,9 +175,9 @@ const MultiChoiceQuestion = (props: any) => {
           )
         })}
       </div>
-      <div className="bg-slate-50 p-3">
+      {/* <div className="bg-slate-50 p-3">
         <div>Total Score [{props?.questionBody[0]?.answer.reduce((acc: any, currentValue: any) => acc + currentValue.point, 0)}]</div>
-      </div>
+      </div> */}
     </div>
   )
 }

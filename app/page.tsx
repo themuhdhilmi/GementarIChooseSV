@@ -34,9 +34,9 @@ import { useMediaQuery } from 'usehooks-ts'
 //// [Admin Dashboard]    Update Final presentation Date Counter Header.
 
 //TODO HM TARGET
-//// 4/10 - Finished MULTI_CHOICE
-//TODO 10/10 - Finished ESSAY
-//TODO 7/10 - Finished FTB
+//// Finished MULTI_CHOICE
+//// Finished ESSAY
+//TODO 14/3 - Finished FTB
 
 //TODO [API | QUIZ] subject
 //TODO [API | QUIZ] question

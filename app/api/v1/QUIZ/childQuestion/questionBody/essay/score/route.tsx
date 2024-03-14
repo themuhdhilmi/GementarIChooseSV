@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
-import bcrypt from 'bcrypt'
 import prisma from '@/prisma/client'
 import { z } from 'zod'
 
-const schemaPOST = z.object({
-  questionBodyId: z.string(),
-  questionType: z.enum(['MULTI_CHOICE', 'ESSAY', 'FILL_IN_THE_BLANKS']),
+const schemaPUT = z.object({
+  childQuestionId: z.string(),
+  point: z.number(),
 })
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function PUT(request: NextRequest, response: NextResponse) {
   try {
     const body = await request.json()
 
-    const validation = schemaPOST.safeParse(body)
+    const validation = schemaPUT.safeParse(body)
 
     if (!validation.success) {
       return NextResponse.json(validation.error.errors, {
@@ -19,24 +18,76 @@ export async function POST(request: NextRequest, response: NextResponse) {
       })
     }
 
-    //TODO SAMBUNG SINI [9:00 AM - 13/3/2024]
-
-    const createAnswer = prisma.answerString.create({
-        data: {
-            string : 'generated answer for essay point',
-            point: 4,
-            QuestionBody : {
-                connect : {
-                    id: body.questionBodyId
-                }
-            }
-        }
+    const findQuestionBody = await prisma.questionBody.findFirst({
+      where: {
+        childQuestion: {
+          id: body.childQuestionId,
+        },
+      },
+      include: {
+        childQuestion: {
+          include: {
+            questionBody: {
+              include: {
+                answer: true,
+              },
+            },
+          },
+        },
+      },
     })
 
+    if (!findQuestionBody) {
+      const createQuestionBody = await prisma.questionBody.create({
+        data: {
+          string: '[SERVER] Auto Generated for Essay',
+          childQuestion: {
+            connect: {
+              id: body.childQuestionId,
+            },
+          },
+        },
+      })
+
+      const createAnswerString = await prisma.answerString.create({
+        data: {
+          string: '[SERVER] Auto Generated for Essay',
+          point: body.point,
+          QuestionBody: {
+            connect: {
+              id: createQuestionBody.id,
+            },
+          },
+        },
+      })
+
+      return NextResponse.json(
+        {
+          createQuestionBody,
+          createAnswerString,
+        },
+        {
+          status: 200,
+        }
+      )
+    }
+
+    const updateAnswerString = await prisma.answerString.updateMany({
+      where: {
+        QuestionBody: {
+          every: {
+            id: findQuestionBody.id,
+          },
+        },
+      },
+      data: {
+        point: body.point,
+      },
+    })
 
     return NextResponse.json(
       {
-        createChildQuestion : '',
+        updateAnswerString,
       },
       {
         status: 200,

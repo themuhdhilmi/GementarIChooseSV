@@ -44,7 +44,7 @@ export function ChildQuestionList(props: any) {
               </Accordion.Title>
               <Accordion.Content>
                 {item?.questionType === "MULTI_CHOICE" ? <MultiChoiceQuestion questionId={item?.id} label={item?.label ?? 'Empty label'} questionBody={item?.questionBody} answerDummy={item?.answerDummy} /> : ''}
-                {item?.questionType === "ESSAY" ? <EssayQuestion questionId={item?.id} label={item?.label ?? 'Empty label'} item={item} questionBody={item?.questionBody} /> : ''}
+                {item?.questionType === "ESSAY" ? <EssayQuestion totalPoints={totalPoints} questionId={item?.id} label={item?.label ?? 'Empty label'} item={item} questionBody={item?.questionBody} /> : ''}
                 
                 <div className="flex flex-row-reverse py-3 px-3 gap-1">
                   <div>

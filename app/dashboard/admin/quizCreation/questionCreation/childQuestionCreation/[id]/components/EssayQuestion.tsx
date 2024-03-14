@@ -20,7 +20,6 @@ const EssayQuestion = (props: any) => {
   }
   return (
     <div className="flex flex-col gap-2">
-        {JSON.stringify(props?.item)}
       <div className="bg-slate-50 p-3">
         <div className="flex flex-row w-full">
           <div className="flex-none">Label</div>
@@ -58,13 +57,12 @@ const EssayQuestion = (props: any) => {
             </button>
           </div>
         </div>
-
         <div className="flex w-full">
-          <SetScore />
+          <SetScore childQuestionId={props?.item?.id} point={props?.totalPoints}/>
         </div>
       </div>
 
-    </div>
+    </div>  
   )
 }
 

@@ -17,6 +17,7 @@ import { useDeleteAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteAn
 import { useUpdateAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useUpdateAnswerMCQ'
 import { useDeleteDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteDummyAnswerMCQ'
 import { useUpdateDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useUpdateDummyAnswerMCQ'
+import { useUpdateScore } from '@/app/utilities/storage/quiz/ESSAY/useUpdateScore'
 // questionType: z.enum(['MULTI_CHOICE', 'ESSAY', 'FILL_IN_THE_BLANKS']),
 const Page = () => {
   const params = useParams<{
@@ -36,12 +37,13 @@ const Page = () => {
   const { data : updateAnswerMCQ } = useUpdateAnswerMCQ()
   const { data: sendDeleteDummyAnswerMCQ } = useDeleteDummyAnswerMCQ()
   const { data: updateDummyAnswerMCQData } = useUpdateDummyAnswerMCQ()
+  const { data: updateScoreData } = useUpdateScore();
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 
   useEffect(() => {
     fetchData(decodeURIComponent(params.id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updateDummyAnswerMCQData, addChildQuestionData, deleteChildQuestionData, userSortChildrenQuestionData, useUpdateChildQuestionData, MCQQuestionData, sendAddDummyAnswerMCQ, sendAddAnswerMCQ,sendDeleteAnswerMCQ, updateAnswerMCQ, sendDeleteDummyAnswerMCQ])
+  }, [updateScoreData, updateDummyAnswerMCQData, addChildQuestionData, deleteChildQuestionData, userSortChildrenQuestionData, useUpdateChildQuestionData, MCQQuestionData, sendAddDummyAnswerMCQ, sendAddAnswerMCQ,sendDeleteAnswerMCQ, updateAnswerMCQ, sendDeleteDummyAnswerMCQ])
 
   const createChildQuestion = (type: string) => {
     const postData = {
