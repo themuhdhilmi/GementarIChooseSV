@@ -9,7 +9,7 @@ import Answer from './MCQ/Answer'
 import { useDeleteDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteDummyAnswerMCQ'
 import DummyAnswer from './MCQ/DummyAnswer'
 
-const MultiChoiceQuestion = (props: any) => {
+const FillInTheBlank = (props: any) => {
   const [canEditLabel, setCanEditLabel] = useState(false)
   const [canEditQuestion, setCanEditQuestion] = useState(false)
   const [label, setLabel] = useState(props?.label)
@@ -84,7 +84,6 @@ const MultiChoiceQuestion = (props: any) => {
             </button>
           </div>
         </div>
-
         {canEditLabel ? (
           <div className="flex flex-row my-2">
             <div className="flex w-full">
@@ -102,9 +101,9 @@ const MultiChoiceQuestion = (props: any) => {
           </div>
         )}
       </div>
-
       <div className="bg-slate-50 p-3">
         <div className="flex flex-row w-full">
+          {'//TODO PLEASE DO PLEASE DO PLEASE DO FOR FITB'}
           <div className="flex-none">Question</div>
           <div className="flex flex-row-reverse w-full">
             <button onClick={() => setCanEditQuestion(!canEditQuestion)} className="btn btn-xs rounded-lg">
@@ -180,4 +179,4 @@ const MultiChoiceQuestion = (props: any) => {
   )
 }
 
-export default MultiChoiceQuestion
+export default FillInTheBlank

@@ -63,7 +63,7 @@ const Page = () => {
               <p className="underline decoration-1 ">Question Creation</p>
             </div>
           </div>
-          <div className="bg-slate-50 flex flex-row-reverse gap-1 pr-4 py-3">
+          <div className="flex flex-row-reverse gap-1 pr-4 py-3">
             <Tooltip content="Essay">
               <button onClick={() => createChildQuestion('ESSAY')} className="btn btn-xs rounded-lg">
                 Add Essay Question
