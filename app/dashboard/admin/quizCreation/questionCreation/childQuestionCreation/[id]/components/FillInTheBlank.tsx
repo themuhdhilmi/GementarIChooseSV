@@ -5,7 +5,7 @@ import { useDeleteAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteAn
 import { useUpdateChildQuestion } from '@/app/utilities/storage/quiz/useUpdateChildQuestion'
 import { useUpdateChildQuestionBodyMCQ } from '@/app/utilities/storage/quiz/MCQ/useUpdateChildQuestionBodyMCQ'
 import React, { useEffect, useState } from 'react'
-import Answer from './MCQ/Answer'
+import Answer from './FITB/Answer'
 import { useDeleteDummyAnswerMCQ } from '@/app/utilities/storage/quiz/MCQ/useDeleteDummyAnswerMCQ'
 import DummyAnswer from './MCQ/DummyAnswer'
 
@@ -102,13 +102,10 @@ const FillInTheBlank = (props: any) => {
         )}
       </div>
       <div className="bg-slate-50 p-3">
-        <div className="flex flex-row w-full">
-          {'//TODO PLEASE DO PLEASE DO PLEASE DO FOR FITB'}
-          <div className="flex-none">Question</div>
-          <div className="flex flex-row-reverse w-full">
-            <button onClick={() => setCanEditQuestion(!canEditQuestion)} className="btn btn-xs rounded-lg">
-              Edit
-            </button>
+        <div className="flex flex-col w-full">
+          <div className="flex-none w-full">Question</div>
+          <div className="flex w-full ">
+            <Answer />
           </div>
         </div>
         {canEditQuestion ? (
@@ -128,7 +125,7 @@ const FillInTheBlank = (props: any) => {
           </div>
         )}
       </div>
-      <div className="bg-slate-50 p-3">
+      {/* <div className="bg-slate-50 p-3">
         <div className="flex flex-row w-full">
           <div className="flex-none">Answer</div>
           <div className="flex flex-row-reverse w-full">
@@ -154,7 +151,7 @@ const FillInTheBlank = (props: any) => {
             </div>
           )
         })}
-      </div>
+      </div> */}
       <div className="bg-slate-50 p-3">
         <div className="flex flex-row w-full ">
           <div className="flex-none">Dummy Answer</div>
