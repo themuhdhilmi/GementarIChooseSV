@@ -200,7 +200,6 @@ model ChildQuestion {
 model QuestionBody {
   id              String         @id @default(cuid())
   string          String
-  stringBefore    String?
   answer          AnswerString[]
   childQuestion   ChildQuestion? @relation(fields: [childQuestionId], references: [id])
   childQuestionId String?
@@ -208,7 +207,9 @@ model QuestionBody {
 
 model AnswerString {
   id             String         @id @default(cuid())
+  stringBefore   String?
   string         String
+  stringAfter    String?
   point          Int            @default(1)
   QuestionBody   QuestionBody[]
 }

@@ -36,7 +36,7 @@ import { useMediaQuery } from 'usehooks-ts'
 //TODO HM TARGET
 //// Finished MULTI_CHOICE
 //// Finished ESSAY
-//TODO 14/3 - Finished FTB
+//TODO 14/3 - Finished FITB
 
 //TODO [API | QUIZ] subject
 //TODO [API | QUIZ] question

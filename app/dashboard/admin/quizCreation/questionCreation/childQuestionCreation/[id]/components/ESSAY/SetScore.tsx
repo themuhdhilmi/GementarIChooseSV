@@ -1,10 +1,10 @@
 'use client'
-import { useUpdateScore } from '@/app/utilities/storage/quiz/ESSAY/useUpdateScore'
+import { useUpdateScoreESSAY } from '@/app/utilities/storage/quiz/ESSAY/useUpdateScoreESSAY'
 import { Label } from 'flowbite-react'
 import React, { useState } from 'react'
 
 const SetScore = (props: any) => {
-  const { sendData } = useUpdateScore();
+  const { sendData } = useUpdateScoreESSAY();
   const [point, setPoint] = useState(props?.point)
 
   const updateScore = () => {

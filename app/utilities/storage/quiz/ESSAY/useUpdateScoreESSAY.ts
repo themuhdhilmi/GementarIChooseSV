@@ -14,7 +14,7 @@ type Store = {
   sendData: (postData: any) => void
 }
 
-export const useUpdateScore = create<Store>((set) => ({
+export const useUpdateScoreESSAY = create<Store>((set) => ({
   data: {},
   loading: false,
   success: SuccessState.NONE,

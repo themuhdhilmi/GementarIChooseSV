@@ -105,7 +105,7 @@ const FillInTheBlank = (props: any) => {
         <div className="flex flex-col w-full">
           <div className="flex-none w-full">Question</div>
           <div className="flex w-full ">
-            <Answer />
+            <Answer questionBody={props?.questionBody} questionId={props?.questionId} />
           </div>
         </div>
         {canEditQuestion ? (
@@ -125,33 +125,6 @@ const FillInTheBlank = (props: any) => {
           </div>
         )}
       </div>
-      {/* <div className="bg-slate-50 p-3">
-        <div className="flex flex-row w-full">
-          <div className="flex-none">Answer</div>
-          <div className="flex flex-row-reverse w-full">
-            <button onClick={() => doAddAnswer()} className="btn btn-xs rounded-lg">
-              Add
-            </button>
-          </div>
-        </div>
-        {props?.questionBody?.map((item: any, index: number) => {
-          return (
-            <div key={index}>
-              <div className="flex flex-row w-full py-1">
-                <div className="w-full">
-                  {item?.answer?.map((item: any, index: number) => {
-                    return (
-                      <div key={index} className="flex w-full">
-                        <Answer string={item?.string} point={item?.point} doDeleteAnswer={doDeleteAnswer} id={item?.id} />
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div>
-          )
-        })}
-      </div> */}
       <div className="bg-slate-50 p-3">
         <div className="flex flex-row w-full ">
           <div className="flex-none">Dummy Answer</div>
