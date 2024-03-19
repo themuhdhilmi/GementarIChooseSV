@@ -73,3 +73,46 @@ export async function POST(request: NextRequest, response: NextResponse) {
     )
   }
 }
+
+
+const schemaDELETE = z.object({
+  questionId : z.string()
+})
+export async function DELETE(request: NextRequest, response: NextResponse) {
+  try {
+    const body = await request.json()
+
+    const validation = schemaDELETE.safeParse(body)
+
+    if (!validation.success) {
+      return NextResponse.json(validation.error.errors, {
+        status: 400,
+      })
+    }
+
+    const deleteQuestion = await prisma.question.delete({
+      where: {
+        id: body?.questionId
+      }
+    })
+
+    return NextResponse.json(
+      {
+        deleteQuestion,
+      },
+      {
+        status: 200,
+      }
+    )
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error,
+      },
+      {
+        status: 400,
+      }
+    )
+  }
+}
+

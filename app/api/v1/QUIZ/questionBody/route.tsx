@@ -28,9 +28,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
       data: {
         childQuestionId: body.childQuestionId,
         string: body.string,
-        stringBefore: body.sringBefore ?? undefined,
-        point: body.point,
-        answerStringId: createAnswer.id,
       },
     })
 
