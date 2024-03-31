@@ -1,11 +1,23 @@
 
 'use client';
 
+import { useDeleteQuestion } from '@/app/utilities/storage/quiz/useDeleteQuestion';
 import { Button, Modal } from 'flowbite-react';
 import { useState } from 'react';
 
-export function DeleteQuizModal() {
+export function DeleteQuizModal(props : any) {
   const [openModal, setOpenModal] = useState(false);
+  const { sendData : deleteQuestion, data : dataDeleteQuestion } = useDeleteQuestion();
+
+
+  const doDeleteQuestion = (questionId : string) => {
+    const postData = {
+      questionId: questionId
+    }
+
+    setOpenModal(false)
+    deleteQuestion(postData)
+  }
 
   return (
     <>
@@ -26,7 +38,7 @@ export function DeleteQuizModal() {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setOpenModal(false)}>I accept</Button>
+          <Button onClick={() => doDeleteQuestion(props?.questionId)}>I accept</Button>
           <Button color="gray" onClick={() => setOpenModal(false)}>
             Decline
           </Button>

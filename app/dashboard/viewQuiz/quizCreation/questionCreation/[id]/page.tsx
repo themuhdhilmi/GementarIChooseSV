@@ -18,7 +18,7 @@ const Page = () => {
 
   const { fetchData, data } = useGetSubjectById()
   const { sendData, data: addQuestionData } = useAddQuestion()
-  const { sendData : deleteQuestion, data : dataDeleteQuestion } = useDeleteQuestion();
+  const { data : dataDeleteQuestion } = useDeleteQuestion();
 
   const [title, setTitle] = useState('')
   const [timer, setTimer] = useState(0)
@@ -42,14 +42,6 @@ const Page = () => {
     // sendDataAddSubject(postData)
     sendData(postData)
     setTitle('')
-  }
-
-  //TODO DELETE AND EDIT THIS PAGE
-  const doDeleteQuestion = (questionId : string) => {
-    const postData = {
-      questionId: questionId
-    }
-    deleteQuestion(postData)
   }
 
   return (
@@ -107,9 +99,7 @@ const Page = () => {
                           <Link href={`/dashboard/viewQuiz/quizCreation/questionCreation/childQuestionCreation/${item?.id}`}>
                             <Button>VIEW</Button>
                           </Link>
-                          <EditQuizModal/>
-                          <DeleteQuizModal/>
-                            {/* <Button onClick={() => doDeleteQuestion(item?.id)}>DELETE</Button> */}
+                          <DeleteQuizModal questionId={item?.id}/>
                         </div>
                       </div>
                     </Banner>
