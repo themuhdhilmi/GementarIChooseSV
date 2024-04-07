@@ -44,7 +44,7 @@ const Answer = (props : any) => {
 
   return (
     <div className="w-full">
-      {JSON.stringify(props?.questionBody[0]?.answer)}
+      {/* {JSON.stringify(props?.questionBody[0]?.answer)} */}
       <div className="flex flex-col w-full ">
         <div className="flex flex-row flex-wrap gap-1 mt-7 p-4 rounded border bg-white">
           {arrayAnswer.map((item : any, index : number) => (

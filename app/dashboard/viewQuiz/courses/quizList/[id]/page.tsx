@@ -69,7 +69,7 @@ const Page = () => {
                           <p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">({item?.timeLimit} Minutes)</p>
                         </div>
                         <div className="flex flex-shrink-0 items-center gap-1">
-                          <Link href={`/pleaseImplement/${item?.id}`}>
+                          <Link href={`/dashboard/viewQuiz/courses/answerQuiz/${item?.id}`}>
                             <Button>AnswerQuestion</Button>
                           </Link>
                         </div>
