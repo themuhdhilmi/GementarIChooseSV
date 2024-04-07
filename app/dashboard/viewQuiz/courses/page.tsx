@@ -42,12 +42,6 @@ const Page = () => {
           </div>
 
           <div>
-            <div className=' flex flex-row-reverse'>
-            <button onClick={() => addSubject()} className="btn rounded-r-lg bg-red-700 text-white">
-                Add New Courses
-              </button>
-              <input placeholder='Course title' className="input input-bordered w-full max-w-xs rounded-l-lg" value={titleSubject} onChange={(e) => setTitleSubject(e.target.value)}></input>{' '}
-            </div>
             <div className="flex flex-wrap  py-4 gap-2">
               {dataGetSubject?.subject?.map((item: any, index: number) => {
                 return (
@@ -55,7 +49,7 @@ const Page = () => {
                     <div className="flex flex-col w-full ">
                       <div className="w-full text-center py-3">{item.title}</div>
                       <div className="w-full">
-                        <Link href={`/dashboard/viewQuiz/quizCreation/questionCreation/${item?.id}`}>
+                        <Link href={`/dashboard/viewQuiz/courses/quizList/${item?.id}`}>
                           <button className="btn w-full bg-red-700 text-white">VIEW</button>
                         </Link>
                       </div>
