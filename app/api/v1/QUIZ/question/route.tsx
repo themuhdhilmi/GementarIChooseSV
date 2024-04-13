@@ -116,3 +116,46 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
   }
 }
 
+export async function PUT(request: NextRequest, response: NextResponse) {
+  try {
+    const body = await request.json()
+
+    const validation = schemaDELETE.safeParse(body)
+
+    if (!validation.success) {
+      return NextResponse.json(validation.error.errors, {
+        status: 400,
+      })
+    }
+
+    const updateQuestion = await prisma.question.update({
+      where: {
+        id: body?.questionId
+      },
+      data : {
+        timeStart : body.timeStart != null ? new Date(body.timeStart) : undefined,
+        timeEnd : body.timeStart != null ? new Date(body.timeEnd) : undefined,
+        title: body.title ?? undefined,
+      }
+    })
+
+    return NextResponse.json(
+      {
+        updateQuestion,
+        body
+      },
+      {
+        status: 200,
+      }
+    )
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error,
+      },
+      {
+        status: 400,
+      }
+    )
+  }
+}

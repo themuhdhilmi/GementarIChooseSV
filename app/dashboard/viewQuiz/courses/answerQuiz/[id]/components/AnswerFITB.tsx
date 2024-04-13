@@ -87,10 +87,6 @@ const AnswerFITB = ({ item }: any) => {
     setInputSections(updatedSections);
   };
 
-  const handleNextButtonClick = () => {
-    // Implement your logic for the next button click here
-  };
-
   return (
     <div className="w-full border p-3 ">
       <div className="flex flex-col w-full">
@@ -126,7 +122,7 @@ const AnswerFITB = ({ item }: any) => {
         <div className="flex justify-end">
           <button
             className="mt-8 w-full py-3 px-4 bg-blue-500 text-white rounded-md font-semibold uppercase tracking-wide disabled:bg-gray-400 disabled:pointer-events-none disabled:cursor-not-allowed"
-            onClick={handleNextButtonClick}
+            onClick={updateFITBAnswer}
             disabled={isSubmitDisabled}
           >
             Next

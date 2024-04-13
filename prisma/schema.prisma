@@ -133,6 +133,7 @@ model StudentInformation {
   Track                   Track
   StudentScore            StudentScore?              @relation(fields: [studentScoreId], references: [id])
   studentScoreId          String?
+  studentAnswer           StudentAnswer[]
 }
 
 enum SupervisorAcceptanceStatus {
@@ -176,13 +177,18 @@ model Subject {
 }
 
 model Question {
-  id            String          @id @default(cuid())
-  title         String
-  timeLimit     Int
-  subject       Subject         @relation(fields: [subjectId], references: [id])
-  childQuestion ChildQuestion[]
-  subjectId     String
-  studentScore  StudentScore[]
+  id              String          @id @default(cuid())
+  title           String
+  timeLimit       Int
+  subject         Subject         @relation(fields: [subjectId], references: [id])
+  childQuestion   ChildQuestion[]
+  subjectId       String
+  studentScore    StudentScore[]
+  studentAnswerId String?
+  StudentAnswer   StudentAnswer[]
+
+  timeStart DateTime @default(now())
+  timeEnd   DateTime @default(now())
 }
 
 model ChildQuestion {
@@ -195,6 +201,8 @@ model ChildQuestion {
   StudentScore    StudentScore[]
   Question        Question?           @relation(fields: [questionId], references: [id])
   questionId      String?
+  StudentAnswer   StudentAnswer?      @relation(fields: [studentAnswerId], references: [id])
+  studentAnswerId String?
 }
 
 model QuestionBody {
@@ -206,12 +214,12 @@ model QuestionBody {
 }
 
 model AnswerString {
-  id             String         @id @default(cuid())
-  stringBefore   String?
-  string         String
-  stringAfter    String?
-  point          Int            @default(1)
-  QuestionBody   QuestionBody[]
+  id           String         @id @default(cuid())
+  stringBefore String?
+  string       String
+  stringAfter  String?
+  point        Int            @default(1)
+  QuestionBody QuestionBody[]
 }
 
 model AnswerStringDummy {
@@ -229,6 +237,17 @@ model StudentScore {
   scoredQuestion     ChildQuestion[]
   Question           Question?            @relation(fields: [questionId], references: [id])
   questionId         String?
+}
+
+model StudentAnswer {
+  id           String          @id @default(cuid())
+  question     Question        @relation(fields: [questionId], references: [id])
+  totalScore   Int             @default(0)
+  doneQuestion ChildQuestion[]
+  questionId   String
+
+  StudentInformation   StudentInformation? @relation(fields: [studentInformationId], references: [id])
+  studentInformationId String?
 }
 
 // -======================= QUESTION START ========================

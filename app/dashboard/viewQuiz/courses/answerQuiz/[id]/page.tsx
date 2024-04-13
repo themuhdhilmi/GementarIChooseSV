@@ -38,6 +38,10 @@ const Page = () => {
           </div>
           <div>
             {data?.subject?.childQuestion.map((item: any, index: number) => {
+
+              if(item.questionBody.length <= 0) return;
+
+
               if (item.questionType === 'MULTI_CHOICE') {
                 return <><AnswerMultiChoice item={item}/></>
               }
