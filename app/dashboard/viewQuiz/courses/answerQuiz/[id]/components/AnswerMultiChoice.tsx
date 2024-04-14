@@ -40,9 +40,8 @@ const AnswerMultiChoice = (props: any) => {
       return acc;
     }, 0);
 
-    // Here, you can store the score wherever needed
-    console.log("Score:", score);
-  };
+    props.answerTheQuestion(item.id, score)
+  }
 
   // Check if the user has selected the required number of options
   const isNextButtonDisabled = selectedAnswers.length !== item.questionBody[0].answer.length;

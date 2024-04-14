@@ -13,6 +13,13 @@ export async function GET(request: NextRequest, response: NextResponse) {
       where: {
         id: token?.sub,
       },
+      include : {
+        StudentAnswer : {
+          include : {
+            doneQuestion : true
+          }
+        }
+      }
     })
 
     return NextResponse.json(

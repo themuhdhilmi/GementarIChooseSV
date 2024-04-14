@@ -11,58 +11,57 @@ type Store = {
   loading: boolean
   data: any
   success: SuccessState
-  sendData: (postData: any) => void
+  sendData: (id: any) => void
 }
 
 export const useGetStudentAnswer = create<Store>((set) => ({
   data: {},
   loading: false,
   success: SuccessState.NONE,
-  sendData: async (postData) => {
+  sendData: async (id : any) => {
     try {
       set({
         loading: true,
         success: SuccessState.NONE,
       })
       // Make your fetch API call here
-      const response = await fetch('/api/v1/QUIZ/studentAnswer', {
+      const response = await fetch(`/api/v1/QUIZ/studentAnswer/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
+        }
       })
 
       const data = await response.json()
 
       // Update the state based on the fetched data
       if (response.ok) {
-        toast.success('Action Success', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
-        })
+        // toast.success('Action Success', {
+        //   position: 'top-right',
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'light',
+        // })
         set((state) => ({
           data: data, // Adjust this based on your API response structure
           loading: false,
           success: SuccessState.SUCCESS,
         }))
       } else {
-        toast.error('Action Failed', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
-        })
+        // toast.error('Action Failed', {
+        //   position: 'top-right',
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'light',
+        // })
         set((state) => ({
           data: data, // Adjust this based on your API response structure
           loading: false,

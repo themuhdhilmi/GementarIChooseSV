@@ -29,6 +29,10 @@ const Page = () => {
   }, [])
 
   useEffect(() => {
+
+
+
+
     setSelectedSession(sessions.sessionSelected?.id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessions])

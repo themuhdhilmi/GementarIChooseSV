@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useUpdateAnswerFITB } from '@/app/utilities/storage/quiz/FITB/useUpdateAnswerFITB';
 
-const AnswerFITB = ({ item }: any) => {
+const AnswerFITB = ({ item, answerTheQuestion }: any) => {
   const { sendData } = useUpdateAnswerFITB();
   const [answers, setAnswers] = useState<any[]>([]);
   const [inputSections, setInputSections] = useState<any[]>([]);
@@ -60,6 +60,8 @@ const AnswerFITB = ({ item }: any) => {
       }
     });
     console.log("Score:", score);
+
+    answerTheQuestion(item.id, score)
   };
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>, answer: string) => {
