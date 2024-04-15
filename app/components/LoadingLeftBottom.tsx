@@ -113,7 +113,7 @@ const LoadingLeftBottom = () => {
             left: 0,
             zIndex: 10,
           }}
-          className="bg-red-800 opacity-35 rounded-lg m-4 p-5"
+          className="bg-blue-800 opacity-35 rounded-lg m-4 p-5"
         >
           <span className="loading loading-ring loading-lg text-white"></span>
         </div>

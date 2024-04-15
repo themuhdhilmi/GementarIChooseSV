@@ -8,7 +8,7 @@ const page = () => {
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">iChooseSV</h1>
             <div className="py-6">
-              <div className="tooltip tooltip-bottom" data-tip="Good luck on your Final Year Project, from Gementar Team.">
+              <div className="tooltip tooltip-bottom" data-tip="Quiz Platform">
                 <h1 className="text-center lg:text-left">Crucial Step Toward Your Professional Development</h1>
                 <h1 className="text-center lg:text-left">Behind Every Successful Project Lies Hours of Hard Work and Dedication.</h1>
               </div>

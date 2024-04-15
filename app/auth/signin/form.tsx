@@ -60,7 +60,7 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      {error && <p className="text-center bg-red-300 py-4 mb-6 rounded">{error}</p>}
+      {error && <p className="text-center bg-blue-300 py-4 mb-6 rounded">{error}</p>}
       <div>
         <div className="form-control ">
           <label className="label">
@@ -81,7 +81,7 @@ export const LoginForm = () => {
       </div>
 
       <div className="form-control mt-6">
-        <button type="submit" className="btn rounded-lg bg-red-600 hover:bg-red-400 text-white" disabled={loading}>
+        <button type="submit" className="btn rounded-lg bg-blue-600 hover:bg-blue-400 text-white" disabled={loading}>
           {loading ? 'loading...' : 'Sign In'}
         </button>
       </div>

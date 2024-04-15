@@ -35,18 +35,18 @@ const UseGetStudent = (props: any) => {
               <p className="underline decoration-1">Students Info</p>
             </div>
             <div className="flex gap-2 py-1 flex-row-reverse w-1/2">
-              <button onClick={props.funcCloseAll} className="btn btn-sm bg-red-600 rounded-lg hover:bg-red-800 text-white">
+              <button onClick={props.funcCloseAll} className="btn btn-sm bg-blue-600 rounded-lg hover:bg-blue-800 text-white">
                 CLOSE
               </button>
               {props.canEditAdmin ? (
-                <button onClick={() => setResetPassword(!resetPassword)} className={`btn btn-sm  rounded-lg text-white ${resetPassword ? 'bg-red-700' : 'bg-blue-950'} `}>
+                <button onClick={() => setResetPassword(!resetPassword)} className={`btn btn-sm  rounded-lg text-white ${resetPassword ? 'bg-blue-500' : 'bg-blue-950'} `}>
                   Reset Password
                 </button>
               ) : (
                 ''
               )}
               {props.canEditAdmin ? (
-                <button onClick={() => setEditQuota(!editQuota)} className={`btn btn-sm  rounded-lg text-white ${editQuota ? 'bg-red-700' : 'bg-blue-950'} `}>
+                <button onClick={() => setEditQuota(!editQuota)} className={`btn btn-sm  rounded-lg text-white ${editQuota ? 'bg-blue-500' : 'bg-blue-950'} `}>
                   Edit Quota
                 </button>
               ) : (

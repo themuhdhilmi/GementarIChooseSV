@@ -148,7 +148,7 @@ const Title = (props: any) => {
                       </div>
                     </td>
                     <td className="flex flex-row-reverse">
-                      <button onClick={() => setEditTeamTitle(99)} className="btn btn-sm text-white bg-red-700 rounded-lg">
+                      <button onClick={() => setEditTeamTitle(99)} className="btn btn-sm text-white bg-blue-500 rounded-lg">
                         Cancel
                       </button>
                       <button

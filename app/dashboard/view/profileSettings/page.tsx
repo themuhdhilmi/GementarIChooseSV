@@ -94,7 +94,7 @@ const Page = () => {
                   </label>
                 </div>
 
-                <button type="submit" className="btn w-full my-5 bg-red-600 rounded-lg hover:bg-red-800 text-white">
+                <button type="submit" className="btn w-full my-5 bg-blue-600 rounded-lg hover:bg-blue-800 text-white">
                   Change Password
                 </button>
               </form>

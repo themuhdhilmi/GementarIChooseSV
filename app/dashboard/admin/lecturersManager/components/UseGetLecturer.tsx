@@ -18,14 +18,14 @@ const UseGetLecturer = (props: any) => {
               <p className="underline decoration-1">Lecturers Info</p>
             </div>
             <div className="flex gap-2 py-1 flex-row-reverse w-1/2">
-              <button onClick={props.funcCloseAll} className="btn btn-sm bg-red-600 rounded-lg hover:bg-red-800 text-white">
+              <button onClick={props.funcCloseAll} className="btn btn-sm bg-blue-600 rounded-lg hover:bg-blue-800 text-white">
                 CLOSE
               </button>
             </div>
           </div>
           <div className={`flex ${!isDesktop ? 'flex-row' : 'flex-col'} flex-wrap `}>
             <div className={`${!isDesktop ? 'w-1/4 ' : 'w-full '} px-1`}>
-              <div className="flex flex-row bg-red-600 rounded-lg shadow-lg">
+              <div className="flex flex-row bg-blue-600 rounded-lg shadow-lg">
                 <div>
                   <div className="avatar">
                     <div className="w-12 my-2 mx-2 mask mask-hexagon">
@@ -39,25 +39,25 @@ const UseGetLecturer = (props: any) => {
                   <p className="text-sm text-slate-100">{props.selectViewUser?.email}</p>
                 </div>
               </div>
-              <div className="font-extrabold text-red-600 my-2  py-2 text-center rounded-lg shadow-2xl">{props.selectViewUser?.lecturerInformation?.Track}</div>
+              <div className="font-extrabold text-blue-600 my-2  py-2 text-center rounded-lg shadow-2xl">{props.selectViewUser?.lecturerInformation?.Track}</div>
               <div className="text-center mt-6 font-extrabold">
                 <p>STATUS</p>
-                <p className="badge bg-red-600 text-white">INCOMPLETE (X)</p>
+                <p className="badge bg-blue-600 text-white">INCOMPLETE (X)</p>
               </div>
 
               <div className="text-center mt-2 font-extrabold">
                 <p>Team Member Quota</p>
-                <p className="text-red-600">{props.selectViewUser?.lecturerInformation?.memberQuota ?? 'USING GLOBAL'}</p>
+                <p className="text-blue-600">{props.selectViewUser?.lecturerInformation?.memberQuota ?? 'USING GLOBAL'}</p>
               </div>
 
               <div className="text-center mt-2 font-extrabold">
                 <p>Title Quota</p>
-                <p className="text-red-600">{props.selectViewUser?.lecturerInformation?.titleQuota ?? 'USING GLOBAL'}</p>
+                <p className="text-blue-600">{props.selectViewUser?.lecturerInformation?.titleQuota ?? 'USING GLOBAL'}</p>
               </div>
 
               <div className="text-center mt-2 font-extrabold">
                 <p>Supervisor</p>
-                <p className="text-red-600">{props.selectViewUser?.lecturerInformation?.LecturerInformation?.User?.name ?? 'NONE'}</p>
+                <p className="text-blue-600">{props.selectViewUser?.lecturerInformation?.LecturerInformation?.User?.name ?? 'NONE'}</p>
               </div>
             </div>
 

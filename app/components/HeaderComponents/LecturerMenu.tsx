@@ -36,36 +36,36 @@ const LecturerMenu = (props: any) => {
       {/* {getFirstThreePathName()} */}
       {!isDesktop ? (
         <div className="flex flex-row gap-3 py-5">
-          <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
+          <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
             <AiOutlineGlobal />
             Feed
           </Link>
 
-          <Link href={`/dashboard/lecturer/studentManage/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${getFirstThreePathName() + `/${decodeURIComponent(params.email)}` === '/dashboard/lecturer/studentManage' + `/${props.email}` ? '' : 'bg-opacity-0'} `}>
+          <Link href={`/dashboard/lecturer/studentManage/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() + `/${decodeURIComponent(params.email)}` === '/dashboard/lecturer/studentManage' + `/${props.email}` ? '' : 'bg-opacity-0'} `}>
             <AiOutlineGlobal />
             Manage Supervisee
           </Link>
 
-          <Link href={`/dashboard/lecturer/lecturerManage/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${getFirstThreePathName() + `/${decodeURIComponent(params.email)}` === '/dashboard/lecturer/lecturerManage' + `/${props.email}` ? '' : 'bg-opacity-0'} `}>
+          <Link href={`/dashboard/lecturer/lecturerManage/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() + `/${decodeURIComponent(params.email)}` === '/dashboard/lecturer/lecturerManage' + `/${props.email}` ? '' : 'bg-opacity-0'} `}>
             <AiOutlineGlobal />
             Manage Lecturer Profile
           </Link>
 
-          <Link href={`/dashboard/view/profileSettings`} className={`btn btn-sm rounded-lg border-0 bg-red-800 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/view/profileSettings' ? '' : 'bg-opacity-0'}  `}>
+          <Link href={`/dashboard/view/profileSettings`} className={`btn btn-sm rounded-lg border-0 bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/view/profileSettings' ? '' : 'bg-opacity-0'}  `}>
             <IoIosConstruct />
             Profile Settings
           </Link>
 
-          <button onClick={() => signOut()} className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '' ? '' : 'bg-opacity-0'}  `}>
+          <button onClick={() => signOut()} className={`btn btn-sm rounded-lg border-0 bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '' ? '' : 'bg-opacity-0'}  `}>
             <FaPowerOff />
             Log Out
           </button>
 
           <div className="w-full flex flex-row-reverse">
-            <Link href={``} className={`btn btn-sm rounded-lg border-0 text-red-600 bg-white hover: hover:text-white`}>
+            {/* <Link href={``} className={`btn btn-sm rounded-lg border-0 text-blue-600 bg-white hover: hover:text-white`}>
               <IoIosConstruct />
               GementarTeam Mentorship Programme
-            </Link>
+            </Link> */}
           </div>
         </div>
       ) : (
@@ -89,7 +89,7 @@ const LecturerMenu = (props: any) => {
           )}
 
           <div className="flex flex-wrap py-5 w-full">
-            <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 border-red-700 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '' ? '' : 'bg-opacity-0'} hover:border-red-700 w-full`}>
+            <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 border-blue-500 bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '' ? '' : 'bg-opacity-0'} hover:border-blue-500 w-full`}>
               {isMobileLandscape ? (
                 ''
               ) : (
@@ -103,33 +103,33 @@ const LecturerMenu = (props: any) => {
             </Link>
           </div>
           <div className="flex flex-wrap"></div>
-          <div className="flex flex-wrap bg-red-500 rounded-lg">
-            <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'} w-full`}>
+          <div className="flex flex-wrap bg-blue-500 rounded-lg">
+            <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'} w-full`}>
               <AiOutlineGlobal />
               Feed
             </Link>
 
-            <Link href={`/dashboard/view/student/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() + `/${props.email}` === '/dashboard/view/student' + `/${props.email}` ? '' : 'bg-opacity-0'} w-full`}>
+            <Link href={`/dashboard/view/student/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() + `/${props.email}` === '/dashboard/view/student' + `/${props.email}` ? '' : 'bg-opacity-0'} w-full`}>
               <AiOutlineGlobal />
               Supervisor Selection
             </Link>
 
-            <Link href={`/dashboard/view/profileSettings`} className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/view/profileSettings' ? '' : 'bg-opacity-0'}    w-full`}>
+            <Link href={`/dashboard/view/profileSettings`} className={`btn btn-sm rounded-lg border-0 bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/view/profileSettings' ? '' : 'bg-opacity-0'}    w-full`}>
               <IoIosConstruct />
               Profile Settings
             </Link>
 
-            <button onClick={() => signOut()} className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '' ? '' : 'bg-opacity-0'}    w-full`}>
+            <button onClick={() => signOut()} className={`btn btn-sm rounded-lg border-0 bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '' ? '' : 'bg-opacity-0'}    w-full`}>
               <FaPowerOff />
               Log Out
             </button>
           </div>
 
           <div className="w-full flex">
-            <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-red-600 bg-white hover: hover:text-white w-full my-5`}>
+            {/* <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-blue-600 bg-white hover: hover:text-white w-full my-5`}>
               {isMobileLandscape ? '' : <IoIosConstruct />}
               GementarTeam Mentorship Programme
-            </Link>
+            </Link> */}
           </div>
         </div>
       )}

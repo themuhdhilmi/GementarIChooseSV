@@ -66,7 +66,7 @@ const Header = () => {
       <ToastSuccess />
       <NotifyUser />
       <OneTimePassword />
-      {checkIfUserLoggedIn() ? <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-red-600 to-red-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
+      {checkIfUserLoggedIn() ? <div className={`-z-50 absolute bg-gradient-to-r from-blue-600 to-blue-800 ${isDesktop ? 'min-h-screen' : 'min-h-96'} min-w-full px-5 py-2`} /> : <div className={`-z-50 absolute bg-gradient-to-r from-blue-600 to-blue-800 ${isTablet ? 'min-h-52' : isDesktop ? 'min-h-52' : 'min-h-52'} min-w-full px-5 py-2`} />}
 
       <div className={`bg-none ${!isDesktop ? 'px-24' : 'px-0'}  py-2`}>
         {!isDesktop ? (
@@ -74,24 +74,16 @@ const Header = () => {
             <div className="navbar-start text-white ">
               <Link href={'/'} className="btn btn-ghost text-white text-xl rounded-lg">
                 <SiHtmlacademy />
-                iChooseSV [{role}]
+                eQMS [{role}]
               </Link>
             </div>
             <div className="navbar-center">
-              <div className="badge badge-neutral">Final presentation</div>
-              <div className="badge ">
-                {/* {JSON.stringify(sessions?.sessionSelected?.finalPresentationDate)} */}
-                <Countdown date={sessions?.sessionSelected?.finalPresentationDate ?? '2025-02-01T01:02:03'} renderer={renderer} />
-              </div>
-              <div className="ml-2 badge badge-neutral">Session</div>
-              <div className="badge ">
-                {sessions?.sessionSelected?.number} {sessions?.sessionSelected?.yearOne}/{sessions?.sessionSelected?.yearTwo}
-              </div>
+
             </div>
 
             {checkIfUserLoggedIn() ? (
               <div className="navbar-end">
-                <button className="btn rounded-lg min-h-fit border-red-700 bg-red-700 text-white hover:bg-red-900 hover:border-red-700">
+                <button className="btn rounded-lg min-h-fit border-blue-500 bg-blue-500 text-white hover:bg-blue-900 hover:border-blue-500">
                   <div className="avatar">
                     <div className="w-10 mask mask-hexagon">
                       <Image alt="" width={500} height={500} src="/images/profile.jpg" />
@@ -104,7 +96,7 @@ const Header = () => {
               </div>
             ) : (
               <div className="navbar-end">
-                <Link href={'/auth/signin'} className="btn rounded-lg min-h-fit border-red-700 bg-red-700 text-white hover:bg-red-900 hover:border-red-700">
+                <Link href={'/auth/signin'} className="btn rounded-lg min-h-fit border-blue-500 bg-blue-500 text-white hover:bg-blue-900 hover:border-blue-500">
                   <p className="text-ellipsis">Login</p>
                 </Link>
               </div>
@@ -115,7 +107,7 @@ const Header = () => {
             <div className="navbar-start text-white ">
               <Link href={'/'} className="btn btn-ghost text-white text-xl rounded-lg">
                 <SiHtmlacademy />
-                iChooseSV
+                eQMS
               </Link>
             </div>
 

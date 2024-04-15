@@ -5,15 +5,6 @@ import { z } from 'zod'
 
 export async function GET(request: NextRequest, { params }: any) {
   try {
-    // const body = await request.json()
-
-    // const validation = schemaGET.safeParse(body)
-
-    // if (!validation.success) {
-    //   return NextResponse.json(validation.error.errors, {
-    //     status: 400,
-    //   })
-    // }
 
     const subject = await prisma.subject.findFirstOrThrow({
       where: {
@@ -24,7 +15,11 @@ export async function GET(request: NextRequest, { params }: any) {
           include: {
             childQuestion: {
               include: {
-                questionBody: true,
+                questionBody: {
+                  include : {
+                    answer : true
+                  }
+                },
                 answerDummy: true,
               },
             },
@@ -33,9 +28,13 @@ export async function GET(request: NextRequest, { params }: any) {
       },
     })
 
+
+
+
     return NextResponse.json(
       {
-        subject,
+        subject
+
       },
       {
         status: 200,

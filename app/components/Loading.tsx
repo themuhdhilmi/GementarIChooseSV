@@ -3,7 +3,7 @@ import React from 'react'
 const Loading = () => {
   return (
     <>
-      <span className="loading loading-ring loading-lg text-red-600"></span>
+      <span className="loading loading-ring loading-lg text-blue-600"></span>
     </>
   )
 }

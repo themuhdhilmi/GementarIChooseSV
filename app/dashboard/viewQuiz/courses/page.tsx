@@ -50,7 +50,7 @@ const Page = () => {
                       <div className="w-full text-center py-3">{item.title}</div>
                       <div className="w-full">
                         <Link href={`/dashboard/viewQuiz/courses/quizList/${item?.id}`}>
-                          <button className="btn w-full bg-red-700 text-white">VIEW</button>
+                          <button className="btn w-full bg-blue-500 text-white">VIEW</button>
                         </Link>
                       </div>
                     </div>

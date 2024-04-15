@@ -31,7 +31,7 @@ const DummyAnswer = (props: any) => {
 
       <div className="basis-1/6">
         <div className="flex flex-row-reverse w-full gap-1 ">
-          <button onClick={() => props.doDeleteAnswer(props?.id)} className="btn btn-xs bg-red-700 text-white rounded-lg">
+          <button onClick={() => props.doDeleteAnswer(props?.id)} className="btn btn-xs bg-blue-500 text-white rounded-lg">
             Delete
           </button>
           <button onClick={() => setCanEdit(!canEdit!)} className="btn btn-xs rounded-lg">

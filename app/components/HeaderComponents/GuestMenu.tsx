@@ -35,16 +35,16 @@ const GuestMenu = (props: any) => {
       {/* {getFirstThreePathName()} */}
       {!isDesktop ? (
         <div className="flex flex-row gap-3 py-5">
-          <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-red-800 text-white hover:bg-red-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
+          <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
             <AiOutlineGlobal />
             Feed
           </Link>
 
           <div className="w-full flex flex-row-reverse">
-            <Link href={``} className={`btn btn-sm rounded-lg border-0 text-red-600 bg-white hover: hover:text-white`}>
+            {/* <Link href={``} className={`btn btn-sm rounded-lg border-0 text-blue-600 bg-white hover: hover:text-white`}>
               <IoIosConstruct />
               GementarTeam Mentorship Programme
-            </Link>
+            </Link> */}
           </div>
         </div>
       ) : (
@@ -71,10 +71,10 @@ const GuestMenu = (props: any) => {
 
           </div>
           <div className="flex flex-wrap"></div>
-          <div className="flex flex-wrap bg-red-500 rounded-lg">
+          <div className="flex flex-wrap bg-blue-500 rounded-lg">
             <Link
               href={`/`}
-              className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${
+              className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${
                 getFirstThreePathName() === "/" ? "" : "bg-opacity-0"
               } w-full`}
             >
@@ -85,10 +85,10 @@ const GuestMenu = (props: any) => {
           </div> */}
 
           <div className="w-full flex">
-            <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-red-600 bg-white hover: hover:text-white w-full my-5`}>
+            {/* <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-blue-600 bg-white hover: hover:text-white w-full my-5`}>
               {isMobileLandscape ? '' : <IoIosConstruct />}
               GementarTeam Mentorship Programme
-            </Link>
+            </Link> */}
           </div>
         </div>
       )}

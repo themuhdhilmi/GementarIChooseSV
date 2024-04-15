@@ -42,7 +42,7 @@ const UseGetLecturers = (props: any) => {
               <p className="underline decoration-1">Lecturers Manager</p>
             </div>
             <div className="flex gap-2 py-1 flex-row-reverse w-1/2">
-              <button onClick={props.funcOpenAddLecturer} className="btn btn-sm bg-red-600 rounded-lg hover:bg-red-800 text-white">
+              <button onClick={props.funcOpenAddLecturer} className="btn btn-sm bg-blue-600 rounded-lg hover:bg-blue-800 text-white">
                 Add Lecturer
               </button>
             </div>
@@ -58,7 +58,7 @@ const UseGetLecturers = (props: any) => {
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   <th>Email</th>
-                  {isMobile ? '' : <th>Completion Status</th>}
+                  {/* {isMobile ? '' : <th>Completion Status</th>} */}
                 </tr>
               </thead>
               <tbody>
@@ -72,14 +72,14 @@ const UseGetLecturers = (props: any) => {
                       {isMobileLandscape ? '' : <th>{index + 1}</th>}
                       <td>{item.User?.name}</td>
                       <td>{item.User?.email}</td>
-                      <td>{hasMatchingID ? <div className="badge text-white badge-neutral">SV</div> : <div className="badge text-white badge-error">NO</div>}</td>
+                      {/* <td>{hasMatchingID ? <div className="badge text-white badge-neutral">SV</div> : <div className="badge text-white badge-error">NO</div>}</td> */}
                       <td>
                         <div className="flex flex-row-reverse w-full">
                           <div className={`${isMobile ? 'flex flex-col max-w-min gap-2' : 'flex flex-row max-w-min gap-2'} `}>
-                            <button onClick={() => toggleSv(item.User?.email)} className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
+                            {/* <button onClick={() => toggleSv(item.User?.email)} className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                               <BsToggles />
-                            </button>
-                            <Link href={`/dashboard/lecturer/studentManage/${item.User?.email}`}>
+                            </button> */}
+                            {/* <Link href={`/dashboard/lecturer/studentManage/${item.User?.email}`}>
                               <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                                 <FaHandPointer />
                               </button>
@@ -88,7 +88,7 @@ const UseGetLecturers = (props: any) => {
                               <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                                 <FaEye />
                               </button>
-                            </Link>
+                            </Link> */}
                             <UseDeleteLecturer email={item.User?.email} id={item?.id} />
                           </div>
                         </div>
@@ -102,7 +102,7 @@ const UseGetLecturers = (props: any) => {
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   {isMobile ? '' : <th>Matric Number</th>}
-                  <th>Completion Status</th>
+                  {/* <th>Completion Status</th> */}
                   <th></th>
                 </tr>
               </tfoot>

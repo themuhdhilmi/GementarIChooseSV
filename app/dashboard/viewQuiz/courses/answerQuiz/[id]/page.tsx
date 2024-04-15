@@ -12,6 +12,7 @@ import { useCreateStudentAnswer } from '@/app/utilities/storage/quiz/studentAnsw
 import { useUpdateStudentAnswer } from '@/app/utilities/storage/quiz/studentAnswer/useUpdateStudentAnswer'
 import { isTimeStatus, timeStatus } from '@/app/utilities/storage/quiz/useQuestionTimeInfo'
 import { useUserInformation } from '@/app/utilities/storage/user/useUserInformation'
+import Countdown from 'react-countdown'
 
 const Page = () => {
   const params = useParams<{
@@ -152,6 +153,19 @@ const Page = () => {
     )
   }
 
+
+
+
+  const renderer = ({ hours, minutes, seconds, completed } : any) => {
+    if (completed) {
+      // Render a completed state
+      router.push('/dashboard/viewQuiz/courses')
+    } else {
+      // Render a countdown
+      return <span>{hours}h {minutes}m {seconds}s</span>;
+    }
+  };
+
   return (
     <div className={`${!isDesktop ? 'px-24' : 'px-0'}`}>
       <div className="justify-center px-4  border rounded-lg  bg-white shadow-lg py-5">
@@ -161,6 +175,7 @@ const Page = () => {
               <p className="underline decoration-1 ">Answer Quiz</p>
             </div>
           </div>
+          <p>Question end at <Countdown date={data?.subject?.timeEnd} renderer={renderer} onComplete={() => {router.push('/dashboard/viewQuiz/courses')}} /></p>
           {questionTimeline()}
           {getUnansweredQuestion()}
         </div>

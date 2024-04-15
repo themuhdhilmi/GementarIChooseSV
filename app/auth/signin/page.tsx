@@ -20,11 +20,11 @@ export default function LoginPage() {
               >
                 <h1 className="text-5xl font-bold flex">
                   <p>iChoose</p>
-                  <p className="text-red-600">SV</p>
+                  <p className="text-blue-600">SV</p>
                 </h1>
               </div>
               <div className="py-6">
-                <div className="tooltip tooltip-bottom" data-tip="Good luck on your Final Year Project, from Gementar Team.">
+                <div className="tooltip tooltip-bottom" data-tip="Good luck on your Final Year Project">
                   <h1>Crucial Step Toward Your Professional Development</h1>
                   <h1>Behind Every Successful Project Lies Hours of Hard Work and Dedication.</h1>
                 </div>
@@ -39,9 +39,9 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="text-center pt-5 px-20">
-        Developed by Gementar Team.{' '}
+        {/* Developed by Gementar Team. */}
         <p>
-          <Link href="https://gementar.com" className="text-red-800">
+          <Link href="https://gementar.com" className="text-blue-800">
             Learn more about us.
           </Link>
         </p>

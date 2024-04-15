@@ -16,7 +16,7 @@ const SessionManager = (props: any) => {
             <p className="underline decoration-1 ">Session Manager</p>
           </div>
         </div>
-        <div className="flex flex-col w-full bg-red-700 min-h-12 text-black rounded-lg shadow-lg p-5">
+        <div className="flex flex-col w-full bg-blue-500 min-h-12 text-black rounded-lg shadow-lg p-5">
           <div className="bg-white rounded-lg w-full text-center font-bold flex flex-col py-5">
             <div className="font-normal text-slate-500">Selected</div>
             <div>
@@ -76,7 +76,7 @@ const SessionManager = (props: any) => {
               </tr>
             </thead>
             <tbody>
-              <tr className="bg-red-700 text-white shadow-lg rounded-lg">
+              <tr className="bg-blue-500 text-white shadow-lg rounded-lg">
                 <th></th>
                 <td>
                   SESI {props?.sessilnSelected?.number} {props?.sessilnSelected?.yearOne}/{props?.sessilnSelected?.yearTwo}

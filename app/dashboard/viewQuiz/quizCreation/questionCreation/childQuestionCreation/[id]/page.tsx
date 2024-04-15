@@ -62,7 +62,7 @@ const Page = () => {
         <div className="overflow-x-auto">
           <div className="flex flex-row py-5">
             <div className="w-1/2 font-medium ">
-              <p className="underline decoration-1 ">Question Creation</p>
+              <p className=" decoration-1 ">Question Creation [{data?.subject?.title}]</p>
             </div>
           </div>
           <div className="flex flex-row-reverse gap-1 pr-4 py-3">

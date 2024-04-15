@@ -50,7 +50,7 @@ const AnswerMultiChoice = (props: any) => {
     <div className="w-full border p-3 ">
       <div className="">
         <div className="">
-          <p className='py-6'>{item?.questionBody[0].string}</p>
+          <p className='py-6'>{item?.questionBody[0].string} Choose any of {item.questionBody[0].answer.length} below.</p>
           <div className="space-y-4">
             <div className='flex flex-row gap-1 '>
             {shuffledAllAnswers.map((answer: any) => (

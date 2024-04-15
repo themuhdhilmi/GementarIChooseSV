@@ -13,6 +13,12 @@ export function timeStatus(timeStart: any, timeEnd: any) {
   return 'Status : START at ' + formatTimeDifference(new Date(timeStart), new Date(currentTime))
 }
 
+export function timeStatusRaw(timeStart: any, timeEnd: any) {
+  if (currentTime >= new Date(timeStart) && currentTime <= new Date(timeEnd)) {
+    return  getRemainingTime(timeStart, timeEnd)
+  }
+}
+
 export function isTimeStatus(timeStart: any, timeEnd: any) {
   if (new Date(timeEnd) < currentTime) {
     return 'ENDED'
@@ -38,7 +44,7 @@ export function formatTime(endTime: any) {
 
 export function formatTimeDifference(timestamp1: any, timestamp2: any) {
   const timeDifferenceInMilliseconds = Math.abs(timestamp2 - timestamp1)
-  const seconds = Math.floor((timeDifferenceInMilliseconds / 1000) % 60)
+  // const seconds = Math.floor((timeDifferenceInMilliseconds / 1000) % 60)
   const minutes = Math.floor((timeDifferenceInMilliseconds / (1000 * 60)) % 60)
   const hours = Math.floor((timeDifferenceInMilliseconds / (1000 * 60 * 60)) % 24)
   const days = Math.floor((timeDifferenceInMilliseconds / (1000 * 60 * 60 * 24)) % 30)
@@ -58,9 +64,9 @@ export function formatTimeDifference(timestamp1: any, timestamp2: any) {
   if (minutes > 0) {
     formattedTime += minutes + ' Minutes '
   }
-  if (seconds > 0) {
-    formattedTime += seconds + ' Seconds '
-  }
+  // if (seconds > 0) {
+  //   formattedTime += seconds + ' Seconds '
+  // }
 
   if (formattedTime.trim() === '') {
     return '(Invalid Range)'
@@ -82,7 +88,8 @@ export function getRemainingTime(timeStart : any, timeEnd : any) {
       const remainingDays = Math.floor(remainingMilliseconds / (1000 * 60 * 60 * 24));
   
       // Return a formatted string indicating ongoing status and remaining time
-      return `ONGOING for another ${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes, and ${remainingSeconds} seconds`;
+      // return `ONGOING for another ${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes, and ${remainingSeconds} seconds`;
+      return `ONGOING for another ${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes`;
     } else {
       return 'The event has not started yet or has already ended.';
     }

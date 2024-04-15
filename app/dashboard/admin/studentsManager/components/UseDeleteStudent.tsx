@@ -21,7 +21,7 @@ const UseDeleteStudent = (props: any) => {
   }
   return (
     <>
-      <button onClick={() => setOpenModal(true)} className="btn rounded-lg bg-red-600 hover:bg-red-800 text-white btn-sm">
+      <button onClick={() => setOpenModal(true)} className="btn rounded-lg bg-blue-600 hover:bg-blue-800 text-white btn-sm">
         <div>
           <RiDeleteBinLine />
         </div>

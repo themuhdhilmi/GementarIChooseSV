@@ -12,8 +12,8 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'iChooseSV',
-  description: 'Developed by Gementar Team',
+  title: '',
+  description: '',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

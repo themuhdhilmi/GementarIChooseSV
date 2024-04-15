@@ -41,7 +41,7 @@ const Page = () => {
 
           <div>
             <div className=' flex flex-row-reverse'>
-            <button onClick={() => addSubject()} className="btn rounded-r-lg bg-red-700 text-white">
+            <button onClick={() => addSubject()} className="btn rounded-r-lg bg-blue-500 text-white">
                 Add New Courses
               </button>
               <input placeholder='Course title' className="input input-bordered w-full max-w-xs rounded-l-lg" value={titleSubject} onChange={(e) => setTitleSubject(e.target.value)}></input>{' '}
@@ -54,7 +54,7 @@ const Page = () => {
                       <div className="w-full text-center py-3">{item.title}</div>
                       <div className="w-full">
                         <Link href={`/dashboard/viewQuiz/quizCreation/questionCreation/${item?.id}`}>
-                          <button className="btn w-full bg-red-700 text-white">VIEW</button>
+                          <button className="btn w-full bg-blue-500 text-white">VIEW</button>
                         </Link>
                       </div>
                     </div>

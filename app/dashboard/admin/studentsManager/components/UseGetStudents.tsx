@@ -33,7 +33,7 @@ const UseGetStudents = (props: any) => {
               <p className="underline decoration-1">Students Manager</p>
             </div>
             <div className="flex gap-2 py-1 flex-row-reverse w-1/2">
-              <button onClick={props.funcOpenAddStudent} className="btn btn-sm bg-red-600 rounded-lg hover:bg-red-800 text-white">
+              <button onClick={props.funcOpenAddStudent} className="btn btn-sm bg-blue-600 rounded-lg hover:bg-blue-800 text-white">
                 Add Student
               </button>
             </div>
@@ -49,7 +49,7 @@ const UseGetStudents = (props: any) => {
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   <th>Matric Number</th>
-                  {isMobile ? '' : <th>Completion Status</th>}
+                  {/* {isMobile ? '' : <th>Completion Status</th>} */}
                   <th></th>
                 </tr>
               </thead>
@@ -70,7 +70,7 @@ const UseGetStudents = (props: any) => {
                       {isMobileLandscape ? '' : <th>{index + 1}</th>}
                       {isMobileLandscape ? '' : <td>{item.name}</td>}
                       <td>{item.studentInformation?.matricNumber}</td>
-                      {isMobile ? (
+                      {/* {isMobile ? (
                         ''
                       ) : (
                         <td>
@@ -81,23 +81,23 @@ const UseGetStudents = (props: any) => {
                           ) : studentProgress.supervisorStatus === 'REQUESTED' ? (
                             <p className="badge bg-yellow-500 text-white">3/4</p>
                           ) : studentProgress.isTitleCompleted ? (
-                            <p className="badge bg-red-600 text-white">2/4</p>
+                            <p className="badge bg-blue-600 text-white">2/4</p>
                           ) : studentProgress.isMemberCompleted ? (
-                            <p className="badge bg-red-600 text-white">1/4</p>
+                            <p className="badge bg-blue-600 text-white">1/4</p>
                           ) : (
-                            <p className="badge bg-red-600 text-white">0/4</p>
+                            <p className="badge bg-blue-600 text-white">0/4</p>
                           )}
                         </td>
-                      )}
+                      )} */}
 
                       <td>
                         <div className="flex flex-row-reverse w-full">
                           <div className={`${isMobile ? 'flex flex-col max-w-min gap-2' : 'flex flex-row max-w-min gap-2'} `}>
-                            <Link href={`/dashboard/view/student/${item?.email}`}>
+                            {/* <Link href={`/dashboard/view/student/${item?.email}`}>
                               <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                                 <FaEye />
                               </button>
-                            </Link>
+                            </Link> */}
                             <UseDeleteStudent email={item?.email} id={item?.studentInformation?.id} />
                           </div>
                         </div>
@@ -111,7 +111,7 @@ const UseGetStudents = (props: any) => {
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   {isMobile ? '' : <th>Matric Number</th>}
-                  <th>Completion Status</th>
+                  {/* <th>Completion Status</th> */}
                   <th></th>
                 </tr>
               </tfoot>

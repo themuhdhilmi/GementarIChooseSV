@@ -29,8 +29,8 @@ const Supervisor = (props: any) => {
         {/* {JSON.stringify(lecturers?.session?.Supervisor)} */}
         <div>{props?.selectViewUser?.studentInformation?.LecturerInformation?.User?.name}</div>
         <div>
-          {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'REQUESTED' ? <p className="text-red-700">[Waiting for approval]</p> : ''}
-          {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'DECLINED' ? <p className="text-red-700">[Approval declined by supervisor]</p> : ''}
+          {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'REQUESTED' ? <p className="text-blue-500">[Waiting for approval]</p> : ''}
+          {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'DECLINED' ? <p className="text-blue-500">[Approval declined by supervisor]</p> : ''}
           {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'ACCEPTED' ? <p className="text-green-800">[Approved]</p> : ''}
         </div>
       </div>

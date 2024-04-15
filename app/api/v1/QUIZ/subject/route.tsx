@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import bcrypt from 'bcrypt'
 import prisma from '@/prisma/client'
 import { z } from 'zod'
 
@@ -46,17 +45,11 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
 export async function GET(request: NextRequest, response: NextResponse) {
   try {
-    // const body = await request.json()
-
-    // const validation = schemaGET.safeParse(body)
-
-    // if (!validation.success) {
-    //   return NextResponse.json(validation.error.errors, {
-    //     status: 400,
-    //   })
-    // }
 
     const subject = await prisma.subject.findMany({
+      where: {
+        isHidden: false
+      },
       include: {
         Question: {
           include: {
@@ -74,6 +67,49 @@ export async function GET(request: NextRequest, response: NextResponse) {
     return NextResponse.json(
       {
         subject,
+      },
+      {
+        status: 200,
+      }
+    )
+  } catch (error) {
+    return NextResponse.json(
+      {
+        error,
+      },
+      {
+        status: 400,
+      }
+    )
+  }
+}
+
+const schemaDelete = z.object({
+  subjectId: z.string(),
+})
+export async function DELETE(request: NextRequest, response: NextResponse) {
+  try {
+    const body = await request.json()
+    const validation = schemaDelete.safeParse(body)
+
+    if (!validation.success) {
+      return NextResponse.json(validation.error.errors, {
+        status: 400,
+      })
+    }
+
+    const hideSubject = await prisma.subject.update({
+      where: {
+        id: body.subjectId
+      },
+      data: {
+        isHidden : true
+      }
+    });
+
+    return NextResponse.json(
+      {
+        hideSubject
       },
       {
         status: 200,

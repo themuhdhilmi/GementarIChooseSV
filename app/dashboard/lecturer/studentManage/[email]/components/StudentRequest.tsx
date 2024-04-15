@@ -29,7 +29,7 @@ const StudentRequest = (props: any) => {
       <div className="flex w-full flex-col justify-between rounded-lg border border-gray-100 bg-white p-4 shadow-sm dark:border-gray-600 dark:bg-gray-700 md:flex-row ">
         <div className="mb-3 mr-4 flex flex-col items-start md:mb-0 md:flex-row md:items-center">
           <span className="self-center whitespace-nowrap text-lg font-semibold dark:text-white md:pr-6 flex flex-row">
-            <div className="text-red-700">
+            <div className="text-blue-500">
               <MdOutlineError />
             </div>
             {props?.student?.matricNumber}
@@ -43,7 +43,7 @@ const StudentRequest = (props: any) => {
           <button onClick={selectionHandlerTrue} className="btn  rounded-lg border-0  bg-blue-950 text-white">
             Accept
           </button>
-          <button onClick={selectionHandlerFalse} className="btn  rounded-lg border-0  bg-red-700 text-white hover:bg-red-900">
+          <button onClick={selectionHandlerFalse} className="btn  rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900">
             Decline
           </button>
           {/* <Banner.CollapseButton color="gray" className="border-0 bg-transparent text-gray-500 dark:text-gray-400">

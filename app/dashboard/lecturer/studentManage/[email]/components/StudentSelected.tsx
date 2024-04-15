@@ -40,7 +40,7 @@ const StudentSelected = (props: any) => {
           </Link>
         </div>
         <div className="flex gap-1 flex-shrink-0 items-center">
-          {/* <button onClick={selectionHandlerFalse} className='btn  rounded-lg border-0  bg-red-700 text-white hover:bg-red-900' >Decline</button> */}
+          {/* <button onClick={selectionHandlerFalse} className='btn  rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900' >Decline</button> */}
           {/* <Banner.CollapseButton color="gray" className="border-0 bg-transparent text-gray-500 dark:text-gray-400">
             <HiX className="h-4 w-4" />
           </Banner.CollapseButton> */}

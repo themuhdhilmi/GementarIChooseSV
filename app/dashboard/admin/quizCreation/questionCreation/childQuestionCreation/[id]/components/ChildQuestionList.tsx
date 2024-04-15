@@ -52,7 +52,7 @@ export function ChildQuestionList(props: any) {
                       onClick={() => {
                         deleteChildQuestion(item?.id)
                       }}
-                      className="btn btn-xs bg-red-700 text-white rounded-lg"
+                      className="btn btn-xs bg-blue-500 text-white rounded-lg"
                     >
                       Delete
                     </button>

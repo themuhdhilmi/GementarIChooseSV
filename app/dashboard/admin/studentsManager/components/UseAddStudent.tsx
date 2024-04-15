@@ -113,7 +113,7 @@ const UseAddStudent = (props: any) => {
               <option value={'NETWORK'}>NETWORK</option>
             </select>
             {!loading ? (
-              <button type="submit" className="btn w-full my-5 bg-red-600 rounded-lg hover:bg-red-800 text-white">
+              <button type="submit" className="btn w-full my-5 bg-blue-600 rounded-lg hover:bg-blue-800 text-white">
                 Add Students
               </button>
             ) : (
