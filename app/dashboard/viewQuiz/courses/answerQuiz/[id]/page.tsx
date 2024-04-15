@@ -156,13 +156,13 @@ const Page = () => {
 
 
 
-  const renderer = ({ hours, minutes, seconds, completed } : any) => {
+  const renderer = ({ days, hours, minutes, seconds, completed } : any) => {
     if (completed) {
       // Render a completed state
       router.push('/dashboard/viewQuiz/courses')
     } else {
       // Render a countdown
-      return <span>{hours}h {minutes}m {seconds}s</span>;
+      return <span>{days}d {hours}h {minutes}m {seconds}s</span>;
     }
   };
 
