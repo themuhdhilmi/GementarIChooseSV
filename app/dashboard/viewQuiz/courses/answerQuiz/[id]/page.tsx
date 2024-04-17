@@ -175,7 +175,7 @@ const Page = () => {
               <p className="underline decoration-1 ">Answer Quiz</p>
             </div>
           </div>
-          <p>Question end at <Countdown date={data?.subject?.timeEnd} renderer={renderer} onComplete={() => {router.push('/dashboard/viewQuiz/courses')}} /></p>
+          {data?.subject?.timeEnd != null ? <p>Question end at <Countdown date={data?.subject?.timeEnd} renderer={renderer} onComplete={() => {router.push('/dashboard/viewQuiz/courses')}} /></p> : ""}
           {questionTimeline()}
           {getUnansweredQuestion()}
         </div>

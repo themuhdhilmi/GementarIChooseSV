@@ -64,31 +64,31 @@ const NotifyUser = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [role, sessionData, responseApplicationData, studentApplySupervisorData])
 
-  if (isAlertHaveStudentRequest) {
-    return (
-      <>
-        <Alert color="failure" icon={HiInformationCircle}>
-          <span className="font-medium">Alert!</span> You have pending student approval.
-          <Link className="text-blue-700" href={'/dashboard/lecturer/studentManage/' + email}>
-            Click here to continue...
-          </Link>
-        </Alert>
-      </>
-    )
-  }
+  // if (isAlertHaveStudentRequest) {
+  //   return (
+  //     <>
+  //       <Alert color="failure" icon={HiInformationCircle}>
+  //         <span className="font-medium">Alert!</span> You have pending student approval.
+  //         <Link className="text-blue-700" href={'/dashboard/lecturer/studentManage/' + email}>
+  //           Click here to continue...
+  //         </Link>
+  //       </Alert>
+  //     </>
+  //   )
+  // }
 
-  if (isAlertStudentNotFinish) {
-    return (
-      <>
-        <Alert color="failure" icon={HiInformationCircle}>
-          <span className="font-medium">Alert!</span> Please complete your supervisor selection for at least [3/4] progress.
-          <Link className="text-blue-700" href={'/dashboard/view/student/' + email}>
-            Click here to continue...
-          </Link>
-        </Alert>
-      </>
-    )
-  }
+  // if (isAlertStudentNotFinish) {
+  //   return (
+  //     <>
+  //       <Alert color="failure" icon={HiInformationCircle}>
+  //         <span className="font-medium">Alert!</span> Please complete your supervisor selection for at least [3/4] progress.
+  //         <Link className="text-blue-700" href={'/dashboard/view/student/' + email}>
+  //           Click here to continue...
+  //         </Link>
+  //       </Alert>
+  //     </>
+  //   )
+  // }
 
   return <></>
 }

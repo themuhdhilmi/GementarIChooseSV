@@ -41,9 +41,9 @@ export default function LoginPage() {
       <div className="text-center pt-5 px-20">
         {/* Developed by Gementar Team. */}
         <p>
-          <Link href="https://gementar.com" className="text-blue-800">
+          {/* <Link href="https://gementar.com" className="text-blue-800">
             Learn more about us.
-          </Link>
+          </Link> */}
         </p>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { breakpoints } from '@/app/config/breakpoints'
 import { useAddQuestion } from '@/app/utilities/storage/quiz/useAddQuestion'
 import { useDeleteQuestion } from '@/app/utilities/storage/quiz/useDeleteQuestion'
 import { useGetSubjectById } from '@/app/utilities/storage/quiz/useGetSubjectById'
-import { Banner, Button } from 'flowbite-react'
+import { Badge, Banner, Button } from 'flowbite-react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -60,26 +60,26 @@ const Page = () => {
         })
         const result = await response.json()
 
-        let totalPoints = 0;
-        await item.childQuestion.forEach((childQuestion : any) => {
-            childQuestion.questionBody.forEach((body : any) => {
-              totalPoints += body.answer.reduce((acc : any, curr : any) => acc + curr.point, 0);
-            });
-          });
+        let totalPoints = 0
+        await item.childQuestion.forEach((childQuestion: any) => {
+          childQuestion.questionBody.forEach((body: any) => {
+            totalPoints += body.answer.reduce((acc: any, curr: any) => acc + curr.point, 0)
+          })
+        })
 
         return (
           <div key={index} className="">
             <Banner className="w-full mt-3">
               <div className="flex w-full flex-col justify-between rounded-lg border border-gray-100 bg-white p-4 shadow-sm dark:border-gray-600 dark:bg-gray-700 md:flex-row">
                 <div className=" mb-3 mr-4 flex flex-col items-start md:mb-0 md:flex-row md:items-center">
-                  <a href="https://flowbite.com/" className="mb-2 flex items-center border-gray-200 dark:border-gray-600 md:mb-0 md:mr-4 md:border-r md:pr-4">
+                  <a href="#" className="mb-2 flex items-center border-gray-200 dark:border-gray-600 md:mb-0 md:mr-4 md:border-r md:pr-4">
                     <span className="self-center whitespace-nowrap text-lg font-semibold dark:text-white md:pr-6">
                       ({index + 1}) {item.title}
                     </span>
                   </a>
-              
-                  <p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">{timeStatus(item?.timeStart, item?.timeEnd)}</p>
-                  <p className='px-3'> {result?.studentAnswer?.totalScore === undefined ? "(User doesn't participate)" : `Score : ${result?.studentAnswer?.totalScore}/${totalPoints}`}</p>
+
+                  <Badge color="gray" className='mx-2'><p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">{timeStatus(item?.timeStart, item?.timeEnd)}</p></Badge>
+                  <Badge color="info" className='mx-2'><p className="px-3"> {result?.studentAnswer?.totalScore === undefined ? "[Does not participate]" : result?.studentAnswer?.isCheckedByLecturer === true ? `SCORE : ${result?.studentAnswer?.totalScore}/${totalPoints}` : isTimeStatus(item?.timeStart, item?.timeEnd) === "ONGOING" ? "[Ongoing]" : "[Score submitted. Pending review from lecturer.]"}</p></Badge>
                 </div>
                 <div className="flex flex-shrink-0 items-center gap-1">
                   {isTimeStatus(item?.timeStart, item?.timeEnd) === 'ONGOING' ? (
@@ -124,7 +124,7 @@ const Page = () => {
                     <Banner className="w-full mt-3">
                       <div className="flex w-full flex-col justify-between rounded-lg border border-gray-100 bg-white p-4 shadow-sm dark:border-gray-600 dark:bg-gray-700 md:flex-row">
                         <div className=" mb-3 mr-4 flex flex-col items-start md:mb-0 md:flex-row md:items-center">
-                          <a href="https://flowbite.com/" className="mb-2 flex items-center border-gray-200 dark:border-gray-600 md:mb-0 md:mr-4 md:border-r md:pr-4">
+                          <a href="#" className="mb-2 flex items-center border-gray-200 dark:border-gray-600 md:mb-0 md:mr-4 md:border-r md:pr-4">
                             <span className="self-center whitespace-nowrap text-lg font-semibold dark:text-white md:pr-6">
                               ({index + 1}) {item.title}
                             </span>

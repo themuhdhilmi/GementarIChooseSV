@@ -49,9 +49,9 @@ const Page = () => {
                     <div className="flex flex-col w-full ">
                       <div className="w-full text-center py-3">{item.title}</div>
                       <div className="w-full">
-                        <Link href={`/dashboard/viewQuiz/courses/quizList/${item?.id}`}>
+                        <a href={`/dashboard/viewQuiz/courses/quizList/${item?.id}`}>
                           <button className="btn w-full bg-blue-500 text-white">VIEW</button>
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   </div>

@@ -43,9 +43,9 @@ const StudentMenu = (props: any) => {
             Feed
           </Link>
 
-          <Link href={`/dashboard/view/student/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() + `/${decodeURIComponent(params.email)}` === '/dashboard/view/student' + `/${props.email}` ? '' : 'bg-opacity-0'} `}>
+          <Link href={`/dashboard/viewQuiz/courses`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === `/dashboard/viewQuiz/courses` ? '' : 'bg-opacity-0'} `}>
             <AiOutlineGlobal />
-            Supervisor Selection
+            Courses
           </Link>
 
           <Link href={`/dashboard/view/profileSettings`} className={`btn btn-sm rounded-lg border-0 bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/view/profileSettings' ? '' : 'bg-opacity-0'}  `}>
@@ -106,9 +106,9 @@ const StudentMenu = (props: any) => {
               Feed
             </Link>
 
-            <Link href={`/dashboard/view/student/${props.email}`} className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() + `/${props.email}` === '/dashboard/view/student' + `/${props.email}` ? '' : 'bg-opacity-0'} w-full`}>
+            <Link href={`/dashboard/viewQuiz/courses`} className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === `/dashboard/viewQuiz/courses` ? '' : 'bg-opacity-0'} w-full`}>
               <AiOutlineGlobal />
-              Supervisor Selection
+              Courses
             </Link>
 
             <Link href={`/dashboard/view/profileSettings`} className={`btn btn-sm rounded-lg border-0 bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/view/profileSettings' ? '' : 'bg-opacity-0'}    w-full`}>
