@@ -19,14 +19,14 @@ export default function LoginPage() {
                 }}
               >
                 <h1 className="text-5xl font-bold flex">
-                  <p>iChoose</p>
-                  <p className="text-blue-600">SV</p>
+                  <p>e</p>
+                  <p className="text-blue-600">QMS</p>
                 </h1>
               </div>
               <div className="py-6">
                 <div className="tooltip tooltip-bottom" data-tip="Good luck on your Final Year Project">
-                  <h1>Crucial Step Toward Your Professional Development</h1>
-                  <h1>Behind Every Successful Project Lies Hours of Hard Work and Dedication.</h1>
+                  <h1>Your Only Quiz Hub</h1>
+                  <h1>&quot;Behind Every Successful Project Lies Hours of Hard Work and Dedication.&quot;</h1>
                 </div>
               </div>
             </div>
