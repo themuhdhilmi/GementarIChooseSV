@@ -55,7 +55,7 @@ const TeamMembers = (props: any) => {
             <tr>
               <th></th>
               <th>Name</th>
-              <th>Matric Number</th>
+              <th>Email</th>
             </tr>
           </thead>
           <tbody>
@@ -82,7 +82,7 @@ const TeamMembers = (props: any) => {
                           setName(e.target.value)
                         }}
                         type="text"
-                        placeholder="Hilmi Azmi"
+                        placeholder="Kamal Abdillah"
                         className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                       />
                     </td>

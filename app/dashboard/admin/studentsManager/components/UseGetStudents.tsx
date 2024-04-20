@@ -48,7 +48,7 @@ const UseGetStudents = (props: any) => {
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
-                  <th>Matric Number</th>
+                  <th>Email</th>
                   {/* {isMobile ? '' : <th>Completion Status</th>} */}
                   <th></th>
                 </tr>
@@ -110,7 +110,7 @@ const UseGetStudents = (props: any) => {
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
-                  {isMobile ? '' : <th>Matric Number</th>}
+                  {isMobile ? '' : <th>Email</th>}
                   {/* <th>Completion Status</th> */}
                   <th></th>
                 </tr>

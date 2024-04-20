@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const AnswerEssay = ({ item }: any) => {
+const AnswerEssay = ({ item , answerTheQuestion }: any) => {
   const [essayAnswer, setEssayAnswer] = useState<string>('');
 
   // Check if item is defined before accessing its properties
@@ -9,6 +9,12 @@ const AnswerEssay = ({ item }: any) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setEssayAnswer(event.target.value);
   };
+
+  const onQuestionAnswer = () => {
+
+    if(essayAnswer === "") return;
+    answerTheQuestion(item.id, -1, item.label, item?.questionBody[0]?.answer?.[0].point, essayAnswer)
+  }
 
   return (
     <div className="w-full border p-3 ">
@@ -25,7 +31,7 @@ const AnswerEssay = ({ item }: any) => {
         <div className="flex justify-end">
           <button
             className="w-full py-3 px-4 bg-blue-500 text-white rounded-md font-semibold uppercase tracking-wide"
-            onClick={() => console.log('Submitted answer:', essayAnswer)}
+            onClick={() => onQuestionAnswer()}
             disabled={!essayAnswer.trim()}
           >
             Submit

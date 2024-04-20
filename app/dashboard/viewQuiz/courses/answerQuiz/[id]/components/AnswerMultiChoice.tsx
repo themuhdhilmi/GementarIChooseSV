@@ -39,12 +39,15 @@ const AnswerMultiChoice = (props: any) => {
       }
       return acc;
     }, 0);
-
-    props.answerTheQuestion(item.id, score)
+    // childQuestionId : any, score : number, title : string, totalScore : number, essayResult : string
+    const totalPoints = item?.questionBody[0]?.answer.reduce((acc : any, item : any) => acc + item.point, 0);
+    
+    props.answerTheQuestion(item.id, score, item?.label, totalPoints, null)
   }
 
   // Check if the user has selected the required number of options
   const isNextButtonDisabled = selectedAnswers.length !== item.questionBody[0].answer.length;
+ 
 
   return (
     <div className="w-full border p-3 ">

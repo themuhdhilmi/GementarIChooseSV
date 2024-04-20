@@ -86,7 +86,7 @@ export const LoginForm = () => {
         </button>
       </div>
 
-      {/* <div className="text-center py-4">Develop by GementarTeam</div> */}
+      {/* <div className="text-center py-4">Develop by </div> */}
     </form>
   )
 }

@@ -76,7 +76,7 @@ const UseAddLecturer = (props: any) => {
             <div className="label">
               <span className="label-text">Name</span>
             </div>
-            <input required type="text" placeholder="Hilmi Azmi" value={name} onChange={(e) => setName(e.target.value)} className="input input-bordered w-full rounded-lg" pattern=".{4,}$" />
+            <input required type="text" placeholder="Kamal Abdillah" value={name} onChange={(e) => setName(e.target.value)} className="input input-bordered w-full rounded-lg" pattern=".{4,}$" />
             <div className="label">
               <span className="label-text-alt"></span>
               <span className="label-text-alt">Minimum 4 characters</span>
@@ -84,10 +84,10 @@ const UseAddLecturer = (props: any) => {
             <div className="label">
               <span className="label-text">Email</span>
             </div>
-            <input required type="text" placeholder="hilmi@gementar.com" value={email} onChange={(e) => setEmail(e.target.value)} className="input input-bordered w-full rounded-lg" pattern="^\S{12,}$" />
+            <input required type="email" placeholder="kamal@website.com" value={email} onChange={(e) => setEmail(e.target.value)} className="input input-bordered w-full rounded-lg" pattern="^\S{12,}$" />
             <div className="label">
               <span className="label-text-alt"></span>
-              <span className="label-text-alt">Ex : hilmi@gementar.com</span>
+              <span className="label-text-alt">Ex : kamal@website.com</span>
             </div>
             <div className="label">
               <span className="label-text">Track</span>

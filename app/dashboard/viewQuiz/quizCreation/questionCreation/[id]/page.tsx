@@ -111,7 +111,10 @@ const Page = () => {
                         <div className="flex flex-shrink-0 items-center gap-1">
                           <ChangeDateModal questionId={item?.id} timeEnd={item?.timeEnd} timeStart={item?.timeStart} />
                           <Link href={`/dashboard/viewQuiz/quizCreation/questionCreation/childQuestionCreation/${item?.id}`}>
-                            <Button>VIEW</Button>
+                            <Button>Edit</Button>
+                          </Link>
+                          <Link href={`/dashboard/viewQuiz/quizCreation/questionCreation/childQuestionResult/${item?.id}`}>
+                            <Button>Submission</Button>
                           </Link>
                           <DeleteQuizModal questionId={item?.id} />
                         </div>

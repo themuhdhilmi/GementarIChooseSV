@@ -78,18 +78,29 @@ const Page = () => {
                     </span>
                   </a>
 
-                  <Badge color="gray" className='mx-2'><p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">{timeStatus(item?.timeStart, item?.timeEnd)}</p></Badge>
-                  <Badge color="info" className='mx-2'><p className="px-3"> {result?.studentAnswer?.totalScore === undefined ? "[Does not participate]" : result?.studentAnswer?.isCheckedByLecturer === true ? `SCORE : ${result?.studentAnswer?.totalScore}/${totalPoints}` : isTimeStatus(item?.timeStart, item?.timeEnd) === "ONGOING" ? "[Ongoing]" : "[Score submitted. Pending review from lecturer.]"}</p></Badge>
+                  <Badge color="gray" className="mx-2">
+                    <p className="flex items-center text-sm font-normal text-gray-500 dark:text-gray-400">{timeStatus(item?.timeStart, item?.timeEnd)}</p>
+                  </Badge>
+                  <Badge color="info" className="mx-2">
+                    <p className="px-3">
+                      {' '}
+                      {result?.studentAnswer?.totalScore === undefined ? '[Does not participate]' : result?.studentAnswer?.isCheckedByLecturer === true ? `SCORE : ${result?.studentAnswer?.totalScore}/${totalPoints}` : isTimeStatus(item?.timeStart, item?.timeEnd) === 'ONGOING' ? '[Ongoing]' : '[Score submitted. Pending review from lecturer.]'}
+                    </p>
+                  </Badge>
                 </div>
-                <div className="flex flex-shrink-0 items-center gap-1">
-                  {isTimeStatus(item?.timeStart, item?.timeEnd) === 'ONGOING' ? (
-                    <Link href={`/dashboard/viewQuiz/courses/answerQuiz/${item?.id}`}>
-                      <Button>AnswerQuestion</Button>
-                    </Link>
-                  ) : (
-                    ''
-                  )}
-                </div>
+                {result?.studentAnswer?.isCheckedByLecturer === true ? (
+                  ''
+                ) : (
+                  <div className="flex flex-shrink-0 items-center gap-1">
+                    {isTimeStatus(item?.timeStart, item?.timeEnd) === 'ONGOING' ? (
+                      <Link href={`/dashboard/viewQuiz/courses/answerQuiz/${item?.id}`}>
+                        <Button>AnswerQuestion</Button>
+                      </Link>
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                )}
               </div>
             </Banner>
           </div>

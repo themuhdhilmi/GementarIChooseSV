@@ -25,7 +25,7 @@ const UseAddStudent = (props: any) => {
   const [track, setTrack] = useState('SOFTWARE')
   const postData = {
     name: name,
-    email: matricNumber + '@student.puo.edu.my',
+    email: matricNumber,
     matricNumber: matricNumber,
     password: matricNumber,
     confirmPassword: matricNumber,
@@ -89,18 +89,18 @@ const UseAddStudent = (props: any) => {
             <div className="label">
               <span className="label-text">Name</span>
             </div>
-            <input required type="text" placeholder="Hilmi Azmi" value={name} onChange={(e) => setName(e.target.value)} className="input input-bordered w-full rounded-lg" pattern=".{4,}$" />
+            <input required type="text" placeholder="Kamal Abdillah" value={name} onChange={(e) => setName(e.target.value)} className="input input-bordered w-full rounded-lg" pattern=".{4,}$" />
             <div className="label">
               <span className="label-text-alt"></span>
               <span className="label-text-alt">Minimum 4 characters</span>
             </div>
             <div className="label">
-              <span className="label-text">Matric Number</span>
+              <span className="label-text">Email</span>
             </div>
-            <input required type="text" placeholder="01DDT20F1122" value={matricNumber} onChange={(e) => setMatricNumber(e.target.value)} className="input input-bordered w-full rounded-lg" pattern="^\S{12,}$" />
+            <input required type="text" placeholder="kamal@mail.com" value={matricNumber} onChange={(e) => setMatricNumber(e.target.value)} className="input input-bordered w-full rounded-lg" pattern="^\S{12,}$" />
             <div className="label">
               <span className="label-text-alt"></span>
-              <span className="label-text-alt">Ex : 01DDT20F1122</span>
+              <span className="label-text-alt"></span>
             </div>
             <div className="label">
               <span className="label-text">Track</span>

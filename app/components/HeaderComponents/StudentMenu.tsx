@@ -61,7 +61,7 @@ const StudentMenu = (props: any) => {
           <div className="w-full flex flex-row-reverse">
             {/* <Link href={``} className={`btn btn-sm rounded-lg border-0 text-blue-600 bg-white hover: hover:text-white`}>
               <IoIosConstruct />
-              GementarTeam Mentorship Programme
+               Mentorship Programme
             </Link> */}
           </div>
         </div>
@@ -71,7 +71,7 @@ const StudentMenu = (props: any) => {
             ''
           ) : (
             <div className="flex flex-col w-full">
-              <div className="flex flex-row">
+              {/* <div className="flex flex-row">
                 <div className="badge badge-neutral  w-1/2">Final presentation</div>
                 <div className="badge  w-1/2">
                   <Countdown date={'2025-02-01T01:02:03'} renderer={props.renderer} />
@@ -81,7 +81,7 @@ const StudentMenu = (props: any) => {
               <div className="flex flex-row">
                 <div className=" badge badge-neutral  w-1/2">Session</div>
                 <div className="badge w-1/2">1 2022/2023</div>
-              </div>
+              </div> */}
             </div>
           )}
 
@@ -125,7 +125,7 @@ const StudentMenu = (props: any) => {
           <div className="w-full flex">
             {/* <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-blue-600 bg-white hover: hover:text-white w-full my-5`}>
               {isMobileLandscape ? '' : <IoIosConstruct />}
-              GementarTeam Mentorship Programme
+               Mentorship Programme
             </Link> */}
           </div>
         </div>

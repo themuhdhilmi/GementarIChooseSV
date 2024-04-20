@@ -77,13 +77,17 @@ const Page = () => {
     )
   }
 
-  const answerTheQuestion = (childQuestionId : any, score : any) => {
+  const answerTheQuestion = (childQuestionId : any, score : number, title : string, totalScore : number, essayResult : string) => {
 
     const postData = {
       addScore : score,
       childQuestionId : childQuestionId,
       userId: user?.user.id,
       questionId: params.id,
+      title: title,
+      score: score,
+      totalScore: totalScore,
+      essayResult: essayResult
     }
 
     sendUpdateStudentAnswer(postData)
@@ -124,7 +128,16 @@ const Page = () => {
         )
       }
     }
+
+
+    return (
+      <div className='pt-5 w-full text-center'>
+        There is no question left to answer, go to courses panel to view your marks after lecturer approval.
+      </div>
+    )
   }
+
+
 
   const questionTimeline = () => {
     return (
@@ -152,9 +165,6 @@ const Page = () => {
       </div>
     )
   }
-
-
-
 
   const renderer = ({ days, hours, minutes, seconds, completed } : any) => {
     if (completed) {

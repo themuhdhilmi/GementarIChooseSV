@@ -36,7 +36,7 @@ const page = () => {
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
-              <div className="text-center">Develop by GementarTeam</div>
+              {/* <div className="text-center">Develop by </div> */}
             </form>
           </div>
         </div>

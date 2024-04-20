@@ -75,15 +75,29 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       )
     }
 
+    const createAnswerList = await prisma.studentAnswerList.create({
+      data: {
+        title: body.title,
+        score: body.addScore,
+        totalScore: body.totalScore,
+        essayResult: body.essayResult ?? null,
+      },
+    })
+
     const updateStudentAnswer = await prisma.studentAnswer.update({
       where: {
         id: studentAnswer.id,
       },
       data: {
-        totalScore: studentAnswer.totalScore + body.addScore,
+        totalScore: body.addScore >= 0 ? studentAnswer.totalScore + body.addScore : undefined,
         doneQuestion: {
           connect: {
             id: body.childQuestionId,
+          },
+        },
+        StudentAnswerList: {
+          connect: {
+            id: createAnswerList.id,
           },
         },
       },

@@ -101,7 +101,7 @@ const UseGetLecturers = (props: any) => {
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
-                  {isMobile ? '' : <th>Matric Number</th>}
+                  {isMobile ? '' : <th>Email</th>}
                   {/* <th>Completion Status</th> */}
                   <th></th>
                 </tr>

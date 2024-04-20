@@ -61,7 +61,9 @@ const AnswerFITB = ({ item, answerTheQuestion }: any) => {
     });
     console.log("Score:", score);
 
-    answerTheQuestion(item.id, score)
+
+    const totalPoints = item?.questionBody[0]?.answer.reduce((acc : any, item : any) => acc + item.point, 0);
+    answerTheQuestion(item.id, score, item.label, totalPoints, null)
   };
 
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>, answer: string) => {

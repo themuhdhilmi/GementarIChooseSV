@@ -17,7 +17,7 @@ const GlobalValue = () => {
           <input
             required
             type="text"
-            placeholder="Hilmi Azmi"
+            placeholder="Kamal Abdillah"
             // value={name}
             // onChange={(e) => setName(e.target.value)}
             className="input input-bordered w-full rounded-lg"
@@ -36,7 +36,7 @@ const GlobalValue = () => {
           <input
             required
             type="text"
-            placeholder="Hilmi Azmi"
+            placeholder="Kamal Abdillah"
             // value={name}
             // onChange={(e) => setName(e.target.value)}
             className="input input-bordered w-full rounded-lg"

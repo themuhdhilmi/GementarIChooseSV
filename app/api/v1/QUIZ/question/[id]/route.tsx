@@ -21,6 +21,12 @@ export async function GET(request: NextRequest, { params }: any) {
             answerDummy: true,
           },
         },
+        StudentAnswer : {
+          include : {
+            StudentAnswerList : true,
+            user : true
+          }
+        }
       },
     })
 

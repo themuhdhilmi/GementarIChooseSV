@@ -115,7 +115,9 @@ const Header = () => {
               ''
             ) : (
               <Link href={'/auth/signin'} className="navbar-end text-white">
+                <button className='btn'>
                 Login
+                </button>
               </Link>
             )}
             <div className="navbar-center"></div>

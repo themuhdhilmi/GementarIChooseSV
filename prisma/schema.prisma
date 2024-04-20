@@ -240,15 +240,25 @@ model StudentScore {
 }
 
 model StudentAnswer {
-  id                  String          @id @default(cuid())
-  question            Question        @relation(fields: [questionId], references: [id])
-  totalScore          Int             @default(0)
+  id                  String              @id @default(cuid())
+  question            Question            @relation(fields: [questionId], references: [id])
+  totalScore          Int                 @default(0)
   doneQuestion        ChildQuestion[]
   questionId          String
-  isCheckedByLecturer Boolean         @default(false)
+  isCheckedByLecturer Boolean             @default(false)
+  user                User                @relation(fields: [userId], references: [id])
+  userId              String
+  StudentAnswerList   StudentAnswerList[]
+}
 
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+model StudentAnswerList {
+  id              String         @id @default(cuid())
+  title           String
+  score           Int
+  totalScore      Int
+  essayResult     String?
+  StudentAnswer   StudentAnswer? @relation(fields: [studentAnswerId], references: [id])
+  studentAnswerId String?
 }
 
 // -======================= QUESTION START ========================
