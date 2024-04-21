@@ -90,15 +90,15 @@ const UseAddLecturer = (props: any) => {
               <span className="label-text-alt">Ex : kamal@website.com</span>
             </div>
             <div className="label">
-              <span className="label-text">Track</span>
+              {/* <span className="label-text">Track</span> */}
             </div>
-            <select value={track} onChange={(e) => setTrack(e.target.value)} className="select select-bordered w-full rounded-lg">
+            {/* <select value={track} onChange={(e) => setTrack(e.target.value)} className="select select-bordered w-full rounded-lg">
               <option value={'SOFTWARE'} selected>
                 SOFTWARE
               </option>
               <option value={'SECURITY'}>SECURITY</option>
               <option value={'NETWORK'}>NETWORK</option>
-            </select>
+            </select> */}
             {!loading ? (
               <button type="submit" className="btn w-full my-5 bg-blue-600 rounded-lg hover:bg-blue-800 text-white">
                 Add Lecturers
