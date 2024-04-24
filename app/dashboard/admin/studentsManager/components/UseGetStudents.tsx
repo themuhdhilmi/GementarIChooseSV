@@ -30,7 +30,7 @@ const UseGetStudents = (props: any) => {
         <div className="overflow-x-auto">
           <div className="flex flex-row py-5">
             <div className="w-1/2 font-medium ">
-              <p className="underline decoration-1">Students Manager</p>
+              <p className="underline decoration-1">Students Management</p>
             </div>
             <div className="flex gap-2 py-1 flex-row-reverse w-1/2">
               <button onClick={props.funcOpenAddStudent} className="btn btn-sm bg-blue-600 rounded-lg hover:bg-blue-800 text-white">

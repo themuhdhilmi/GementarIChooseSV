@@ -37,7 +37,7 @@ const GuestMenu = (props: any) => {
         <div className="flex flex-row gap-3 py-5">
           <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
             <AiOutlineGlobal />
-            Feed
+            Home
           </Link>
 
           <div className="w-full flex flex-row-reverse">
@@ -79,7 +79,7 @@ const GuestMenu = (props: any) => {
               } w-full`}
             >
               <AiOutlineGlobal />
-              Feed
+              Home
             </Link>
 
           </div> */}

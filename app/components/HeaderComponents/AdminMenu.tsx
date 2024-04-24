@@ -37,7 +37,7 @@ const AdminMenu = (props: any) => {
         <div className="flex flex-row gap-3 py-5">
           {/* <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
             <AiOutlineGlobal />
-            Feed
+            Home
           </Link> */}
 
           {/* <Link href={`/dashboard/admin/globalValue`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/admin/globalValue' ? '' : 'bg-opacity-0'} `}>
@@ -47,17 +47,17 @@ const AdminMenu = (props: any) => {
 
           <Link href={`/dashboard/viewQuiz/quizCreation`} className={`btn btn-sm rounded-lg border-0 bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/viewQuiz/quizCreation' ? '' : 'bg-opacity-0'}  `}>
             <AiOutlineGlobal />
-            Quiz Creation
+            Subject Management
           </Link>
 
           <Link href={`/dashboard/admin/studentsManager`} className={`btn btn-sm rounded-lg border-0 bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/admin/studentsManager' ? '' : 'bg-opacity-0'}  `}>
             <PiStudentFill />
-            Students Manager
+            Students Management
           </Link>
 
           <Link href={`/dashboard/admin/lecturersManager`} className={`btn btn-sm rounded-lg border-0 bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/admin/lecturersManager' ? '' : 'bg-opacity-0'}  `}>
             <FaPerson />
-            Lecturers Manager
+            Lecturer Management
           </Link>
 
           <Link href={`/dashboard/view/profileSettings`} className={`btn btn-sm rounded-lg border-0 bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/view/profileSettings' ? '' : 'bg-opacity-0'}  `}>
@@ -115,7 +115,7 @@ const AdminMenu = (props: any) => {
           <div className="flex flex-wrap bg-blue-500 rounded-lg">
             <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'} w-full`}>
               <AiOutlineGlobal />
-              Feed
+              Home
             </Link>
 
             <Link href={`/dashboard/admin/globalValue`} className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/admin/globalValue' ? '' : 'bg-opacity-0'} w-full`}>
@@ -125,7 +125,7 @@ const AdminMenu = (props: any) => {
 
             <Link href={`/dashboard/admin/studentsManager`} className={`btn btn-sm rounded-lg border-0 bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/admin/studentsManager' ? '' : 'bg-opacity-0'}    w-full`}>
               <PiStudentFill />
-              Students Manager
+              Students Management
             </Link>
 
             <Link href={`/dashboard/admin/lecturersManager`} className={`btn btn-sm rounded-lg border-0 bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/admin/lecturersManager' ? '' : 'bg-opacity-0'}    w-full`}>

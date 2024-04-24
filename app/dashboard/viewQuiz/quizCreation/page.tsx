@@ -35,14 +35,14 @@ const Page = () => {
         <div className="overflow-x-auto">
           <div className="flex flex-row py-5">
             <div className="w-1/2 font-medium ">
-              <p className="underline decoration-1 ">Course List</p>
+              <p className="underline decoration-1 ">Subject List</p>
             </div>
           </div>
 
           <div>
             <div className=' flex flex-row-reverse'>
             <button onClick={() => addSubject()} className="btn rounded-r-lg bg-blue-500 text-white">
-                Add New Courses
+                Add New Subjects
               </button>
               <input placeholder='Course title' className="input input-bordered w-full max-w-xs rounded-l-lg" value={titleSubject} onChange={(e) => setTitleSubject(e.target.value)}></input>{' '}
             </div>

@@ -40,7 +40,7 @@ const StudentMenu = (props: any) => {
         <div className="flex flex-row gap-3 py-5">
           <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
             <AiOutlineGlobal />
-            Feed
+            Home
           </Link>
 
           <Link href={`/dashboard/viewQuiz/courses`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === `/dashboard/viewQuiz/courses` ? '' : 'bg-opacity-0'} `}>
@@ -103,7 +103,7 @@ const StudentMenu = (props: any) => {
           <div className="flex flex-wrap bg-blue-500 rounded-lg">
             <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'} w-full`}>
               <AiOutlineGlobal />
-              Feed
+              Home
             </Link>
 
             <Link href={`/dashboard/viewQuiz/courses`} className={`btn btn-sm rounded-lg border-0  bg-blue-500 text-white hover:bg-blue-900 ${getFirstThreePathName() === `/dashboard/viewQuiz/courses` ? '' : 'bg-opacity-0'} w-full`}>

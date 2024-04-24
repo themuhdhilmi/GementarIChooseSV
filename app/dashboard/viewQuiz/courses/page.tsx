@@ -37,7 +37,7 @@ const Page = () => {
         <div className="overflow-x-auto">
           <div className="flex flex-row py-5">
             <div className="w-1/2 font-medium ">
-              <p className="underline decoration-1 ">Course List</p>
+              <p className="underline decoration-1 ">Subject List</p>
             </div>
           </div>
 

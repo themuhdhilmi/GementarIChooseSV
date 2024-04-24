@@ -24,13 +24,13 @@ export function DeleteSubjectModal(props : any) {
 
   return (
     <>
-      <button className='btn' onClick={() => setOpenModal(true)}>Delete Course</button>
+      <button className='btn' onClick={() => setOpenModal(true)}>Delete Subject</button>
       <Modal show={openModal} onClose={() => setOpenModal(false)}>
-        <Modal.Header>Delete Course</Modal.Header>
+        <Modal.Header>Delete Subject</Modal.Header>
         <Modal.Body>
           <div className="space-y-6">
             <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-              Confirm delete course?
+              Confirm Delete Subject?
             </p>
           </div>
         </Modal.Body>
