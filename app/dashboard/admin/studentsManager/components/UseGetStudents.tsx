@@ -9,6 +9,7 @@ import UseDeleteStudent from './UseDeleteStudent'
 import Link from 'next/link'
 import HereIsEmpty from '@/app/components/HereIsEmpty'
 import { useDeleteStudent } from '@/app/utilities/storage/student/useDeleteStudent'
+import dateFormat from 'dateformat'
 
 const UseGetStudents = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
@@ -47,8 +48,11 @@ const UseGetStudents = (props: any) => {
               <thead>
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
+                  {isMobileLandscape ? '' : <th>Matric Number</th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   <th>Email</th>
+                  {isMobileLandscape ? '' : <th>Mobile Number</th>}
+                  {isMobileLandscape ? '' : <th>Last Login</th>}
                   {/* {isMobile ? '' : <th>Completion Status</th>} */}
                   <th></th>
                 </tr>
@@ -68,28 +72,11 @@ const UseGetStudents = (props: any) => {
                   return (
                     <tr key={index}>
                       {isMobileLandscape ? '' : <th>{index + 1}</th>}
-                      {isMobileLandscape ? '' : <td>{item.name}</td>}
                       <td>{item.studentInformation?.matricNumber}</td>
-                      {/* {isMobile ? (
-                        ''
-                      ) : (
-                        <td>
-                          {studentProgress.supervisorStatus === 'DECLINED' ? (
-                            <p className="badge bg-yellow-500 text-white">2/4</p>
-                          ) : studentProgress.supervisorStatus === 'ACCEPTED' ? (
-                            <p className="badge bg-green-600 text-white">4/4 ✓</p>
-                          ) : studentProgress.supervisorStatus === 'REQUESTED' ? (
-                            <p className="badge bg-yellow-500 text-white">3/4</p>
-                          ) : studentProgress.isTitleCompleted ? (
-                            <p className="badge bg-blue-600 text-white">2/4</p>
-                          ) : studentProgress.isMemberCompleted ? (
-                            <p className="badge bg-blue-600 text-white">1/4</p>
-                          ) : (
-                            <p className="badge bg-blue-600 text-white">0/4</p>
-                          )}
-                        </td>
-                      )} */}
-
+                      {isMobileLandscape ? '' : <td>{item.name}</td>}
+                      <td>{item.email}</td>
+                      <td>{item.mobileNumber ?? "None"}</td>
+                      <td>{dateFormat(item.lastLogin, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</td>
                       <td>
                         <div className="flex flex-row-reverse w-full">
                           <div className={`${isMobile ? 'flex flex-col max-w-min gap-2' : 'flex flex-row max-w-min gap-2'} `}>
@@ -109,8 +96,11 @@ const UseGetStudents = (props: any) => {
               <tfoot>
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
+                  {isMobileLandscape ? '' : <th>Matric Number</th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   {isMobile ? '' : <th>Email</th>}
+                  {isMobileLandscape ? '' : <th>Mobile Number</th>}
+                  {isMobileLandscape ? '' : <th>Last Login</th>}
                   {/* <th>Completion Status</th> */}
                   <th></th>
                 </tr>

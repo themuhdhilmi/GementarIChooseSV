@@ -34,6 +34,17 @@ export const authOptions: NextAuthOptions = {
 
         const passwordMatch = await bcrypt.compare(credentials.password, user.hashedPassword!)
 
+        if (passwordMatch) {
+          const updateLastLogin = await prisma.user.update({
+            where: {
+              id: user.id,
+            },
+            data: {
+              lastLogin: new Date(),
+            },
+          })
+        }
+
         return passwordMatch ? user : null
       },
     }),

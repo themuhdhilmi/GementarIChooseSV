@@ -12,6 +12,7 @@ import { useDeleteLecturer } from '@/app/utilities/storage/lecturer/useDeleteLec
 import { FaHandPointer } from 'react-icons/fa'
 import { BsToggles } from 'react-icons/bs'
 import { useSetLecturerAsSupervisor } from '@/app/utilities/storage/lecturer/useSetLecturerAsSupervisor'
+import dateFormat from "dateformat"
 
 const UseGetLecturers = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
@@ -56,8 +57,11 @@ const UseGetLecturers = (props: any) => {
               <thead>
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
+                  {isMobileLandscape ? '' : <th>id</th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   <th>Email</th>
+                  {isMobileLandscape ? '' : <th>Mobile Number</th>}
+                  {isMobileLandscape ? '' : <th>Last Login</th>}
                   {/* {isMobile ? '' : <th>Completion Status</th>} */}
                 </tr>
               </thead>
@@ -70,8 +74,11 @@ const UseGetLecturers = (props: any) => {
                   return (
                     <tr key={index}>
                       {isMobileLandscape ? '' : <th>{index + 1}</th>}
+                      <td>{item.User?.noID}</td>
                       <td>{item.User?.name}</td>
                       <td>{item.User?.email}</td>
+                      <td>{item.User.mobileNumber ?? "None"}</td>
+                      <td>{dateFormat(item.User?.lastLogin, "dddd, mmmm dS, yyyy, h:MM:ss TT")}</td>
                       {/* <td>{hasMatchingID ? <div className="badge text-white badge-neutral">SV</div> : <div className="badge text-white badge-error">NO</div>}</td> */}
                       <td>
                         <div className="flex flex-row-reverse w-full">
@@ -100,8 +107,11 @@ const UseGetLecturers = (props: any) => {
               <tfoot>
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
+                  {isMobileLandscape ? '' : <th>id</th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   {isMobile ? '' : <th>Email</th>}
+                  {isMobileLandscape ? '' : <th>Mobile Number</th>}
+                  {isMobileLandscape ? '' : <th>Last Login</th>}
                   {/* <th>Completion Status</th> */}
                   <th></th>
                 </tr>

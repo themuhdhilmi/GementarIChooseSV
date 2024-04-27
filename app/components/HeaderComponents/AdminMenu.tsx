@@ -35,10 +35,10 @@ const AdminMenu = (props: any) => {
       {/* {getFirstThreePathName()} */}
       {!isDesktop ? (
         <div className="flex flex-row gap-3 py-5">
-          {/* <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
+          <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'}`}>
             <AiOutlineGlobal />
             Home
-          </Link> */}
+          </Link>
 
           {/* <Link href={`/dashboard/admin/globalValue`} className={`btn btn-sm rounded-lg border-0  bg-blue-800 text-white hover:bg-blue-900 ${getFirstThreePathName() === '/dashboard/admin/globalValue' ? '' : 'bg-opacity-0'} `}>
             <AiOutlineGlobal />

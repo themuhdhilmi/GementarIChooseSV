@@ -43,11 +43,14 @@ model User {
   id                       String               @id @default(cuid())
   name                     String?
   email                    String?              @unique
+  noID                     String?              @unique @default(cuid())
   emailVerified            DateTime?
   image                    String?
   hashedPassword           String?
   createdAt                DateTime             @default(now())
   updatedAt                DateTime             @updatedAt
+  lastLogin                DateTime             @default(now())
+  mobileNumber             String?
   accounts                 Account[]
   sessions                 Session[]
   role                     Role                 @default(STUDENT)
@@ -86,24 +89,24 @@ model SessionYear {
   yearOne Int
   yearTwo Int
 
-  globalMemberQuota     Int @default(4)
-  globalTitleQuota      Int @default(3)
-  globalSupervisorQuota Int @default(3)
-  finalPresentationDate DateTime @default(now())
-  isSelected Boolean @default(false)
-  StudentInformation StudentInformation[]
-  Supervisor         LecturerInformation[]
+  globalMemberQuota     Int                   @default(4)
+  globalTitleQuota      Int                   @default(3)
+  globalSupervisorQuota Int                   @default(3)
+  finalPresentationDate DateTime              @default(now())
+  isSelected            Boolean               @default(false)
+  StudentInformation    StudentInformation[]
+  Supervisor            LecturerInformation[]
 }
 
 // +======================= LECTURER START =======================
 model LecturerInformation {
   id                 String               @id @default(cuid())
   StudentInformation StudentInformation[]
-  supervisorQuota Int?
-  Track       Track
-  SessionYear SessionYear[]
-  User        User          @relation(fields: [userId], references: [id])
-  userId      String        @unique
+  supervisorQuota    Int?
+  Track              Track
+  SessionYear        SessionYear[]
+  User               User                 @relation(fields: [userId], references: [id])
+  userId             String               @unique
 }
 
 // -======================= LECTURER END =========================

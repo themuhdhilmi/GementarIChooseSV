@@ -117,6 +117,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
 
 const TrackEnum = z.enum(['SOFTWARE', 'SECURITY', 'NETWORK'])
 const schemaPOST = z.object({
+  id  : z.string().min(4),
   name: z.string().min(4),
   email: z.string().email(),
   password: z.string().min(4),
@@ -143,6 +144,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         email: body.email,
         hashedPassword: passwordEncrypt,
         role: 'LECTURER',
+        noID : body.id
       },
     })
 

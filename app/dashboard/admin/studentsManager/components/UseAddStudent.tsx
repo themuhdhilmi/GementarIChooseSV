@@ -21,13 +21,14 @@ const UseAddStudent = (props: any) => {
   const { fetchData } = useGetStudents()
   const [name, setName] = useState('')
   const [matricNumber, setMatricNumber] = useState('')
+  const [email, setEmail] = useState('')
   const [selectedSession, setSelectedSession] = useState('')
   const [track, setTrack] = useState('SOFTWARE')
   const postData = {
     name: name,
-    email: matricNumber,
+    email: email,
     matricNumber: matricNumber,
-    password: matricNumber,
+    password: email,
     confirmPassword: matricNumber,
     sessionYearID: selectedSession,
     track: track,
@@ -87,6 +88,14 @@ const UseAddStudent = (props: any) => {
               ''
             )}
             <div className="label">
+              <span className="label-text">Matric Number</span>
+            </div>
+            <input required type="text" placeholder="2017224410" value={matricNumber} onChange={(e) => setMatricNumber(e.target.value)} className="input input-bordered w-full rounded-lg" pattern=".{4,}$" />
+            <div className="label">
+              <span className="label-text-alt"></span>
+              <span className="label-text-alt">Minimum 4 characters</span>
+            </div>
+            <div className="label">
               <span className="label-text">Name</span>
             </div>
             <input required type="text" placeholder="Kamal Abdillah" value={name} onChange={(e) => setName(e.target.value)} className="input input-bordered w-full rounded-lg" pattern=".{4,}$" />
@@ -97,14 +106,12 @@ const UseAddStudent = (props: any) => {
             <div className="label">
               <span className="label-text">Email</span>
             </div>
-            <input required type="text" placeholder="kamal@mail.com" value={matricNumber} onChange={(e) => setMatricNumber(e.target.value)} className="input input-bordered w-full rounded-lg" pattern="^\S{12,}$" />
+            <input required type="email" placeholder="kamal@mail.com" value={email} onChange={(e) => setEmail(e.target.value)} className="input input-bordered w-full rounded-lg" pattern="^\S{12,}$" />
             <div className="label">
               <span className="label-text-alt"></span>
               <span className="label-text-alt"></span>
             </div>
-            <div className="label">
-              {/* <span className="label-text">Track</span> */}
-            </div>
+            <div className="label">{/* <span className="label-text">Track</span> */}</div>
             {/* <select value={track} onChange={(e) => setTrack(e.target.value)} className="select select-bordered w-full rounded-lg">
               <option value={'SOFTWARE'} selected>
                 SOFTWARE

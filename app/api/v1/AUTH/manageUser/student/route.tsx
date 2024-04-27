@@ -202,7 +202,7 @@ const TrackEnum = z.enum(['SOFTWARE', 'SECURITY', 'NETWORK'])
 const schema = z.object({
   name: z.string().min(4),
   email: z.string().email(),
-  matricNumber: z.string().email(),
+  matricNumber: z.string(),
   password: z.string().min(4),
   confirmPassword: z.string().min(4),
   sessionYearID: z.string(),
@@ -239,7 +239,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         {
           errors: [
             {
-              message: `Email ${body.matricNumber} already existed`,
+              message: `Matric number ${body.matricNumber} already existed`,
               path: '',
             },
           ],

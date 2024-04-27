@@ -10,10 +10,12 @@ const UseAddLecturer = (props: any) => {
   const { sendData, success, data, loading: loadingAddLecturer } = useAddLecturer()
   const { data: sessions, loading } = useGetsessions()
   const { fetchData } = useGetLecturers()
+  const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [track, setTrack] = useState('SOFTWARE')
   const postData = {
+    id: id,
     name: name,
     email: email,
     password: email,
@@ -74,6 +76,14 @@ const UseAddLecturer = (props: any) => {
               ''
             )}
             <div className="label">
+              <span className="label-text">ID</span>
+            </div>
+            <input required type="text" placeholder="01FF331XX" value={id} onChange={(e) => setId(e.target.value)} className="input input-bordered w-full rounded-lg" pattern=".{4,}$" />
+            <div className="label">
+              <span className="label-text-alt"></span>
+              <span className="label-text-alt">Minimum 4 characters</span>
+            </div>
+            <div className="label">
               <span className="label-text">Name</span>
             </div>
             <input required type="text" placeholder="Kamal Abdillah" value={name} onChange={(e) => setName(e.target.value)} className="input input-bordered w-full rounded-lg" pattern=".{4,}$" />
@@ -89,9 +99,7 @@ const UseAddLecturer = (props: any) => {
               <span className="label-text-alt"></span>
               <span className="label-text-alt">Ex : kamal@website.com</span>
             </div>
-            <div className="label">
-              {/* <span className="label-text">Track</span> */}
-            </div>
+            <div className="label">{/* <span className="label-text">Track</span> */}</div>
             {/* <select value={track} onChange={(e) => setTrack(e.target.value)} className="select select-bordered w-full rounded-lg">
               <option value={'SOFTWARE'} selected>
                 SOFTWARE

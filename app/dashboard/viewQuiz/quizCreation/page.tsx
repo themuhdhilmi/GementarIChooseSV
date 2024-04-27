@@ -2,6 +2,7 @@
 import { breakpoints } from '@/app/config/breakpoints'
 import { useAddSubject } from '@/app/utilities/storage/quiz/useAddSubject'
 import { useGetSubject } from '@/app/utilities/storage/quiz/useGetSubject'
+import { Badge } from 'flowbite-react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
@@ -51,7 +52,7 @@ const Page = () => {
                 return (
                   <div key={index} className="grow w-96 pt-5 rounded-lg border ">
                     <div className="flex flex-col w-full ">
-                      <div className="w-full text-center py-3">{item.title}</div>
+                      <div className="w-full text-center py-3"><div>{item.title} [Total Question : {item.Question ? item.Question.length : "0"}]</div></div>
                       <div className="w-full">
                         <Link href={`/dashboard/viewQuiz/quizCreation/questionCreation/${item?.id}`}>
                           <button className="btn w-full bg-blue-500 text-white">VIEW</button>
