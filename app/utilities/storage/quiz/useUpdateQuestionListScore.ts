@@ -28,10 +28,9 @@ export const useUpdateQuestionListScore = create<Store>((set) => ({
       const response = await fetch('/api/v1/QUIZ/studentAnswer/studentListScore', {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-store',
-          cache : "no-store"
+          'Content-Type': 'application/json'
         },
+        body: JSON.stringify(postData),
       })
 
       const data = await response.json()
