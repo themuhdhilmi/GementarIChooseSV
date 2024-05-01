@@ -29,7 +29,9 @@ export const useGetStudentAnswer = create<Store>((set) => ({
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-        }
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
       })
 
       const data = await response.json()

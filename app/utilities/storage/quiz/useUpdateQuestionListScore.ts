@@ -26,11 +26,12 @@ export const useUpdateQuestionListScore = create<Store>((set) => ({
       })
       // Make your fetch API call here
       const response = await fetch('/api/v1/QUIZ/studentAnswer/studentListScore', {
-        method: 'PUT',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
         },
-        body: JSON.stringify(postData),
       })
 
       const data = await response.json()

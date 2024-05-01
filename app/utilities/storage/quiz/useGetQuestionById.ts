@@ -15,7 +15,14 @@ export const useGetQuestionById = create<SessionStore>((set) => ({
         loading: true,
       })
       // Make your fetch API call here
-      const response = await fetch('/api/v1/QUIZ/question/' + id)
+      const response = await fetch('/api/v1/QUIZ/question/' + id, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
       const data = await response.json()
 
       if (response.ok) {

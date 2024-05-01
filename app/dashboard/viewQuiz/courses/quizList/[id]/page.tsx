@@ -52,10 +52,12 @@ const Page = () => {
       }
 
       const promises = data?.subject?.Question?.map(async (item: any, index: number) => {
-        const response = await fetch(`/api/v1/QUIZ/studentAnswer/${item?.id}`, {
+        const response = await fetch(`/api/v1/QUIZ/studentAnswer/${item?.id}`,{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
+            'Cache-Control': 'no-store',
+            cache : "no-store"
           },
         })
         const result = await response.json()
