@@ -13,6 +13,11 @@ const TableHome4 = (props: any) => {
           <Table.HeadCell>Status</Table.HeadCell>
         </Table.Head>
         <Table.Body className="divide-y">
+        <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+        {props?.data?.answerListIncomplete?.length === 0 ? <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">No data</Table.Cell> : ""}
+        {props?.data?.answerListIncomplete?.length === 0 ? <Table.Cell>No data</Table.Cell> : ""}
+        {props?.data?.answerListIncomplete?.length === 0 ? <Table.Cell>No data</Table.Cell> : ""}
+        </Table.Row>
           {props?.data?.answerListIncomplete?.map((item: any, index: number) => {
             return (
               <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">

@@ -16,7 +16,17 @@ export const useGetHomeQuizList = create<StudentStore>((set : any) => ({
         loading: true,
       })
       // Make your fetch API call here
-      const response = await fetch(`/api/v1/feedHome/childQuestion`)
+      // const response = await fetch(`/api/v1/feedHome/childQuestion`)
+
+      const response = await fetch(`/api/v1/feedHome/childQuestion`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
+
       const data = await response.json()
 
       if (response.ok) {

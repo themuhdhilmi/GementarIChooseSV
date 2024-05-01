@@ -92,3 +92,5 @@ export async function GET(request: NextRequest, response: NextResponse) {
     )
   }
 }
+
+export const dynamic = "force-dynamic";
