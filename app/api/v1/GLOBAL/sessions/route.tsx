@@ -122,6 +122,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         globalTitleQuota: body.globalTitleQuota ?? sesssionGet?.globalTitleQuota,
         globalSupervisorQuota: body.globalSupervisorQuota ?? sesssionGet?.globalSupervisorQuota,
         finalPresentationDate: body.finalPresentationDate ?? sesssionGet?.finalPresentationDate,
+        feed : body.feed ?? sesssionGet?.feed
       },
     })
 

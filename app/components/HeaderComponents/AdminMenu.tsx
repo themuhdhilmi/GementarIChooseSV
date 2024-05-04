@@ -12,6 +12,7 @@ import { breakpoints } from '@/app/config/breakpoints'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
+import { DrawerAdminMenu } from './Drawer/DrawerAdminMenu'
 
 const AdminMenu = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
@@ -74,77 +75,7 @@ const AdminMenu = (props: any) => {
         </div>
       ) : (
         <div>
-          {isMobileLandscape ? (
-            ''
-          ) : (
-            <div className="flex flex-col w-full">
-              <div className="flex flex-row">
-                <div className="badge badge-neutral  w-1/2">Final presentation</div>
-                <div className="badge  w-1/2">
-                  <Countdown date={'2025-02-01T01:02:03'} renderer={props.renderer} />
-                </div>
-              </div>
-
-              <div className="flex flex-row">
-                <div className=" badge badge-neutral  w-1/2">Session</div>
-                <div className="badge w-1/2">1 2022/2023</div>
-              </div>
-            </div>
-          )}
-
-          <div className="flex flex-wrap py-5 w-full">
-            <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 border-red-700 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '' ? '' : 'bg-opacity-0'} hover:border-red-700 w-full`}>
-              {isMobileLandscape ? (
-                ''
-              ) : (
-                <div className="avatar">
-                  <div className="w-10 mask mask-hexagon">
-                    <Image alt="" width={500} height={500} src="/images/profile.jpg" />
-                  </div>
-                </div>
-              )}
-              {props.name}
-            </Link>
-          </div>
-          <div className="flex flex-wrap"></div>
-          <div className="flex flex-wrap bg-red-500 rounded-lg">
-            <Link href={`/`} className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '/' ? '' : 'bg-opacity-0'} w-full`}>
-              <AiOutlineGlobal />
-              Feed
-            </Link>
-
-            <Link href={`/dashboard/admin/globalValue`} className={`btn btn-sm rounded-lg border-0  bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/admin/globalValue' ? '' : 'bg-opacity-0'} w-full`}>
-              <AiOutlineGlobal />
-              Manage Sessions
-            </Link>
-
-            <Link href={`/dashboard/admin/studentsManager`} className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/admin/studentsManager' ? '' : 'bg-opacity-0'}    w-full`}>
-              <PiStudentFill />
-              Students Manager
-            </Link>
-
-            <Link href={`/dashboard/admin/lecturersManager`} className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/admin/lecturersManager' ? '' : 'bg-opacity-0'}    w-full`}>
-              <FaPerson />
-              Lecturer Manager
-            </Link>
-
-            <Link href={`/dashboard/view/profileSettings`} className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/view/profileSettings' ? '' : 'bg-opacity-0'}    w-full`}>
-              <IoIosConstruct />
-              Profile Settings
-            </Link>
-
-            <button onClick={() => signOut()} className={`btn btn-sm rounded-lg border-0 bg-red-700 text-white hover:bg-red-900 ${getFirstThreePathName() === '' ? '' : 'bg-opacity-0'}    w-full`}>
-              <FaPowerOff />
-              Log Out
-            </button>
-          </div>
-
-          <div className="w-full flex">
-            <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-red-600 bg-white hover: hover:text-white w-full my-5`}>
-              {isMobileLandscape ? '' : <IoIosConstruct />}
-              GementarTeam Mentorship Programme
-            </Link>
-          </div>
+          <DrawerAdminMenu renderer={props?.renderer} name={props?.name} />
         </div>
       )}
     </div>

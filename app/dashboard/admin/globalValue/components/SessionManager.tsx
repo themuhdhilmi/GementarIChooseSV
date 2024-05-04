@@ -5,6 +5,7 @@ import SetGlobalMemberQuota from './components/SetGlobalMemberQuota'
 import { breakpoints } from '@/app/config/breakpoints'
 import { useMediaQuery } from 'usehooks-ts'
 import SetGlobalEndDate from './components/SetGlobalEndDate'
+import { format } from 'date-fns';
 
 const SessionManager = (props: any) => {
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
@@ -33,7 +34,7 @@ const SessionManager = (props: any) => {
             <div>{props?.sessilnSelected?.globalMemberQuota}</div>
 
             <div className="font-normal text-slate-500">Final Presentation Date</div>
-            <div>{props?.sessilnSelected?.finalPresentationDate}</div>
+            <div>{format(props?.sessilnSelected?.finalPresentationDate ?? new Date(), 'yyyy/MM/dd')}</div>
           </div>
 
           {isMobile ? (
