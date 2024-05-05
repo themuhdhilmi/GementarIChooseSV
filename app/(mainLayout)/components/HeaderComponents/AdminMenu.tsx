@@ -53,7 +53,7 @@ const AdminMenu = (props: any) => {
             Students Manager
           </Link>
 
-          <Link href={`/dashboard/view/lecturer/` + email} className={`btn btn-sm rounded-lg border-0 bg-red-800 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/view/lecturer/' ? '' : 'bg-opacity-0'}  `}>
+          <Link href={`/dashboard/admin/lecturersManager/`} className={`btn btn-sm rounded-lg border-0 bg-red-800 text-white hover:bg-red-900 ${getFirstThreePathName() === '/dashboard/admin/lecturersManager/' ? '' : 'bg-opacity-0'}  `}>
             <FaPerson />
             Lecturers Manager
           </Link>

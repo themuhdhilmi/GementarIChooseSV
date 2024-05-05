@@ -15,7 +15,13 @@ const LeftSection = (props : any) => {
         <p>{props?.lecturerData?.lecturer?.LecturerInformation?.Track}</p>
         <p>015-4878312</p>
         <div className="card-actions">
-          <button className="btn">Academic Qualification</button>
+          <button className="btn">Scopus ID</button>
+        </div>
+        <div className="card-actions">
+          <button className="btn">Wos ID</button>
+        </div>
+        <div className="card-actions">
+          <button className="btn">Google Scholar</button>
         </div>
       </div>
     </div>

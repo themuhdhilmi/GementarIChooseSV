@@ -2,7 +2,7 @@
 'use client'
 import { breakpoints } from '@/app/config/breakpoints'
 import { useParams } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import LeftSection from './components/LeftSection'
 import RightSection from './components/RightSection'
@@ -17,6 +17,7 @@ import { useUpdateLecturerInfo } from '@/app/utilities/storage/lecturer/informat
 import { useAddLecturerInfoTag } from '@/app/utilities/storage/lecturer/information/useAddLecturerInfoTag'
 import { useDeleteLecturerInfoTag } from '../../../../../utilities/storage/lecturer/information/useDeleteLecturerInfoTag'
 import { FaHome } from 'react-icons/fa'
+import { Button, Label, Modal, TextInput } from 'flowbite-react'
 
 const Page = () => {
   const params = useParams<{
@@ -71,7 +72,7 @@ const Page = () => {
                 </li>
                 {canEdit ? (
                   <li>
-                    <a>Edit</a>
+                    <EditProfileModal />
                   </li>
                 ) : (
                   ''
@@ -89,7 +90,7 @@ const Page = () => {
           ''
         ) : (
           <div className="navbar-end">
-            {canEdit ? <button className="btn mr-2">EDIT PROFILE</button> : ''}
+            {canEdit ? <EditProfileModal /> : ''}
 
             <a href="/dashboard/view/lecturerDirectory" className="btn">
               <FaHome />
@@ -131,3 +132,71 @@ const Page = () => {
 }
 
 export default Page
+
+function EditProfileModal() {
+  const [openModal, setOpenModal] = useState(false)
+
+  return (
+    <>
+      <button className="btn mr-2" onClick={() => setOpenModal(true)}>
+        EDIT
+      </button>
+      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+        <Modal.Header>Edit Profile</Modal.Header>
+        <Modal.Body>
+          <form className="flex w-full flex-col gap-4">
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="small" value="Email" />
+              </div>
+              <TextInput id="small" type="text" sizing="sm" required />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="small" value="Name" />
+              </div>
+              <TextInput id="small" type="text" sizing="sm" required />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="small" value="Track" />
+              </div>
+              <TextInput id="small" type="text" sizing="sm" />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="small" value="Expertise (Optional)" />
+              </div>
+              <TextInput id="small" type="text" sizing="sm" placeholder="Game Development,Web Development,Software Development" />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="small" value="Scopus ID (Optional)" />
+              </div>
+              <TextInput id="small" type="text" sizing="sm" placeholder="https://www.scopus.com/authid/detail.uri?authorId=XXXXXXX" />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="small" value="Wos ID (Optional)" />
+              </div>
+              <TextInput id="small" type="text" sizing="sm" placeholder="https://www.webofscience.com/wos/author/rid/XXXXXXXXX" />
+            </div>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="small" value="Google Scholar (Optional)" />
+              </div>
+              <TextInput id="small" type="text" sizing="sm" placeholder="https://scholar.google.com/citations?user=&hl=en&user=XXXXXXXXXX" />
+            </div>
+            <Button type="submit">Submit</Button>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          {/* <Button onClick={() => setOpenModal(false)}>I accept</Button> */}
+          <Button color="gray" onClick={() => setOpenModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  )
+}
