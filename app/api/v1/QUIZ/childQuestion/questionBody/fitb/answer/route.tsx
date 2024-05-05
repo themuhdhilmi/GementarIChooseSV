@@ -77,7 +77,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       })
 
 
-      if(createManyAnswersPromises.length > 1)
+      if(createManyAnswersPromises.length >= 1)
       {
         return NextResponse.json(
             {
