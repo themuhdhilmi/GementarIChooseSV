@@ -50,7 +50,7 @@ import Image from 'next/image'
 
 const Page = () => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
-
+  
   return (
     <div className={`${!isDesktop ? 'px-24' : 'px-0'}`}>
       <div className="stats shadow"></div>

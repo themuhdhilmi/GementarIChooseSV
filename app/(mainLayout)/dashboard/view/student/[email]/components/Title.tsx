@@ -4,7 +4,7 @@ import { useAddStudentTitle } from '@/app/utilities/storage/student/useAddStuden
 import React, { useEffect, useState } from 'react'
 import { useUpdateStudentTitle } from '../../../../../../utilities/storage/student/useUpdateStudentTitle'
 import { useUploadStudentPoster } from '@/app/utilities/storage/student/useUploadStudentPoster'
-import { toast } from 'react-toastify'
+import { FileUploader } from 'react-drag-drop-files'
 import Link from 'next/link'
 
 const Title = (props: any) => {
@@ -43,21 +43,7 @@ const Title = (props: any) => {
       sendUpdateStudentTitle(postData)
     }
   }
-
-  const [file, setFile] = useState<File | null>(null)
   const [titleId, setTitleId] = useState('')
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if (!file) return
-
-    try {
-      sendUploadStudentPoster(file, props?.selectViewUser?.email, titleId)
-    } catch (e: any) {
-      // Handle errors here
-      console.error(e)
-    }
-  }
 
   return (
     <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
@@ -124,11 +110,11 @@ const Title = (props: any) => {
                     </td>
                     <td>
                       <div>
-                        <form onSubmit={onSubmit}>
+                        <form>
                           <div className="join">
                             <div>
                               <div>
-                                <input
+                                {/* <input
                                   className="file-input file-input-ghost w-full max-w-xs rounded-l-lg"
                                   type="file"
                                   name="file"
@@ -137,11 +123,24 @@ const Title = (props: any) => {
                                     setTitleId(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id)
                                     setFile(e.target.files?.[0])
                                   }}
-                                />
+                                /> */}
                               </div>
                             </div>
                             <div className="indicator">
-                              <input className="btn join-item rounded-r-lg bg-blue-950 text-white" type="submit" value="Upload" />
+                              {/* <input className="btn join-item rounded-r-lg bg-blue-950 text-white" type="submit" value="Upload" /> */}
+
+                              <FileUploader
+                                handleChange={(file: any) => {
+                                  try {
+                                    sendUploadStudentPoster(file, props?.selectViewUser?.email, props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id)
+                                  } catch (e: any) {
+                                    // Handle errors here
+                                    console.error(e)
+                                  }
+                                }}
+                                name="file"
+                                types={['PDF']}
+                              />
                             </div>
                           </div>
                         </form>
@@ -170,24 +169,34 @@ const Title = (props: any) => {
                 <tr key={index}>
                   {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                   <td>{props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name ?? 'None'}</td>
-                  <td className=" "><div className='flex flex-row-reverse'>{props.selectViewUser?.studentInformation?.ProjectTitle[index] == null ? 'None' : <Link className='btn btn-sm text-white bg-blue-950 rounded-lg' href={'https://storage.ichoosesv.gementar.com/gementar/storage/file/' + props.selectViewUser.studentInformation.ProjectTitle[index].id + '.pdf'}>View Poster</Link>}</div></td>
+                  <td className=" ">
+                    <div className="flex flex-row-reverse">
+                      {props.selectViewUser?.studentInformation?.ProjectTitle[index] == null ? (
+                        'None'
+                      ) : (
+                        <Link className="btn btn-sm text-white bg-blue-950 rounded-lg" target="_blank" href={'https://storage.server.gementar.com/gementar/storage/file/' + props.selectViewUser.studentInformation.ProjectTitle[index].id + '.pdf'}>
+                          View Poster
+                        </Link>
+                      )}
+                    </div>
+                  </td>
                   {props.canEdit && props.isMemberCompleted ? (
                     <td className="w-6">
                       <div>
-                      {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'ACCEPTED' ? (
-                        ''
-                      ) : (
-                        <button
-                          onClick={() => {
-                            setEditTeamTitle(index)
-                            setName(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name ?? 'None')
-                            setMatricTitleId(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id ?? '')
-                          }}
-                          className="btn btn-sm text-white bg-blue-950 rounded-lg"
-                        >
-                          Edit
-                        </button>
-                      )}
+                        {props?.selectViewUser?.studentInformation?.lecturerAcceptedStudent === 'ACCEPTED' ? (
+                          ''
+                        ) : (
+                          <button
+                            onClick={() => {
+                              setEditTeamTitle(index)
+                              setName(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name ?? 'None')
+                              setMatricTitleId(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id ?? '')
+                            }}
+                            className="btn btn-sm text-white bg-blue-950 rounded-lg"
+                          >
+                            Edit
+                          </button>
+                        )}
                       </div>
                     </td>
                   ) : (
