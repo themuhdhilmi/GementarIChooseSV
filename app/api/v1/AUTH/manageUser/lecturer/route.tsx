@@ -25,6 +25,11 @@ export async function GET(request: NextRequest, response: NextResponse) {
                   SessionYear: true,
                 },
               },
+              LecturerBiographyInfo : {
+                include : {
+                  LecturerBiographyInfoTag : true
+                }
+              },
               SessionYear: true,
             },
           },

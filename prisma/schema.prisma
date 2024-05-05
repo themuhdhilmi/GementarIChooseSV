@@ -96,15 +96,54 @@ model SessionYear {
 
 // +======================= LECTURER START =======================
 model LecturerInformation {
-  id                 String               @id @default(cuid())
-  StudentInformation StudentInformation[]
+  id                    String                  @id @default(cuid())
+  StudentInformation    StudentInformation[]
+  supervisorQuota       Int?
+  LecturerBiographyInfo LecturerBiographyInfo[]
 
-  supervisorQuota Int?
+  googleID  String?
+  Expertise String?
 
   Track       Track
   SessionYear SessionYear[]
   User        User          @relation(fields: [userId], references: [id])
   userId      String        @unique
+}
+
+enum LecturerBiographyInfoType {
+  RESEARCH
+  ARTICLE
+  CONSULTATION
+  AWARD_RECOGNITION
+  PROCEEDING
+  OTHERS
+  SUPERVISION
+}
+
+model LecturerBiographyInfo {
+  id                        String                     @id @default(cuid())
+  LecturerBiographyInfoType LecturerBiographyInfoType
+  mainText                  String                     @default("")
+  subText                   String?
+  LecturerBiographyInfoTag  LecturerBiographyInfoTag[]
+  LecturerInformation       LecturerInformation?       @relation(fields: [lecturerInformationId], references: [id])
+  lecturerInformationId     String?
+}
+
+enum LecturerBiographyInfoTagColor {
+  RED
+  LEADER
+  GREEN
+  BLUE
+  YELLOW
+}
+
+model LecturerBiographyInfoTag {
+  id                            String                        @id @default(cuid())
+  text                          String
+  LecturerBiographyInfoTagColor LecturerBiographyInfoTagColor
+  LecturerBiographyInfo         LecturerBiographyInfo?        @relation(fields: [lecturerBiographyInfoId], references: [id])
+  lecturerBiographyInfoId       String?
 }
 
 // -======================= LECTURER END =========================
@@ -153,4 +192,4 @@ model ProjectTitle {
   studentInformationId String?
 }
 
-// -======================= STUDENT END ======================= 
+// -======================= STUDENT END =======================
