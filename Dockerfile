@@ -6,6 +6,11 @@ FROM base AS deps
 RUN apt-get update && apt-get install -y libc6
 WORKDIR /app
 
+RUN npm cache clean --force
+RUN rm -rf node_modules
+RUN npm install -g npm@latest
+
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -14,6 +19,16 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm install; \
   else echo "Lockfile not found." && exit 1; \
   fi
+
+#COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+#RUN \
+#  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+#  elif [ -f package-lock.json ]; then rm -rf node_modules && npm install && npm ci; \
+#  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm install; \
+#  else echo "Lockfile not found." && exit 1; \
+#  fi
+
+
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -31,7 +46,6 @@ RUN npx prisma generate
 RUN npx prisma db push
 
 RUN npm run build
-
 
 # If using yarn, comment out the line above and use the one below instead
 # RUN yarn build
