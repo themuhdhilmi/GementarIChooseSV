@@ -151,7 +151,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
       let pageSize = pageSizeParam ? pageSizeParam : apiDefaultPagination.pageSize
       const students = await prisma.user.findMany({
         orderBy: {
-          createdAt: Prisma.SortOrder.desc,
+          createdAt: 'desc',
         } as any,
         where: {
           role: 'STUDENT',
