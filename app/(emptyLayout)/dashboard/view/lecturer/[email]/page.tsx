@@ -17,7 +17,9 @@ import { useUpdateLecturerInfo } from '@/app/utilities/storage/lecturer/informat
 import { useAddLecturerInfoTag } from '@/app/utilities/storage/lecturer/information/useAddLecturerInfoTag'
 import { useDeleteLecturerInfoTag } from '../../../../../utilities/storage/lecturer/information/useDeleteLecturerInfoTag'
 import { FaHome } from 'react-icons/fa'
-import { Button, Label, Modal, TextInput } from 'flowbite-react'
+import { Button, Checkbox, Label, Modal, TextInput, Tooltip } from 'flowbite-react'
+import { useUpdateLecturer } from '@/app/utilities/storage/lecturer/useUpdateLecturer'
+import LoadingLeftBottom from '@/app/(mainLayout)/components/LoadingLeftBottom'
 
 const Page = () => {
   const params = useParams<{
@@ -32,6 +34,7 @@ const Page = () => {
   const { data: updateLecturerInfo } = useUpdateLecturerInfo()
   const { data: addLecturerInfoTag } = useAddLecturerInfoTag()
   const { data: deleteLecturerInfoTag } = useDeleteLecturerInfoTag()
+  const { data: updateLecturer } = useUpdateLecturer()
 
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 
@@ -39,7 +42,7 @@ const Page = () => {
     fetchData()
     getCurrentLecturerData(decodeURIComponent(params.email))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [role, addLecturerInfo, deleteLecturerInfo, updateLecturerInfo, addLecturerInfoTag, deleteLecturerInfoTag])
+  }, [role, addLecturerInfo, deleteLecturerInfo, updateLecturerInfo, addLecturerInfoTag, deleteLecturerInfoTag, updateLecturer])
 
   let canEdit = false
 
@@ -55,6 +58,7 @@ const Page = () => {
 
   return (
     <div>
+      <LoadingLeftBottom />
       <div className="navbar bg-red-700 text-neutral-content">
         <div className="navbar-start">
           {isDesktop ? (
@@ -72,7 +76,14 @@ const Page = () => {
                 </li>
                 {canEdit ? (
                   <li>
-                    <EditProfileModal />
+                    <EditProfileModal lecturerData={lecturerData} />
+                  </li>
+                ) : (
+                  ''
+                )}
+                {role === 'ADMIN' ? (
+                  <li>
+                    <ResetPassword lecturerData={lecturerData} />
                   </li>
                 ) : (
                   ''
@@ -90,7 +101,8 @@ const Page = () => {
           ''
         ) : (
           <div className="navbar-end">
-            {canEdit ? <EditProfileModal /> : ''}
+            {canEdit ? <EditProfileModal lecturerData={lecturerData} /> : ''}
+            {role === 'ADMIN' ? <ResetPassword lecturerData={lecturerData} /> : ''}
 
             <a href="/dashboard/view/lecturerDirectory" className="btn">
               <FaHome />
@@ -133,8 +145,83 @@ const Page = () => {
 
 export default Page
 
-function EditProfileModal() {
+function EditProfileModal(props: any) {
   const [openModal, setOpenModal] = useState(false)
+  const [email, setEmail] = useState(props?.lecturerData?.lecturer?.email)
+  const [name, setName] = useState(props?.lecturerData?.lecturer?.name || '') // Added default value
+  const [track, setTrack] = useState(props?.lecturerData?.lecturer?.track || '') // Added default value
+  const [expertise, setExpertise] = useState(props?.lecturerData?.lecturer?.LecturerInformation?.Track || '') // Added default value
+  const [scopusID, setScopusID] = useState(props?.lecturerData?.lecturer?.LecturerInformation?.scopusID || '') // Added default value
+  const [wosID, setWosID] = useState(props?.lecturerData?.lecturer?.LecturerInformation?.wosID || '') // Added default value
+  const [googleScholar, setGoogleScholar] = useState(props?.lecturerData?.lecturer?.LecturerInformation?.googleID || '') // Added default value
+
+  const { sendData } = useUpdateLecturer()
+
+  useEffect(() => {
+    setEmail(props?.lecturerData?.lecturer?.email || '')
+    setName(props?.lecturerData?.lecturer?.name || '') // Added default value
+    setTrack(props?.lecturerData?.lecturer?.LecturerInformation?.Track || '') // Added default value
+    setExpertise(props?.lecturerData?.lecturer?.LecturerInformation?.expertise || '') // Added default value
+    setScopusID(props?.lecturerData?.lecturer?.LecturerInformation?.scopusID || '') // Added default value
+    setWosID(props?.lecturerData?.lecturer?.LecturerInformation?.wosID || '') // Added default value
+    setGoogleScholar(props?.lecturerData?.lecturer?.LecturerInformation?.googleID || '') // Added default value
+  }, [props?.lecturerData])
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value)
+  }
+
+  const handleTrackChange = (e: any) => {
+    setTrack(e)
+  }
+
+  const handleExpertiseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setExpertise(e.target.value)
+  }
+
+  const handleScopusIDChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setScopusID(e.target.value)
+  }
+
+  const handleWosIDChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWosID(e.target.value)
+  }
+
+  const handleGoogleScholarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setGoogleScholar(e.target.value)
+  }
+
+  // const schemaPUT = z.object({
+  //   id: z.string(),
+  //   name: z.string().min(4).nullable(),
+  //   email: z.string().email().nullable(),
+  //   password: z.string().min(4).nullable(),
+  //   track: TrackEnum.nullable(),
+  //   supervisorQuota: z.number().nullable(),
+  //   googleID: z.string().min(4).nullable(),
+  //   wosID: z.string().min(4).nullable(),
+  //   scopusID: z.string().min(4).nullable(),
+  //   expertise: z.string().min(4).nullable(),
+  // })
+
+  const submit = (e: any) => {
+    e.preventDefault()
+
+    const postData = {
+      id: props?.lecturerData?.lecturer?.id,
+      name: name,
+      email: email,
+      password: null,
+      track: track === '' ? null : track,
+      supervisorQuota: null,
+      googleID: googleScholar === '' ? null : googleScholar,
+      wosID: wosID === '' ? null : wosID,
+      scopusID: scopusID === '' ? null : scopusID,
+      expertise: expertise === '' ? null : expertise,
+    }
+
+    sendData(postData)
+  }
 
   return (
     <>
@@ -144,58 +231,118 @@ function EditProfileModal() {
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>Edit Profile</Modal.Header>
         <Modal.Body>
-          <form className="flex w-full flex-col gap-4">
+          <form className="flex w-full flex-col gap-4" onSubmit={submit}>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="small" value="Email" />
               </div>
-              <TextInput id="small" type="text" sizing="sm" required />
+              <TextInput id="small" value={email} onChange={(e) => setEmail(e.target.value)} type="text" sizing="sm" required />
             </div>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="small" value="Name" />
               </div>
-              <TextInput id="small" type="text" sizing="sm" required />
+              <TextInput id="small" value={name} onChange={handleNameChange} type="text" sizing="sm" required />
             </div>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="small" value="Track" />
               </div>
-              <TextInput id="small" type="text" sizing="sm" />
+              {/* <TextInput id="small" value={track} onChange={handleTrackChange} type="text" sizing="sm" /> */}
+              <select value={track} onChange={(e) => handleTrackChange(e.target.value)} className="select select-bordered w-full rounded-lg">
+                <option value={'SOFTWARE'} selected={track === 'SOFTWARE' ? true : false}>
+                  SOFTWARE
+                </option>
+                <option value={'SECURITY'} selected={track === 'SECURITY' ? true : false}>
+                  SECURITY
+                </option>
+                <option value={'NETWORK'} selected={track === 'NETWORK' ? true : false}>
+                  NETWORK
+                </option>
+              </select>
             </div>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="small" value="Expertise (Optional)" />
               </div>
-              <TextInput id="small" type="text" sizing="sm" placeholder="Game Development,Web Development,Software Development" />
+              <TextInput className="w-full" id="small" value={expertise} onChange={handleExpertiseChange} type="text" sizing="sm" placeholder="Game Development,Web Development,Software Development" />
             </div>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="small" value="Scopus ID (Optional)" />
               </div>
-              <TextInput id="small" type="text" sizing="sm" placeholder="https://www.scopus.com/authid/detail.uri?authorId=XXXXXXX" />
+              <TextInput id="small" value={scopusID} onChange={handleScopusIDChange} type="text" sizing="sm" placeholder="https://www.scopus.com/authid/detail.uri?authorId=XXXXXXX" />
             </div>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="small" value="Wos ID (Optional)" />
               </div>
-              <TextInput id="small" type="text" sizing="sm" placeholder="https://www.webofscience.com/wos/author/rid/XXXXXXXXX" />
+              <TextInput id="small" value={wosID} onChange={handleWosIDChange} type="text" sizing="sm" placeholder="https://www.webofscience.com/wos/author/rid/XXXXXXXXX" />
             </div>
             <div>
               <div className="mb-2 block">
                 <Label htmlFor="small" value="Google Scholar (Optional)" />
               </div>
-              <TextInput id="small" type="text" sizing="sm" placeholder="https://scholar.google.com/citations?user=&hl=en&user=XXXXXXXXXX" />
+              <TextInput id="small" value={googleScholar} onChange={handleGoogleScholarChange} type="text" sizing="sm" placeholder="https://scholar.google.com/citations?user=&hl=en&user=XXXXXXXXXX" />
             </div>
             <Button type="submit">Submit</Button>
           </form>
         </Modal.Body>
-        <Modal.Footer>
-          {/* <Button onClick={() => setOpenModal(false)}>I accept</Button> */}
-          <Button color="gray" onClick={() => setOpenModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
+      </Modal>
+    </>
+  )
+}
+
+function ResetPassword(props: any) {
+  const [openModal, setOpenModal] = useState(false)
+  const [password, setPassword] = useState('')
+  const { sendData } = useUpdateLecturer()
+
+  function onCloseModal() {
+    setOpenModal(false)
+    setPassword('')
+  }
+
+  const submit = () => {
+    if (password === '') return
+
+    const postData = {
+      id: props?.lecturerData?.lecturer?.id,
+      name: props?.lecturerData?.lecturer?.name,
+      email: props?.lecturerData?.lecturer?.email,
+      password: password,
+      track: props?.lecturerData?.lecturer?.LecturerInformation?.Track,
+      supervisorQuota: null,
+      googleID: props?.lecturerData?.lecturer?.LecturerInformation?.googleID,
+      wosID: props?.lecturerData?.lecturer?.LecturerInformation?.wosID,
+      scopusID: props?.lecturerData?.lecturer?.LecturerInformation?.scopusID,
+      expertise: props?.lecturerData?.lecturer?.LecturerInformation?.expertise,
+    }
+
+    sendData(postData)
+  }
+
+  return (
+    <>
+      <button className="btn mr-2" onClick={() => setOpenModal(true)}>
+        RESET PASSWORD
+      </button>
+      <Modal show={openModal} size="md" onClose={onCloseModal} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="space-y-6">
+            <h3 className="text-xl font-medium text-gray-900 dark:text-white">Reset Password</h3>
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="password" value="New Password" />
+              </div>
+              <TextInput value={password} onChange={(e) => setPassword(e.target.value)} id="password" type="password" required />
+            </div>
+            <div className="w-full">
+              <Button onClick={submit}>Reset Password</Button>
+            </div>
+          </div>
+        </Modal.Body>
       </Modal>
     </>
   )

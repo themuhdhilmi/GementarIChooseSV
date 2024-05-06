@@ -104,7 +104,7 @@ model LecturerInformation {
   googleID  String?
   wosID     String?
   scopusID  String?
-  Expertise String?
+  expertise String?
 
   Track       Track
   SessionYear SessionYear[]

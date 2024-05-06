@@ -15,7 +15,7 @@ const LeftSection = () => {
         <h2 className="card-title">AFIFAH NAILAH BINTI MUHAMAD</h2>
         <p>Head of Department of Gementar Team</p>
         <p>hilmi@gementar.com</p>
-        <p>015-4878312</p>
+        {/* <p>015-4878312</p> */}
         <div className="card-actions">
           <button className="btn">Academic Qualification</button>
         </div>

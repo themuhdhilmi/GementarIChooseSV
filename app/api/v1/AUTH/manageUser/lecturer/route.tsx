@@ -190,6 +190,10 @@ const schemaPUT = z.object({
   password: z.string().min(4).nullable(),
   track: TrackEnum.nullable(),
   supervisorQuota: z.number().nullable(),
+  googleID: z.string().min(4).nullable(),
+  wosID: z.string().min(4).nullable(),
+  scopusID: z.string().min(4).nullable(),
+  expertise: z.string().min(4).nullable(),
 })
 
 export async function PUT(request: NextRequest, response: NextResponse) {
@@ -230,6 +234,10 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       data: {
         Track: body.track !== null ? body.track : undefined,
         supervisorQuota: body.supervisorQuota !== null ? body.supervisorQuota : undefined,
+        googleID: body.googleID ?? null,
+        wosID: body.wosID ?? null,
+        scopusID: body.scopusID ?? null,
+        expertise: body.expertise ?? null,
       },
     })
 

@@ -36,13 +36,14 @@ import Image from 'next/image'
 //// [User] Account One Time Password
 //// [Admin Dashboard]    Add Final Presentation Date.
 //// [Admin Dashboard]    Update Final presentation Date Counter Header.
-
 //// [Global Dashboard] Per-session result.
 //// [Lecturer Directory] Lecturer List Page. https://directory.upsi.edu.my
 //// [Lecturer Dashbaord] Lecturer Profile.
 //// Populate Feed Pages
+///// [Lecturer Directory] Lecturer View Page.
+//// [Lecturer Profile Page]
+//// [Lecturer Profile Page] Reset Password for Admin
 
-//TODO [Lecturer Directory] Lecturer View Page.
 //TODO [Admin Dashboard] Add Moderator Account.
 //TODO [Preview Session]
 
