@@ -145,7 +145,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       )
     }
 
-    const countStudent = userLecturerInfo?.StudentInformation?.filter((info) => info.lecturerAcceptedStudent === 'ACCEPTED').length ?? 0
+    const countStudent = userLecturerInfo?.StudentInformation?.filter((info : any) => info.lecturerAcceptedStudent === 'ACCEPTED').length ?? 0
     const countSupervisorQuota = userLecturerInfo.supervisorQuota ?? userLecturerInfo.SessionYear[0].globalSupervisorQuota ?? 0
 
     if (countStudent >= countSupervisorQuota) {
