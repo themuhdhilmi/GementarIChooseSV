@@ -15,7 +15,14 @@ export const useGetStudents = create<StudentStore>((set) => ({
         loading: true,
       })
       // Make your fetch API call here
-      const response = await fetch(`/api/v1/AUTH/manageUser/student?type=many&session=${sessionId}`)
+      const response = await fetch(`/api/v1/AUTH/manageUser/student?type=many&session=${sessionId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
       const data = await response.json()
 
       if (response.ok) {

@@ -9,7 +9,14 @@ const Page = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch('/api/v1/GLOBAL/sessions/' + params.id)
+      const response = await fetch('/api/v1/GLOBAL/sessions/' + params.id, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
       const data = await response.json()
       setData(data)
     }

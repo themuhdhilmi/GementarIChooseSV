@@ -20,7 +20,14 @@ export const useGetStudent = create<Studenttore>((set) => ({
         doneFetch: false,
       })
       // Make your fetch API call here
-      const response = await fetch(`/api/v1/AUTH/manageUser/student?email=${email}&type=single`)
+      const response = await fetch(`/api/v1/AUTH/manageUser/student?email=${email}&type=single`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
       const data = await response.json()
 
       // Update the state based on the fetched data

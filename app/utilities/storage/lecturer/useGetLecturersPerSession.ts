@@ -15,7 +15,14 @@ export const useGetLecturersPerSession = create<LecturerStore>((set) => ({
         loading: true,
       })
       // Make your fetch API call here
-      const response = await fetch(`/api/v1/AUTH/manageUser/lecturer?email=lecturerfaizul@example.com&selection=SESSION&sessionID=${sessionId}`)
+      const response = await fetch(`/api/v1/AUTH/manageUser/lecturer?email=lecturerfaizul@example.com&selection=SESSION&sessionID=${sessionId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
       const data = await response.json()
       // Update the state based on the fetched data
       set((state) => ({

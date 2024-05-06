@@ -21,7 +21,14 @@ export const useGetLecturer = create<Lecturertore>((set) => ({
       })
       // Make your fetch API call here
 
-      const response = await fetch(`/api/v1/AUTH/manageUser/lecturer?email=${email}&selection=EMAIL`)
+      const response = await fetch(`/api/v1/AUTH/manageUser/lecturer?email=${email}&selection=EMAIL`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
       const data = await response.json()
 
       // Update the state based on the fetched data

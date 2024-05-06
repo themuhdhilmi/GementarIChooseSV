@@ -42,8 +42,7 @@ import Image from 'next/image'
 //// [Lecturer Directory] Lecturer View Page.
 //// [Lecturer Profile Page]
 //// [Lecturer Profile Page] Reset Password for Admin
-
-//TODO [Preview Session]
+//// [Preview Session]
 
 //TODO [Admin Dashboard] Add Moderator Account.
 

@@ -20,7 +20,14 @@ export const useGetSessionDetail = create<Studenttore>((set) => ({
         doneFetch: false,// app\api\v1\GLOBAL\sessions\[id]
       })
       // Make your fetch API call here
-      const response = await fetch(`/api/v1/GLOBAL/sessionInfo/${id}`)
+      const response = await fetch(`/api/v1/GLOBAL/sessionInfo/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
       const data = await response.json()
 
       // Update the state based on the fetched data

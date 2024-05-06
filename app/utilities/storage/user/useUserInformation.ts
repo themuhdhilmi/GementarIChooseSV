@@ -25,7 +25,14 @@ export const useUserInformation = create<UseStore>((set) => ({
       set({
         loading: true,
       })
-      const response = await fetch('/api/v1/AUTH/global/user')
+      const response = await fetch('/api/v1/AUTH/global/user', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-store',
+          cache : "no-store"
+        },
+      })
       const data = await response.json()
 
       // Update the state based on the fetched data
