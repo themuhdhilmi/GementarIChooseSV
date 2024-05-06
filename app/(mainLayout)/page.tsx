@@ -4,7 +4,6 @@ import React from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import InformationalLink from './components/Feed/InformationalLink'
 import Feed from './components/Feed/Feed'
-import { useUserInformation } from '../utilities/storage/user/useUserInformation'
 import Image from 'next/image'
 
 //// Database Design
@@ -40,12 +39,13 @@ import Image from 'next/image'
 //// [Lecturer Directory] Lecturer List Page. https://directory.upsi.edu.my
 //// [Lecturer Dashbaord] Lecturer Profile.
 //// Populate Feed Pages
-///// [Lecturer Directory] Lecturer View Page.
+//// [Lecturer Directory] Lecturer View Page.
 //// [Lecturer Profile Page]
 //// [Lecturer Profile Page] Reset Password for Admin
 
-//TODO [Admin Dashboard] Add Moderator Account.
 //TODO [Preview Session]
+
+//TODO [Admin Dashboard] Add Moderator Account.
 
 //TODO [====FINAL BOSS====] IMPLEMENT SECURITY IN API SIDE
 

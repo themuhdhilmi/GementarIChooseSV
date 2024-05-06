@@ -5,7 +5,9 @@ import SetGlobalMemberQuota from './components/SetGlobalMemberQuota'
 import { breakpoints } from '@/app/config/breakpoints'
 import { useMediaQuery } from 'usehooks-ts'
 import SetGlobalEndDate from './components/SetGlobalEndDate'
-import { format } from 'date-fns';
+import { format } from 'date-fns'
+import { FcAddressBook } from 'react-icons/fc'
+import Link from 'next/link'
 
 const SessionManager = (props: any) => {
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet})`)
@@ -105,11 +107,15 @@ const SessionManager = (props: any) => {
                         <div className="form-control">
                           <label className="label cursor-pointer">
                             <span className="label-text">Selected</span>
-                            {/* <UseSetSession
-                            sessionId={item.id}
-                            sessionLabel={`SESI ${item.number} ${item.yearOne}/${item.yearTwo}`}
-                          /> */}
                           </label>
+                          <label className="label cursor-pointer">
+                          <span className="label-text"></span>
+                          <div>
+                            <Link className='btn rounded-lg bg-slate-600 hover:bg-slate-800 text-white btn-sm' href={'/dashboard/view/session/' + item.id} target="_blank">
+                              <FcAddressBook />
+                            </Link>
+                          </div>
+                        </label>
                         </div>
                       </td>
                     </tr>
@@ -128,6 +134,14 @@ const SessionManager = (props: any) => {
                         <label className="label cursor-pointer">
                           <span className="label-text"></span>
                           <UseSetSession sessionId={item.id} sessionLabel={`SESI ${item.number} ${item.yearOne}/${item.yearTwo}`} />
+                        </label>
+                        <label className="label cursor-pointer">
+                          <span className="label-text"></span>
+                          <div>
+                            <Link className='btn rounded-lg bg-slate-600 hover:bg-slate-800 text-white btn-sm' href={'/dashboard/view/session/' + item.id} target="_blank">
+                              <FcAddressBook />
+                            </Link>
+                          </div>
                         </label>
                       </div>
                     </td>
