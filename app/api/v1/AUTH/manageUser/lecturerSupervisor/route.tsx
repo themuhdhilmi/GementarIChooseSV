@@ -31,7 +31,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
     })
 
     // Find the lecturer in the supervisors list
-    const lecturerIndex = getCurrentSession.Supervisor.findIndex((item) => item.User.email === body.lecturerEmail)
+    const lecturerIndex = getCurrentSession.Supervisor.findIndex((item : any) => item.User.email === body.lecturerEmail)
 
     const getFirstSession = await prisma.sessionYear.findFirstOrThrow({
         where : {
