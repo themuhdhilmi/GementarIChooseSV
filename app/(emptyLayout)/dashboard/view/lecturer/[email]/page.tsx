@@ -20,6 +20,9 @@ import { FaHome } from 'react-icons/fa'
 import { Button, Checkbox, Label, Modal, TextInput, Tooltip } from 'flowbite-react'
 import { useUpdateLecturer } from '@/app/utilities/storage/lecturer/useUpdateLecturer'
 import LoadingLeftBottom from '@/app/(mainLayout)/components/LoadingLeftBottom'
+import { FileUploader } from 'react-drag-drop-files'
+import { useAddUserProfilePicture } from '@/app/utilities/storage/user/useAddUserProfilePicture'
+import { useUploadFile } from '@/app/utilities/storage/storage/useUploadFile'
 
 const Page = () => {
   const params = useParams<{
@@ -35,6 +38,8 @@ const Page = () => {
   const { data: addLecturerInfoTag } = useAddLecturerInfoTag()
   const { data: deleteLecturerInfoTag } = useDeleteLecturerInfoTag()
   const { data: updateLecturer } = useUpdateLecturer()
+  const { data : AddUserProfilePicture} = useAddUserProfilePicture()
+
 
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
 
@@ -42,7 +47,7 @@ const Page = () => {
     fetchData()
     getCurrentLecturerData(decodeURIComponent(params.email))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [role, addLecturerInfo, deleteLecturerInfo, updateLecturerInfo, addLecturerInfoTag, deleteLecturerInfoTag, updateLecturer])
+  }, [role, addLecturerInfo, deleteLecturerInfo, updateLecturerInfo, addLecturerInfoTag, deleteLecturerInfoTag, updateLecturer,AddUserProfilePicture])
 
   let canEdit = false
 
@@ -154,8 +159,32 @@ function EditProfileModal(props: any) {
   const [scopusID, setScopusID] = useState(props?.lecturerData?.lecturer?.LecturerInformation?.scopusID || '') // Added default value
   const [wosID, setWosID] = useState(props?.lecturerData?.lecturer?.LecturerInformation?.wosID || '') // Added default value
   const [googleScholar, setGoogleScholar] = useState(props?.lecturerData?.lecturer?.LecturerInformation?.googleID || '') // Added default value
+  const { data : AddUserProfilePicture, sendData : sendProfilePictureData} = useAddUserProfilePicture()
+  const { data : uploadFileData , sendData : sendUploadFileToServer } = useUploadFile()
 
   const { sendData } = useUpdateLecturer()
+
+  function isEmpty(obj : any) {
+    for(let key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
+  useEffect(() => {
+    if(isEmpty(uploadFileData)) return
+
+    const postData = {
+      userID : props?.lecturerData?.lecturer?.id,
+      path : uploadFileData.path
+    }
+
+    sendProfilePictureData(postData)
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uploadFileData])
+  
 
   useEffect(() => {
     setEmail(props?.lecturerData?.lecturer?.email || '')
@@ -191,19 +220,6 @@ function EditProfileModal(props: any) {
     setGoogleScholar(e.target.value)
   }
 
-  // const schemaPUT = z.object({
-  //   id: z.string(),
-  //   name: z.string().min(4).nullable(),
-  //   email: z.string().email().nullable(),
-  //   password: z.string().min(4).nullable(),
-  //   track: TrackEnum.nullable(),
-  //   supervisorQuota: z.number().nullable(),
-  //   googleID: z.string().min(4).nullable(),
-  //   wosID: z.string().min(4).nullable(),
-  //   scopusID: z.string().min(4).nullable(),
-  //   expertise: z.string().min(4).nullable(),
-  // })
-
   const submit = (e: any) => {
     e.preventDefault()
 
@@ -231,6 +247,12 @@ function EditProfileModal(props: any) {
       <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>Edit Profile</Modal.Header>
         <Modal.Body>
+          <div className="mb-2 block">
+            <Label value="Upload Profile Image" />
+          </div>
+          <FileUploader handleChange={(file: any) => {
+            sendUploadFileToServer(file)
+          }} name="file" types={['PNG','JPG']} />
           <form className="flex w-full flex-col gap-4" onSubmit={submit}>
             <div>
               <div className="mb-2 block">

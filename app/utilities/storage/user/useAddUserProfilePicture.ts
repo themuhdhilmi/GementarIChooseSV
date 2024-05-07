@@ -14,7 +14,7 @@ type Store = {
   sendData: (postData: any) => Promise<void>
 }
 
-export const useUpdatePassword = create<Store>((set) => ({
+export const useAddUserProfilePicture = create<Store>((set) => ({
   data: {},
   loading: false,
   success: SuccessState.NONE,
@@ -24,9 +24,9 @@ export const useUpdatePassword = create<Store>((set) => ({
         loading: true,
         success: SuccessState.NONE,
       })
-      // Make your fetch API call here
-      const response = await fetch('/api/v1/AUTH/manageUser', {
-        method: 'PUT',
+      // Make your fetch API call here C:\Users\hilmi\OneDrive\Documents\Repo\ischoosesv_123\ichoosesv\app\api\v1\AUTH\manageUser\profileImage
+      const response = await fetch('/api/v1/AUTH/manageUser/profileImage', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -37,7 +37,7 @@ export const useUpdatePassword = create<Store>((set) => ({
 
       // Update the state based on the fetched data
       if (response.ok) {
-        toast.success('Sucessfull', {
+        toast.success('Sucessfully updated profile picture', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -54,7 +54,7 @@ export const useUpdatePassword = create<Store>((set) => ({
           success: SuccessState.SUCCESS,
         }))
       } else {
-        toast.error('Failed', {
+        toast.error('Failed update profile picture', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,

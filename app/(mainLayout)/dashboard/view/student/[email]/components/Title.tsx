@@ -13,37 +13,25 @@ const Title = (props: any) => {
   const [emailLead, setEmailLead] = useState('')
   const [name, setName] = useState('')
   const [matricTitleId, setMatricTitleId] = useState('')
-  const { sendData: sendAddStudentTitle } = useAddStudentTitle()
-  const { sendData: sendUpdateStudentTitle } = useUpdateStudentTitle()
-  const { sendData: sendUploadStudentPoster } = useUploadStudentPoster()
+  const { sendData: sendAddStudentTitle, data : sendAddStudentTitleData } = useAddStudentTitle()
+  const { sendData: sendUpdateStudentTitle, data : sendUpdateStudentTitleData } = useUpdateStudentTitle()
+  const { sendData: sendUploadStudentPoster, data : sendUploadStudentPosterData } = useUploadStudentPoster()
   const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7', 'Item 8', 'Item 9', 'Item 10']
 
   useEffect(() => {
     setEmailLead(props.selectViewUser?.email)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.selectViewUser?.email])
+  }, [props.selectViewUser?.email, sendAddStudentTitleData,sendUpdateStudentTitleData,sendUploadStudentPosterData ])
 
   const sendDataTitle = (e: any) => {
-    if (matricTitleId === '') {
-      if (e === 'None' && name === 'None') {
-        return
-      }
-      const postData = {
-        emailLead: emailLead,
-        name: name,
-      }
-      sendAddStudentTitle(postData)
-    } else {
-      const postData = {
-        emailLead: emailLead,
-        name: name,
-        projectTitleId: matricTitleId,
-      }
-
-      sendUpdateStudentTitle(postData)
+    const postData = {
+      emailLead: emailLead,
+      name: name,
+      projectTitleId: e,
     }
+
+    sendUpdateStudentTitle(postData)
   }
-  const [titleId, setTitleId] = useState('')
 
   return (
     <div className="overflow-x-auto rounded-lg shadow-lg mb-2">
@@ -146,6 +134,7 @@ const Title = (props: any) => {
                         </form>
                       </div>
                     </td>
+                    {JSON.stringify(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id)}
                     <td className="flex flex-row-reverse">
                       <button onClick={() => setEditTeamTitle(99)} className="btn btn-sm text-white bg-red-700 rounded-lg">
                         Cancel
@@ -154,7 +143,7 @@ const Title = (props: any) => {
                         onClick={() => {
                           setEditTeamTitle(99)
                           setMatricTitleId(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id ?? '')
-                          sendDataTitle(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.matricTitleId ?? 'None')
+                          sendDataTitle(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id)
                         }}
                         className="btn btn-sm text-white bg-blue-950 rounded-lg mr-1"
                       >

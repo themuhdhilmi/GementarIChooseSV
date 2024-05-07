@@ -60,6 +60,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
               StudentInformation: true,
             },
           },
+          
         },
       })
 

@@ -1,6 +1,5 @@
 import { toast } from 'react-toastify'
 import { create } from 'zustand'
-import { useUserInformation } from '../user/useUserInformation'
 
 type StudentStore = {
   data: any
@@ -14,7 +13,7 @@ export const useUploadFile = create<StudentStore>((set) => ({
   sendData: async (file) => {
     try {
       const data = new FormData()
-      
+
       const response = await fetch('/api/v1/AUTH/global/user')
       const userData = await response.json()
 
@@ -23,7 +22,7 @@ export const useUploadFile = create<StudentStore>((set) => ({
       data.set('fileName', randomString)
       data.set('file', file)
 
-      const responseTitle2 = await fetch('http://localhost:3009/gementar/storage/upload', {
+      const responseTitle2 = await fetch('https://storage.server.gementar.com/gementar/storage/upload', {
         method: 'POST',
         body: data,
       })
@@ -31,23 +30,23 @@ export const useUploadFile = create<StudentStore>((set) => ({
       const data2 = await responseTitle2.json()
 
       if (responseTitle2.ok) {
-        toast.success('Sucessfully upload poster', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'light',
-        })
+        // toast.success('Sucessfully upload', {
+        //   position: 'top-right',
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'light',
+        // })
 
         set((state) => ({
           loading: false,
           data: data2,
         }))
       } else {
-        toast.error('Failed upload poster, make sure user are logged in', {
+        toast.error('Failed upload, make sure user are logged in', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
