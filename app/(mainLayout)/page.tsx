@@ -45,6 +45,7 @@ import Image from 'next/image'
 //// [Preview Session]
 //// Upload Lecturer Profile Image.
 //// Expertise In lecturerDirectory
+//// FIX POSTER UPDATE
 
 //TODO [Admin Dashboard] Add Moderator Account.
 //TODO [====FINAL BOSS====] IMPLEMENT SECURITY IN API SIDE

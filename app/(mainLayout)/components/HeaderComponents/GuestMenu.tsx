@@ -41,7 +41,7 @@ const GuestMenu = (props: any) => {
           </Link>
 
           <div className="w-full flex flex-row-reverse">
-            <Link href={``} className={`btn btn-sm rounded-lg border-0 text-red-600 bg-white hover: hover:text-white`}>
+            <Link href={`https://academy.gementar.com`} className={`btn btn-sm rounded-lg border-0 text-red-600 bg-white hover: hover:text-white`}>
               <IoIosConstruct />
               GementarTeam Mentorship Programme
             </Link>
@@ -85,7 +85,7 @@ const GuestMenu = (props: any) => {
           </div> */}
 
           <div className="w-full flex">
-            <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-red-600 bg-white hover: hover:text-white w-full my-5`}>
+            <Link href={`https://academy.gementar.com`} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-red-600 bg-white hover: hover:text-white w-full my-5`}>
               {isMobileLandscape ? '' : <IoIosConstruct />}
               GementarTeam Mentorship Programme
             </Link>

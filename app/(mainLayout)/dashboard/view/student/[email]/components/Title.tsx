@@ -67,7 +67,7 @@ const Title = (props: any) => {
                   <tr key={index}>
                     {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
                     <td>
-                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name === 'None' ? (
+                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id ? (
                         <input
                           value={name}
                           onChange={(e: any) => {
@@ -78,10 +78,6 @@ const Title = (props: any) => {
                           className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                         />
                       ) : (
-                        ''
-                      )}
-
-                      {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.name !== 'None' ? (
                         <input
                           value={'Waiting for poster upload..'}
                           onChange={(e: any) => {
@@ -92,9 +88,12 @@ const Title = (props: any) => {
                           className="input input-bordered w-full max-w-xs rounded-lg input-xs"
                           disabled
                         />
+                      )}
+                      {/* {props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id === null ? (
+
                       ) : (
                         ''
-                      )}
+                      )} */}
                     </td>
                     <td>
                       <div>
@@ -134,7 +133,6 @@ const Title = (props: any) => {
                         </form>
                       </div>
                     </td>
-                    {JSON.stringify(props.selectViewUser?.studentInformation?.ProjectTitle[index]?.id)}
                     <td className="flex flex-row-reverse">
                       <button onClick={() => setEditTeamTitle(99)} className="btn btn-sm text-white bg-red-700 rounded-lg">
                         Cancel

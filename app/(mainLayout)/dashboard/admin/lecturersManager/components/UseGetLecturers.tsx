@@ -58,7 +58,7 @@ const UseGetLecturers = (props: any) => {
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
                   <th>Email</th>
-                  {isMobile ? '' : <th>Completion Status</th>}
+                  {isMobile ? '' : <th>SV Status</th>}
                 </tr>
               </thead>
               <tbody>
@@ -101,8 +101,8 @@ const UseGetLecturers = (props: any) => {
                 <tr>
                   {isMobileLandscape ? '' : <th></th>}
                   {isMobileLandscape ? '' : <th>Name</th>}
-                  {isMobile ? '' : <th>Matric Number</th>}
-                  <th>Completion Status</th>
+                  {isMobile ? '' : <th>Email</th>}
+                  <th>SV Status</th>
                   <th></th>
                 </tr>
               </tfoot>

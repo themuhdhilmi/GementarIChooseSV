@@ -110,7 +110,7 @@ export function DrawerAdminMenu(props : {renderer : any, name : string}) {
           </div>
 
           <div className="w-full flex">
-            <Link href={``} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-red-600 bg-white hover: hover:text-white w-full my-5`}>
+            <Link href={`https://academy.gementar.com`} className={`${isMobileLandscape ? 'text-xs' : ''} btn rounded-lg border-0 text-red-600 bg-white hover: hover:text-white w-full my-5`}>
               {isMobileLandscape ? '' : <IoIosConstruct />}
               GementarTeam Mentorship Programme
             </Link>

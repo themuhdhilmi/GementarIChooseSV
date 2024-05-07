@@ -12,7 +12,7 @@ const InformationalLink = () => {
         <button className="btn btn-sm bg-white w-full rounded-lg hover:bg-red-900 hover:text-white" onClick={() => window.open('/dashboard/view/lecturerDirectory', '_blank')}>
           Staff Directory (JTMK)
         </button>
-        <button className="btn btn-sm bg-white w-full rounded-lg hover:bg-red-900 hover:text-white" onClick={() => window.open('someLink', '_blank')}>
+        <button className="btn btn-sm bg-white w-full rounded-lg hover:bg-red-900 hover:text-white" onClick={() => window.open('https://academy.gementar.com', '_blank')}>
           Gementar Team Academy
         </button>
       </div>
