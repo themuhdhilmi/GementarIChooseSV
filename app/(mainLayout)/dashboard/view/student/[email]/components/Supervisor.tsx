@@ -60,9 +60,15 @@ const Supervisor = (props: any) => {
                           return null
                         }
 
+                        if(props?.selectViewUser?.studentInformation?.Track !== item.Track)
+                        {
+                          return null
+                        }
+
                         return (
                           <option value={item.User.email} key={index}>
-                            {item.User.name}- accepted : {item?.acceptedStudentsCount}/{item?.supervisorQuota ?? lecturers?.session?.globalSupervisorQuota} - Requested : {item?.requestedStudentsCount} - Declined : {item?.declinedStudentsCount}
+                            {/* {item.User.name}- accepted : {item?.acceptedStudentsCount}/{item?.supervisorQuota ?? lecturers?.session?.globalSupervisorQuota} - Requested : {item?.requestedStudentsCount} - Declined : {item?.declinedStudentsCount} */}
+                            {item.User.name}
                           </option>
                         )
                       })}
