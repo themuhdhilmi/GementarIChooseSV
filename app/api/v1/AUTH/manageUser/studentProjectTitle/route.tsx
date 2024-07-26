@@ -69,7 +69,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const newProjectTitle = await prisma.projectTitle.create({
       data: {
-        name: body.name,
+        name: body.name.trim(),
         studentInformationId: checkLead.id,
       },
     })
@@ -151,7 +151,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         id: projectTitle.id,
       },
       data: {
-        name: body.name ?? undefined,
+        name: body.name.trim() ?? undefined,
         uploadedPoster: body.projectTitleId,
       },
     })

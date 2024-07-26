@@ -222,7 +222,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         id: body.id,
       },
       data: {
-        name: body.name !== null ? body.name : undefined,
+        name: body.name !== null ? body.name.trim() : undefined,
         email: body.email !== null ? body.email : undefined,
         hashedPassword: body.password !== null ? passwordEncrypt : undefined,
       },

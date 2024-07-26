@@ -263,7 +263,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const student = await prisma.user.create({
       data: {
-        name: body.name,
+        name: body.name.trim(),
         email: body.email,
         hashedPassword: passwordEncrypt,
         role: 'STUDENT',
@@ -344,8 +344,8 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         id: body.id,
       },
       data: {
-        name: body.name ?? undefined,
-        email: body.email ?? undefined,
+        name: body.name.trim() ?? undefined,
+        email: body.email.trim() ?? undefined,
         hashedPassword: passwordEncrypt ?? undefined,
       },
     })
