@@ -427,7 +427,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
 
     const deleteMember = await prisma.member.deleteMany({
       where : {
-        studentInformationId : findStudent.id
+        studentInformationId: findStudent.id
       }
     })
 
