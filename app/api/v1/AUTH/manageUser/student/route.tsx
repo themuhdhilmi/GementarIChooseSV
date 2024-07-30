@@ -425,6 +425,12 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       },
     })
 
+    const deleteMember = await prisma.member.deleteMany({
+      where : {
+        studentInformationId : findStudent.id
+      }
+    })
+
     const deleteUser = await prisma.user.delete({
       where: {
         id: findStudent.User.id,
@@ -435,6 +441,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
       {
         deleteStudent,
         deleteUser,
+        deleteMember
       },
       {
         status: 200,
