@@ -68,7 +68,7 @@ const UseGetStudents = (props: any) => {
                   return (
                     <tr key={index}>
                       {isMobileLandscape ? '' : <th>{index + 1}</th>}
-                      {isMobileLandscape ? '' : <td>{item.name}</td>}
+                      {isMobileLandscape ? '' : <td>{item.name.toUpperCase()}</td>}
                       <td>{item.studentInformation?.matricNumber}</td>
                       {isMobile ? (
                         ''

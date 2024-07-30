@@ -53,7 +53,7 @@ export const useUpdateStudentMember = create<StudentStore>((set) => ({
           success: SuccessState.SUCCESS,
         }))
       } else {
-        toast.error('Failed update student member', {
+        toast.error('Failed update student member, ' + JSON.stringify(data), {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,

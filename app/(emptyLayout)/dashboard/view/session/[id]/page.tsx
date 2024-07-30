@@ -59,14 +59,14 @@ const Page = () => {
                     </td>
                     <td className="border border-black">
                       <div className="flex flex-row" key={index}>
-                        <div>{item?.User?.name}</div> <div className="grow"></div>
+                        <div>{item?.User?.name.toUpperCase()}</div> <div className="grow"></div>
                         <div>{item?.matricNumber}</div>
                       </div>
 
                       {item?.Member?.map((item: any, index: any) => {
                         return (
                           <div className="flex flex-row" key={index}>
-                            <div>{item?.name}</div> <div className="grow"></div>
+                            <div>{item?.name.toUpperCase()}</div> <div className="grow"></div>
                             <div>{item?.matricNumber}</div>
                           </div>
                         )
@@ -77,7 +77,7 @@ const Page = () => {
                       {item?.lecturerAcceptedStudent === 'NONE' ? <div className="badge badge-error gap-2">PROFILE INCOMPLETE</div> : ''}
                       {item?.lecturerAcceptedStudent === 'REQUESTED' ? <div className="badge badge-warning  gap-2">REQUESTED</div> : ''}
                       {item?.lecturerAcceptedStudent === 'ACCEPTED' ? <div className="badge badge-success  gap-2">COMPLETED</div> : ''}
-                      {item?.lecturerAcceptedStudent === 'DECLINED' ? <div className="badge badge-error  gap-2">DECLINED BY LECTURER</div> : ''}
+                      {item?.lecturerAcceptedStudent === 'DECLINED' ? <div className="badge bg-red-700  gap-2">DECLINED BY LECTURER</div> : ''}
                     </td>
                   </tr>
                 )

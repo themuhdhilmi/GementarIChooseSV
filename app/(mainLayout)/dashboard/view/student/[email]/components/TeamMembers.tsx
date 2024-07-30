@@ -59,6 +59,12 @@ const TeamMembers = (props: any) => {
             </tr>
           </thead>
           <tbody>
+            <tr>
+              {!props.isDesktop ? <th className="w-4">{1}</th> : null}
+              <td>{props.selectViewUser?.name.toUpperCase()}</td>
+              <td>{props.selectViewUser?.studentInformation?.matricNumber}</td>
+            </tr>
+
             {items.map((item: any, index: number) => {
               let quota = props?.selectViewUser?.studentInformation?.memberQuota ?? props?.selectViewUser?.studentInformation?.SessionYear?.globalMemberQuota ?? 0
 
@@ -73,7 +79,7 @@ const TeamMembers = (props: any) => {
               if (editTeamMember === index) {
                 return (
                   <tr key={index}>
-                    {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
+                    {!props.isDesktop ? <th className="w-4">{index + 2}</th> : null}
                     <td>
                       <input
                         value={name}
@@ -118,8 +124,8 @@ const TeamMembers = (props: any) => {
 
               return (
                 <tr key={index}>
-                  {!props.isDesktop ? <th className="w-4">{index + 1}</th> : null}
-                  <td>{props.selectViewUser?.studentInformation?.Member[index]?.name ?? 'None'}</td>
+                  {!props.isDesktop ? <th className="w-4">{index + 2}</th> : null}
+                  <td>{props.selectViewUser?.studentInformation?.Member[index]?.name.toUpperCase() ?? 'None'}</td>
                   <td>{props.selectViewUser?.studentInformation?.Member[index]?.matricNumber ?? 'None'}</td>
                   {props.canEdit ? (
                     <td className="flex flex-row-reverse">

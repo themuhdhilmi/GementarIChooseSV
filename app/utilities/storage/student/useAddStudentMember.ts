@@ -53,7 +53,7 @@ export const useAddStudentMember = create<StudentStore>((set) => ({
           success: SuccessState.SUCCESS,
         }))
       } else {
-        toast.error('Failed add student member', {
+        toast.error('Failed add student member, ' + JSON.stringify(data), {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,

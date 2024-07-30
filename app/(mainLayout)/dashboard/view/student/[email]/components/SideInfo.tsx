@@ -16,7 +16,7 @@ const SideInfo = (props: any) => {
           </div>
         </div>
         <div className="my-3 w-full ">
-          <p className="text-sm font-bold text-white">{props.selectViewUser?.name}</p>
+          <p className="text-sm font-bold text-white">{props.selectViewUser?.name.toUpperCase()}</p>
           <p className="text-sm text-slate-100">{props.selectViewUser?.studentInformation?.matricNumber}</p>
           <p className="text-sm text-slate-100">{props.selectViewUser?.email}</p>
         </div>

@@ -9,22 +9,23 @@ export async function GET(request: NextRequest, { params } : any, response: Next
       where: {
         id: params.id
       },
-      include:{
-        StudentInformation : {
-            include : {
-                User: true,
-                Member : true,
-                LecturerInformation : {
-                    include : {
-                        User : true
-                    }
-                },
-                ProjectTitle: true,
-                
-            }
+      include: {
+        StudentInformation: {
+          include: {
+            User: true,
+            Member: true,
+            LecturerInformation: {
+              include: {
+                User: true
+              }
+            },
+            ProjectTitle: true,
+          },
+          orderBy: {
+            lecturerAcceptedStudent: 'desc'
+          }
         }
-      },
-      
+      }
     })
 
     return NextResponse.json(
