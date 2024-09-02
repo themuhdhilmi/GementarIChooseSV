@@ -70,8 +70,8 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const newMember = await prisma.member.create({
       data: {
-        matricNumber: body.matricNumber.trim(),
-        name: body.name.trim(),
+        matricNumber: body.newMatricNumber !== null ? body.newMatricNumber.trim() : undefined,
+        name: body.name !== null ? body.name.trim() : undefined,
         studentInformationId: checkLead.id,
       },
     })

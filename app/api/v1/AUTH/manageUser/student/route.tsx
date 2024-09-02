@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt'
 import prisma from '@/prisma/client'
 import { z } from 'zod'
 import { apiDefaultPagination } from '@/app/config/api'
-import { Prisma } from '@prisma/client'
 
 function censorName(name: any) {
   const nameParts = name.split(' ')
@@ -263,7 +262,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const student = await prisma.user.create({
       data: {
-        name: body.name.trim(),
+        name: body.name !== null ? body.name.trim() : undefined,
         email: body.email,
         hashedPassword: passwordEncrypt,
         role: 'STUDENT',
@@ -328,6 +327,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       passwordEncrypt = await bcrypt.hash(body.password, 10)
     }
 
+
     const validation = schemaPUT.safeParse(body)
 
     if (!validation.success) {
@@ -338,17 +338,19 @@ export async function PUT(request: NextRequest, response: NextResponse) {
 
     // DEBUG : PLEASE ADD ADMIN VER
     // DEBUG : IF USER SAME ROLE ALSO CAN RUN
+    
 
     const student = await prisma.user.update({
       where: {
         id: body.id,
       },
       data: {
-        name: body.name.trim() ?? undefined,
-        email: body.email.trim() ?? undefined,
+        name: body.name === null ? undefined : body.name.trim(),
+        email: body.email  === null ? undefined : body.email.trim(),
         hashedPassword: passwordEncrypt ?? undefined,
       },
     })
+    
 
     const studentData = await prisma.studentInformation.update({
       where: {
@@ -362,6 +364,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         sessionYearId: body.sessionYearId ?? undefined,
       },
     })
+    
 
     const studentResult = await prisma.user.findFirst({
       where: {
@@ -371,6 +374,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
         studentInformation: true,
       },
     })
+    
 
     return NextResponse.json(
       {
