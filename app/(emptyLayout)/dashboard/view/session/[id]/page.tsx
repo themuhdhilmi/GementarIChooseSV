@@ -49,7 +49,7 @@ const Page = () => {
                           <div className="flex flex-row" key={index}>
                             <div>{item?.name}</div> <div className="grow"></div>{' '}
                             <div className="pl-2">
-                              <Link target="_blank" href={'https://storage.server.gementar.com/gementar/storage/file/' + item?.uploadedPoster + '.pdf'}>
+                              <Link target="_blank" href={'https://storage.ichoosesv.gementar.com/gementar/storage/file/' + item?.uploadedPoster + '.pdf'}>
                                 <FaFilePdf />
                               </Link>
                             </div>

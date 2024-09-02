@@ -22,7 +22,7 @@ export const useUploadFile = create<StudentStore>((set) => ({
       data.set('fileName', randomString)
       data.set('file', file)
 
-      const responseTitle2 = await fetch('https://storage.server.gementar.com/gementar/storage/upload', {
+      const responseTitle2 = await fetch('https://storage.ichoosesv.gementar.com/gementar/storage/upload', {
         method: 'POST',
         body: data,
       })

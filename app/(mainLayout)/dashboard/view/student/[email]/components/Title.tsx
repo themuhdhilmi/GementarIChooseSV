@@ -161,7 +161,7 @@ const Title = (props: any) => {
                       {props.selectViewUser?.studentInformation?.ProjectTitle[index] == null ? (
                         'None'
                       ) : (
-                        <Link className="btn btn-sm text-white bg-blue-950 rounded-lg" target="_blank" href={'https://storage.server.gementar.com/gementar/storage/file/' + props.selectViewUser.studentInformation.ProjectTitle[index].id + '.pdf'}>
+                        <Link className="btn btn-sm text-white bg-blue-950 rounded-lg" target="_blank" href={'https://storage.ichoosesv.gementar.com/gementar/storage/file/' + props.selectViewUser.studentInformation.ProjectTitle[index].id + '.pdf'}>
                           View Poster
                         </Link>
                       )}

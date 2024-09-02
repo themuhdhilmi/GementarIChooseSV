@@ -9,9 +9,9 @@ const LecturerCard = (props: any) => {
   return (
     <div className="border rounded-lg shadow-md min-h-40 relative mb-8 flex-initial min-w-80 mx-2 hover:cursor-pointer" onClick={() => window.open('/dashboard/view/lecturer/' + props?.item?.User?.email)}>
       <div className="absolute left-3 -top-4 bg-white">
-        <Avatar bordered color="gray" img={props?.item?.User.image === null ? "/images/profile.jpg" :( `https://storage.server.gementar.com` + props?.item?.User.image)} size="lg" />
+        <Avatar bordered color="gray" img={props?.item?.User.image === null ? "/images/profile.jpg" :( `https://storage.ichoosesv.gementar.com` + props?.item?.User.image)} size="lg" />
         {/* <figure className="px-10 pt-10">
-          <img src={props?.item?.User.image === null ? "/images/profile.jpg" :( `https://storage.server.gementar.com` + props?.item?.User.image)} alt="profile" className="rounded-xl" />
+          <img src={props?.item?.User.image === null ? "/images/profile.jpg" :( `https://storage.ichoosesv.gementar.com` + props?.item?.User.image)} alt="profile" className="rounded-xl" />
         </figure> */}
       </div>
       {props?.item?.SessionYear[0]?.isSelected === true ? (

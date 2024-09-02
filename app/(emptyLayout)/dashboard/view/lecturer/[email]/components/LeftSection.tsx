@@ -8,7 +8,7 @@ const LeftSection = (props: any) => {
     <div className="overflow-x-auto ">
       <div className="card w-80 bg-base-100 shadow-xl">
         <figure className="px-10 pt-10">
-          <img src={props?.lecturerData?.lecturer?.image === null ? "/images/profile.jpg" :( `https://storage.server.gementar.com` + props?.lecturerData?.lecturer?.image)} alt="profile" className="rounded-xl" />
+          <img src={props?.lecturerData?.lecturer?.image === null ? "/images/profile.jpg" :( `https://storage.ichoosesv.gementar.com` + props?.lecturerData?.lecturer?.image)} alt="profile" className="rounded-xl" />
         </figure>
         <div className="card-body items-center text-center">
           <h2 className="card-title">{props?.lecturerData?.lecturer?.name}</h2>
