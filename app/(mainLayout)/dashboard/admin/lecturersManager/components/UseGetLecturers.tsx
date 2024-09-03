@@ -12,6 +12,8 @@ import { useDeleteLecturer } from '@/app/utilities/storage/lecturer/useDeleteLec
 import { FaHandPointer } from 'react-icons/fa'
 import { BsToggles } from 'react-icons/bs'
 import { useSetLecturerAsSupervisor } from '@/app/utilities/storage/lecturer/useSetLecturerAsSupervisor'
+import { Label, Select } from 'flowbite-react'
+import SelectSupervisorQuota from './components/SelectSupervisorQuota'
 
 const UseGetLecturers = (props: any) => {
   const isDesktop = useMediaQuery(`(max-width: ${breakpoints.desktop})`)
@@ -59,6 +61,7 @@ const UseGetLecturers = (props: any) => {
                   {isMobileLandscape ? '' : <th>Name</th>}
                   <th>Email</th>
                   {isMobile ? '' : <th>SV Status</th>}
+                  <th>Quota</th>
                 </tr>
               </thead>
               <tbody>
@@ -74,11 +77,14 @@ const UseGetLecturers = (props: any) => {
                       <td>{item.User?.email}</td>
                       <td>{hasMatchingID ? <div className="badge text-white badge-neutral">SV</div> : <div className="badge text-white badge-error">NO</div>}</td>
                       <td>
+                        <SelectSupervisorQuota supervisorQuota={item?.supervisorQuota} id={item.User?.id} />
+                      </td>
+                      <td>
                         <div className="flex flex-row-reverse w-full">
                           <div className={`${isMobile ? 'flex flex-col max-w-min gap-2' : 'flex flex-row max-w-min gap-2'} `}>
-                              <button onClick={() => toggleSv(item.User?.email)} className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
-                                <BsToggles />
-                              </button>
+                            <button onClick={() => toggleSv(item.User?.email)} className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
+                              <BsToggles />
+                            </button>
                             <Link href={`/dashboard/lecturer/studentManage/${item.User?.email}`}>
                               <button className="btn rounded-lg py-1 btn-sm bg-slate-600 hover:bg-slate-800 text-white">
                                 <FaHandPointer />

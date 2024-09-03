@@ -20,6 +20,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     // DEBUG : PLEASE ADD ADMIN VER
 
+
     let checkLead = await prisma.studentInformation.findFirstOrThrow({
       where: {
         User: {
@@ -37,6 +38,10 @@ export async function POST(request: NextRequest, response: NextResponse) {
         id: checkLead.sessionYearId,
       },
     })
+
+
+
+
 
     if (!checkLead.memberQuota) {
       if (checkLead.Member.length >= sessionGet.globalMemberQuota) {
@@ -68,10 +73,11 @@ export async function POST(request: NextRequest, response: NextResponse) {
       }
     }
 
+
     const newMember = await prisma.member.create({
       data: {
-        matricNumber: body.newMatricNumber !== null ? body.newMatricNumber.trim() : undefined,
-        name: body.name !== null ? body.name.trim() : undefined,
+        matricNumber: body.matricNumber.trim(),
+        name: body.name.trim(),
         studentInformationId: checkLead.id,
       },
     })

@@ -234,7 +234,7 @@ export async function PUT(request: NextRequest, response: NextResponse) {
       },
       data: {
         Track: body.track !== null ? body.track : undefined,
-        supervisorQuota: body.supervisorQuota !== null ? body.supervisorQuota : undefined,
+        supervisorQuota: body.supervisorQuota !== null ? body.supervisorQuota : null,
         googleID: body.googleID ?? null,
         wosID: body.wosID ?? null,
         scopusID: body.scopusID ?? null,
